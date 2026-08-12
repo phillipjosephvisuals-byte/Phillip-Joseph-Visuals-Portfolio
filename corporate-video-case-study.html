@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corporate Video & Visual Narrative | Phillip Joseph Villarreal</title>
+  
+  <style>
+    :root {
+      --bg-main: #0B0F17;
+      --bg-surface: #141A26;
+      --bg-surface-hover: #1D2536;
+      --border-subtle: #242E42;
+      --text-main: #E2E8F0;
+      --text-muted: #94A3B8;
+      --accent: #38BDF8;
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --max-width: 1120px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-stack);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img, video {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* --- LAYOUT CONTAINERS --- */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* --- NAVIGATION --- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(11, 15, 23, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text-main);
+    }
+
+    /* --- HERO --- */
+    .hero {
+      padding: 5rem 0 3rem 0;
+    }
+
+    .hero-kicker {
+      color: var(--accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-bio {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 820px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* META GRID */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+    }
+
+    .meta-item h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .meta-item p {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* --- SECTION HEADINGS --- */
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 750px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* --- CONTENT CARDS & GRIDS --- */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      height: 100%;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .card p, .card ul {
+      color: var(--text-muted);
+      font-size: 0.975rem;
+      line-height: 1.6;
+    }
+
+    .card ul {
+      list-style-type: disc;
+      padding-left: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .card ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* MEDIA PLACEHOLDERS */
+    .media-placeholder {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-subtle);
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    /* --- FOOTER --- */
+    .site-footer {
+      padding: 3rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-align: center;
+      border-top: 1px solid var(--border-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">PJV Home</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">← Back to Portfolio</a></li>
+          <li><a href="#overview" class="active">Overview</a></li>
+          <li><a href="#production">Production</a></li>
+          <li><a href="#post">Post-Production</a></li>
+          <li><a href="#showcase">Reel</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- HERO SECTION -->
+    <section id="overview" class="section hero">
+      <div class="hero-kicker">Media & Art Direction</div>
+      <h1 class="hero-title">Corporate Video & Motion Narrative</h1>
+      <p class="hero-bio">
+        Combining cinematic camera work, controlled lighting, kinetic motion graphics, and narrative editing to craft high-impact brand messaging videos and executive communication reels.
+      </p>
+
+      <!-- PROJECT META -->
+      <div class="meta-grid">
+        <div class="meta-item">
+          <h4>Role</h4>
+          <p>Cinematographer & Video Editor</p>
+        </div>
+        <div class="meta-item">
+          <h4>Camera Rig</h4>
+          <p>Canon R50V, Cinema Primes</p>
+        </div>
+        <div class="meta-item">
+          <h4>Deliverables</h4>
+          <p>Brand Reels & Corporate Motion</p>
+        </div>
+        <div class="meta-item">
+          <h4>Software</h4>
+          <p>Premiere, After Effects, DaVinci</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTION WORKFLOW -->
+    <section id="production" class="section">
+      <h2 class="section-title">Cinematography & On-Set Production</h2>
+      <p class="section-subtitle">High-end video production requires meticulous control over lighting, composition, and sound to convey brand authority.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Lighting & Framing Discipline</h3>
+          <p>Utilizing three-point lighting setups, controlled diffusion, and intentional depth-of-field separation to make corporate interview subjects look professional and engaging.</p>
+          <ul>
+            <li>Precise key/fill light ratio balancing for modern corporate looks.</li>
+            <li>Controlled camera movement to establish dynamic visual rhythm.</li>
+            <li>Dual-channel lavalier and shotgun audio capture for crisp dialogue.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Narrative Storyboarding</h3>
+          <p>Pre-visualizing key shot lists and B-roll coverage ensures the final edit tells a coherent story aligned with brand goals.</p>
+          <ul>
+            <li>Detailed scene breakdown and pacing mapping before camera roll.</li>
+            <li>Intentional B-roll capture targeting authentic workplace interactions.</li>
+            <li>Multi-angle setup planning for seamless jump-cut-free editing.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- POST-PRODUCTION & MOTION -->
+    <section id="post" class="section">
+      <h2 class="section-title">Post-Production & Motion Pipeline</h2>
+      <p class="section-subtitle">Transforming raw log footage into a polished, color-graded visual asset ready for multi-platform distribution.</p>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3>1. DaVinci Color Grading</h3>
+          <p>Applying custom LUTs and color correction passes to unify disparate camera angles into a rich, cinema-grade color profile.</p>
+        </article>
+
+        <article class="card">
+          <h3>2. Kinetic Motion Graphics</h3>
+          <p>Building lower-thirds, title cards, and callout graphics in After Effects to reinforce messaging without cluttering the frame.</p>
+        </article>
+
+        <article class="card">
+          <h3>3. Audio Mastering</h3>
+          <p>Dialogue cleanup, noise reduction, and ducking background score music to preserve vocal clarity throughout the narrative.</p>
+        </article>
+      </div>
+
+      <div class="media-placeholder" style="aspect-ratio: 16 / 9; margin-top: 2rem;">
+        <!-- Replace with: <img src="corporate-video-editing-timeline.webp" alt="Video Editing Timeline Preview" loading="lazy" /> -->
+        Editing & Motion Graphic Timeline Preview
+      </div>
+    </section>
+
+    <!-- REEL SHOWCASE -->
+    <section id="showcase" class="section">
+      <h2 class="section-title">Visual Narrative Showcase</h2>
+      <p class="section-subtitle">Key video stills and motion sequences engineered for corporate branding.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Brand Storytelling Reel</h3>
+          <p>High-energy overview combining interview dialogue, atmospheric B-roll, and branded graphic overlays.</p>
+          <div class="media-placeholder" style="aspect-ratio: 16 / 9;">
+            Brand Storytelling Video Preview
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Executive Interview Series</h3>
+          <p>Clean, conversational lighting setups designed for executive keynotes, recruitment, and internal updates.</p>
+          <div class="media-placeholder" style="aspect-ratio: 16 / 9;">
+            Executive Interview Video Preview
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
+    </div>
+  </footer>
+
+</body>
+</html>
