@@ -1,374 +1,39 @@
-<!-- Inside index.html -> Corporate Communication & Visual Design section -->
-<div class="grid-3">
-
-  <!-- WRAP THE CARD IN AN <a> TAG LIKE THIS -->
-  <a href="iaem-bulletin-case-study.html" class="card-link">
-    <article class="card">
-      <div class="media-placeholder">IAEM Collateral</div>
-      <h3>IAEM Bulletin</h3>
-      <p>Web-based newsletter collateral. Designed for quick dissemination of information and easy comprehension in a crowded market.</p>
-      <div class="card-tags">Figma • Adobe Illustrator</div>
-    </article>
-  </a>
-
-  <article class="card">
-    <div class="media-placeholder">Presentation Deck</div>
-    <h3>Presentations</h3>
-    <p>Grid-aligned presentation designs. Built for executive-level communication, business development, and education/training.</p>
-    <div class="card-tags">Figma • PowerPoint</div>
-  </article>
-
-  <article class="card">
-    <div class="media-placeholder">Custom Illustrations</div>
-    <h3>Corporate Voice</h3>
-    <p>Custom raster-based illustrations to convey company voice and mission across website and marketing collateral.</p>
-    <div class="card-tags">Procreate • Adobe Illustrator</div>
-  </article>
-
-</div>      text-decoration: none;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phillip Joseph Villarreal | Product Designer & Front-End Developer</title>
+  
+  <style>
+    :root {
+      --bg-main: #0B0F17;
+      --bg-surface: #141A26;
+      --bg-surface-hover: #1D2536;
+      --border-subtle: #242E42;
+      --text-main: #E2E8F0;
+      --text-muted: #94A3B8;
+      --accent: #38BDF8;
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --max-width: 1120px;
     }
 
-    img, video {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    /* --- LAYOUT CONTAINERS --- */
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .section {
-      padding: 4.5rem 0;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    /* --- NAVIGATION --- */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background-color: rgba(11, 15, 23, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 70px;
-    }
-
-    .brand {
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.75rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--text-main);
-    }
-
-    /* --- HERO --- */
-    .hero {
-      padding: 5rem 0 3rem 0;
-    }
-
-    .hero-kicker {
-      color: var(--accent);
-      font-size: 0.875rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.75rem;
-    }
-
-    .hero-title {
-      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.25rem;
-    }
-
-    .hero-bio {
-      color: var(--text-muted);
-      font-size: 1.15rem;
-      max-width: 820px;
-      line-height: 1.7;
-      margin-bottom: 2rem;
-    }
-
-    /* META GRID */
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.25rem;
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 1.5rem 2rem;
-    }
-
-    .meta-item h4 {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      color: var(--accent);
-      letter-spacing: 0.05em;
-      margin-bottom: 0.25rem;
-    }
-
-    .meta-item p {
-      font-size: 0.95rem;
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    /* --- SECTION HEADINGS --- */
-    .section-title {
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .section-subtitle {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      max-width: 750px;
-      margin-bottom: 2.5rem;
-    }
-
-    /* --- CONTENT CARDS & GRIDS --- */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    @media (min-width: 768px) {
-      .grid-2 { grid-template-columns: repeat(2, 1fr); }
-      .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    .card {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 2rem;
-      height: 100%;
-    }
-
-    .card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
-      color: var(--text-main);
-    }
-
-    .card p, .card ul {
-      color: var(--text-muted);
-      font-size: 0.975rem;
-      line-height: 1.6;
-    }
-
-    .card ul {
-      list-style-type: disc;
-      padding-left: 1.25rem;
-      margin-top: 0.5rem;
-    }
-
-    .card ul li {
-      margin-bottom: 0.5rem;
-    }
-
-    /* MEDIA PLACEHOLDERS */
-    .media-placeholder {
+    body {
       background-color: var(--bg-main);
-      border: 1px solid var(--border-subtle);
-      aspect-ratio: 16 / 9;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-top: 1rem;
+      color: var(--text-main);
+      font-family: var(--font-stack);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* --- FOOTER --- */
-    .site-footer {
-      padding: 3rem 0;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      text-align: center;
-      border-top: 1px solid var(--border-subtle);
-    }
-  </style>
-</head>
-<body>
-
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="container nav-inner">
-      <a href="index.html" class="brand">PJV Home</a>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">← Back to Portfolio</a></li>
-          <li><a href="#overview" class="active">Overview</a></li>
-          <li><a href="#objectives">Objectives</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#solution">Final Design</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    
-    <!-- HERO SECTION -->
-    <section id="overview" class="section hero">
-      <div class="hero-kicker">Corporate Communication & Editorial Graphic</div>
-      <h1 class="hero-title">From Shelter to Stability: IAEM Bulletin Editorial</h1>
-      <p class="hero-bio">
-        A full-page, information-dense infographic designed on behalf of National EMR for publication in the IAEM (International Association of Emergency Managers) Bulletin. Built to communicate complex emergency management workflows with visual clarity for industry leaders.
-      </p>
-
-      <!-- PROJECT META -->
-      <div class="meta-grid">
-        <div class="meta-item">
-          <h4>Client / Entity</h4>
-          <p>National EMR / IAEM Bulletin</p>
-        </div>
-        <div class="meta-item">
-          <h4>Publication Date</h4>
-          <p>June 2025 (Vol. 42, No. 6)</p>
-        </div>
-        <div class="meta-item">
-          <h4>Deliverable</h4>
-          <p>Editorial Graphic & Infographic</p>
-        </div>
-        <div class="meta-item">
-          <h4>Tools</h4>
-          <p>Figma, Adobe Illustrator</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- OBJECTIVES & PARAMETERS -->
-    <section id="objectives" class="section">
-      <h2 class="section-title">Design Parameters & Objectives</h2>
-      <p class="section-subtitle">Emergency management professionals receive vast amounts of raw data. The primary objective was balancing editorial depth with intuitive visual hierarchy.</p>
-
-      <div class="grid-2">
-        <article class="card">
-          <h3>Core Objective</h3>
-          <p>Deliver a resource that translates complex response protocols into a high-retention visual layout that informs rather than purely promotes.</p>
-          <ul>
-            <li>Outline key operational challenges National EMR solves in the field.</li>
-            <li>Illustrate a step-by-step roadmap of their emergency response process.</li>
-            <li>Highlight five direct, actionable tips from field experience.</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>Brand & Format Constraints</h3>
-          <p>Specific spatial and visual parameters governed the execution:</p>
-          <ul>
-            <li><strong>Brand Palette Integration:</strong> Strict application of National EMR navy blue, red accents, and gold highlight hues.</li>
-            <li><strong>Editorial Coexistence:</strong> Designed to function alongside a featured written article without crowding text margins.</li>
-            <li><strong>High-Retention Hierarchy:</strong> Ensuring critical timeline steps remain legible at standard magazine print scale.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- DRAFTS & WIREFRAMES -->
-    <section id="process" class="section">
-      <h2 class="section-title">Drafts, Typography & Spatial Layout</h2>
-      <p class="section-subtitle">Managing dense information requires treating text and layout components as fluid structural blocks.</p>
-
-      <div class="grid-2">
-        <article class="card">
-          <h3>Roadmap Architecture</h3>
-          <p>The core challenge was accommodating a linear timeline within a fixed print aspect ratio. By establishing a minimum readable font size first, the roadmap was folded like a spring—flowing vertically top-to-bottom and stepping right into subsequent phases.</p>
-          <div class="media-placeholder" style="aspect-ratio: 16 / 10;">
-            Roadmap Wireframe & Grid Layout
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Text Fluidity & Spatial Hierarchy</h3>
-          <p>The "Challenges" and "Field Tips" sections were formatted around the primary roadmap anchor. Strategic use of container padding, contrasting background panels, and gold accent rules guided the reader's eye seamlessly through secondary content blocks.</p>
-          <div class="media-placeholder" style="aspect-ratio: 16 / 10;">
-            Draft Layout & Typography Scaling
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- FINAL DESIGN ANALYSIS -->
-    <section id="solution" class="section">
-      <h2 class="section-title">Final Design Breakdown</h2>
-      <p class="section-subtitle">How specific visual design decisions were applied to elevate information hierarchy.</p>
-
-      <div class="grid-3">
-        <article class="card">
-          <h3>1. Gold Focus System</h3>
-          <p>National EMR’s gold hue was reserved exclusively for pivotal roadmap steps, drawing immediate visual attention to center-stage milestones.</p>
-        </article>
-
-        <article class="card">
-          <h3>2. Layered Depth & Contrast</h3>
-          <p>A soft, blurred background graphic was paired with subtle card drop-shadows to establish clear foreground and background separation.</p>
-        </article>
-
-        <article class="card">
-          <h3>3. Specialized Iconography</h3>
-          <p>Each of the five field tips features custom vector icons with navy and gold hues, providing visual shorthand without overwhelming the eye.</p>
-        </article>
-      </div>
-
-      <div class="media-placeholder" style="aspect-ratio: 16 / 10; margin-top: 2rem;">
-        <!-- Replace with: <img src="iaem-bulletin-final-graphic.webp" alt="IAEM Bulletin Final Infographic Design" loading="lazy" /> -->
-        Final Full-Page IAEM Bulletin Graphic Preview
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
-    </div>
-  </footer>
-
-</body>
-</html>      color: inherit;
+    a {
+      color: inherit;
       text-decoration: none;
     }
 
@@ -378,12 +43,14 @@
       display: block;
       border-radius: 8px;
     }
-    /* Makes card links block-level and maintains crisp styling */
-.card-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
+
+    /* CARD LINK WRAPPER */
+    .card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      height: 100%;
+    }
 
     /* --- LAYOUT CONTAINERS --- */
     .container {
@@ -494,7 +161,7 @@
       }
     }
 
-    .featured-card:hover {
+    .card-link:hover .featured-card {
       border-color: var(--accent);
       transform: translateY(-2px);
     }
@@ -578,7 +245,7 @@
       transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
-    .card:hover {
+    .card-link:hover .card {
       border-color: var(--accent);
       transform: translateY(-2px);
     }
@@ -588,7 +255,7 @@
     }
 
     .card h3 {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       margin-bottom: 0.5rem;
     }
 
@@ -616,14 +283,14 @@
 </head>
 <body>
 
-  <!-- SINGLE HEADER (NO DUPLICATES) -->
+  <!-- SITE HEADER -->
   <header class="site-header">
     <div class="container nav-inner">
-      <a href="#" class="brand">PJV Home</a>
+      <a href="index.html" class="brand">PJV Home</a>
       <nav>
         <ul class="nav-links">
-          <li><a href="#featured">Portfolio</a></li>
-          <li><a href="scribe85-case-study.html>scribe85</a></li>
+          <li><a href="#scribe85">Portfolio</a></li>
+          <li><a href="#scribe85">scribe85</a></li>
           <li><a href="#corporate">Visual Design</a></li>
           <li><a href="#media">Media & Art</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -643,57 +310,64 @@
       </p>
     </section>
 
-   <!-- FEATURED PRODUCT CASE STUDY -->
-<section id="scribe85" class="section">
-  <h2 class="section-title">Featured Product Case Study</h2>
-  
-  <!-- LINK WRAPPER ADDED HERE -->
-  <a href="scribe85-case-study.html" class="card-link">
-    <div class="featured-card">
-      <div>
-        <div class="card-kicker">Classic Dark</div>
-        <h3 class="card-title">scribe85: zero-to-one dark surface writing workspace</h3>
-        <p class="card-desc">
-          An independent, single-file writing environment built from scratch to eliminate distraction. Works completely in your browser, requires no installation, and features themes, markdown functionality, and auto-save systems.
-        </p>
-        <ul class="meta-list">
-          <li><strong>My Role:</strong> Product Designer and Front-End Developer</li>
-          <li><strong>Key Skills:</strong> Zero-to-one product strategy | Typography hierarchy | Dark surface UI | Vanilla JS/CSS</li>
-        </ul>
-      </div>
-      <div class="media-placeholder">
-        scribe85 Interface Preview
-      </div>
-    </div>
-  </a>
-
-</section>
+    <!-- FEATURED PRODUCT CASE STUDY: scribe85 -->
+    <section id="scribe85" class="section">
+      <h2 class="section-title">Featured Product Case Study</h2>
+      
+      <a href="scribe85-case-study.html" class="card-link">
+        <div class="featured-card">
+          <div>
+            <div class="card-kicker">Classic Dark</div>
+            <h3 class="card-title">scribe85: zero-to-one dark surface writing workspace</h3>
+            <p class="card-desc">
+              An independent, single-file browser-based writing environment built from scratch to eliminate distraction. Features themes, markdown functionality, and auto-save systems.
+            </p>
+            <ul class="meta-list">
+              <li><strong>My Role:</strong> Product Designer and Front-End Developer</li>
+              <li><strong>Key Skills:</strong> Zero-to-one product strategy | Typography hierarchy | Dark surface UI | Vanilla JS/CSS</li>
+            </ul>
+          </div>
+          <div class="media-placeholder">
+            scribe85 Workspace Preview
+          </div>
+        </div>
+      </a>
+    </section>
 
     <!-- CORPORATE COMMUNICATION & VISUAL DESIGN -->
     <section id="corporate" class="section">
       <h2 class="section-title">Corporate Communication & Visual Design</h2>
       <div class="grid-3">
         
-        <article class="card">
-          <div class="media-placeholder">IAEM Collateral</div>
-          <h3>IAEM Bulletin</h3>
-          <p>Web-based newsletter collateral. Designed for quick dissemination of information and easy comprehension in a crowded market.</p>
-          <div class="card-tags">Figma • Adobe Illustrator</div>
-        </article>
+        <!-- IAEM BULLETIN CARD -->
+        <a href="iaem-bulletin-case-study.html" class="card-link">
+          <article class="card">
+            <div class="media-placeholder">IAEM Collateral</div>
+            <h3>IAEM Bulletin</h3>
+            <p>Web-based newsletter collateral. Designed for quick dissemination of information and easy comprehension in a crowded market.</p>
+            <div class="card-tags">Figma • Adobe Illustrator</div>
+          </article>
+        </a>
 
-        <article class="card">
-          <div class="media-placeholder">Presentation Deck</div>
-          <h3>Presentations</h3>
-          <p>Grid-aligned presentation designs. Built for executive-level communication, business development, and education/training.</p>
-          <div class="card-tags">Figma • PowerPoint</div>
-        </article>
+        <!-- PRESENTATIONS CARD -->
+        <a href="presentations-case-study.html" class="card-link">
+          <article class="card">
+            <div class="media-placeholder">Presentation Deck</div>
+            <h3>Presentations</h3>
+            <p>Grid-aligned presentation designs. Built for executive-level communication, business development, and education/training.</p>
+            <div class="card-tags">Figma • PowerPoint</div>
+          </article>
+        </a>
 
-        <article class="card">
-          <div class="media-placeholder">Custom Illustrations</div>
-          <h3>Corporate Voice</h3>
-          <p>Custom raster-based illustrations to convey company voice and mission across website and marketing collateral.</p>
-          <div class="card-tags">Procreate • Adobe Illustrator</div>
-        </article>
+        <!-- CORPORATE VOICE CARD -->
+        <a href="corporate-voice-case-study.html" class="card-link">
+          <article class="card">
+            <div class="media-placeholder">Custom Illustrations</div>
+            <h3>Corporate Voice</h3>
+            <p>Custom raster-based illustrations to convey company voice and mission across website and marketing collateral.</p>
+            <div class="card-tags">Procreate • Adobe Illustrator</div>
+          </article>
+        </a>
 
       </div>
     </section>
@@ -703,19 +377,25 @@
       <h2 class="section-title">Media & Art Direction</h2>
       <div class="grid-2">
         
-        <article class="card">
-          <div class="media-placeholder">Photography Showcase</div>
-          <h3>Photography</h3>
-          <p>Framing, composition, and lighting studies for visual storytelling.</p>
-          <div class="card-tags">Canon R50V • Adobe Photoshop • Camera RAW</div>
-        </article>
+        <!-- PHOTOGRAPHY CARD -->
+        <a href="photography-case-study.html" class="card-link">
+          <article class="card">
+            <div class="media-placeholder">Photography Showcase</div>
+            <h3>Photography</h3>
+            <p>Framing, composition, and lighting studies for visual storytelling.</p>
+            <div class="card-tags">Canon R50V • Adobe Photoshop • Camera RAW</div>
+          </article>
+        </a>
 
-        <article class="card">
-          <div class="media-placeholder">Corporate Video Reel</div>
-          <h3>Corporate Video</h3>
-          <p>Cinematic lighting, camera work, and motion narrative for brand messaging.</p>
-          <div class="card-tags">Adobe Premiere • After Effects • DaVinci Resolve</div>
-        </article>
+        <!-- CORPORATE VIDEO CARD -->
+        <a href="corporate-video-case-study.html" class="card-link">
+          <article class="card">
+            <div class="media-placeholder">Corporate Video Reel</div>
+            <h3>Corporate Video</h3>
+            <p>Cinematic lighting, camera work, and motion narrative for brand messaging.</p>
+            <div class="card-tags">Adobe Premiere • After Effects • DaVinci Resolve</div>
+          </article>
+        </a>
 
       </div>
     </section>
