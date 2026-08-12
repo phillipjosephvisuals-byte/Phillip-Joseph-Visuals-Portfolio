@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>K12 Insight Illustration Project | Phillip Joseph Villarreal</title>
+  
+  <style>
+    :root {
+      --bg-main: #0B0F17;
+      --bg-surface: #141A26;
+      --bg-surface-hover: #1D2536;
+      --border-subtle: #242E42;
+      --text-main: #E2E8F0;
+      --text-muted: #94A3B8;
+      --accent: #38BDF8;
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --max-width: 1120px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-stack);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img, video {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* --- LAYOUT CONTAINERS --- */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* --- NAVIGATION --- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(11, 15, 23, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text-main);
+    }
+
+    /* --- HERO --- */
+    .hero {
+      padding: 5rem 0 3rem 0;
+    }
+
+    .hero-kicker {
+      color: var(--accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-bio {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 820px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* META GRID */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+    }
+
+    .meta-item h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .meta-item p {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* --- SECTION HEADINGS --- */
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 750px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* --- CONTENT CARDS & GRIDS --- */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      height: 100%;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .card p, .card ul {
+      color: var(--text-muted);
+      font-size: 0.975rem;
+      line-height: 1.6;
+    }
+
+    .card ul {
+      list-style-type: disc;
+      padding-left: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .card ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* MEDIA PLACEHOLDERS */
+    .media-placeholder {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-subtle);
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    /* --- FOOTER --- */
+    .site-footer {
+      padding: 3rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-align: center;
+      border-top: 1px solid var(--border-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">PJV Home</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">← Back to Portfolio</a></li>
+          <li><a href="#overview" class="active">Overview</a></li>
+          <li><a href="#objectives">Objectives</a></li>
+          <li><a href="#process">Process & Execution</a></li>
+          <li><a href="#deliverables">Deliverables</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- HERO SECTION -->
+    <section id="overview" class="section hero">
+      <div class="hero-kicker">Corporate Voice & Illustration System</div>
+      <h1 class="hero-title">K12 Insight Illustration Project</h1>
+      <p class="hero-bio">
+        A custom suite of raster-based corporate illustrations created to solidify company voice and mission across web touchpoints, marketing collateral, and customer-facing product education.
+      </p>
+
+      <!-- PROJECT META -->
+      <div class="meta-grid">
+        <div class="meta-item">
+          <h4>Client / Project</h4>
+          <p>K12 Insight</p>
+        </div>
+        <div class="meta-item">
+          <h4>Category</h4>
+          <p>Corporate Voice & Brand Illustration</p>
+        </div>
+        <div class="meta-item">
+          <h4>Deliverables</h4>
+          <p>Custom Digital Illustrations & Assets</p>
+        </div>
+        <div class="meta-item">
+          <h4>Tools & Software</h4>
+          <p>Procreate, Adobe Illustrator</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OBJECTIVES -->
+    <section id="objectives" class="section">
+      <h2 class="section-title">Project Objectives & Brand Alignment</h2>
+      <p class="section-subtitle">Translating complex educational technology and customer experience solutions into welcoming, human-centric visual art.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Humanizing EdTech Communication</h3>
+          <p>Stock photography often feels detached and generic. The objective was to craft bespoke illustrations that communicate warmth, accessibility, and trust—reflecting K12 Insight's mission of connecting school districts with their communities.</p>
+        </article>
+
+        <article class="card">
+          <h3>Unified Visual Language</h3>
+          <p>Developing a cohesive illustration style guide—defining line weights, color palettes, shading techniques, and character proportions that integrate seamlessly into existing digital and print collateral.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROCESS & CREATIVE EXECUTION -->
+    <section id="process" class="section">
+      <h2 class="section-title">Creative Process & Methodologies</h2>
+      <p class="section-subtitle">From initial concept sketches in Procreate to production-ready vector and raster assets.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>1. Concept Sketching & Composition</h3>
+          <p>Exploring narrative scenes in Procreate to establish balance and focal points. Sketches focused on depicting active, relatable interactions between educators, parents, and administrative leadership.</p>
+          <div class="media-placeholder" style="aspect-ratio: 16 / 10;">
+            Initial Concept Sketches & Scene Layouts
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>2. Digital Rendering & Color Application</h3>
+          <p>Refining line work and applying K12 Insight's core visual palette. Using subtle gradients, textured brushes, and soft shadows to give elements warmth and depth while maintaining high readability.</p>
+          <div class="media-placeholder" style="aspect-ratio: 16 / 10;">
+            Color Palette & Rendered Asset Showcase
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- DELIVERABLES & APPLICATION -->
+    <section id="deliverables" class="section">
+      <h2 class="section-title">Final Deliverables & Use Cases</h2>
+      <p class="section-subtitle">Multi-channel visual assets designed to scale across responsive web pages, presentation decks, and marketing campaigns.</p>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3>Website & Landing Pages</h3>
+          <p>Hero illustrations and section spot graphics designed to guide user focus down marketing pages and highlight key platform features.</p>
+        </article>
+
+        <article class="card">
+          <h3>Marketing Collateral</h3>
+          <p>High-resolution raster art optimized for digital newsletters, downloadable PDF guides, and print media.</p>
+        </article>
+
+        <article class="card">
+          <h3>Social & Campaign Assets</h3>
+          <p>Modular scene components that can be easily reformatted for social media graphics and presentation slide decks.</p>
+        </article>
+      </div>
+
+      <div class="media-placeholder" style="aspect-ratio: 16 / 9; margin-top: 2rem;">
+        <!-- Replace with: <img src="k12-insight-illustration-hero.webp" alt="K12 Insight Final Illustration Showcase" loading="lazy" /> -->
+        K12 Insight Full Illustration Showcase Preview
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
+    </div>
+  </footer>
+
+</body>
+</html>
