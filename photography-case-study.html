@@ -516,43 +516,49 @@
   <script>
     // Gallery Data Structure - Ready to swap with real image paths (e.g. <img src="study1-img1.webp" />)
     const galleryData = [
-      {
-        title: "Architectural Lines & Shadows",
-        slides: [
-          "[Study 1 - Photo 1: High-Contrast Urban Symmetry]",
-          "[Study 1 - Photo 2: Shadow Silhouette Study]",
-          "[Study 1 - Photo 3: Facade Geometry]",
-          "[Study 1 - Photo 4: Leading Lines Perspective]"
-        ]
-      },
-      {
-        title: "Natural Lighting & Environmental Depth",
-        slides: [
-          "[Study 2 - Photo 1: Golden Hour Forest Canopy]",
-          "[Study 2 - Photo 2: Atmospheric Haze Depth]",
-          "[Study 2 - Photo 3: Foreground Leaves Macro Focus]"
-        ]
-      },
-      {
-        title: "Low-Light Tonal Curve Studies",
-        slides: [
-          "[Study 3 - Photo 1: Neon Tungsten Reflection]",
-          "[Study 3 - Photo 2: Deep Shadow Street Scene]",
-          "[Study 3 - Photo 3: Low-Light Contrast Curves]",
-          "[Study 3 - Photo 4: Nighttime Rain Reflections]",
-          "[Study 3 - Photo 5: Split-Toned Urban Horizon]"
-        ]
-      },
-      {
-        title: "Candid Human Narrative",
-        slides: [
-          "[Study 4 - Photo 1: Street Transit Moment]",
-          "[Study 4 - Photo 2: Unposed Conversation]",
-          "[Study 4 - Photo 3: Market Artisan Focus]",
-          "[Study 4 - Photo 4: Evening Crowd Movement]"
-        ]
-      }
-    ];
+  {
+    title: "Architectural Lines & Shadows",
+    // Cover thumbnail shown on the card
+    coverImage: "assets/images/photography/arch-cover.webp",
+    // All images for this specific slideshow
+    slides: [
+      "assets/images/photography/arch-1.webp",
+      "assets/images/photography/arch-2.webp",
+      "assets/images/photography/arch-3.webp",
+      "assets/images/photography/arch-4.webp"
+    ]
+  },
+  {
+    title: "Natural Lighting & Environmental Depth",
+    coverImage: "assets/images/photography/nature-cover.webp",
+    slides: [
+      "assets/images/photography/nature-1.webp",
+      "assets/images/photography/nature-2.webp",
+      "assets/images/photography/nature-3.webp"
+    ]
+  },
+  {
+    title: "Low-Light Tonal Curve Studies",
+    coverImage: "assets/images/photography/lowlight-cover.webp",
+    slides: [
+      "assets/images/photography/lowlight-1.webp",
+      "assets/images/photography/lowlight-2.webp",
+      "assets/images/photography/lowlight-3.webp",
+      "assets/images/photography/lowlight-4.webp",
+      "assets/images/photography/lowlight-5.webp"
+    ]
+  },
+  {
+    title: "Candid Human Narrative",
+    coverImage: "assets/images/photography/candid-cover.webp",
+    slides: [
+      "assets/images/photography/candid-1.webp",
+      "assets/images/photography/candid-2.webp",
+      "assets/images/photography/candid-3.webp",
+      "assets/images/photography/candid-4.webp"
+    ]
+  }
+];
 
     let currentStudyIndex = 0;
     let currentSlideIndex = 0;
@@ -582,28 +588,40 @@
     }
 
     function updateSlideshow() {
-      const study = galleryData[currentStudyIndex];
-      const stage = document.getElementById('slideStage');
-      const dotsContainer = document.getElementById('dotsContainer');
+  const study = galleryData[currentStudyIndex];
+  const stage = document.getElementById('slideStage');
+  const dotsContainer = document.getElementById('dotsContainer');
 
-      // Render Active Slide Placeholder (Replace with <img src="..." /> when ready)
-      stage.innerHTML = `
-        <div class="modal-slide-placeholder">
-          <p style="color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.85rem;">
-            ${study.title} — Slide ${currentSlideIndex + 1} of ${study.slides.length}
-          </p>
-          <p style="font-size: 1.25rem; color: #ffffff;">${study.slides[currentSlideIndex]}</p>
-        </div>
-      `;
+  // Render actual WebP image with smooth contain sizing
+  const currentImageSrc = study.slides[currentSlideIndex];
+  stage.innerHTML = `
+    <img 
+      src="${currentImageSrc}" 
+      alt="${study.title} - Slide ${currentSlideIndex + 1}" 
+      style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);" 
+    />
+  `;
 
-      // Render Glowing White Dots
-      dotsContainer.innerHTML = '';
-      study.slides.forEach((_, i) => {
-        const dot = document.createElement('div');
-        dot.className = `dot ${i === currentSlideIndex ? 'active' : ''}`;
-        dot.onclick = () => goToSlide(i);
-        dotsContainer.appendChild(dot);
-      });
+  // Render Glowing White Dots
+  dotsContainer.innerHTML = '';
+  study.slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = `dot ${i === currentSlideIndex ? 'active' : ''}`;
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+}
+
+// Auto-populate card cover thumbnails on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.study-card');
+  galleryData.forEach((item, index) => {
+    if (cards[index]) {
+      const placeholder = cards[index].querySelector('.study-media-placeholder');
+      placeholder.innerHTML = `<img src="${item.coverImage}" alt="${item.title} Cover" style="width:100%; height:100%; object-fit:cover; border-radius:8px;" />`;
+    }
+  });
+});
     }
 
     // Keyboard Shortcuts (Esc to close, Arrow keys to navigate)
