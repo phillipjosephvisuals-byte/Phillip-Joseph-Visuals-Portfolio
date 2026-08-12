@@ -6,15 +6,26 @@
   <title>Phillip Joseph Villarreal | Product Designer & Front-End Developer</title>
   
   <style>
+    /* TYPOGRAPHY IMPORT FOR ADAPT PRO */
+    @font-face {
+      font-family: 'Adapt Pro';
+      src: local('Adapt Pro'), local('AdaptPro'), url('assets/fonts/AdaptPro.woff2') format('woff2');
+      font-weight: 700 800;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root {
-      --bg-main: #0B0F17;
-      --bg-surface: #141A26;
-      --bg-surface-hover: #1D2536;
-      --border-subtle: #242E42;
-      --text-main: #E2E8F0;
-      --text-muted: #94A3B8;
-      --accent: #38BDF8;
-      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      /* Deepened palette to rich charcoal/obsidian */
+      --bg-base: #05070a;
+      --bg-surface: #0f141d;
+      --bg-surface-hover: #171f2c;
+      --border-subtle: #1e293b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --font-heading: 'Adapt Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       --max-width: 1120px;
     }
 
@@ -25,11 +36,38 @@
     }
 
     body {
-      background-color: var(--bg-main);
+      background-color: var(--bg-base);
       color: var(--text-main);
-      font-family: var(--font-stack);
+      font-family: var(--font-body);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* MULTIPLY VIGNETTE OVERLAY */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(
+        circle at 50% 30%, 
+        rgba(20, 27, 41, 0.45) 0%, 
+        rgba(5, 7, 10, 0.85) 65%, 
+        rgba(2, 3, 5, 0.98) 100%
+      );
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ENSURE CONTENT STAYS ABOVE VIGNETTE */
+    .site-header, main, .site-footer {
+      position: relative;
+      z-index: 1;
     }
 
     a {
@@ -44,7 +82,6 @@
       border-radius: 8px;
     }
 
-    /* CARD LINK WRAPPER */
     .card-link {
       display: block;
       text-decoration: none;
@@ -52,7 +89,7 @@
       height: 100%;
     }
 
-    /* --- LAYOUT CONTAINERS --- */
+    /* LAYOUT CONTAINERS */
     .container {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -64,14 +101,14 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    /* --- NAVIGATION --- */
+    /* NAVIGATION */
     .site-header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background-color: rgba(11, 15, 23, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background-color: rgba(5, 7, 10, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
     }
 
@@ -83,9 +120,11 @@
     }
 
     .brand {
+      font-family: var(--font-heading);
       font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: -0.02em;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
     }
 
     .nav-links {
@@ -105,9 +144,19 @@
       color: var(--text-main);
     }
 
-    /* --- HERO --- */
+    /* HEADINGS & LIT WHITE GLOW EFFECT */
+    h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
+      font-family: var(--font-heading);
+      color: #ffffff;
+      /* Soft multi-layered white glow */
+      text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.28),
+        0 0 20px rgba(255, 255, 255, 0.12);
+    }
+
+    /* HERO */
     .hero {
-      padding: 6rem 0 4rem 0;
+      padding: 6.5rem 0 4.5rem 0;
     }
 
     .hero-kicker {
@@ -120,11 +169,15 @@
     }
 
     .hero-title {
-      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
       font-weight: 800;
-      line-height: 1.2;
-      letter-spacing: -0.03em;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
       margin-bottom: 1.25rem;
+      /* Enhanced glow for hero header */
+      text-shadow: 
+        0 0 12px rgba(255, 255, 255, 0.32),
+        0 0 28px rgba(255, 255, 255, 0.15);
     }
 
     .hero-bio {
@@ -134,15 +187,14 @@
       line-height: 1.7;
     }
 
-    /* --- SECTION HEADINGS --- */
     .section-title {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 700;
       margin-bottom: 2rem;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
 
-    /* --- FEATURED CASE STUDY (HERO CARD) --- */
+    /* FEATURED CARD */
     .featured-card {
       background-color: var(--bg-surface);
       border: 1px solid var(--border-subtle);
@@ -151,7 +203,8 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 2rem;
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
 
     @media (min-width: 850px) {
@@ -164,6 +217,7 @@
     .card-link:hover .featured-card {
       border-color: var(--accent);
       transform: translateY(-2px);
+      box-shadow: 0 12px 35px -10px rgba(56, 189, 248, 0.15);
     }
 
     .card-kicker {
@@ -200,7 +254,7 @@
     }
 
     .media-placeholder {
-      background-color: var(--bg-main);
+      background-color: var(--bg-base);
       border: 1px solid var(--border-subtle);
       aspect-ratio: 16 / 10;
       border-radius: 8px;
@@ -211,7 +265,7 @@
       font-size: 0.9rem;
     }
 
-    /* --- GRIDS --- */
+    /* GRIDS & CARDS */
     .grid-3 {
       display: grid;
       grid-template-columns: 1fr;
@@ -233,7 +287,6 @@
       .grid-3 { grid-template-columns: repeat(3, 1fr); }
     }
 
-    /* --- STANDARD CARDS --- */
     .card {
       background-color: var(--bg-surface);
       border: 1px solid var(--border-subtle);
@@ -242,12 +295,14 @@
       display: flex;
       flex-direction: column;
       height: 100%;
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4);
     }
 
     .card-link:hover .card {
       border-color: var(--accent);
       transform: translateY(-2px);
+      box-shadow: 0 10px 30px -8px rgba(56, 189, 248, 0.12);
     }
 
     .card .media-placeholder {
@@ -272,7 +327,7 @@
       font-weight: 500;
     }
 
-    /* --- FOOTER --- */
+    /* FOOTER */
     .site-footer {
       padding: 3rem 0;
       color: var(--text-muted);
@@ -360,14 +415,14 @@
         </a>
 
         <!-- CORPORATE VOICE CARD -->
-        <a href="k12-insight-illustration-project-case-study.html" class="card-link">
-  <article class="card">
-    <div class="media-placeholder">Custom Illustrations</div>
-    <h3>Corporate Voice</h3>
-    <p>Custom raster-based illustrations to convey company voice and mission across website and marketing collateral.</p>
-    <div class="card-tags">Procreate • Adobe Illustrator</div>
-  </article>
-</a>
+        <a href="corporate-voice-case-study.html" class="card-link">
+          <article class="card">
+            <div class="media-placeholder">Custom Illustrations</div>
+            <h3>Corporate Voice</h3>
+            <p>Custom raster-based illustrations to convey company voice and mission across website and marketing collateral.</p>
+            <div class="card-tags">Procreate • Adobe Illustrator</div>
+          </article>
+        </a>
 
       </div>
     </section>
