@@ -436,20 +436,28 @@
 
   </main>
 
-  <!-- THEATER MODE VIDEO MODAL -->
-  <div id="videoModal" class="modal-overlay">
-    <button class="modal-close-btn" onclick="closeVideoModal()" aria-label="Close Theater Mode">✕</button>
-    
-    <div class="modal-stage">
-      <div class="video-player-container">
-        <video id="activeVideoPlayer" controls playsinline preload="metadata">
-          <source id="videoSource" src="" type="video/mp4" />
-          Your browser does not support HTML5 video playback.
-        </video>
-      </div>
-      <div id="modalVideoTitle" class="modal-video-title"></div>
+ <!-- THEATER MODE VIDEO MODAL -->
+<div id="videoModal" class="modal-overlay">
+  <button class="modal-close-btn" onclick="closeVideoModal()" aria-label="Close Theater Mode">✕</button>
+  
+  <div class="modal-stage">
+    <div class="video-player-container">
+      <!-- YOUTUBE IFRAME EMBED CONTAINER -->
+      <iframe 
+        id="youtubeIframe" 
+        width="100%" 
+        height="100%" 
+        src="" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen
+        style="border: none; border-radius: 12px;">
+      </iframe>
     </div>
+    <div id="modalVideoTitle" class="modal-video-title"></div>
   </div>
+</div>
 
   <footer class="site-footer">
     <div class="container">
@@ -459,59 +467,75 @@
 
   <!-- LIGHTWEIGHT VIDEO MODAL SCRIPT -->
   <script>
-    // Simply replace the 'videoUrl' values below with your hosted MP4/WebM video paths
-    const videoData = [
-      {
-        title: "The economic impact of declining enrollment",
-        videoUrl: "https://youtu.be/VAikZlNdhgg?si=HV4dBWR0wiil5zg5"
-      },
-      {
-        title: "Students take action on school safety",
-        videoUrl: "https://youtu.be/aWUYOYSFIpc?si=gtCrkSCq5-dOiQWN"
-      },
-       {
-        title: "HealthShare Credit Union + Sogolytics | Client Testimonial",
-        videoUrl: "https://youtu.be/HXMDnF_uwAA?si=yKN37mF5XxWY9gVu"
-      },
-      {
-        title: "Fort Belvoir Residential Communities LLC + Sogolytics | Client Testimonial",
-        videoUrl: "https://youtu.be/Exl5mJyY8Xw?si=-N3Dr0sIkCwcdfJq"
-      }
-    ];
+    // Replace VIDEO_ID_1, VIDEO_ID_2, etc., with your actual YouTube Video IDs
+// Example: For https://www.youtube.com/watch?v=dQw4w9WgXcQ, the ID is "dQw4w9WgXcQ"
+const videoData = [
+  {
+    title: "Corporate Brand Overview Reel",
+    youtubeId: "VIDEO_ID_1",
+    thumbnailUrl: "https://img.youtube.com/vi/VIDEO_ID_1/hqdefault.jpg"
+  },
+  {
+    title: "Product & Motion Graphic Showcase",
+    youtubeId: "VIDEO_ID_2",
+    thumbnailUrl: "https://img.youtube.com/vi/VIDEO_ID_2/hqdefault.jpg"
+  },
+   {
+    title: "Product & Motion Graphic Showcase",
+    youtubeId: "<iframe width="560" height="315" src="https://www.youtube.com/embed/aWUYOYSFIpc?si=6FKfEzsGqGug2ZjJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>",
+    thumbnailUrl: "https://img.youtube.com/vi/<iframe width="560" height="315" src="https://www.youtube.com/embed/aWUYOYSFIpc?si=6FKfEzsGqGug2ZjJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>/hqdefault.jpg"
+  },
+  {
+    title: "Executive Event & Keynote Highlights",
+    youtubeId: "VIDEO_ID_3",
+    thumbnailUrl: "https://img.youtube.com/vi/VIDEO_ID_3/hqdefault.jpg"
+  }
+];
 
     function openVideoModal(index) {
-      const video = videoData[index];
-      const modal = document.getElementById('videoModal');
-      const player = document.getElementById('activeVideoPlayer');
-      const source = document.getElementById('videoSource');
-      const title = document.getElementById('modalVideoTitle');
+  const video = videoData[index];
+  const modal = document.getElementById('videoModal');
+  const iframe = document.getElementById('youtubeIframe');
+  const title = document.getElementById('modalVideoTitle');
 
-      source.src = video.videoUrl;
-      title.textContent = video.title;
-      player.load();
+  // Load YouTube embed URL with autoplay enabled
+  iframe.src = `https://www.youtube.com/embed/${video.youtubeId}?autoplay=1&rel=0`;
+  title.textContent = video.title;
 
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Stop background scrolling
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+  const modal = document.getElementById('videoModal');
+  const iframe = document.getElementById('youtubeIframe');
+
+  // Clearing the src stops video audio immediately when closed
+  iframe.src = "";
+  modal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+// Auto-populate YouTube thumbnails onto the horizontal cards on load
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.video-card');
+  videoData.forEach((item, index) => {
+    if (cards[index]) {
+      const placeholder = cards[index].querySelector('.video-media-placeholder');
+      placeholder.innerHTML = `<img src="${item.thumbnailUrl}" alt="${item.title} Thumbnail" style="width:100%; height:100%; object-fit:cover; border-radius:8px;" />`;
     }
+  });
+});
 
-    function closeVideoModal() {
-      const modal = document.getElementById('videoModal');
-      const player = document.getElementById('activeVideoPlayer');
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeVideoModal();
+});
 
-      player.pause(); // Pause video on close
-      modal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-
-    // Close on Escape Key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeVideoModal();
-    });
-
-    // Close when clicking backdrop
-    document.getElementById('videoModal').addEventListener('click', (e) => {
-      if (e.target.id === 'videoModal') closeVideoModal();
-    });
+// Close when clicking dark overlay
+document.getElementById('videoModal').addEventListener('click', (e) => {
+  if (e.target.id === 'videoModal') closeVideoModal();
+});
   </script>
 
 </body>
