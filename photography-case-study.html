@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photography & Visual Narrative | Phillip Joseph Villarreal</title>
+  
+  <style>
+    @font-face {
+      font-family: 'Adapt Pro';
+      src: local('Adapt Pro'), local('AdaptPro'), url('assets/fonts/AdaptPro.woff2') format('woff2');
+      font-weight: 700 800;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg-base: #05070a;
+      --bg-surface: #0f141d;
+      --bg-surface-hover: #171f2c;
+      --border-subtle: #1e293b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --font-heading: 'Adapt Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --max-width: 1120px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* MULTIPLY VIGNETTE OVERLAY */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(
+        circle at 50% 30%, 
+        rgba(20, 27, 41, 0.45) 0%, 
+        rgba(5, 7, 10, 0.85) 65%, 
+        rgba(2, 3, 5, 0.98) 100%
+      );
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .site-header, main, .site-footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img, video { max-width: 100%; height: auto; display: block; border-radius: 8px; }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: 4.5rem 0; border-bottom: 1px solid var(--border-subtle); }
+
+    /* NAVIGATION */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(5, 7, 10, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+    .brand { font-family: var(--font-heading); font-weight: 700; font-size: 1.15rem; text-shadow: 0 0 12px rgba(255, 255, 255, 0.25); }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color 0.2s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+
+    /* HEADINGS WITH ILLUMINATED GLOW */
+    h1, h2, h3, .brand, .hero-title, .section-title {
+      font-family: var(--font-heading);
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.28), 0 0 20px rgba(255, 255, 255, 0.12);
+    }
+
+    .hero { padding: 5rem 0 3rem 0; }
+    .hero-kicker { color: var(--accent); font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+    .hero-title { font-size: clamp(2.2rem, 4.5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.25rem; }
+    .hero-bio { color: var(--text-muted); font-size: 1.15rem; max-width: 820px; line-height: 1.7; margin-bottom: 2rem; }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+    }
+
+    .meta-item h4 { font-size: 0.8rem; text-transform: uppercase; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+    .meta-item p { font-size: 0.95rem; color: var(--text-main); font-weight: 500; }
+
+    .section-title { font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; }
+    .section-subtitle { color: var(--text-muted); font-size: 1.05rem; max-width: 750px; margin-bottom: 2.5rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+
+    @media (min-width: 768px) {
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      height: 100%;
+    }
+
+    .card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--text-main); }
+    .card p, .card ul { color: var(--text-muted); font-size: 0.975rem; line-height: 1.6; }
+    .card ul { list-style-type: disc; padding-left: 1.25rem; margin-top: 0.5rem; }
+    .card ul li { margin-bottom: 0.5rem; }
+
+    .media-placeholder {
+      background-color: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      aspect-ratio: 16 / 10;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .site-footer { padding: 3rem 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--border-subtle); }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">PJV Home</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">← Back to Portfolio</a></li>
+          <li><a href="#overview" class="active">Overview</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <section id="overview" class="section hero">
+      <div class="hero-kicker">Media & Art Direction</div>
+      <h1 class="hero-title">Visual Narrative & Still Photography</h1>
+      <p class="hero-bio">
+        Explorations in framing, natural and controlled lighting, spatial composition, and color grading. Focused on capturing candid moments and structured environmental studies that evoke mood and tell a story through a single frame.
+      </p>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <h4>Camera Rig</h4>
+          <p>Canon R50V</p>
+        </div>
+        <div class="meta-item">
+          <h4>Post-Processing</h4>
+          <p>Adobe Photoshop, Camera RAW</p>
+        </div>
+        <div class="meta-item">
+          <h4>Asset Management</h4>
+          <p>Adobe Bridge</p>
+        </div>
+        <div class="meta-item">
+          <h4>Core Focus</h4>
+          <p>Lighting, Framing & Narrative</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach" class="section">
+      <h2 class="section-title">Compositional Strategy & Workflow</h2>
+      <p class="section-subtitle">A methodical approach to visual storytelling—balancing raw capture with disciplined color science.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>1. Environmental Framing</h3>
+          <p>Utilizing leading lines, depth-of-field separation, and architectural geometry to isolate key subjects and direct visual priority.</p>
+          <ul>
+            <li>Natural light manipulation and dynamic range management.</li>
+            <li>Subject isolation through tactical focal length selection.</li>
+            <li>Foreground/background depth staging.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>2. Color Science & Grading</h3>
+          <p>Developing subtle, non-destructive color profiles in Camera RAW and Photoshop to establish cohesive visual tone across image series.</p>
+          <ul>
+            <li>Highlights and shadows tonal curve balancing.</li>
+            <li>Selective split-toning for cinematic mood.</li>
+            <li>Preserving skin-tone fidelity across varied lighting.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="gallery" class="section">
+      <h2 class="section-title">Selected Photography Studies</h2>
+      <p class="section-subtitle">Visual narrative studies exploring environmental lighting and mood.</p>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3>Environmental Study</h3>
+          <p>Lighting and texture composition study focusing on architectural lines.</p>
+          <div class="media-placeholder" style="aspect-ratio: 4 / 5;">
+            Photography Preview Asset 1
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Framing & Depth</h3>
+          <p>Subject isolation using natural aperture falloff and foreground elements.</p>
+          <div class="media-placeholder" style="aspect-ratio: 4 / 5;">
+            Photography Preview Asset 2
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Tonal Curve Study</h3>
+          <p>Low-light narrative study exploring high-contrast shadow detail.</p>
+          <div class="media-placeholder" style="aspect-ratio: 4 / 5;">
+            Photography Preview Asset 3
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
+    </div>
+  </footer>
+
+</body>
+</html>
