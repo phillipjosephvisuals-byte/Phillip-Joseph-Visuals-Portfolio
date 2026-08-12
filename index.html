@@ -44,6 +44,12 @@
       display: block;
       border-radius: 8px;
     }
+    /* Makes card links block-level and maintains crisp styling */
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
 
     /* --- LAYOUT CONTAINERS --- */
     .container {
@@ -303,27 +309,31 @@
       </p>
     </section>
 
-    <!-- FEATURED PRODUCT CASE STUDY -->
-    <section id="scribe85" class="section">
-      <h2 class="section-title">Featured Product Case Study</h2>
-      <div class="featured-card">
-        <div>
-          <div class="card-kicker">Classic Dark</div>
-          <h3 class="card-title">scribe85: zero-to-one dark surface writing workspace</h3>
-          <p class="card-desc">
-            An independent, single-file writing environment built from scratch to eliminate distraction. Works completely in your browser, requires no installation, and features themes, markdown functionality, and auto-save systems.
-          </p>
-          <ul class="meta-list">
-            <li><strong>My Role:</strong> Product Designer and Front-End Developer</li>
-            <li><strong>Key Skills:</strong> Zero-to-one product strategy | Typography hierarchy | Dark surface UI | Vanilla JS/CSS</li>
-          </ul>
-        </div>
-        <div class="media-placeholder">
-          <!-- Replace this div with: <img src="scribe85-preview.webp" width="600" height="375" loading="lazy" alt="scribe85 Workspace Preview" /> -->
-          scribe85 Interface Preview
-        </div>
+   <!-- FEATURED PRODUCT CASE STUDY -->
+<section id="scribe85" class="section">
+  <h2 class="section-title">Featured Product Case Study</h2>
+  
+  <!-- LINK WRAPPER ADDED HERE -->
+  <a href="scribe85-case-study.html" class="card-link">
+    <div class="featured-card">
+      <div>
+        <div class="card-kicker">Classic Dark</div>
+        <h3 class="card-title">scribe85: zero-to-one dark surface writing workspace</h3>
+        <p class="card-desc">
+          An independent, single-file writing environment built from scratch to eliminate distraction. Works completely in your browser, requires no installation, and features themes, markdown functionality, and auto-save systems.
+        </p>
+        <ul class="meta-list">
+          <li><strong>My Role:</strong> Product Designer and Front-End Developer</li>
+          <li><strong>Key Skills:</strong> Zero-to-one product strategy | Typography hierarchy | Dark surface UI | Vanilla JS/CSS</li>
+        </ul>
       </div>
-    </section>
+      <div class="media-placeholder">
+        scribe85 Interface Preview
+      </div>
+    </div>
+  </a>
+
+</section>
 
     <!-- CORPORATE COMMUNICATION & VISUAL DESIGN -->
     <section id="corporate" class="section">
