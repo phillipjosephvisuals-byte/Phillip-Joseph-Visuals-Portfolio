@@ -177,7 +177,8 @@
       color: var(--text-muted);
       font-size: 0.85rem;
       text-align: center;
-      padding: 1rem;
+      padding: 0;
+      overflow: hidden;
     }
 
     .study-content {
@@ -268,22 +269,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .modal-slide-placeholder {
-      width: 100%;
-      height: 100%;
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-      gap: 0.5rem;
     }
 
     .nav-arrow {
@@ -427,10 +412,10 @@
 
       <div class="studies-stack">
         
-        <!-- STUDY 1 -->
+        <!-- STUDY 0 -->
         <article class="study-card" onclick="openSlideshow(0)">
           <div class="study-media-placeholder">
-            [Study 1 Cover Image]
+            <!-- Thumbnail populates via JS -->
           </div>
           <div class="study-content">
             <h3 class="study-title">1. Architectural Lines & Shadows</h3>
@@ -441,10 +426,10 @@
           </div>
         </article>
 
-        <!-- STUDY 2 -->
+        <!-- STUDY 1 -->
         <article class="study-card" onclick="openSlideshow(1)">
           <div class="study-media-placeholder">
-            [Study 2 Cover Image]
+            <!-- Thumbnail populates via JS -->
           </div>
           <div class="study-content">
             <h3 class="study-title">2. Natural Lighting & Environmental Depth</h3>
@@ -455,10 +440,10 @@
           </div>
         </article>
 
-        <!-- STUDY 3 -->
+        <!-- STUDY 2 -->
         <article class="study-card" onclick="openSlideshow(2)">
           <div class="study-media-placeholder">
-            [Study 3 Cover Image]
+            <!-- Thumbnail populates via JS -->
           </div>
           <div class="study-content">
             <h3 class="study-title">3. Low-Light Tonal Curve Studies</h3>
@@ -469,10 +454,10 @@
           </div>
         </article>
 
-        <!-- STUDY 4 -->
+        <!-- STUDY 3 -->
         <article class="study-card" onclick="openSlideshow(3)">
           <div class="study-media-placeholder">
-            [Study 4 Cover Image]
+            <!-- Thumbnail populates via JS -->
           </div>
           <div class="study-content">
             <h3 class="study-title">4. Candid Human Narrative</h3>
@@ -496,7 +481,7 @@
       <button class="nav-arrow prev" onclick="navigateSlide(-1)">‹</button>
       
       <div class="modal-slide-container" id="slideStage">
-        <!-- Slide content renders dynamically via JavaScript -->
+        <!-- Slide image renders dynamically via JavaScript -->
       </div>
       
       <button class="nav-arrow next" onclick="navigateSlide(1)">›</button>
@@ -514,51 +499,48 @@
 
   <!-- LIGHTWEIGHT SLIDESHOW SCRIPT -->
   <script>
-    // Gallery Data Structure - Ready to swap with real image paths (e.g. <img src="study1-img1.webp" />)
     const galleryData = [
-  {
-    title: "Architectural Lines & Shadows",
-    // Cover thumbnail shown on the card
-    coverImage: "assets/images/photography/arch-cover.webp",
-    // All images for this specific slideshow
-    slides: [
-      "assets/images/photography/arch-1.webp",
-      "assets/images/photography/arch-2.webp",
-      "assets/images/photography/arch-3.webp",
-      "assets/images/photography/arch-4.webp"
-    ]
-  },
-  {
-    title: "Natural Lighting & Environmental Depth",
-    coverImage: "assets/images/photography/nature-cover.webp",
-    slides: [
-      "assets/images/photography/nature-1.webp",
-      "assets/images/photography/nature-2.webp",
-      "assets/images/photography/nature-3.webp"
-    ]
-  },
-  {
-    title: "Low-Light Tonal Curve Studies",
-    coverImage: "assets/images/photography/lowlight-cover.webp",
-    slides: [
-      "assets/images/photography/lowlight-1.webp",
-      "assets/images/photography/lowlight-2.webp",
-      "assets/images/photography/lowlight-3.webp",
-      "assets/images/photography/lowlight-4.webp",
-      "assets/images/photography/lowlight-5.webp"
-    ]
-  },
-  {
-    title: "Candid Human Narrative",
-    coverImage: "assets/images/photography/candid-cover.webp",
-    slides: [
-      "assets/images/photography/candid-1.webp",
-      "assets/images/photography/candid-2.webp",
-      "assets/images/photography/candid-3.webp",
-      "assets/images/photography/candid-4.webp"
-    ]
-  }
-];
+      {
+        title: "Architectural Lines & Shadows",
+        coverImage: "assets/images/photography/arch-cover.webp",
+        slides: [
+          "assets/images/photography/arch-1.webp",
+          "assets/images/photography/arch-2.webp",
+          "assets/images/photography/arch-3.webp",
+          "assets/images/photography/arch-4.webp"
+        ]
+      },
+      {
+        title: "Natural Lighting & Environmental Depth",
+        coverImage: "assets/images/photography/nature-cover.webp",
+        slides: [
+          "assets/images/photography/nature-1.webp",
+          "assets/images/photography/nature-2.webp",
+          "assets/images/photography/nature-3.webp"
+        ]
+      },
+      {
+        title: "Low-Light Tonal Curve Studies",
+        coverImage: "assets/images/photography/lowlight-cover.webp",
+        slides: [
+          "assets/images/photography/lowlight-1.webp",
+          "assets/images/photography/lowlight-2.webp",
+          "assets/images/photography/lowlight-3.webp",
+          "assets/images/photography/lowlight-4.webp",
+          "assets/images/photography/lowlight-5.webp"
+        ]
+      },
+      {
+        title: "Candid Human Narrative",
+        coverImage: "assets/images/photography/candid-cover.webp",
+        slides: [
+          "assets/images/photography/candid-1.webp",
+          "assets/images/photography/candid-2.webp",
+          "assets/images/photography/candid-3.webp",
+          "assets/images/photography/candid-4.webp"
+        ]
+      }
+    ];
 
     let currentStudyIndex = 0;
     let currentSlideIndex = 0;
@@ -568,7 +550,7 @@
       currentSlideIndex = 0;
       updateSlideshow();
       document.getElementById('slideshowModal').classList.add('active');
-      document.body.style.overflow = 'hidden'; // Stop background page scroll
+      document.body.style.overflow = 'hidden';
     }
 
     function closeSlideshow() {
@@ -588,41 +570,38 @@
     }
 
     function updateSlideshow() {
-  const study = galleryData[currentStudyIndex];
-  const stage = document.getElementById('slideStage');
-  const dotsContainer = document.getElementById('dotsContainer');
+      const study = galleryData[currentStudyIndex];
+      const stage = document.getElementById('slideStage');
+      const dotsContainer = document.getElementById('dotsContainer');
 
-  // Render actual WebP image with smooth contain sizing
-  const currentImageSrc = study.slides[currentSlideIndex];
-  stage.innerHTML = `
-    <img 
-      src="${currentImageSrc}" 
-      alt="${study.title} - Slide ${currentSlideIndex + 1}" 
-      style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);" 
-    />
-  `;
+      const currentImageSrc = study.slides[currentSlideIndex];
+      stage.innerHTML = `
+        <img 
+          src="${currentImageSrc}" 
+          alt="${study.title} - Slide ${currentSlideIndex + 1}" 
+          style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);" 
+        />
+      `;
 
-  // Render Glowing White Dots
-  dotsContainer.innerHTML = '';
-  study.slides.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.className = `dot ${i === currentSlideIndex ? 'active' : ''}`;
-    dot.onclick = () => goToSlide(i);
-    dotsContainer.appendChild(dot);
-  });
-}
-
-// Auto-populate card cover thumbnails on page load
-document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.study-card');
-  galleryData.forEach((item, index) => {
-    if (cards[index]) {
-      const placeholder = cards[index].querySelector('.study-media-placeholder');
-      placeholder.innerHTML = `<img src="${item.coverImage}" alt="${item.title} Cover" style="width:100%; height:100%; object-fit:cover; border-radius:8px;" />`;
+      dotsContainer.innerHTML = '';
+      study.slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = `dot ${i === currentSlideIndex ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+      });
     }
-  });
-});
-    }
+
+    // Auto-populate card cover thumbnails on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.study-card');
+      galleryData.forEach((item, index) => {
+        if (cards[index]) {
+          const placeholder = cards[index].querySelector('.study-media-placeholder');
+          placeholder.innerHTML = `<img src="${item.coverImage}" alt="${item.title} Cover" style="width:100%; height:100%; object-fit:cover; border-radius:8px;" />`;
+        }
+      });
+    });
 
     // Keyboard Shortcuts (Esc to close, Arrow keys to navigate)
     document.addEventListener('keydown', (e) => {
