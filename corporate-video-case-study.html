@@ -177,8 +177,9 @@
       color: var(--text-muted);
       font-size: 0.85rem;
       text-align: center;
-      padding: 1rem;
+      padding: 0;
       position: relative;
+      overflow: hidden;
     }
 
     /* PLAY BUTTON ICON OVERLAY */
@@ -290,12 +291,6 @@
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
     }
 
-    .video-player-container video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
     .modal-video-title {
       color: #ffffff;
       font-family: var(--font-heading);
@@ -389,10 +384,10 @@
 
       <div class="video-stack">
         
-        <!-- VIDEO ITEM 1 -->
+        <!-- VIDEO ITEM 0 -->
         <article class="video-card" onclick="openVideoModal(0)">
           <div class="video-media-placeholder">
-            [Video 1 Thumbnail]
+            <!-- Thumbnail populates via JS -->
           </div>
           <div class="video-content">
             <h3 class="video-title">1. Corporate Brand Overview Reel</h3>
@@ -403,13 +398,13 @@
           </div>
         </article>
 
-        <!-- VIDEO ITEM 2 -->
+        <!-- VIDEO ITEM 1 -->
         <article class="video-card" onclick="openVideoModal(1)">
           <div class="video-media-placeholder">
-            [Video 2 Thumbnail]
+            <!-- Thumbnail populates via JS -->
           </div>
           <div class="video-content">
-            <h3 class="video-title">2. Product & Motion Graphic Showcase</h3>
+            <h3 class="video-title">2. Product & Motion Graphic Showcase (Part 1)</h3>
             <p class="video-blurb">
               High-pacing feature highlight video combining screen captures, kinetic typography, and synchronized motion graphics built in After Effects.
             </p>
@@ -417,13 +412,27 @@
           </div>
         </article>
 
-        <!-- VIDEO ITEM 3 -->
+        <!-- VIDEO ITEM 2 -->
         <article class="video-card" onclick="openVideoModal(2)">
           <div class="video-media-placeholder">
-            [Video 3 Thumbnail]
+            <!-- Thumbnail populates via JS -->
           </div>
           <div class="video-content">
-            <h3 class="video-title">3. Executive Event & Keynote Highlights</h3>
+            <h3 class="video-title">3. Product & Motion Graphic Showcase (Part 2)</h3>
+            <p class="video-blurb">
+              In-depth product motion walk-through demonstrating interface interactions, motion transitions, and user flow animations.
+            </p>
+            <span class="click-hint">Watch Video Reel →</span>
+          </div>
+        </article>
+
+        <!-- VIDEO ITEM 3 -->
+        <article class="video-card" onclick="openVideoModal(3)">
+          <div class="video-media-placeholder">
+            <!-- Thumbnail populates via JS -->
+          </div>
+          <div class="video-content">
+            <h3 class="video-title">4. Executive Event & Keynote Highlights</h3>
             <p class="video-blurb">
               Cinematic event recap capturing stage lighting, live audience reactions, and crisp multi-track audio mastering.
             </p>
@@ -436,28 +445,28 @@
 
   </main>
 
- <!-- THEATER MODE VIDEO MODAL -->
-<div id="videoModal" class="modal-overlay">
-  <button class="modal-close-btn" onclick="closeVideoModal()" aria-label="Close Theater Mode">✕</button>
-  
-  <div class="modal-stage">
-    <div class="video-player-container">
-      <!-- YOUTUBE IFRAME EMBED CONTAINER -->
-      <iframe 
-        id="youtubeIframe" 
-        width="100%" 
-        height="100%" 
-        src="" 
-        title="YouTube video player" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        allowfullscreen
-        style="border: none; border-radius: 12px;">
-      </iframe>
+  <!-- THEATER MODE VIDEO MODAL -->
+  <div id="videoModal" class="modal-overlay">
+    <button class="modal-close-btn" onclick="closeVideoModal()" aria-label="Close Theater Mode">✕</button>
+    
+    <div class="modal-stage">
+      <div class="video-player-container">
+        <!-- YOUTUBE IFRAME EMBED CONTAINER -->
+        <iframe 
+          id="youtubeIframe" 
+          width="100%" 
+          height="100%" 
+          src="" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="border: none; border-radius: 12px;">
+        </iframe>
+      </div>
+      <div id="modalVideoTitle" class="modal-video-title"></div>
     </div>
-    <div id="modalVideoTitle" class="modal-video-title"></div>
   </div>
-</div>
 
   <footer class="site-footer">
     <div class="container">
@@ -467,75 +476,71 @@
 
   <!-- LIGHTWEIGHT VIDEO MODAL SCRIPT -->
   <script>
-    // Replace VIDEO_ID_1, VIDEO_ID_2, etc., with your actual YouTube Video IDs
-// Example: For https://www.youtube.com/watch?v=dQw4w9WgXcQ, the ID is "dQw4w9WgXcQ"
-const videoData = [
-  {
-    title: "Corporate Brand Overview Reel",
-    youtubeId: "<iframe width="560" height="315" src="https://www.youtube.com/embed/HXMDnF_uwAA?si=R4U_soITDlvPCRg5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>",
-    thumbnailUrl: "https://img.youtube.com/vi/<iframe width="560" height="315" src="https://www.youtube.com/embed/HXMDnF_uwAA?si=R4U_soITDlvPCRg5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>/hqdefault.jpg"
-  },
-  {
-    title: "Product & Motion Graphic Showcase",
-    youtubeId: "<iframe width="560" height="315" src="https://www.youtube.com/embed/Exl5mJyY8Xw?si=hotG5KYRgHJoifDW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>",
-    thumbnailUrl: "https://img.youtube.com/vi/<iframe width="560" height="315" src="https://www.youtube.com/embed/Exl5mJyY8Xw?si=hotG5KYRgHJoifDW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>/hqdefault.jpg"
-  },
-   {
-    title: "Product & Motion Graphic Showcase",
-    youtubeId: "<iframe width="560" height="315" src="https://www.youtube.com/embed/aWUYOYSFIpc?si=6FKfEzsGqGug2ZjJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>",
-    thumbnailUrl: "https://img.youtube.com/vi/<iframe width="560" height="315" src="https://www.youtube.com/embed/aWUYOYSFIpc?si=6FKfEzsGqGug2ZjJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>/hqdefault.jpg"
-  },
-  {
-    title: "Executive Event & Keynote Highlights",
-    youtubeId: "<iframe width="560" height="315" src="https://www.youtube.com/embed/VAikZlNdhgg?si=CRA93aGSXg5CpVvl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>",
-    thumbnailUrl: "https://img.youtube.com/vi/<iframe width="560" height="315" src="https://www.youtube.com/embed/VAikZlNdhgg?si=CRA93aGSXg5CpVvl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>/hqdefault.jpg"
-  }
-];
+    // YouTube Video IDs extracted from your embed codes
+    const videoData = [
+      {
+        title: "Corporate Brand Overview Reel",
+        youtubeId: "HXMDnF_uwAA"
+      },
+      {
+        title: "Product & Motion Graphic Showcase (Part 1)",
+        youtubeId: "Exl5mJyY8Xw"
+      },
+      {
+        title: "Product & Motion Graphic Showcase (Part 2)",
+        youtubeId: "aWUYOYSFIpc"
+      },
+      {
+        title: "Executive Event & Keynote Highlights",
+        youtubeId: "VAikZlNdhgg"
+      }
+    ];
 
     function openVideoModal(index) {
-  const video = videoData[index];
-  const modal = document.getElementById('videoModal');
-  const iframe = document.getElementById('youtubeIframe');
-  const title = document.getElementById('modalVideoTitle');
+      const video = videoData[index];
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('youtubeIframe');
+      const title = document.getElementById('modalVideoTitle');
 
-  // Load YouTube embed URL with autoplay enabled
-  iframe.src = `https://www.youtube.com/embed/${video.youtubeId}?autoplay=1&rel=0`;
-  title.textContent = video.title;
+      // Set YouTube Embed URL with Autoplay
+      iframe.src = `https://www.youtube.com/embed/${video.youtubeId}?autoplay=1&rel=0`;
+      title.textContent = video.title;
 
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeVideoModal() {
-  const modal = document.getElementById('videoModal');
-  const iframe = document.getElementById('youtubeIframe');
-
-  // Clearing the src stops video audio immediately when closed
-  iframe.src = "";
-  modal.classList.remove('active');
-  document.body.style.overflow = 'auto';
-}
-
-// Auto-populate YouTube thumbnails onto the horizontal cards on load
-document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.video-card');
-  videoData.forEach((item, index) => {
-    if (cards[index]) {
-      const placeholder = cards[index].querySelector('.video-media-placeholder');
-      placeholder.innerHTML = `<img src="${item.thumbnailUrl}" alt="${item.title} Thumbnail" style="width:100%; height:100%; object-fit:cover; border-radius:8px;" />`;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
-  });
-});
 
-// Close on Escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeVideoModal();
-});
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('youtubeIframe');
 
-// Close when clicking dark overlay
-document.getElementById('videoModal').addEventListener('click', (e) => {
-  if (e.target.id === 'videoModal') closeVideoModal();
-});
+      // Clearing src immediately halts audio/video
+      iframe.src = "";
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Automatically generate YouTube thumbnails onto cards on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.video-card');
+      videoData.forEach((item, index) => {
+        if (cards[index]) {
+          const placeholder = cards[index].querySelector('.video-media-placeholder');
+          const thumbUrl = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
+          placeholder.innerHTML = `<img src="${thumbUrl}" alt="${item.title} Thumbnail" style="width:100%; height:100%; object-fit:cover; border-radius:8px;" />`;
+        }
+      });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeVideoModal();
+    });
+
+    // Close when clicking dark backdrop
+    document.getElementById('videoModal').addEventListener('click', (e) => {
+      if (e.target.id === 'videoModal') closeVideoModal();
+    });
   </script>
 
 </body>
