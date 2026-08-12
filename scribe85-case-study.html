@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scribe85 Case Study | Phillip Joseph Villarreal</title>
+  
+  <style>
+    :root {
+      --bg-main: #0B0F17;
+      --bg-surface: #141A26;
+      --bg-surface-hover: #1D2536;
+      --border-subtle: #242E42;
+      --text-main: #E2E8F0;
+      --text-muted: #94A3B8;
+      --accent: #38BDF8;
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: "Courier Prime", "JetBrains Mono", Consolas, monospace;
+      --max-width: 1120px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-stack);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img, video {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* --- LAYOUT CONTAINERS --- */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* --- NAVIGATION --- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(11, 15, 23, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text-main);
+    }
+
+    /* --- HERO --- */
+    .hero {
+      padding: 5rem 0 3rem 0;
+    }
+
+    .hero-kicker {
+      color: var(--accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-bio {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 820px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* META PILLS GRID */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+    }
+
+    .meta-item h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .meta-item p {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* --- SECTION HEADINGS --- */
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 750px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* --- CONTENT CARDS & GRIDS --- */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      height: 100%;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .card p, .card ul {
+      color: var(--text-muted);
+      font-size: 0.975rem;
+      line-height: 1.6;
+    }
+
+    .card ul {
+      list-style-type: disc;
+      padding-left: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .card ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* --- PLACEHOLDERS FOR MEDIA/SCREENSHOTS --- */
+    .media-placeholder {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-subtle);
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    /* --- THEME PREVIEW CARDS --- */
+    .theme-card {
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .theme-card.classic { background-color: #0d1117; color: #58a6ff; border-color: #30363d; }
+    .theme-card.amber { background-color: #1a1200; color: #ffb000; border-color: #423000; }
+    .theme-card.matrix { background-color: #001a00; color: #00ff41; border-color: #004d1a; }
+    .theme-card.cobalt { background-color: #001133; color: #ffffff; border-color: #002266; }
+
+    .theme-card h4 { font-weight: bold; margin-bottom: 0.5rem; }
+
+    /* --- CALL TO ACTION --- */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-surface-hover) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+      margin: 4rem 0;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: var(--accent);
+      color: #0B0F17;
+      font-weight: 700;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .cta-button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    /* --- FOOTER --- */
+    .site-footer {
+      padding: 3rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-align: center;
+      border-top: 1px solid var(--border-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">PJV Home</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">← Back to Portfolio</a></li>
+          <li><a href="#overview" class="active">Overview</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#testing">Usability</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- HERO SECTION -->
+    <section id="overview" class="section hero">
+      <div class="hero-kicker">Zero-to-One Product Case Study</div>
+      <h1 class="hero-title">scribe85: Distraction-Free Web Workspace</h1>
+      <p class="hero-bio">
+        A single-file writing environment built to eliminate cognitive friction for creative writers and screenwriters. Operates completely in-browser with ambient focus mechanics, zero subscriptions, and retro display color profiles.
+      </p>
+
+      <!-- PROJECT META -->
+      <div class="meta-grid">
+        <div class="meta-item">
+          <h4>Role</h4>
+          <p>Product Designer & Engineer</p>
+        </div>
+        <div class="meta-item">
+          <h4>Deliverable</h4>
+          <p>Browser App & Export Pipeline</p>
+        </div>
+        <div class="meta-item">
+          <h4>Stack</h4>
+          <p>Vanilla JS, Modern CSS, GitHub Pages</p>
+        </div>
+        <div class="meta-item">
+          <h4>Target Audience</h4>
+          <p>Screenwriters & Novelists</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE PURPOSE & THE GAP -->
+    <section class="section">
+      <h2 class="section-title">The Gap vs. The Solution</h2>
+      <p class="section-subtitle">Traditional text editors overload the writing space with persistent toolbars, paywalls, and complex formatting setups that interrupt creative flow.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3 style="color: #ef4444;">The Problem (Cognitive Friction)</h3>
+          <p>When opening conventional writing tools, writers face immediate hurdles:</p>
+          <ul>
+            <li>Invasive UI framing and toolbars competing for visual focus.</li>
+            <li>Subscription paywalls on core features like screenplay formatting.</li>
+            <li>Inconsistent local saving and forced cloud accounts.</li>
+            <li>Bright default surfaces causing severe eye strain during long-form composition.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 style="color: var(--accent);">The scribe85 Solution</h3>
+          <p>Designed to honor deep concentration through zero-overhead architecture:</p>
+          <ul>
+            <li><strong>Ambient Focus State:</strong> UI controls fade into darkness while typing and return instantly on key triggers.</li>
+            <li><strong>Ergonomic Container Boundary:</strong> Restricts text lines to an optimal 60–75 characters per line (CPL).</li>
+            <li><strong>Custom Screenplay Engine:</strong> Automatic indentation and export logic for standard script layouts without fees.</li>
+            <li><strong>Local Auto-Save:</strong> In-browser persistence ensures zero work loss without forced log-ins.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- RETRO THEMES SYSTEM -->
+    <section class="section">
+      <h2 class="section-title">Retro Display Color Systems</h2>
+      <p class="section-subtitle">Simulating terminal ergonomics inspired by 1980s monitors to reduce visual fatigue.</p>
+
+      <div class="grid-4">
+        <div class="theme-card classic">
+          <h4>Classic Dark</h4>
+          <p>Deep indigo background with crisp slate typography.</p>
+        </div>
+        <div class="theme-card amber">
+          <h4>Amber CRT</h4>
+          <p>Warm phosphor spectrum minimizing blue light emissions.</p>
+        </div>
+        <div class="theme-card matrix">
+          <h4>Matrix Green</h4>
+          <p>High-contrast terminal green for intense focus.</p>
+        </div>
+        <div class="theme-card cobalt">
+          <h4>Retro Cobalt</h4>
+          <p>Deep solid blue canvas mimicking legacy CRT televisions.</p>
+        </div>
+      </div>
+
+      <div class="media-placeholder">
+        <!-- Replace with: <img src="scribe85-themes-preview.webp" alt="scribe85 Retro Themes Showcase" loading="lazy" /> -->
+        scribe85 Theme Modes Interface Preview
+      </div>
+    </section>
+
+    <!-- PROCESS & ARCHITECTURE -->
+    <section id="process" class="section">
+      <h2 class="section-title">Product Strategy & Front-End Architecture</h2>
+      
+      <div class="grid-2">
+        <article class="card">
+          <h3>UX & Interface Design</h3>
+          <ul>
+            <li><strong>Persona Frameworks:</strong> Designed around "The Distraction-Free Novelist" and "The Structured Screenwriter."</li>
+            <li><strong>Typographic Hierarchy:</strong> Configured monospaced fonts (Courier Prime, JetBrains Mono) with 1.6× line-height scaling.</li>
+            <li><strong>Lightweight UI Footprint:</strong> Custom inline vector icons and pure CSS state transitions for instant execution.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Engineering & Deployment</h3>
+          <ul>
+            <li><strong>Custom Export Parser:</strong> Outputs clean RTF and TXT while preserving indented screenplay block structures down to the pixel.</li>
+            <li><strong>Responsive Container Queries:</strong> Adapts fluidly across mobile, tablet, and ultra-wide monitor canvas sizes.</li>
+            <li><strong>Production Pipeline:</strong> Deployed on custom apex domain via GitHub Pages with enforced SSL/TLS encryption.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- USABILITY TESTING & ITERATION -->
+    <section id="testing" class="section">
+      <h2 class="section-title">Usability Iteration & Refinement</h2>
+      <p class="section-subtitle">Synthesizing testing sessions with authors and screenwriters into targeted UX solutions.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>1. Document Title Affordance</h3>
+          <p><strong>Feedback:</strong> Users were uncertain if the top document title was editable without visible UI cues.</p>
+          <p style="margin-top: 0.5rem;"><strong>Solution:</strong> Added subtle hover states, inline focus styling, and a micro-pencil icon indicator.</p>
+          <div class="media-placeholder" style="aspect-ratio: 16 / 6;">Document Title Editing Micro-interaction</div>
+        </article>
+
+        <article class="card">
+          <h3>2. Contextual Guidance Drawer</h3>
+          <p><strong>Feedback:</strong> Writers requested access to markdown and screenplay shortcuts without opening extra browser tabs.</p>
+          <p style="margin-top: 0.5rem;"><strong>Solution:</strong> Engineered a slide-out Markdown & Scripting shortcut drawer available on demand.</p>
+          <div class="media-placeholder" style="aspect-ratio: 16 / 6;">Shortcut Drawer Drawer Interface</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION BANNER -->
+    <section class="cta-banner">
+      <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Experience scribe85 Live</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">No sign-ups, no fees, no downloads. Start writing instantly in your browser.</p>
+      <a href="https://scribe85.com" target="_blank" class="cta-button">Launch Workspace →</a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
+    </div>
+  </footer>
+
+</body>
+</html>
