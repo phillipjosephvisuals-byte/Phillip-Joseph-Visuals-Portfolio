@@ -91,7 +91,7 @@
     .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
 
     /* HEADINGS WITH ILLUMINATED GLOW */
-    h1, h2, h3, .brand, .hero-title, .section-title {
+    h1, h2, h3, .brand, .hero-title, .section-title, .study-title {
       font-family: var(--font-heading);
       color: #ffffff;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.28), 0 0 20px rgba(255, 255, 255, 0.12);
@@ -119,12 +119,7 @@
     .section-subtitle { color: var(--text-muted); font-size: 1.05rem; max-width: 750px; margin-bottom: 2.5rem; }
 
     .grid-2 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-    .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-
-    @media (min-width: 768px) {
-      .grid-2 { grid-template-columns: repeat(2, 1fr); }
-      .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    }
+    @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
 
     .card {
       background-color: var(--bg-surface);
@@ -137,19 +132,214 @@
     .card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--text-main); }
     .card p, .card ul { color: var(--text-muted); font-size: 0.975rem; line-height: 1.6; }
     .card ul { list-style-type: disc; padding-left: 1.25rem; margin-top: 0.5rem; }
-    .card ul li { margin-bottom: 0.5rem; }
 
-    .media-placeholder {
+    /* --- HORIZONTAL STACKED STUDY CARDS --- */
+    .studies-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .study-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (min-width: 768px) {
+      .study-card {
+        grid-template-columns: 1fr 2fr; /* 1/3 image, 2/3 text */
+        align-items: center;
+      }
+    }
+
+    .study-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px -8px rgba(56, 189, 248, 0.15);
+    }
+
+    .study-media-placeholder {
       background-color: var(--bg-base);
       border: 1px solid var(--border-subtle);
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 4 / 3;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-top: 1rem;
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .study-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .study-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .study-blurb {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .click-hint {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* --- THEATER MODE SLIDESHOW MODAL --- */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(2, 3, 5, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 2rem;
+      right: 2.5rem;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.3);
+      transition: transform 0.2s ease, text-shadow 0.2s ease;
+      z-index: 1010;
+    }
+
+    .modal-close-btn:hover {
+      transform: scale(1.15);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.6);
+    }
+
+    .modal-stage {
+      position: relative;
+      width: 90%;
+      max-width: 1000px;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-slide-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-slide-placeholder {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      gap: 0.5rem;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 20, 29, 0.6);
+      border: 1px solid var(--border-subtle);
+      color: #ffffff;
+      font-size: 1.5rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease;
+      z-index: 1005;
+    }
+
+    .nav-arrow:hover {
+      background: var(--bg-surface-hover);
+      border-color: var(--accent);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .nav-arrow.prev { left: -70px; }
+    .nav-arrow.next { right: -70px; }
+
+    @media (max-width: 1150px) {
+      .nav-arrow.prev { left: 10px; }
+      .nav-arrow.next { right: 10px; }
+    }
+
+    /* GLOWING WHITE DOT INDICATORS */
+    .dots-container {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.75rem;
+      z-index: 1005;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .dot.active {
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 18px rgba(255, 255, 255, 0.5);
+      transform: scale(1.2);
     }
 
     .site-footer { padding: 3rem 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--border-subtle); }
@@ -157,6 +347,7 @@
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="site-header">
     <div class="container nav-inner">
       <a href="index.html" class="brand">PJV Home</a>
@@ -165,7 +356,7 @@
           <li><a href="index.html">← Back to Portfolio</a></li>
           <li><a href="#overview" class="active">Overview</a></li>
           <li><a href="#approach">Approach</a></li>
-          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#studies">Selected Studies</a></li>
         </ul>
       </nav>
     </div>
@@ -173,6 +364,7 @@
 
   <main class="container">
     
+    <!-- HERO SECTION -->
     <section id="overview" class="section hero">
       <div class="hero-kicker">Media & Art Direction</div>
       <h1 class="hero-title">Visual Narrative & Still Photography</h1>
@@ -200,6 +392,7 @@
       </div>
     </section>
 
+    <!-- APPROACH SECTION -->
     <section id="approach" class="section">
       <h2 class="section-title">Compositional Strategy & Workflow</h2>
       <p class="section-subtitle">A methodical approach to visual storytelling—balancing raw capture with disciplined color science.</p>
@@ -227,44 +420,207 @@
       </div>
     </section>
 
-    <section id="gallery" class="section">
+    <!-- SELECTED STACKED PHOTOGRAPHY STUDIES -->
+    <section id="studies" class="section">
       <h2 class="section-title">Selected Photography Studies</h2>
-      <p class="section-subtitle">Visual narrative studies exploring environmental lighting and mood.</p>
+      <p class="section-subtitle">Click any study below to open the full theater mode slideshow gallery.</p>
 
-      <div class="grid-3">
-        <article class="card">
-          <h3>Environmental Study</h3>
-          <p>Lighting and texture composition study focusing on architectural lines.</p>
-          <div class="media-placeholder" style="aspect-ratio: 4 / 5;">
-            Photography Preview Asset 1
+      <div class="studies-stack">
+        
+        <!-- STUDY 1 -->
+        <article class="study-card" onclick="openSlideshow(0)">
+          <div class="study-media-placeholder">
+            [Study 1 Cover Image]
+          </div>
+          <div class="study-content">
+            <h3 class="study-title">1. Architectural Lines & Shadows</h3>
+            <p class="study-blurb">
+              An exploration of geometric symmetry, hard directional sunlight, and high-contrast shadow lines across urban structures. Focuses on isolating structural repetition and minimal silhouettes.
+            </p>
+            <span class="click-hint">Launch Theater Gallery (4 Slides) →</span>
           </div>
         </article>
 
-        <article class="card">
-          <h3>Framing & Depth</h3>
-          <p>Subject isolation using natural aperture falloff and foreground elements.</p>
-          <div class="media-placeholder" style="aspect-ratio: 4 / 5;">
-            Photography Preview Asset 2
+        <!-- STUDY 2 -->
+        <article class="study-card" onclick="openSlideshow(1)">
+          <div class="study-media-placeholder">
+            [Study 2 Cover Image]
+          </div>
+          <div class="study-content">
+            <h3 class="study-title">2. Natural Lighting & Environmental Depth</h3>
+            <p class="study-blurb">
+              Capturing golden-hour falloff and atmospheric haze. This series focuses on environmental depth-of-field separation, foreground framing, and soft dynamic range control.
+            </p>
+            <span class="click-hint">Launch Theater Gallery (3 Slides) →</span>
           </div>
         </article>
 
-        <article class="card">
-          <h3>Tonal Curve Study</h3>
-          <p>Low-light narrative study exploring high-contrast shadow detail.</p>
-          <div class="media-placeholder" style="aspect-ratio: 4 / 5;">
-            Photography Preview Asset 3
+        <!-- STUDY 3 -->
+        <article class="study-card" onclick="openSlideshow(2)">
+          <div class="study-media-placeholder">
+            [Study 3 Cover Image]
+          </div>
+          <div class="study-content">
+            <h3 class="study-title">3. Low-Light Tonal Curve Studies</h3>
+            <p class="study-blurb">
+              Low-light narrative studies focusing on artificial neon, tungsten glow, and deep shadow preservation. Demonstrates noise management and cinematic split-toning.
+            </p>
+            <span class="click-hint">Launch Theater Gallery (5 Slides) →</span>
           </div>
         </article>
+
+        <!-- STUDY 4 -->
+        <article class="study-card" onclick="openSlideshow(3)">
+          <div class="study-media-placeholder">
+            [Study 4 Cover Image]
+          </div>
+          <div class="study-content">
+            <h3 class="study-title">4. Candid Human Narrative</h3>
+            <p class="study-blurb">
+              Unposed street and environmental portraits capturing authentic emotion and moment-to-moment interaction with minimal subject disruption.
+            </p>
+            <span class="click-hint">Launch Theater Gallery (4 Slides) →</span>
+          </div>
+        </article>
+
       </div>
     </section>
 
   </main>
+
+  <!-- THEATER MODE SLIDESHOW MODAL -->
+  <div id="slideshowModal" class="modal-overlay">
+    <button class="modal-close-btn" onclick="closeSlideshow()" aria-label="Close Theater Mode">✕</button>
+    
+    <div class="modal-stage">
+      <button class="nav-arrow prev" onclick="navigateSlide(-1)">‹</button>
+      
+      <div class="modal-slide-container" id="slideStage">
+        <!-- Slide content renders dynamically via JavaScript -->
+      </div>
+      
+      <button class="nav-arrow next" onclick="navigateSlide(1)">›</button>
+    </div>
+
+    <!-- Glowing White Slide Indicators -->
+    <div class="dots-container" id="dotsContainer"></div>
+  </div>
 
   <footer class="site-footer">
     <div class="container">
       <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
     </div>
   </footer>
+
+  <!-- LIGHTWEIGHT SLIDESHOW SCRIPT -->
+  <script>
+    // Gallery Data Structure - Ready to swap with real image paths (e.g. <img src="study1-img1.webp" />)
+    const galleryData = [
+      {
+        title: "Architectural Lines & Shadows",
+        slides: [
+          "[Study 1 - Photo 1: High-Contrast Urban Symmetry]",
+          "[Study 1 - Photo 2: Shadow Silhouette Study]",
+          "[Study 1 - Photo 3: Facade Geometry]",
+          "[Study 1 - Photo 4: Leading Lines Perspective]"
+        ]
+      },
+      {
+        title: "Natural Lighting & Environmental Depth",
+        slides: [
+          "[Study 2 - Photo 1: Golden Hour Forest Canopy]",
+          "[Study 2 - Photo 2: Atmospheric Haze Depth]",
+          "[Study 2 - Photo 3: Foreground Leaves Macro Focus]"
+        ]
+      },
+      {
+        title: "Low-Light Tonal Curve Studies",
+        slides: [
+          "[Study 3 - Photo 1: Neon Tungsten Reflection]",
+          "[Study 3 - Photo 2: Deep Shadow Street Scene]",
+          "[Study 3 - Photo 3: Low-Light Contrast Curves]",
+          "[Study 3 - Photo 4: Nighttime Rain Reflections]",
+          "[Study 3 - Photo 5: Split-Toned Urban Horizon]"
+        ]
+      },
+      {
+        title: "Candid Human Narrative",
+        slides: [
+          "[Study 4 - Photo 1: Street Transit Moment]",
+          "[Study 4 - Photo 2: Unposed Conversation]",
+          "[Study 4 - Photo 3: Market Artisan Focus]",
+          "[Study 4 - Photo 4: Evening Crowd Movement]"
+        ]
+      }
+    ];
+
+    let currentStudyIndex = 0;
+    let currentSlideIndex = 0;
+
+    function openSlideshow(studyIndex) {
+      currentStudyIndex = studyIndex;
+      currentSlideIndex = 0;
+      updateSlideshow();
+      document.getElementById('slideshowModal').classList.add('active');
+      document.body.style.overflow = 'hidden'; // Stop background page scroll
+    }
+
+    function closeSlideshow() {
+      document.getElementById('slideshowModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function navigateSlide(direction) {
+      const slides = galleryData[currentStudyIndex].slides;
+      currentSlideIndex = (currentSlideIndex + direction + slides.length) % slides.length;
+      updateSlideshow();
+    }
+
+    function goToSlide(index) {
+      currentSlideIndex = index;
+      updateSlideshow();
+    }
+
+    function updateSlideshow() {
+      const study = galleryData[currentStudyIndex];
+      const stage = document.getElementById('slideStage');
+      const dotsContainer = document.getElementById('dotsContainer');
+
+      // Render Active Slide Placeholder (Replace with <img src="..." /> when ready)
+      stage.innerHTML = `
+        <div class="modal-slide-placeholder">
+          <p style="color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.85rem;">
+            ${study.title} — Slide ${currentSlideIndex + 1} of ${study.slides.length}
+          </p>
+          <p style="font-size: 1.25rem; color: #ffffff;">${study.slides[currentSlideIndex]}</p>
+        </div>
+      `;
+
+      // Render Glowing White Dots
+      dotsContainer.innerHTML = '';
+      study.slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = `dot ${i === currentSlideIndex ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    // Keyboard Shortcuts (Esc to close, Arrow keys to navigate)
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('slideshowModal');
+      if (!modal.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') closeSlideshow();
+      if (e.key === 'ArrowRight') navigateSlide(1);
+      if (e.key === 'ArrowLeft') navigateSlide(-1);
+    });
+
+    // Close when clicking directly on the dark backdrop
+    document.getElementById('slideshowModal').addEventListener('click', (e) => {
+      if (e.target.id === 'slideshowModal') closeSlideshow();
+    });
+  </script>
 
 </body>
 </html>
