@@ -6,8 +6,29 @@
   <title>Phillip Joseph Villarreal | Product Designer & Front-End Developer</title>
   
   <style>
-    /* IMPORT INTER FROM GOOGLE FONTS CDN (WEIGHTS 100 THROUGH 900) */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+    /* TYPOGRAPHY IMPORT: ADVENT PRO (REGULAR / UPRIGHT VARIABLE WEIGHTS) */
+    @font-face {
+      font-family: 'Advent Pro';
+      src: local('Advent Pro Regular'), local('AdventPro-Regular'),
+           url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff2') format('woff2-variations'),
+           url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff2') format('woff2'),
+           url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff') format('woff');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* TYPOGRAPHY IMPORT: ADVENT PRO (ITALIC VARIABLE WEIGHTS) */
+    @font-face {
+      font-family: 'Advent Pro';
+      src: local('Advent Pro Italic'), local('AdventPro-Italic'),
+           url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff2') format('woff2-variations'),
+           url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff2') format('woff2'),
+           url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff') format('woff');
+      font-weight: 100 900;
+      font-style: italic;
+      font-display: swap;
+    }
 
     :root {
       --bg-base: #05070a;
@@ -17,8 +38,8 @@
       --text-main: #f1f5f9;
       --text-muted: #94a3b8;
       --accent: #38e1ff;
-      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-heading: 'Advent Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       --max-width: 1120px;
     }
 
@@ -96,7 +117,7 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    /* DYNAMIC SCROLLING TRANSPARENT NAVIGATION HEADER */
+    /* DYNAMIC TRANSPARENT HEADER (TRANSITIONS AS SCROLLED OVER HERO HEADING) */
     .site-header {
       position: fixed;
       top: 0;
@@ -128,8 +149,9 @@
     .brand {
       font-family: var(--font-heading);
       font-weight: 600;
+      font-style: normal;
       font-size: 1.35rem;
-      letter-spacing: -0.02em;
+      letter-spacing: 0.02em;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
       color: #ffffff;
     }
@@ -199,6 +221,7 @@
     /* BASE HEADING SELECTOR */
     h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
       font-family: var(--font-heading);
+      font-style: normal;
       color: #ffffff;
       text-shadow: 
         0 0 10px rgba(255, 255, 255, 0.28),
@@ -266,27 +289,41 @@
       }
     }
 
-    /* HERO HEADING - BOLD (700) */
-    .hero-title {
-      font-size: clamp(2.3rem, 4.8vw, 3.6rem);
-      font-weight: 700;
-      line-height: 1.12;
-      letter-spacing: -0.02em;
+    /* CONTAINER QUERY WRAPPER FOR PERFECT EQUAL-WIDTH SINGLE LINE TITLES */
+    .hero-title-container {
+      container-type: inline-size;
+      width: 100%;
+      max-width: 580px;
       margin-bottom: 1.25rem;
+    }
+
+    .hero-title {
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
       text-shadow: 
         0 0 12px rgba(255, 255, 255, 0.32),
         0 0 28px rgba(255, 255, 255, 0.15);
     }
 
-    .hero-title-line {
+    /* DYNAMIC EQUAL-WIDTH SIZING USING CONTAINER INLINE UNITS (cqw) */
+    .hero-title-line-1 {
       display: block;
+      font-size: 13.1cqw; /* Perfectly matches line 2 width */
+      white-space: nowrap;
+    }
+
+    .hero-title-line-2 {
+      display: block;
+      font-size: 11cqw; /* Perfectly matches line 1 width */
+      white-space: nowrap;
     }
 
     .hero-title-plus {
       display: block;
       font-size: 1.8rem;
       color: var(--accent);
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1;
       margin: 0.2rem 0;
       padding-left: 5.5rem;
@@ -296,7 +333,7 @@
     .hero-bio {
       color: var(--text-muted);
       font-size: 1.075rem;
-      line-height: 1.75;
+      line-height: 1.7;
       margin-bottom: 1.75rem;
       max-width: 580px;
       text-align: justify;
@@ -336,7 +373,8 @@
       background-color: var(--text-main);
       color: var(--bg-base);
       font-family: var(--font-heading);
-      font-weight: 600;
+      font-weight: 700;
+      font-style: normal;
       padding: 0.85rem 1.75rem;
       border-radius: 8px;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
@@ -354,7 +392,8 @@
       color: var(--text-main);
       border: 1px solid var(--border-subtle);
       font-family: var(--font-heading);
-      font-weight: 600;
+      font-weight: 700;
+      font-style: normal;
       padding: 0.85rem 1.75rem;
       border-radius: 8px;
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -423,14 +462,14 @@
       font-size: 0.8rem;
       text-transform: uppercase;
       color: var(--accent);
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.05em;
     }
 
     .metric-value {
       font-size: 1rem;
       color: var(--text-main);
-      font-weight: 500;
+      font-weight: 600;
     }
 
     /* SECTION TITLE - SEMIBOLD (600) */
@@ -605,7 +644,7 @@
 </head>
 <body>
 
-  <!-- SITE HEADER (TRANSPARENT AT TOP, BACKLIT ON SCROLL) -->
+  <!-- SITE HEADER (TRANSPARENT AT TOP, BACKLIT AS IT SCROLLS PAST HERO HEADING) -->
   <header class="site-header" id="siteHeader">
     <div class="container nav-inner">
       <a href="index.html" class="brand">PJV</a>
@@ -634,12 +673,14 @@
       <div class="hero-grid">
         
         <div>
-          <!-- HERO HEADING (BOLD WEIGHT 700) -->
-          <h1 class="hero-title">
-            <span class="hero-title-line">Product Designer</span>
-            <span class="hero-title-plus">+</span>
-            <span class="hero-title-line">Front-End Developer</span>
-          </h1>
+          <!-- CONTAINER QUERY WRAPPER FOR PERFECT EQUAL-WIDTH SINGLE LINE TITLES -->
+          <div class="hero-title-container" id="heroTitleContainer">
+            <h1 class="hero-title">
+              <span class="hero-title-line-1">Product Designer</span>
+              <span class="hero-title-plus">+</span>
+              <span class="hero-title-line-2">Front-End Developer</span>
+            </h1>
+          </div>
 
           <p class="hero-bio">
             Specializing in taking complex digital concepts from raw strategy to polished production. Blending human-centered UX design discipline with clean front-end code, I engineer scalable design systems, intuitive interfaces, and high-performance dark surface web tools.
@@ -789,15 +830,16 @@
     </div>
   </footer>
 
-  <!-- DYNAMIC NAV HEADER SCROLL SCRIPT -->
+  <!-- DYNAMIC NAV HEADER SCROLL SCRIPT (TRANSITIONS AS SCROLLED OVER HERO TITLE) -->
   <script>
     const header = document.getElementById('siteHeader');
-    const heroSection = document.getElementById('about');
+    const heroTitleContainer = document.getElementById('heroTitleContainer');
 
     window.addEventListener('scroll', () => {
-      const threshold = heroSection.offsetHeight * 0.7;
+      // Triggers transition as the bottom of the hero heading passes near the header height
+      const titleBottom = heroTitleContainer.getBoundingClientRect().bottom;
       
-      if (window.scrollY > threshold) {
+      if (titleBottom < 80) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
