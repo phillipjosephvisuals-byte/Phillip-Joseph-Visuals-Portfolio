@@ -29,14 +29,13 @@
     }
 
     :root {
-      /* Deepened palette with lightened, vibrant turquoise accent */
       --bg-base: #05070a;
       --bg-surface: #0f141d;
       --bg-surface-hover: #171f2c;
       --border-subtle: #1e293b;
       --text-main: #f1f5f9;
       --text-muted: #94a3b8;
-      --accent: #38e1ff; /* Lightened turquoise */
+      --accent: #38e1ff;
       --font-heading: 'Advent Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       --max-width: 1120px;
@@ -81,7 +80,6 @@
       z-index: 0;
     }
 
-    /* ENSURE CONTENT STAYS ABOVE VIGNETTE */
     .site-header, main, .site-footer {
       position: relative;
       z-index: 1;
@@ -106,7 +104,6 @@
       height: 100%;
     }
 
-    /* LAYOUT CONTAINERS */
     .container {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -171,7 +168,6 @@
       color: var(--text-main);
     }
 
-    /* DROPDOWN SUB-MENU STYLES */
     .dropdown-menu {
       position: absolute;
       top: 100%;
@@ -219,14 +215,55 @@
         0 0 20px rgba(255, 255, 255, 0.12);
     }
 
-    /* FULL-VIEWPORT UX DESIGNER HERO */
+    /* FULL-VIEWPORT HERO WITH GRAPHITE GRADIENT */
     .hero-full {
       min-height: calc(100vh - 70px);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 3rem 0;
+      padding: 4rem 0 5rem 0;
       position: relative;
+      
+      /* Subtle graphite/slate radial gradient core */
+      background: radial-gradient(
+        ellipse 85% 65% at 50% 40%, 
+        #141d2b 0%, 
+        #0c121d 55%, 
+        #05070a 100%
+      );
+      
+      /* Full-bleed viewport edges */
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      padding-left: calc(50vw - 50%);
+      padding-right: calc(50vw - 50%);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* Gradient fade overlay into obsidian base */
+    .hero-full::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(
+        to bottom, 
+        rgba(5, 7, 10, 0) 0%, 
+        rgba(5, 7, 10, 0.8) 70%, 
+        #05070a 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-inner-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-grid {
@@ -265,10 +302,9 @@
       box-shadow: 0 0 8px var(--accent);
     }
 
-    /* HERO HEADING - EXTRA HEAVY WEIGHT HIERARCHY */
     .hero-title {
       font-size: clamp(2.4rem, 5vw, 3.8rem);
-      font-weight: 900; /* Ultra-Bold */
+      font-weight: 900;
       line-height: 1.12;
       letter-spacing: -0.01em;
       margin-bottom: 1.25rem;
@@ -328,7 +364,6 @@
       box-shadow: 0 0 15px rgba(56, 225, 255, 0.25);
     }
 
-    /* PROFILE IMAGE CONTAINER WITH GLOWING ACCENT */
     .profile-frame {
       position: relative;
       width: 100%;
@@ -366,7 +401,6 @@
       filter: grayscale(15%) contrast(105%);
     }
 
-    /* UX DOMAINS STRIP AT BASE OF HERO */
     .hero-metrics {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -396,10 +430,9 @@
       font-weight: 600;
     }
 
-    /* SECTION TITLE HIERARCHY */
     .section-title {
       font-size: 1.75rem;
-      font-weight: 700; /* Bold */
+      font-weight: 700;
       margin-bottom: 2rem;
       letter-spacing: -0.01em;
     }
@@ -439,7 +472,6 @@
       margin-bottom: 0.5rem;
     }
 
-    /* FEATURED CARD TITLE */
     .card-title {
       font-size: 1.75rem;
       font-weight: 700;
@@ -468,7 +500,6 @@
       color: var(--text-main);
     }
 
-    /* SWAPPABLE CARD IMAGE PLACEHOLDERS */
     .media-placeholder {
       background-color: var(--bg-base);
       border: 1px solid var(--border-subtle);
@@ -495,7 +526,6 @@
       transform: scale(1.03);
     }
 
-    /* GRIDS & CARDS */
     .grid-3 {
       display: grid;
       grid-template-columns: 1fr;
@@ -541,14 +571,12 @@
       margin-bottom: 1.25rem;
     }
 
-    /* STANDARD CARD TITLES HIERARCHY */
     .card h3 {
       font-size: 1.35rem;
-      font-weight: 600; /* Semi-Bold */
+      font-weight: 600;
       margin-bottom: 0.5rem;
     }
 
-    /* SPECIFIC ITALIC STYLING FOR K12 INSIGHT */
     .card h3 em {
       font-style: italic;
     }
@@ -569,7 +597,6 @@
       font-weight: 500;
     }
 
-    /* FOOTER */
     .site-footer {
       padding: 3rem 0;
       color: var(--text-muted);
@@ -587,7 +614,6 @@
       <nav>
         <ul class="nav-links">
           
-          <!-- PORTFOLIO DROPDOWN MENU -->
           <li class="dropdown">
             <a href="#scribe85">Portfolio ▾</a>
             <ul class="dropdown-menu">
@@ -604,13 +630,11 @@
     </div>
   </header>
 
-  <main class="container">
-    
-    <!-- FULL VIEWPORT UX DESIGNER HERO SECTION -->
-    <section id="about" class="hero-full">
+  <!-- HERO SECTION WITH GRAPHITE SLATE GRADIENT -->
+  <section id="about" class="hero-full">
+    <div class="hero-inner-container">
       <div class="hero-grid">
         
-        <!-- LEFT: UX VALUE PROPOSITION -->
         <div>
           <div class="hero-status-tag">
             <span class="status-dot"></span> Available for Product & UX Roles
@@ -626,16 +650,14 @@
           </div>
         </div>
 
-        <!-- RIGHT: PROFILE IMAGE FRAME WITH HOVER GLOW -->
         <div>
           <div class="profile-frame">
-            <img src="Assets/HeroProfile_01.JPG" alt="Phillip Joseph Villarreal" class="HeroProfile_01.JPG" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;\'>Phillip Joseph Villarreal</div>';" />
+            <img src="Assets/HeroProfile_01.JPG" alt="Phillip Joseph Villarreal" class="profile-img" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;\'>Phillip Joseph Villarreal</div>';" />
           </div>
         </div>
 
       </div>
 
-      <!-- UX DOMAINS STRIP -->
       <div class="hero-metrics">
         <div class="metric-item">
           <span class="metric-label">0→1 Strategy</span>
@@ -650,7 +672,10 @@
           <span class="metric-value">HTML / CSS / JS / Figma</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+
+  <main class="container">
 
     <!-- FEATURED PRODUCT CASE STUDY: scribe85 -->
     <section id="scribe85" class="section">
@@ -676,7 +701,7 @@
       </a>
     </section>
 
-    <!-- CORPORATE COMMUNICATION (REFACTORED TO 2 CARDS) -->
+    <!-- CORPORATE COMMUNICATION -->
     <section id="corporate" class="section">
       <h2 class="section-title">Corporate Communication</h2>
       <div class="grid-2">
@@ -708,7 +733,7 @@
       </div>
     </section>
 
-    <!-- MEDIA & ART DIRECTION (3 CARDS: PRESENTATIONS, VIDEOGRAPHY, PHOTOGRAPHY) -->
+    <!-- MEDIA & ART DIRECTION -->
     <section id="media" class="section">
       <h2 class="section-title">Media & Art Direction</h2>
       <div class="grid-3">
