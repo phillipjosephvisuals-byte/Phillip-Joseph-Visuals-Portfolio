@@ -6,10 +6,11 @@
   <title>Phillip Joseph Villarreal | Product Designer & Front-End Developer</title>
   
   <style>
-    /* TYPOGRAPHY IMPORT: ADVENT PRO (REGULAR / UPRIGHT) */
+    /* TYPOGRAPHY IMPORT: ADVENT PRO (REGULAR / UPRIGHT VARIABLE WEIGHTS) */
     @font-face {
       font-family: 'Advent Pro';
-      src: local('Advent Pro'), local('AdventPro'),
+      src: local('Advent Pro Regular'), local('AdventPro-Regular'),
+           url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff2') format('woff2-variations'),
            url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff2') format('woff2'),
            url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff') format('woff');
       font-weight: 100 900;
@@ -17,10 +18,11 @@
       font-display: swap;
     }
 
-    /* TYPOGRAPHY IMPORT: ADVENT PRO (ITALIC) */
+    /* TYPOGRAPHY IMPORT: ADVENT PRO (ITALIC VARIABLE WEIGHTS) */
     @font-face {
       font-family: 'Advent Pro';
       src: local('Advent Pro Italic'), local('AdventPro-Italic'),
+           url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff2') format('woff2-variations'),
            url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff2') format('woff2'),
            url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff') format('woff');
       font-weight: 100 900;
@@ -143,7 +145,7 @@
       height: 70px;
     }
 
-    /* PJV BUTTON - MEDIUM WEIGHT */
+    /* PJV BRAND LOGO - SEMIBOLD (WEIGHT 600) */
     .brand {
       font-family: var(--font-heading);
       font-weight: 600;
@@ -216,7 +218,7 @@
       color: var(--accent);
     }
 
-    /* HEADINGS & LIT WHITE GLOW EFFECT */
+    /* BASE HEADING STYLES */
     h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
       font-family: var(--font-heading);
       font-style: normal;
@@ -287,10 +289,10 @@
       }
     }
 
-    /* 1. HERO TITLE - BOLD (WEIGHT 700) */
+    /* HERO HEADING - BOLD (WEIGHT 700) */
     .hero-title {
       font-size: clamp(2.3rem, 4.8vw, 3.6rem);
-      font-weight: 700; /* Bold */
+      font-weight: 700; /* Explicit numeric weight for variable font */
       line-height: 1.12;
       letter-spacing: -0.01em;
       margin-bottom: 1.25rem;
@@ -331,7 +333,6 @@
       margin-bottom: 1.5rem;
     }
 
-    /* 5. MOVED ROLES INDICATOR TAG DOWN BELOW BUTTONS */
     .hero-status-tag {
       display: inline-flex;
       align-items: center;
@@ -390,13 +391,12 @@
       box-shadow: 0 0 15px rgba(56, 225, 255, 0.25);
     }
 
-    /* 6. PROFILE FRAME FLUSH RIGHT ALIGNMENT */
     .profile-frame {
       position: relative;
       width: 100%;
       max-width: 360px;
       aspect-ratio: 4 / 5;
-      margin-left: auto; /* Aligns container right flush with parent edge */
+      margin-left: auto;
       margin-right: 0;
       border-radius: 16px;
       background-color: var(--bg-surface);
@@ -429,12 +429,11 @@
       filter: grayscale(15%) contrast(105%);
     }
 
-    /* 7. REPOSITIONED METRICS DIVIDER & STRIP */
     .hero-metrics {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 1.5rem;
-      margin-top: 5rem; /* Pushed down for balance */
+      margin-top: 5rem;
       padding-top: 2.5rem;
       border-top: 1px solid var(--border-subtle);
     }
@@ -459,10 +458,10 @@
       font-weight: 600;
     }
 
-    /* 2. SECTION TITLE - SEMIBOLD (WEIGHT 600) */
+    /* SECTION TITLE - SEMIBOLD (WEIGHT 600) */
     .section-title {
       font-size: 1.75rem;
-      font-weight: 600; /* SemiBold */
+      font-weight: 600; /* Explicit numeric weight for variable font */
       margin-bottom: 2rem;
       letter-spacing: -0.01em;
     }
@@ -494,10 +493,10 @@
         0 0 18px rgba(56, 225, 255, 0.28);
     }
 
-    /* 3. PROJECT TITLE - MEDIUM (WEIGHT 500) */
+    /* PROJECT CARD TITLES - MEDIUM (WEIGHT 500) */
     .card-title {
       font-size: 1.75rem;
-      font-weight: 500; /* Medium */
+      font-weight: 500; /* Explicit numeric weight for variable font */
       margin-bottom: 1rem;
     }
 
@@ -594,10 +593,10 @@
       margin-bottom: 1.25rem;
     }
 
-    /* 3. PROJECT TITLE - MEDIUM (WEIGHT 500) */
+    /* PROJECT CARD TITLES - MEDIUM (WEIGHT 500) */
     .card h3 {
       font-size: 1.35rem;
-      font-weight: 500; /* Medium */
+      font-weight: 500; /* Explicit numeric weight for variable font */
       margin-bottom: 0.5rem;
     }
 
@@ -654,7 +653,7 @@
     </div>
   </header>
 
-  <!-- HERO SECTION WITH REORDERED HEADING/BIO/BUTTONS/TAG -->
+  <!-- HERO SECTION WITH GRAPHITE SLATE GRADIENT EXTENDED TO TOP -->
   <section id="about" class="hero-full">
     <div class="hero-inner-container">
       <div class="hero-grid">
@@ -676,14 +675,12 @@
             <a href="ContactMe.html" class="btn-secondary">Get in Touch</a>
           </div>
 
-          <!-- MOVED INDICATOR TAG BELOW BUTTONS -->
           <div class="hero-status-tag">
             <span class="status-dot"></span> Available for Product & UX Roles
           </div>
         </div>
 
         <div>
-          <!-- FLUSH RIGHT ALIGNED PROFILE FRAME -->
           <div class="profile-frame">
             <img src="Assets/HeroProfile_01.JPG" alt="Phillip Joseph Villarreal" class="profile-img" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;\'>Phillip Joseph Villarreal</div>';" />
           </div>
@@ -691,7 +688,6 @@
 
       </div>
 
-      <!-- REPOSITIONED METRICS STRIP -->
       <div class="hero-metrics">
         <div class="metric-item">
           <span class="metric-label">0→1 Strategy</span>
@@ -718,7 +714,6 @@
       <a href="scribe85-case-study.html" class="card-link">
         <div class="featured-card">
           <div>
-            <!-- REMOVED CLASSIC DARK KICKER -->
             <h3 class="card-title">scribe85: zero-to-one dark surface writing workspace</h3>
             <p class="card-desc">
               An independent, single-file browser writing workspace engineered from scratch to eliminate cognitive distraction. Features custom theme architectures, full markdown formatting, and local autosave functionality.
