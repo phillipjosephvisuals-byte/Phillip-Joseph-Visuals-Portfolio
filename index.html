@@ -35,6 +35,10 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background-color: var(--bg-base);
       color: var(--text-main);
@@ -121,15 +125,16 @@
 
     .brand {
       font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.15rem;
-      letter-spacing: -0.01em;
-      text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+      color: #ffffff;
     }
 
     .nav-links {
       display: flex;
-      gap: 1.75rem;
+      gap: 2rem;
       list-style: none;
     }
 
@@ -148,33 +153,63 @@
     h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
       font-family: var(--font-heading);
       color: #ffffff;
-      /* Soft multi-layered white glow */
       text-shadow: 
         0 0 10px rgba(255, 255, 255, 0.28),
         0 0 20px rgba(255, 255, 255, 0.12);
     }
 
-    /* HERO */
-    .hero {
-      padding: 6.5rem 0 4.5rem 0;
+    /* FULL-VIEWPORT UX DESIGNER HERO */
+    .hero-full {
+      min-height: calc(100vh - 70px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 0;
+      position: relative;
     }
 
-    .hero-kicker {
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (min-width: 850px) {
+      .hero-grid {
+        grid-template-columns: 1.25fr 0.85fr;
+      }
+    }
+
+    .hero-status-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
       color: var(--accent);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.75rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      width: fit-content;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
     }
 
     .hero-title {
-      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
       font-weight: 800;
-      line-height: 1.18;
+      line-height: 1.12;
       letter-spacing: -0.02em;
       margin-bottom: 1.25rem;
-      /* Enhanced glow for hero header */
       text-shadow: 
         0 0 12px rgba(255, 255, 255, 0.32),
         0 0 28px rgba(255, 255, 255, 0.15);
@@ -182,11 +217,116 @@
 
     .hero-bio {
       color: var(--text-muted);
-      font-size: 1.125rem;
-      max-width: 800px;
+      font-size: 1.15rem;
       line-height: 1.7;
+      margin-bottom: 2rem;
+      text-align: justify;
+      text-justify: inter-word;
     }
 
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background-color: var(--text-main);
+      color: var(--bg-base);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      padding: 0.85rem 1.75rem;
+      border-radius: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 22px rgba(255, 255, 255, 0.4);
+      background-color: #ffffff;
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      padding: 0.85rem 1.75rem;
+      border-radius: 8px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    /* PROFILE IMAGE CONTAINER WITH AMBIENT GLOW */
+    .profile-frame {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 4 / 5;
+      margin: 0 auto;
+      border-radius: 16px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+      transition: border-color 0.3s ease;
+    }
+
+    .profile-frame::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.3), transparent 60%);
+      border-radius: 16px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%) contrast(105%);
+    }
+
+    /* UX DOMAINS STRIP AT BASE OF HERO */
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .metric-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .metric-value {
+      font-size: 1rem;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* FEATURED CARD */
     .section-title {
       font-size: 1.6rem;
       font-weight: 700;
@@ -194,7 +334,6 @@
       letter-spacing: -0.01em;
     }
 
-    /* FEATURED CARD */
     .featured-card {
       background-color: var(--bg-surface);
       border: 1px solid var(--border-subtle);
@@ -238,6 +377,8 @@
       color: var(--text-muted);
       margin-bottom: 1.5rem;
       font-size: 1rem;
+      text-align: justify;
+      text-justify: inter-word;
     }
 
     .meta-list {
@@ -319,6 +460,8 @@
       font-size: 0.95rem;
       margin-bottom: 1rem;
       flex-grow: 1;
+      text-align: justify;
+      text-justify: inter-word;
     }
 
     .card-tags {
@@ -341,14 +484,12 @@
   <!-- SITE HEADER -->
   <header class="site-header">
     <div class="container nav-inner">
-      <a href="index.html" class="brand">PJV Home</a>
+      <a href="index.html" class="brand">PJV</a>
       <nav>
         <ul class="nav-links">
           <li><a href="#scribe85">Portfolio</a></li>
-          <li><a href="#scribe85">scribe85</a></li>
-          <li><a href="#corporate">Visual Design</a></li>
-          <li><a href="#media">Media & Art</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="ContactMe.html">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -356,13 +497,51 @@
 
   <main class="container">
     
-    <!-- HERO SECTION -->
-    <section class="section hero">
-      <div class="hero-kicker">0→1 Digital Products & Systems</div>
-      <h1 class="hero-title">Product Designer & Front-End Developer</h1>
-      <p class="hero-bio">
-        Specializing in taking complex concepts from absolute scratch to refined digital reality. Blending strong visual discipline with front-end code, I build responsive design systems, action-oriented interfaces, and dark-surface web tools that make dense data simple to navigate.
-      </p>
+    <!-- FULL VIEWPORT UX DESIGNER HERO SECTION -->
+    <section id="about" class="hero-full">
+      <div class="hero-grid">
+        
+        <!-- LEFT: UX VALUE PROPOSITION -->
+        <div>
+          <div class="hero-status-tag">
+            <span class="status-dot"></span> Available for Product & UX Roles
+          </div>
+          <h1 class="hero-title">Product Designer & Front-End Developer</h1>
+          <p class="hero-bio">
+            Specializing in taking complex concepts from absolute scratch to refined digital reality. Blending human-centered visual discipline with front-end code, I construct scalable design systems, action-oriented interfaces, and dark-surface web tools that make dense workflows simple to navigate.
+          </p>
+          
+          <div class="hero-actions">
+            <a href="#scribe85" class="btn-primary">View Featured Work</a>
+            <a href="ContactMe.html" class="btn-secondary">Get in Touch</a>
+          </div>
+        </div>
+
+        <!-- RIGHT: PROFILE IMAGE FRAME -->
+        <div>
+          <div class="profile-frame">
+            <!-- Swap Assets/profile.webp with your exact uploaded profile image path -->
+            <img src="Assets/profile.webp" alt="Phillip Joseph Villarreal" class="profile-img" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;\'>Phillip Joseph Villarreal</div>';" />
+          </div>
+        </div>
+
+      </div>
+
+      <!-- UX DOMAINS STRIP -->
+      <div class="hero-metrics">
+        <div class="metric-item">
+          <span class="metric-label">0→1 Strategy</span>
+          <span class="metric-value">Concept to Code</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-label">Design Systems</span>
+          <span class="metric-value">Dark Surface Specialist</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-label">Front-End Stack</span>
+          <span class="metric-value">HTML / CSS / JS / Figma</span>
+        </div>
+      </div>
     </section>
 
     <!-- FEATURED PRODUCT CASE STUDY: scribe85 -->
@@ -457,7 +636,7 @@
 
   </main>
 
-  <footer id="contact" class="site-footer">
+  <footer class="site-footer">
     <div class="container">
       <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
     </div>
