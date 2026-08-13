@@ -6,14 +6,25 @@
   <title>Phillip Joseph Villarreal | Product Designer & Front-End Developer</title>
   
   <style>
-    /* TYPOGRAPHY IMPORT FOR ADVENT PRO */
+    /* TYPOGRAPHY IMPORT: ADVENT PRO (REGULAR / UPRIGHT) */
     @font-face {
       font-family: 'Advent Pro';
       src: local('Advent Pro'), local('AdventPro'),
+           url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff2') format('woff2'),
+           url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff') format('woff');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* TYPOGRAPHY IMPORT: ADVENT PRO (ITALIC) */
+    @font-face {
+      font-family: 'Advent Pro';
+      src: local('Advent Pro Italic'), local('AdventPro-Italic'),
            url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff2') format('woff2'),
            url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff') format('woff');
       font-weight: 100 900;
-      font-style: italic, normal;
+      font-style: italic;
       font-display: swap;
     }
 
@@ -128,6 +139,7 @@
     .brand {
       font-family: var(--font-heading);
       font-weight: 800;
+      font-style: normal;
       font-size: 1.5rem;
       letter-spacing: 0.02em;
       text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
@@ -197,9 +209,10 @@
       color: var(--accent);
     }
 
-    /* HEADINGS & LIT WHITE GLOW EFFECT USING ADVENT PRO */
+    /* HEADINGS & LIT WHITE GLOW EFFECT */
     h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
       font-family: var(--font-heading);
+      font-style: normal;
       color: #ffffff;
       text-shadow: 
         0 0 10px rgba(255, 255, 255, 0.28),
@@ -252,9 +265,10 @@
       box-shadow: 0 0 8px var(--accent);
     }
 
+    /* HERO HEADING - EXTRA HEAVY WEIGHT HIERARCHY */
     .hero-title {
       font-size: clamp(2.4rem, 5vw, 3.8rem);
-      font-weight: 800;
+      font-weight: 900; /* Ultra-Bold */
       line-height: 1.12;
       letter-spacing: -0.01em;
       margin-bottom: 1.25rem;
@@ -283,6 +297,7 @@
       color: var(--bg-base);
       font-family: var(--font-heading);
       font-weight: 700;
+      font-style: normal;
       padding: 0.85rem 1.75rem;
       border-radius: 8px;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
@@ -301,6 +316,7 @@
       border: 1px solid var(--border-subtle);
       font-family: var(--font-heading);
       font-weight: 700;
+      font-style: normal;
       padding: 0.85rem 1.75rem;
       border-radius: 8px;
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -380,10 +396,10 @@
       font-weight: 600;
     }
 
-    /* FEATURED & STANDARD CARDS WITH LIGHTED GLOW HOVER EFFECT */
+    /* SECTION TITLE HIERARCHY */
     .section-title {
       font-size: 1.75rem;
-      font-weight: 700;
+      font-weight: 700; /* Bold */
       margin-bottom: 2rem;
       letter-spacing: -0.01em;
     }
@@ -423,6 +439,7 @@
       margin-bottom: 0.5rem;
     }
 
+    /* FEATURED CARD TITLE */
     .card-title {
       font-size: 1.75rem;
       font-weight: 700;
@@ -524,9 +541,16 @@
       margin-bottom: 1.25rem;
     }
 
+    /* STANDARD CARD TITLES HIERARCHY */
     .card h3 {
       font-size: 1.35rem;
+      font-weight: 600; /* Semi-Bold */
       margin-bottom: 0.5rem;
+    }
+
+    /* SPECIFIC ITALIC STYLING FOR K12 INSIGHT */
+    .card h3 em {
+      font-style: italic;
     }
 
     .card p {
@@ -645,7 +669,6 @@
               <li><strong>Key Skills:</strong> Zero-to-one product strategy | Typography hierarchy | Dark surface UI | Vanilla JS/CSS</li>
             </ul>
           </div>
-          <!-- SWAPPABLE FEATURED CARD IMAGE -->
           <div class="media-placeholder">
             <img src="Assets/images/index/scribe85-preview.webp" alt="scribe85 Workspace Preview" onerror="this.onerror=null; this.parentElement.innerHTML='scribe85 Workspace Preview';" />
           </div>
@@ -661,7 +684,6 @@
         <!-- IAEM BULLETIN CARD -->
         <a href="iaem-bulletin-case-study.html" class="card-link">
           <article class="card">
-            <!-- SWAPPABLE CARD IMAGE -->
             <div class="media-placeholder">
               <img src="Assets/images/index/iaem-preview.webp" alt="IAEM Bulletin Collateral" onerror="this.onerror=null; this.parentElement.innerHTML='IAEM Collateral';" />
             </div>
@@ -674,7 +696,6 @@
         <!-- K12 INSIGHT CARD -->
         <a href="corporate-voice-case-study.html" class="card-link">
           <article class="card">
-            <!-- SWAPPABLE CARD IMAGE -->
             <div class="media-placeholder">
               <img src="Assets/images/index/k12-preview.webp" alt="K12 Insight Media" onerror="this.onerror=null; this.parentElement.innerHTML='K12 Insight Media';" />
             </div>
@@ -695,7 +716,6 @@
         <!-- 1. PRESENTATIONS CARD -->
         <a href="presentations-case-study.html" class="card-link">
           <article class="card">
-            <!-- SWAPPABLE CARD IMAGE -->
             <div class="media-placeholder">
               <img src="Assets/images/index/presentations-preview.webp" alt="Presentation Deck Design" onerror="this.onerror=null; this.parentElement.innerHTML='Presentation Deck';" />
             </div>
@@ -708,7 +728,6 @@
         <!-- 2. VIDEOGRAPHY CARD -->
         <a href="corporate-video-case-study.html" class="card-link">
           <article class="card">
-            <!-- SWAPPABLE CARD IMAGE -->
             <div class="media-placeholder">
               <img src="Assets/images/index/videography-preview.webp" alt="Videography Reel Preview" onerror="this.onerror=null; this.parentElement.innerHTML='Videography Showcase';" />
             </div>
@@ -721,7 +740,6 @@
         <!-- 3. PHOTOGRAPHY CARD -->
         <a href="photography-case-study.html" class="card-link">
           <article class="card">
-            <!-- SWAPPABLE CARD IMAGE -->
             <div class="media-placeholder">
               <img src="Assets/images/index/photography-preview.webp" alt="Photography Showcase Preview" onerror="this.onerror=null; this.parentElement.innerHTML='Photography Showcase';" />
             </div>
