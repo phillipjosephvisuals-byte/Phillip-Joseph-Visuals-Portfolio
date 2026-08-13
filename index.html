@@ -6,29 +6,8 @@
   <title>Phillip Joseph Villarreal | Product Designer & Front-End Developer</title>
   
   <style>
-    /* TYPOGRAPHY IMPORT: ADVENT PRO (REGULAR / UPRIGHT VARIABLE WEIGHTS) */
-    @font-face {
-      font-family: 'Advent Pro';
-      src: local('Advent Pro Regular'), local('AdventPro-Regular'),
-           url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff2') format('woff2-variations'),
-           url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff2') format('woff2'),
-           url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff') format('woff');
-      font-weight: 100 900;
-      font-style: Bold;
-      font-display: swap;
-    }
-
-    /* TYPOGRAPHY IMPORT: ADVENT PRO (ITALIC VARIABLE WEIGHTS) */
-    @font-face {
-      font-family: 'Advent Pro';
-      src: local('Advent Pro Italic'), local('AdventPro-Italic'),
-           url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff2') format('woff2-variations'),
-           url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff2') format('woff2'),
-           url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff') format('woff');
-      font-weight: 100 900;
-      font-style: italic;
-      font-display: swap;
-    }
+    /* IMPORT INTER FROM GOOGLE FONTS CDN (WEIGHTS 100 THROUGH 900) */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
     :root {
       --bg-base: #05070a;
@@ -38,8 +17,8 @@
       --text-main: #f1f5f9;
       --text-muted: #94a3b8;
       --accent: #38e1ff;
-      --font-heading: 'Advent Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --max-width: 1120px;
     }
 
@@ -149,9 +128,8 @@
     .brand {
       font-family: var(--font-heading);
       font-weight: 600;
-      font-style: SemiBold;
       font-size: 1.35rem;
-      letter-spacing: 0.02em;
+      letter-spacing: -0.02em;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
       color: #ffffff;
     }
@@ -221,7 +199,6 @@
     /* BASE HEADING SELECTOR */
     h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
       font-family: var(--font-heading);
-      font-style: normal;
       color: #ffffff;
       text-shadow: 
         0 0 10px rgba(255, 255, 255, 0.28),
@@ -289,12 +266,12 @@
       }
     }
 
-    /* 1. HERO HEADING - BOLD (700) */
+    /* HERO HEADING - BOLD (700) */
     .hero-title {
       font-size: clamp(2.3rem, 4.8vw, 3.6rem);
-      font-weight: 700; /* Explicit numeric Bold weight */
+      font-weight: 700;
       line-height: 1.12;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
       margin-bottom: 1.25rem;
       text-shadow: 
         0 0 12px rgba(255, 255, 255, 0.32),
@@ -309,7 +286,7 @@
       display: block;
       font-size: 1.8rem;
       color: var(--accent);
-      font-weight: 400;
+      font-weight: 300;
       line-height: 1;
       margin: 0.2rem 0;
       padding-left: 5.5rem;
@@ -319,7 +296,7 @@
     .hero-bio {
       color: var(--text-muted);
       font-size: 1.075rem;
-      line-height: 1.7;
+      line-height: 1.75;
       margin-bottom: 1.75rem;
       max-width: 580px;
       text-align: justify;
@@ -359,8 +336,7 @@
       background-color: var(--text-main);
       color: var(--bg-base);
       font-family: var(--font-heading);
-      font-weight: 700;
-      font-style: normal;
+      font-weight: 600;
       padding: 0.85rem 1.75rem;
       border-radius: 8px;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
@@ -378,8 +354,7 @@
       color: var(--text-main);
       border: 1px solid var(--border-subtle);
       font-family: var(--font-heading);
-      font-weight: 700;
-      font-style: normal;
+      font-weight: 600;
       padding: 0.85rem 1.75rem;
       border-radius: 8px;
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -448,20 +423,20 @@
       font-size: 0.8rem;
       text-transform: uppercase;
       color: var(--accent);
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.05em;
     }
 
     .metric-value {
       font-size: 1rem;
       color: var(--text-main);
-      font-weight: 600;
+      font-weight: 500;
     }
 
-    /* 2. SECTION TITLE - SEMIBOLD (600) */
+    /* SECTION TITLE - SEMIBOLD (600) */
     .section-title {
       font-size: 1.75rem;
-      font-weight: 600; /* Explicit numeric SemiBold weight */
+      font-weight: 600;
       margin-bottom: 2rem;
       letter-spacing: -0.01em;
     }
@@ -493,10 +468,10 @@
         0 0 18px rgba(56, 225, 255, 0.28);
     }
 
-    /* 3. PROJECT CARD TITLES - MEDIUM (500) */
+    /* PROJECT CARD TITLES - MEDIUM (500) */
     .card-title {
       font-size: 1.75rem;
-      font-weight: 500; /* Explicit numeric Medium weight */
+      font-weight: 500;
       margin-bottom: 1rem;
     }
 
@@ -593,10 +568,10 @@
       margin-bottom: 1.25rem;
     }
 
-    /* 3. PROJECT CARD TITLES - MEDIUM (500) */
+    /* PROJECT CARD TITLES - MEDIUM (500) */
     .card h3 {
       font-size: 1.35rem;
-      font-weight: 500; /* Explicit numeric Medium weight */
+      font-weight: 500;
       margin-bottom: 0.5rem;
     }
 
