@@ -310,6 +310,9 @@
       gap: 0.75rem;
       margin-top: 1.75rem;
       z-index: 1005;
+      max-width: 80%;
+      overflow-x: auto;
+      padding: 0.5rem;
     }
 
     .dot {
@@ -318,6 +321,7 @@
       border-radius: 50%;
       background-color: rgba(255, 255, 255, 0.25);
       cursor: pointer;
+      flex-shrink: 0;
       transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
 
@@ -418,11 +422,11 @@
             <!-- Thumbnail populates via JS -->
           </div>
           <div class="study-content">
-            <h3 class="study-title">1. Architectural Lines & Shadows</h3>
+            <h3 class="study-title">1. Birds of Patterson Park</h3>
             <p class="study-blurb">
-              An exploration of geometric symmetry, hard directional sunlight, and high-contrast shadow lines across urban structures. Focuses on isolating structural repetition and minimal silhouettes.
+              An environmental wildlife study documenting birdlife, flight movement, and natural lighting interactions within Baltimore's Patterson Park.
             </p>
-            <span class="click-hint">Launch Theater Gallery (4 Slides) →</span>
+            <span class="click-hint">Launch Theater Gallery (12 Slides) →</span>
           </div>
         </article>
 
@@ -432,11 +436,11 @@
             <!-- Thumbnail populates via JS -->
           </div>
           <div class="study-content">
-            <h3 class="study-title">2. Natural Lighting & Environmental Depth</h3>
+            <h3 class="study-title">2. A Working Artist</h3>
             <p class="study-blurb">
-              Capturing golden-hour falloff and atmospheric haze. This series focuses on environmental depth-of-field separation, foreground framing, and soft dynamic range control.
+              A documentary series capturing unposed creative workflows, studio environments, and the focus of artists in their element.
             </p>
-            <span class="click-hint">Launch Theater Gallery (3 Slides) →</span>
+            <span class="click-hint">Launch Theater Gallery (17 Slides) →</span>
           </div>
         </article>
 
@@ -446,11 +450,11 @@
             <!-- Thumbnail populates via JS -->
           </div>
           <div class="study-content">
-            <h3 class="study-title">3. Low-Light Tonal Curve Studies</h3>
+            <h3 class="study-title">3. Night Vision: A Horror Tale</h3>
             <p class="study-blurb">
-              Low-light narrative studies focusing on artificial neon, tungsten glow, and deep shadow preservation. Demonstrates noise management and cinematic split-toning.
+              Cinematic low-light narrative exploring high-contrast tungsten shadows, artificial light falloff, and atmospheric tension.
             </p>
-            <span class="click-hint">Launch Theater Gallery (5 Slides) →</span>
+            <span class="click-hint">Launch Theater Gallery (11 Slides) →</span>
           </div>
         </article>
 
@@ -460,11 +464,11 @@
             <!-- Thumbnail populates via JS -->
           </div>
           <div class="study-content">
-            <h3 class="study-title">4. Candid Human Narrative</h3>
+            <h3 class="study-title">4. A Sense of Place</h3>
             <p class="study-blurb">
-              Unposed street and environmental portraits capturing authentic emotion and moment-to-moment interaction with minimal subject disruption.
+              Spatial and architectural framing capturing geography, mood, and personal connection to surrounding environments.
             </p>
-            <span class="click-hint">Launch Theater Gallery (4 Slides) →</span>
+            <span class="click-hint">Launch Theater Gallery (1 Slide) →</span>
           </div>
         </article>
 
@@ -502,42 +506,67 @@
     const galleryData = [
       {
         title: "Birds of Patterson Park",
-        coverImage: "assets/images/photography/arch-cover.webp",
+        coverImage: "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_001-scaled.webp",
         slides: [
-          "VillarrealPhillip_ASenseOfPlace_001-scaled.webp",
-          "VillarrealPhillip_ASenseOfPlace_002-scaled.webp",
-          "VillarrealPhillip_ASenseOfPlace_003-scaled.webp",
-          "VillarrealPhillip_ASenseOfPlace_004-scaled.webp"
-        ]
-      },
-      {
-        title: "A Sense of Place",
-        coverImage: "assets/images/photography/nature-cover.webp",
-        slides: [
-          "assets/images/photography/nature-1.webp",
-          "assets/images/photography/nature-2.webp",
-          "assets/images/photography/nature-3.webp"
-        ]
-      },
-      {
-        title: "Night Vision: A Horror Tale",
-        coverImage: "assets/images/photography/lowlight-cover.webp",
-        slides: [
-          "assets/images/photography/lowlight-1.webp",
-          "assets/images/photography/lowlight-2.webp",
-          "assets/images/photography/lowlight-3.webp",
-          "assets/images/photography/lowlight-4.webp",
-          "assets/images/photography/lowlight-5.webp"
+          "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_001-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_002-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_003-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_004-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_005-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_006-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_007-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_008-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_009-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_010-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_011-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_BirdsOfPattersonPark_012-scaled.webp"
         ]
       },
       {
         title: "A Working Artist",
-        coverImage: "assets/images/photography/candid-cover.webp",
+        coverImage: "assets/images/photography/VillarrealPhillip_aWorkingArtist_001-scaled.webp",
         slides: [
-          "assets/images/photography/candid-1.webp",
-          "assets/images/photography/candid-2.webp",
-          "assets/images/photography/candid-3.webp",
-          "assets/images/photography/candid-4.webp"
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_001-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_002-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_003-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_004-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_005-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_006-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_007-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_008-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_009-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_010-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_011-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_012-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_013-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_014-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_015-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_016-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_aWorkingArtist_017-scaled.webp"
+        ]
+      },
+      {
+        title: "Night Vision: A Horror Tale",
+        coverImage: "assets/images/photography/VillarrealPhillip_NightVision_001-scaled.webp",
+        slides: [
+          "assets/images/photography/VillarrealPhillip_NightVision_001-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_NightVision_002-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_NightVision_003-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_NightVision_004-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_NightVision_005-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_NightVision_006-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_NightVision_007-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_NightVision_008-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_NightVision_009-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_NightVision_010-scaled.webp",
+          "assets/images/photography/VillarrealPhillip_NightVision_111_TheEnd-scaled.webp"
+        ]
+      },
+      {
+        title: "A Sense of Place",
+        coverImage: "assets/images/photography/VillarrealPhillip_ASenseOfPlace_001-scaled.webp",
+        slides: [
+          "assets/images/photography/VillarrealPhillip_ASenseOfPlace_001-scaled.webp"
         ]
       }
     ];
