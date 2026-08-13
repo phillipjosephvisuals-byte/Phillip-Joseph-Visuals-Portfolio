@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Me | Phillip Joseph Villarreal</title>
+  
+  <style>
+    @font-face {
+      font-family: 'Adapt Pro';
+      src: local('Adapt Pro'), local('AdaptPro'), url('assets/fonts/AdaptPro.woff2') format('woff2');
+      font-weight: 700 800;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg-base: #05070a;
+      --bg-surface: #0f141d;
+      --bg-surface-hover: #171f2c;
+      --border-subtle: #1e293b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --font-heading: 'Adapt Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --max-width: 800px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(
+        circle at 50% 30%, 
+        rgba(20, 27, 41, 0.45) 0%, 
+        rgba(5, 7, 10, 0.85) 65%, 
+        rgba(2, 3, 5, 0.98) 100%
+      );
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .site-header, main, .site-footer { position: relative; z-index: 1; }
+    a { color: inherit; text-decoration: none; }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: 5rem 0; }
+
+    /* NAVIGATION */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(5, 7, 10, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+    .brand { font-family: var(--font-heading); font-weight: 700; font-size: 1.15rem; text-shadow: 0 0 12px rgba(255, 255, 255, 0.25); }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color 0.2s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+
+    /* HEADINGS */
+    h1, .brand, .hero-title {
+      font-family: var(--font-heading);
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.28), 0 0 20px rgba(255, 255, 255, 0.12);
+    }
+
+    .hero-title { font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 800; margin-bottom: 1rem; }
+    .hero-bio { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2.5rem; }
+
+    /* CONTACT FORM STYLES */
+    .contact-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .form-control {
+      background-color: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    /* HONEYPOT SPAM TRAP (HIDDEN FROM HUMANS) */
+    .honeypot-field {
+      display: none !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      left: -9999px !important;
+    }
+
+    .submit-btn {
+      background-color: var(--accent);
+      color: #05070a;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 22px rgba(56, 189, 248, 0.5);
+    }
+
+    .site-footer { padding: 3rem 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--border-subtle); margin-top: 4rem; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">PJV Home</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">← Back to Portfolio</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h1 class="hero-title">Get in Touch</h1>
+      <p class="hero-bio">Have a question or want to collaborate on a design system, web project, or visual narrative? Send a message below.</p>
+
+      <div class="contact-card">
+        
+        <!-- REPLACE ACCESS_KEY WITH YOUR FREE KEY FROM WEB3FORMS.COM OR FORMSPREE -->
+        <form action="https://api.web3forms.com/submit" method="POST">
+          
+          <!-- Web3Forms Access Key (Free & Stops Spam) -->
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+
+          <!-- 1. HONEYPOT FIELD (Traps automated bots) -->
+          <input type="checkbox" name="botcheck" class="honeypot-field" tabindex="-1" autocomplete="off" />
+
+          <!-- 2. NAME FIELD -->
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Jane Doe" required />
+          </div>
+
+          <!-- 3. EMAIL FIELD -->
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="jane@example.com" required />
+          </div>
+
+          <!-- 4. MESSAGE FIELD -->
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" class="form-control" placeholder="Tell me about your project or inquiry..." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Message →</button>
+        </form>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
+    </div>
+  </footer>
+
+</body>
+</html>
