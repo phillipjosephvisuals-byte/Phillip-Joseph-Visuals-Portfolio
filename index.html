@@ -129,7 +129,6 @@
       transition: background-color 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
     }
 
-    /* SOLID/BACKLIT STATE WHEN SCROLLED PAST THRESHOLD */
     .site-header.scrolled {
       background-color: rgba(5, 7, 10, 0.85);
       backdrop-filter: blur(16px);
@@ -144,7 +143,7 @@
       height: 70px;
     }
 
-    /* PJV BUTTON - MEDIUM BOLD */
+    /* PJV BUTTON - MEDIUM WEIGHT */
     .brand {
       font-family: var(--font-heading);
       font-weight: 600;
@@ -233,7 +232,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: calc(70px + 3rem) 0 5rem 0; /* Padding offsets fixed nav height */
+      padding: calc(70px + 3rem) 0 5rem 0;
       position: relative;
       
       background: radial-gradient(
@@ -279,7 +278,7 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 3.5rem;
-      align-items: center;
+      align-items: flex-start;
     }
 
     @media (min-width: 850px) {
@@ -288,54 +287,30 @@
       }
     }
 
-    .hero-status-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background-color: rgba(56, 225, 255, 0.08);
-      border: 1px solid rgba(56, 225, 255, 0.25);
-      color: var(--accent);
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 0.35rem 0.85rem;
-      border-radius: 20px;
-      margin-bottom: 1.25rem;
-      width: fit-content;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent);
-    }
-
-    /* 3. HERO HEADING - ULTRA BOLD / BLACK (WEIGHT 900) */
+    /* 1. HERO TITLE - BOLD (WEIGHT 700) */
     .hero-title {
       font-size: clamp(2.3rem, 4.8vw, 3.6rem);
-      font-weight: 900; /* Maximum bold weight */
+      font-weight: 700; /* Bold */
       line-height: 1.12;
       letter-spacing: -0.01em;
       margin-bottom: 1.25rem;
       text-shadow: 
-        0 0 14px rgba(255, 255, 255, 0.35),
-        0 0 30px rgba(255, 255, 255, 0.18);
+        0 0 12px rgba(255, 255, 255, 0.32),
+        0 0 28px rgba(255, 255, 255, 0.15);
     }
 
     .hero-title-line {
       display: block;
     }
 
-    /* 2. REPOSITIONED & ENLARGED STYLISTIC PLUS */
     .hero-title-plus {
       display: block;
-      font-size: 1.8rem; /* Scaled up */
+      font-size: 1.8rem;
       color: var(--accent);
       font-weight: 400;
       line-height: 1;
       margin: 0.2rem 0;
-      padding-left: 5.5rem; /* Shifted right over the word 'End' */
+      padding-left: 5.5rem;
       text-shadow: 0 0 12px rgba(56, 225, 255, 0.6);
     }
 
@@ -353,6 +328,30 @@
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    /* 5. MOVED ROLES INDICATOR TAG DOWN BELOW BUTTONS */
+    .hero-status-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(56, 225, 255, 0.08);
+      border: 1px solid rgba(56, 225, 255, 0.25);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      width: fit-content;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
     }
 
     .btn-primary {
@@ -391,12 +390,14 @@
       box-shadow: 0 0 15px rgba(56, 225, 255, 0.25);
     }
 
+    /* 6. PROFILE FRAME FLUSH RIGHT ALIGNMENT */
     .profile-frame {
       position: relative;
       width: 100%;
       max-width: 360px;
       aspect-ratio: 4 / 5;
-      margin: 0 auto;
+      margin-left: auto; /* Aligns container right flush with parent edge */
+      margin-right: 0;
       border-radius: 16px;
       background-color: var(--bg-surface);
       border: 1px solid var(--border-subtle);
@@ -428,12 +429,13 @@
       filter: grayscale(15%) contrast(105%);
     }
 
+    /* 7. REPOSITIONED METRICS DIVIDER & STRIP */
     .hero-metrics {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 1.5rem;
-      margin-top: 3.5rem;
-      padding-top: 2rem;
+      margin-top: 5rem; /* Pushed down for balance */
+      padding-top: 2.5rem;
       border-top: 1px solid var(--border-subtle);
     }
 
@@ -457,9 +459,10 @@
       font-weight: 600;
     }
 
+    /* 2. SECTION TITLE - SEMIBOLD (WEIGHT 600) */
     .section-title {
       font-size: 1.75rem;
-      font-weight: 600;
+      font-weight: 600; /* SemiBold */
       margin-bottom: 2rem;
       letter-spacing: -0.01em;
     }
@@ -491,17 +494,10 @@
         0 0 18px rgba(56, 225, 255, 0.28);
     }
 
-    .card-kicker {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-
+    /* 3. PROJECT TITLE - MEDIUM (WEIGHT 500) */
     .card-title {
       font-size: 1.75rem;
-      font-weight: 600;
+      font-weight: 500; /* Medium */
       margin-bottom: 1rem;
     }
 
@@ -598,9 +594,10 @@
       margin-bottom: 1.25rem;
     }
 
+    /* 3. PROJECT TITLE - MEDIUM (WEIGHT 500) */
     .card h3 {
       font-size: 1.35rem;
-      font-weight: 600;
+      font-weight: 500; /* Medium */
       margin-bottom: 0.5rem;
     }
 
@@ -657,17 +654,13 @@
     </div>
   </header>
 
-  <!-- HERO SECTION WITH GRAPHITE SLATE GRADIENT EXTENDED TO TOP -->
+  <!-- HERO SECTION WITH REORDERED HEADING/BIO/BUTTONS/TAG -->
   <section id="about" class="hero-full">
     <div class="hero-inner-container">
       <div class="hero-grid">
         
         <div>
-          <div class="hero-status-tag">
-            <span class="status-dot"></span> Available for Product & UX Roles
-          </div>
-          
-          <!-- HEAVY BOLD HERO HEADING WITH REPOSITIONED PLUS -->
+          <!-- HERO HEADING (BOLD WEIGHT 700) -->
           <h1 class="hero-title">
             <span class="hero-title-line">Product Designer</span>
             <span class="hero-title-plus">+</span>
@@ -682,9 +675,15 @@
             <a href="#scribe85" class="btn-primary">View Featured Work</a>
             <a href="ContactMe.html" class="btn-secondary">Get in Touch</a>
           </div>
+
+          <!-- MOVED INDICATOR TAG BELOW BUTTONS -->
+          <div class="hero-status-tag">
+            <span class="status-dot"></span> Available for Product & UX Roles
+          </div>
         </div>
 
         <div>
+          <!-- FLUSH RIGHT ALIGNED PROFILE FRAME -->
           <div class="profile-frame">
             <img src="Assets/HeroProfile_01.JPG" alt="Phillip Joseph Villarreal" class="profile-img" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;\'>Phillip Joseph Villarreal</div>';" />
           </div>
@@ -692,6 +691,7 @@
 
       </div>
 
+      <!-- REPOSITIONED METRICS STRIP -->
       <div class="hero-metrics">
         <div class="metric-item">
           <span class="metric-label">0→1 Strategy</span>
@@ -718,7 +718,7 @@
       <a href="scribe85-case-study.html" class="card-link">
         <div class="featured-card">
           <div>
-            <div class="card-kicker">Classic Dark</div>
+            <!-- REMOVED CLASSIC DARK KICKER -->
             <h3 class="card-title">scribe85: zero-to-one dark surface writing workspace</h3>
             <p class="card-desc">
               An independent, single-file browser writing workspace engineered from scratch to eliminate cognitive distraction. Features custom theme architectures, full markdown formatting, and local autosave functionality.
@@ -825,7 +825,6 @@
     const heroSection = document.getElementById('about');
 
     window.addEventListener('scroll', () => {
-      // Threshold set to when scroll position passes 2/3rds of the hero height
       const threshold = heroSection.offsetHeight * 0.7;
       
       if (window.scrollY > threshold) {
