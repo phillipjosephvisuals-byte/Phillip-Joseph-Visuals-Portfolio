@@ -117,8 +117,10 @@
 
     /* DYNAMIC SCROLLING TRANSPARENT NAVIGATION HEADER */
     .site-header {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      width: 100%;
       z-index: 100;
       background-color: transparent;
       backdrop-filter: blur(0px);
@@ -142,10 +144,10 @@
       height: 70px;
     }
 
-    /* 1. PJV BUTTON - MEDIUM BOLD (WEIGHT 600) */
+    /* PJV BUTTON - MEDIUM BOLD */
     .brand {
       font-family: var(--font-heading);
-      font-weight: 600; /* Medium Bold */
+      font-weight: 600;
       font-style: normal;
       font-size: 1.35rem;
       letter-spacing: 0.02em;
@@ -225,17 +227,17 @@
         0 0 20px rgba(255, 255, 255, 0.12);
     }
 
-    /* FULL-VIEWPORT HERO WITH GRAPHITE GRADIENT */
+    /* FULL-VIEWPORT HERO WITH TOP-BLEED GRADIENT */
     .hero-full {
-      min-height: calc(100vh - 70px);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 3rem 0 5rem 0;
+      padding: calc(70px + 3rem) 0 5rem 0; /* Padding offsets fixed nav height */
       position: relative;
       
       background: radial-gradient(
-        ellipse 85% 65% at 50% 40%, 
+        ellipse 90% 70% at 50% 30%, 
         #141d2b 0%, 
         #0c121d 55%, 
         #05070a 100%
@@ -273,7 +275,6 @@
       z-index: 2;
     }
 
-    /* 4. TIGHTENED HERO LEFT COLUMN */
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -283,7 +284,7 @@
 
     @media (min-width: 850px) {
       .hero-grid {
-        grid-template-columns: 1.1fr 0.9fr; /* Tightened left text column */
+        grid-template-columns: 1.1fr 0.9fr;
       }
     }
 
@@ -310,40 +311,40 @@
       box-shadow: 0 0 8px var(--accent);
     }
 
-    /* 3. HERO HEADING - HEAVY BOLD (WEIGHT 800) */
+    /* 3. HERO HEADING - ULTRA BOLD / BLACK (WEIGHT 900) */
     .hero-title {
       font-size: clamp(2.3rem, 4.8vw, 3.6rem);
-      font-weight: 800; /* Heavy Bold */
-      line-height: 1.15;
+      font-weight: 900; /* Maximum bold weight */
+      line-height: 1.12;
       letter-spacing: -0.01em;
       margin-bottom: 1.25rem;
       text-shadow: 
-        0 0 12px rgba(255, 255, 255, 0.32),
-        0 0 28px rgba(255, 255, 255, 0.15);
+        0 0 14px rgba(255, 255, 255, 0.35),
+        0 0 30px rgba(255, 255, 255, 0.18);
     }
 
     .hero-title-line {
       display: block;
     }
 
-    /* 5. STYLISTIC PLUS SEPARATOR BETWEEN TITLE LINES */
+    /* 2. REPOSITIONED & ENLARGED STYLISTIC PLUS */
     .hero-title-plus {
       display: block;
-      font-size: 1.2rem;
+      font-size: 1.8rem; /* Scaled up */
       color: var(--accent);
       font-weight: 400;
       line-height: 1;
-      margin: 0.35rem 0;
-      text-shadow: 0 0 10px rgba(56, 225, 255, 0.5);
+      margin: 0.2rem 0;
+      padding-left: 5.5rem; /* Shifted right over the word 'End' */
+      text-shadow: 0 0 12px rgba(56, 225, 255, 0.6);
     }
 
-    /* TIGHTENED HERO BIO BLURB */
     .hero-bio {
       color: var(--text-muted);
       font-size: 1.075rem;
       line-height: 1.7;
       margin-bottom: 1.75rem;
-      max-width: 580px; /* Constrained width for breathing room */
+      max-width: 580px;
       text-align: justify;
       text-justify: inter-word;
     }
@@ -456,10 +457,9 @@
       font-weight: 600;
     }
 
-    /* 2. CARD HEADINGS - MEDIUM BOLD (WEIGHT 600) */
     .section-title {
       font-size: 1.75rem;
-      font-weight: 600; /* Medium Bold */
+      font-weight: 600;
       margin-bottom: 2rem;
       letter-spacing: -0.01em;
     }
@@ -501,7 +501,7 @@
 
     .card-title {
       font-size: 1.75rem;
-      font-weight: 600; /* Medium Bold */
+      font-weight: 600;
       margin-bottom: 1rem;
     }
 
@@ -600,7 +600,7 @@
 
     .card h3 {
       font-size: 1.35rem;
-      font-weight: 600; /* Medium Bold */
+      font-weight: 600;
       margin-bottom: 0.5rem;
     }
 
@@ -657,7 +657,7 @@
     </div>
   </header>
 
-  <!-- HERO SECTION WITH GRAPHITE SLATE GRADIENT -->
+  <!-- HERO SECTION WITH GRAPHITE SLATE GRADIENT EXTENDED TO TOP -->
   <section id="about" class="hero-full">
     <div class="hero-inner-container">
       <div class="hero-grid">
@@ -667,7 +667,7 @@
             <span class="status-dot"></span> Available for Product & UX Roles
           </div>
           
-          <!-- 5. HEAVY BOLD TWO-LINE HERO HEADING WITH STYLISTIC PLUS -->
+          <!-- HEAVY BOLD HERO HEADING WITH REPOSITIONED PLUS -->
           <h1 class="hero-title">
             <span class="hero-title-line">Product Designer</span>
             <span class="hero-title-plus">+</span>
