@@ -3,368 +3,297 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>K12 Insight Illustration Project | Phillip Joseph Villarreal</title>
+  <title>K12 Insight Case Study | Phillip Joseph Villarreal</title>
   
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
     :root {
-      --bg-main: #0B0F17;
-      --bg-surface: #141A26;
-      --bg-surface-hover: #1D2536;
-      --border-subtle: #242E42;
-      --text-main: #E2E8F0;
-      --text-muted: #94A3B8;
-      --accent: #38BDF8;
-      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --bg-base: #05070a;
+      --bg-surface: #0f141d;
+      --bg-surface-hover: #171f2c;
+      --border-subtle: #1e293b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38e1ff;
+      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       --max-width: 1120px;
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      background-color: var(--bg-main);
+      background-color: var(--bg-base);
       color: var(--text-main);
-      font-family: var(--font-stack);
+      font-family: var(--font-body);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+      min-height: 100vh;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    body::before {
+      content: "";
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: radial-gradient(circle at 50% 30%, rgba(20, 27, 41, 0.45) 0%, rgba(5, 7, 10, 0.85) 65%, rgba(2, 3, 5, 0.98) 100%);
+      mix-blend-mode: multiply; pointer-events: none; z-index: 0;
     }
 
-    img, video {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
-    }
+    .site-header, main, .site-footer { position: relative; z-index: 1; }
+    a { color: inherit; text-decoration: none; }
+    img, video { max-width: 100%; height: auto; display: block; border-radius: 8px; }
 
-    /* --- LAYOUT CONTAINERS --- */
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: 4.5rem 0; border-bottom: 1px solid var(--border-subtle); }
 
-    .section {
-      padding: 4.5rem 0;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    /* --- NAVIGATION --- */
     .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background-color: rgba(11, 15, 23, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-subtle);
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      background-color: transparent; backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px);
+      border-bottom: 1px solid transparent; transition: background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
+    }
+    .site-header.scrolled {
+      background-color: rgba(5, 7, 10, 0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-subtle);
     }
 
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 70px;
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+    .brand { font-family: var(--font-heading); font-weight: 600; font-size: 1.35rem; letter-spacing: -0.02em; text-shadow: 0 0 10px rgba(255, 255, 255, 0.28); color: #ffffff; }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color 0.2s ease; display: flex; align-items: center; gap: 0.3rem; padding: 0.5rem 0; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+
+    .dropdown-menu {
+      position: absolute; top: 100%; left: 0; min-width: 230px;
+      background-color: rgba(15, 20, 29, 0.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.6rem 0; list-style: none;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(56, 225, 255, 0.1);
+      opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.25s ease;
+    }
+    .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-menu li a { padding: 0.6rem 1.25rem; font-size: 0.9rem; color: var(--text-muted); transition: background-color 0.2s ease, color 0.2s ease; }
+    .dropdown-menu li a:hover { background-color: var(--bg-surface-hover); color: var(--accent); }
+
+    h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
+      font-family: var(--font-heading); color: #ffffff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.28), 0 0 20px rgba(255, 255, 255, 0.12);
     }
 
-    .brand {
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: -0.02em;
+    .subpage-hero {
+      padding: calc(70px + 3rem) 0 4rem 0; position: relative;
+      background: radial-gradient(ellipse 90% 70% at 50% 30%, #141d2b 0%, #0c121d 55%, #05070a 100%);
+      margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%);
+      padding-left: calc(50vw - 50%); padding-right: calc(50vw - 50%); border-bottom: 1px solid var(--border-subtle);
+    }
+    .subpage-hero::after {
+      content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 100px;
+      background: linear-gradient(to bottom, rgba(5, 7, 10, 0) 0%, rgba(5, 7, 10, 0.8) 70%, #05070a 100%); pointer-events: none;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 1.75rem;
-      list-style: none;
-    }
+    .hero-inner-container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; width: 100%; position: relative; z-index: 2; }
+    .hero-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+    @media (min-width: 850px) { .hero-grid { grid-template-columns: 1.1fr 0.9fr; } }
 
-    .nav-links a {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.2s ease;
+    .hero-status-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem; background-color: rgba(56, 225, 255, 0.08);
+      border: 1px solid rgba(56, 225, 255, 0.25); color: var(--accent); font-size: 0.85rem; font-weight: 600;
+      padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 1.25rem; width: fit-content;
     }
+    .status-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); }
 
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--text-main);
+    .hero-title { font-size: clamp(2.1rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+    .hero-title em, .section-title em, .card h3 em { font-style: italic; }
+    .hero-bio { color: var(--text-muted); font-size: 1.075rem; line-height: 1.7; margin-bottom: 1.75rem; max-width: 580px; text-align: justify; text-justify: inter-word; }
+
+    .hero-media-frame {
+      position: relative; width: 100%; aspect-ratio: 16 / 10; margin-left: auto; margin-right: 0;
+      border-radius: 16px; background-color: var(--bg-surface); border: 1px solid var(--border-subtle);
+      overflow: hidden; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8); transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
+    .hero-media-frame:hover { border-color: var(--accent); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 225, 255, 0.3); }
+    .hero-media-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* --- HERO --- */
-    .hero {
-      padding: 5rem 0 3rem 0;
-    }
-
-    .hero-kicker {
-      color: var(--accent);
-      font-size: 0.875rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.75rem;
-    }
-
-    .hero-title {
-      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.25rem;
-    }
-
-    .hero-bio {
-      color: var(--text-muted);
-      font-size: 1.15rem;
-      max-width: 820px;
-      line-height: 1.7;
-      margin-bottom: 2rem;
-    }
-
-    /* META GRID */
     .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.25rem;
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 1.5rem 2rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem;
+      background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.5rem 2rem; margin-top: 3.5rem;
     }
+    .meta-item h4 { font-size: 0.8rem; text-transform: uppercase; color: var(--accent); font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+    .meta-item p { font-size: 0.95rem; color: var(--text-main); font-weight: 500; }
 
-    .meta-item h4 {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      color: var(--accent);
-      letter-spacing: 0.05em;
-      margin-bottom: 0.25rem;
-    }
+    .section-title { font-size: 1.75rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: -0.01em; }
+    .section-subtitle { color: var(--text-muted); font-size: 1.05rem; max-width: 750px; margin-bottom: 2.5rem; }
 
-    .meta-item p {
-      font-size: 0.95rem;
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    /* --- SECTION HEADINGS --- */
-    .section-title {
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .section-subtitle {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      max-width: 750px;
-      margin-bottom: 2.5rem;
-    }
-
-    /* --- CONTENT CARDS & GRIDS --- */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    @media (min-width: 768px) {
-      .grid-2 { grid-template-columns: repeat(2, 1fr); }
-      .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    }
+    .grid-2, .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } .grid-3 { grid-template-columns: repeat(3, 1fr); } }
 
     .card {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 2rem;
-      height: 100%;
+      background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 2rem; height: 100%;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease; box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4);
     }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 225, 255, 0.25); }
+    .card h3 { font-size: 1.35rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--text-main); }
+    .card p, .card ul { color: var(--text-muted); font-size: 0.975rem; line-height: 1.65; text-align: justify; text-justify: inter-word; }
+    .card ul { list-style-type: disc; padding-left: 1.25rem; margin-top: 0.5rem; }
+    .card ul li { margin-bottom: 0.5rem; }
 
-    .card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
-      color: var(--text-main);
-    }
-
-    .card p, .card ul {
-      color: var(--text-muted);
-      font-size: 0.975rem;
-      line-height: 1.6;
-    }
-
-    .card ul {
-      list-style-type: disc;
-      padding-left: 1.25rem;
-      margin-top: 0.5rem;
-    }
-
-    .card ul li {
-      margin-bottom: 0.5rem;
-    }
-
-    /* MEDIA PLACEHOLDERS */
     .media-placeholder {
-      background-color: var(--bg-main);
-      border: 1px solid var(--border-subtle);
-      aspect-ratio: 16 / 9;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-top: 1rem;
+      background-color: var(--bg-base); border: 1px solid var(--border-subtle); aspect-ratio: 16 / 10; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.9rem; overflow: hidden; position: relative; margin-top: 1.25rem;
     }
+    .media-placeholder img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+    .media-placeholder:hover img { transform: scale(1.02); }
 
-    /* --- FOOTER --- */
-    .site-footer {
-      padding: 3rem 0;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      text-align: center;
-      border-top: 1px solid var(--border-subtle);
-    }
+    .site-footer { padding: 3rem 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--border-subtle); }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="site-header">
+  <header class="site-header" id="siteHeader">
     <div class="container nav-inner">
-      <a href="index.html" class="brand">PJV Home</a>
+      <a href="index.html" class="brand">PJV</a>
       <nav>
         <ul class="nav-links">
           <li><a href="index.html">← Back to Portfolio</a></li>
-          <li><a href="#overview" class="active">Overview</a></li>
-          <li><a href="#objectives">Objectives</a></li>
-          <li><a href="#process">Process & Execution</a></li>
-          <li><a href="#deliverables">Deliverables</a></li>
+          <li class="dropdown">
+            <a href="index.html#corporate" class="active">Portfolio ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="scribe85-case-study.html">scribe85</a></li>
+              <li><a href="iaem-bulletin-case-study.html">Corporate Communication</a></li>
+              <li><a href="k12-insight-illustration-project-case-study.html">K12 Insight</a></li>
+            </ul>
+          </li>
+          <li><a href="ContactMe.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    
-    <!-- HERO SECTION -->
-    <section id="overview" class="section hero">
-      <div class="hero-kicker">Corporate Voice & Illustration System</div>
-      <h1 class="hero-title">K12 Insight Illustration Project</h1>
-      <p class="hero-bio">
-        A custom suite of raster-based corporate illustrations created to solidify company voice and mission across web touchpoints, marketing collateral, and customer-facing product education.
-      </p>
-
-      <!-- PROJECT META -->
+  <section id="overview" class="subpage-hero">
+    <div class="hero-inner-container">
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-title">K12 <em>Insight</em>: Visual Brand Narrative & Custom Illustration</h1>
+          <p class="hero-bio">
+            Creating a bespoke illustration system and cohesive visual language to convey educational technology solutions with warmth, clarity, and human connection across digital platforms and corporate marketing collateral.
+          </p>
+          <div class="hero-status-tag">
+            <span class="status-dot"></span> Corporate Communication & Brand Identity
+          </div>
+        </div>
+        <div>
+          <div class="hero-media-frame">
+            <img src="Assets/K12Insight/K12Insight_012.webp" alt="K12 Insight Featured Artwork" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;\'>K12 Insight Hero Artwork</div>';" />
+          </div>
+        </div>
+      </div>
       <div class="meta-grid">
-        <div class="meta-item">
-          <h4>Client / Project</h4>
-          <p>K12 Insight</p>
-        </div>
-        <div class="meta-item">
-          <h4>Category</h4>
-          <p>Corporate Voice & Brand Illustration</p>
-        </div>
-        <div class="meta-item">
-          <h4>Deliverables</h4>
-          <p>Custom Digital Illustrations & Assets</p>
-        </div>
-        <div class="meta-item">
-          <h4>Tools & Software</h4>
-          <p>Procreate, Adobe Illustrator</p>
-        </div>
+        <div class="meta-item"><h4>Client</h4><p>K12 <em>Insight</em></p></div>
+        <div class="meta-item"><h4>Deliverable</h4><p>Custom Vector & Raster Assets</p></div>
+        <div class="meta-item"><h4>Tools</h4><p>Procreate, Adobe Illustrator, Photoshop</p></div>
+        <div class="meta-item"><h4>Core Focus</h4><p>Brand Storytelling & Visual Identity</p></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- OBJECTIVES -->
-    <section id="objectives" class="section">
-      <h2 class="section-title">Project Objectives & Brand Alignment</h2>
-      <p class="section-subtitle">Translating complex educational technology and customer experience solutions into welcoming, human-centric visual art.</p>
-
+  <main class="container">
+    <section class="section">
+      <h2 class="section-title">The Challenge vs. The Creative Direction</h2>
+      <p class="section-subtitle">EdTech communications frequently lean on generic stock photography that fails to represent diverse student and educator experiences authentically.</p>
       <div class="grid-2">
         <article class="card">
-          <h3>Humanizing EdTech Communication</h3>
-          <p>Stock photography often feels detached and generic. The objective was to craft bespoke illustrations that communicate warmth, accessibility, and trust—reflecting K12 Insight's mission of connecting school districts with their communities.</p>
+          <h3 style="color: #f87171;">The Challenge (Generic Imagery)</h3>
+          <p>Standard corporate communication struggled with engagement barriers:</p>
+          <ul>
+            <li>Impersonal stock assets that diluted unique brand personality.</li>
+            <li>Inconsistent art styles across web, presentation decks, and print.</li>
+            <li>Difficulty visualizing abstract educational concepts like school climate.</li>
+            <li>Visual fatigue from cold, purely corporate iconography.</li>
+          </ul>
         </article>
-
         <article class="card">
-          <h3>Unified Visual Language</h3>
-          <p>Developing a cohesive illustration style guide—defining line weights, color palettes, shading techniques, and character proportions that integrate seamlessly into existing digital and print collateral.</p>
+          <h3 style="color: var(--accent);">The Creative Direction</h3>
+          <p>Developing an expressive, custom-crafted visual language:</p>
+          <ul>
+            <li><strong>Character-Driven Narrative:</strong> Relatable, diverse representations of teachers and students.</li>
+            <li><strong>Harmonized Palette:</strong> Warm, accessible color harmonies aligned with established brand guidelines.</li>
+            <li><strong>Modular Scene Assets:</strong> Scalable vector compositions adaptable across web and print collateral.</li>
+            <li><strong>Abstract Made Tangible:</strong> Metaphorical storytelling transforming survey data into friendly visual concepts.</li>
+          </ul>
         </article>
       </div>
     </section>
 
-    <!-- PROCESS & CREATIVE EXECUTION -->
-    <section id="process" class="section">
-      <h2 class="section-title">Creative Process & Methodologies</h2>
-      <p class="section-subtitle">From initial concept sketches in Procreate to production-ready vector and raster assets.</p>
-
-      <div class="grid-2">
-        <article class="card">
-          <h3>1. Concept Sketching & Composition</h3>
-          <p>Exploring narrative scenes in Procreate to establish balance and focal points. Sketches focused on depicting active, relatable interactions between educators, parents, and administrative leadership.</p>
-          <div class="media-placeholder" style="aspect-ratio: 16 / 10;">
-            Initial Concept Sketches & Scene Layouts
+    <section id="illustrations" class="section">
+      <h2 class="section-title">Selected Illustration Studies</h2>
+      <p class="section-subtitle">A showcase of bespoke visual storytelling assets produced for campaign touchpoints and platform features.</p>
+      <div class="grid-3">
+        <div>
+          <div class="media-placeholder">
+            <img src="Assets/K12Insight/K12Insight_012.webp" alt="Artwork 1" onerror="this.onerror=null; this.parentElement.innerHTML='[Artwork 1 Placeholder]';" />
           </div>
-        </article>
-
-        <article class="card">
-          <h3>2. Digital Rendering & Color Application</h3>
-          <p>Refining line work and applying K12 Insight's core visual palette. Using subtle gradients, textured brushes, and soft shadows to give elements warmth and depth while maintaining high readability.</p>
-          <div class="media-placeholder" style="aspect-ratio: 16 / 10;">
-            Color Palette & Rendered Asset Showcase
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; text-align: center;">Stakeholder Collaboration & Community Voice</p>
+        </div>
+        <div>
+          <div class="media-placeholder">
+            <img src="Assets/K12Insight/K12Insight_012.webp" alt="Artwork 2" onerror="this.onerror=null; this.parentElement.innerHTML='[Artwork 2 Placeholder]';" />
           </div>
-        </article>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; text-align: center;">School Climate & Continuous Feedback</p>
+        </div>
+        <div>
+          <div class="media-placeholder">
+            <img src="Assets/K12Insight/K12Insight_012.webp" alt="Artwork 3" onerror="this.onerror=null; this.parentElement.innerHTML='[Artwork 3 Placeholder]';" />
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; text-align: center;">Educational Leadership & Strategic Planning</p>
+        </div>
       </div>
     </section>
 
-    <!-- DELIVERABLES & APPLICATION -->
-    <section id="deliverables" class="section">
-      <h2 class="section-title">Final Deliverables & Use Cases</h2>
-      <p class="section-subtitle">Multi-channel visual assets designed to scale across responsive web pages, presentation decks, and marketing campaigns.</p>
-
+    <section id="system" class="section">
+      <h2 class="section-title">Design System & Workflow</h2>
+      <p class="section-subtitle">From initial thumbnail sketches to production-ready scalable vector assets.</p>
       <div class="grid-3">
         <article class="card">
-          <h3>Website & Landing Pages</h3>
-          <p>Hero illustrations and section spot graphics designed to guide user focus down marketing pages and highlight key platform features.</p>
+          <h3>1. Concept Sketching</h3>
+          <p>Iterative ideation in Procreate exploring composition balance and metaphorical clarity before committing to final vectors.</p>
         </article>
-
         <article class="card">
-          <h3>Marketing Collateral</h3>
-          <p>High-resolution raster art optimized for digital newsletters, downloadable PDF guides, and print media.</p>
+          <h3>2. Vector Precision</h3>
+          <p>Translating approved sketches into clean vector paths in Adobe Illustrator, ensuring razor-sharp rendering at all resolutions.</p>
         </article>
-
         <article class="card">
-          <h3>Social & Campaign Assets</h3>
-          <p>Modular scene components that can be easily reformatted for social media graphics and presentation slide decks.</p>
+          <h3>3. Asset Integration</h3>
+          <p>Organizing assets into structured component libraries for marketing and design teams to deploy across collateral.</p>
         </article>
-      </div>
-
-      <div class="media-placeholder" style="aspect-ratio: 16 / 9; margin-top: 2rem;">
-        <!-- Replace with: <img src="k12-insight-illustration-hero.webp" alt="K12 Insight Final Illustration Showcase" loading="lazy" /> -->
-        K12 Insight Full Illustration Showcase Preview
       </div>
     </section>
 
+    <section id="outcomes" class="section">
+      <h2 class="section-title">Impact & Brand Alignment</h2>
+      <p class="section-subtitle">Elevating brand distinction and humanizing technical communication in the K-12 education sector.</p>
+      <div class="grid-2">
+        <article class="card">
+          <h3>Brand Recognition</h3>
+          <p>The custom illustration language created an instantly identifiable look and feel that separated K12 <em>Insight</em> from competitors.</p>
+        </article>
+        <article class="card">
+          <h3>Cross-Channel Consistency</h3>
+          <p>Providing a modular asset toolkit ensured visual continuity across web pages, executive slide decks, and event marketing materials.</p>
+        </article>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
-    </div>
+    <div class="container"><p>Copyright © 2026 - Phillip Joseph Villarreal</p></div>
   </footer>
 
+  <script>
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) { header.classList.add('scrolled'); } 
+      else { header.classList.remove('scrolled'); }
+    });
+  </script>
 </body>
 </html>
