@@ -6,7 +6,6 @@
   <title>scribe85 Case Study | Phillip Joseph Villarreal</title>
   
   <style>
-    /* IMPORT INTER FROM GOOGLE FONTS CDN (WEIGHTS 100 THROUGH 900) */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
     :root {
@@ -90,7 +89,7 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    /* DYNAMIC TRANSPARENT HEADER (EARLY SCROLL TRANSITION) */
+    /* --- SITE HEADER & NAV --- */
     .site-header {
       position: fixed;
       top: 0;
@@ -118,7 +117,6 @@
       height: 70px;
     }
 
-    /* PJV LOGO - SEMIBOLD (600) */
     .brand {
       font-family: var(--font-heading);
       font-weight: 600;
@@ -153,7 +151,7 @@
       color: var(--text-main);
     }
 
-    /* DROPDOWN SUB-MENU STYLES */
+    /* DROPDOWN SUB-MENU */
     .dropdown-menu {
       position: absolute;
       top: 100%;
@@ -186,7 +184,7 @@
       transition: background-color 0.2s ease, color 0.2s ease;
     }
 
-    .dropdown-menu li a:hover {
+    .dropdown-menu li a:hover, .dropdown-menu li a.active {
       background-color: var(--bg-surface-hover);
       color: var(--accent);
     }
@@ -200,18 +198,16 @@
         0 0 20px rgba(255, 255, 255, 0.12);
     }
 
-    /* SUBPAGE HERO (COMPACT GRAPHITE SLATE GRADIENT) */
+    /* --- HERO SECTION --- */
     .subpage-hero {
       padding: calc(70px + 3rem) 0 4rem 0;
       position: relative;
-      
       background: radial-gradient(
         ellipse 90% 70% at 50% 30%, 
         #141d2b 0%, 
         #0c121d 55%, 
         #05070a 100%
       );
-      
       margin-left: calc(-50vw + 50%);
       margin-right: calc(-50vw + 50%);
       padding-left: calc(50vw - 50%);
@@ -280,7 +276,6 @@
       box-shadow: 0 0 8px var(--accent);
     }
 
-    /* 1. HERO TITLE - BOLD (700) */
     .hero-title {
       font-size: clamp(2.1rem, 4vw, 3.2rem);
       font-weight: 700;
@@ -299,7 +294,6 @@
       text-justify: inter-word;
     }
 
-    /* SWAPPABLE HERO PREVIEW FRAME */
     .hero-media-frame {
       position: relative;
       width: 100%;
@@ -326,7 +320,6 @@
       display: block;
     }
 
-    /* META PILLS GRID */
     .meta-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -353,7 +346,6 @@
       font-weight: 500;
     }
 
-    /* 2. SECTION TITLE - SEMIBOLD (600) */
     .section-title {
       font-size: 1.75rem;
       font-weight: 600;
@@ -368,7 +360,7 @@
       margin-bottom: 2.5rem;
     }
 
-    /* CONTENT CARDS & GRIDS */
+    /* --- CONTENT CARDS & GRIDS --- */
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr;
@@ -395,7 +387,6 @@
       box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 225, 255, 0.25);
     }
 
-    /* 3. CARD TITLES - MEDIUM (500) */
     .card h3 {
       font-size: 1.35rem;
       font-weight: 500;
@@ -421,7 +412,7 @@
       margin-bottom: 0.5rem;
     }
 
-    /* MEDIA PLACEHOLDERS FOR WIREFRAMES & INTERACTION PREVIEWS */
+    /* MEDIA PLACEHOLDERS */
     .media-placeholder {
       background-color: var(--bg-base);
       border: 1px solid var(--border-subtle);
@@ -449,90 +440,126 @@
       transform: scale(1.02);
     }
 
-    /* EMBEDDED PAGE CAROUSEL (INLINE, NON-MODAL) */
-    .embedded-carousel-container {
+    /* --- CAROUSEL STYLES --- */
+    .carousel-container {
       position: relative;
-      width: 100%;
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-      margin-top: 2rem;
+      max-width: 860px;
+      margin: 0 auto;
     }
 
-    .embedded-carousel-stage {
+    .carousel-stage {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 8px;
-      overflow: hidden;
-      background-color: var(--bg-base);
+      aspect-ratio: 16 / 10;
+      background-color: var(--bg-surface);
       border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .carousel-stage:hover {
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 225, 255, 0.2);
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .embedded-carousel-stage img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+    .carousel-slide.active {
+      opacity: 1;
+      visibility: visible;
     }
 
-    /* EMBEDDED NAV ARROWS (MATCHING THEATER ARROW STYLING) */
-    .carousel-nav-arrow {
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(15, 20, 29, 0.75);
+      width: 44px;
+      height: 44px;
+      background-color: rgba(15, 20, 29, 0.85);
       border: 1px solid var(--border-subtle);
-      color: #ffffff;
-      font-size: 1.5rem;
-      width: 46px;
-      height: 46px;
       border-radius: 50%;
+      color: var(--text-main);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 1.25rem;
       cursor: pointer;
-      transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: all 0.2s ease;
       z-index: 10;
     }
 
-    .carousel-nav-arrow:hover {
+    .carousel-btn:hover {
       background-color: var(--bg-surface-hover);
       border-color: var(--accent);
-      box-shadow: 0 0 12px rgba(56, 225, 255, 0.4);
+      color: var(--accent);
+      box-shadow: 0 0 12px rgba(56, 225, 255, 0.3);
     }
 
-    .carousel-nav-arrow.prev { left: 1rem; }
-    .carousel-nav-arrow.next { right: 1rem; }
+    .carousel-btn.prev { left: -22px; }
+    .carousel-btn.next { right: -22px; }
 
-    /* EMBEDDED GLOWING WHITE DOT INDICATORS */
-    .carousel-dots-container {
+    @media (max-width: 768px) {
+      .carousel-btn.prev { left: 10px; }
+      .carousel-btn.next { right: 10px; }
+    }
+
+    .carousel-caption-container {
+      margin-top: 1.25rem;
+      text-align: center;
+      min-height: 45px;
+    }
+
+    .carousel-caption {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .carousel-indicators {
       display: flex;
       justify-content: center;
-      gap: 0.75rem;
-      margin-top: 1.25rem;
+      gap: 0.6rem;
+      margin-top: 0.75rem;
     }
 
-    .carousel-dot {
+    .indicator-dot {
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.25);
+      background-color: var(--border-subtle);
+      border: none;
       cursor: pointer;
-      transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      padding: 0;
+      transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .carousel-dot.active {
-      background-color: #ffffff;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 16px rgba(255, 255, 255, 0.5);
-      transform: scale(1.25);
+    .indicator-dot.active {
+      background-color: var(--accent);
+      transform: scale(1.2);
+      box-shadow: 0 0 8px var(--accent);
     }
 
-    /* CALL TO ACTION BANNER */
+    /* --- CTA BANNER --- */
     .cta-banner {
       background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-surface-hover) 100%);
       border: 1px solid var(--border-subtle);
@@ -561,7 +588,6 @@
       background-color: #ffffff;
     }
 
-    /* FOOTER */
     .site-footer {
       padding: 3rem 0;
       color: var(--text-muted);
@@ -573,7 +599,7 @@
 </head>
 <body>
 
- <!-- SITE HEADER -->
+  <!-- SITE HEADER -->
   <header class="site-header" id="siteHeader">
     <div class="container nav-inner">
       <a href="index.html" class="brand">PJV</a>
@@ -581,23 +607,24 @@
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li class="dropdown">
-            <a href="index.html#scribe85">Portfolio ▾</a>
+            <a href="index.html#portfolio" class="active">Portfolio ▾</a>
             <ul class="dropdown-menu">
-              <li><a href="scribe85-case-study.html">scribe85</a></li>
-              <li><a href="iaem-bulletin-case-study.html">Corporate Communication</a></li>
+              <li><a href="scribe85-case-study.html" class="active">scribe85</a></li>
+              <li><a href="iaem-bulletin-case-study.html">IAEM</a></li>
               <li><a href="k12-insight-illustration-project-case-study.html">K12 Insight</a></li>
               <li><a href="presentations-case-study.html">Presentations</a></li>
               <li><a href="photography-case-study.html">Photography</a></li>
+              <li><a href="videography.html">Videography</a></li>
             </ul>
           </li>
-          <li><a href="Resume.html" class="active">Resume</a></li>
+          <li><a href="Resume.html">Resume</a></li>
           <li><a href="ContactMe.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- SUBPAGE HERO SECTION (LEFT CONTENT vs. RIGHT MEDIA FRAME) -->
+  <!-- SUBPAGE HERO SECTION -->
   <section id="overview" class="subpage-hero">
     <div class="hero-inner-container">
       <div class="hero-grid">
@@ -615,14 +642,14 @@
           </div>
         </div>
 
-        <!-- RIGHT: SWAPPABLE APP WORKSPACE IMAGE FRAME -->
+        <!-- RIGHT: HERO PREVIEW FRAME -->
         <div>
           <div class="hero-media-frame">
-            <!-- SWAPPABLE HERO PREVIEW IMAGE PLACEHOLDER -->
+            <!-- PASTE HERO IMAGE PATH BELOW -->
             <img 
               src="Assets/scribe85/00_scribe85/scribe85_LandingPage.png" 
               alt="scribe85 Main Workspace Interface" 
-              onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;\'>scribe85 Workspace Image Placeholder</div>';" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;\'>[Hero Image Placeholder - Swap src]</div>';" 
             />
           </div>
         </div>
@@ -689,11 +716,11 @@
       <p class="section-subtitle">Initial architectural sketches focusing on spatial ratios, line-length constraints, and essential control placement before styling.</p>
 
       <div class="media-placeholder">
-        <!-- SWAPPABLE LOW-FIDELITY WIREFRAME IMAGE -->
+        <!-- PASTE LOW-FIDELITY WIREFRAME PATH BELOW -->
         <img 
           src="Assets/scribe85/scribe85-lofi-wireframe.webp" 
           alt="scribe85 Low-Fidelity Wireframe" 
-          onerror="this.onerror=null; this.parentElement.innerHTML='[Low-Fidelity Wireframe Image Placeholder - Swap with Assets/scribe85/scribe85-lofi-wireframe.webp]';" 
+          onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>[Low-Fidelity Wireframe Placeholder - Swap src]</div>';" 
         />
       </div>
     </section>
@@ -704,40 +731,72 @@
       <p class="section-subtitle">Refining typography scales, drawer micro-interactions, and testing the auto-fading control triggers across tablet and desktop canvas sizes.</p>
 
       <div class="media-placeholder">
-        <!-- SWAPPABLE MID-FIDELITY WIREFRAME IMAGE -->
+        <!-- PASTE MID-FIDELITY WIREFRAME PATH BELOW -->
         <img 
           src="Assets/scribe85/scribe85-midfi-wireframe.webp" 
           alt="scribe85 Mid-Fidelity Wireframe" 
-          onerror="this.onerror=null; this.parentElement.innerHTML='[Mid-Fidelity Wireframe Image Placeholder - Swap with Assets/scribe85/scribe85-midfi-wireframe.webp]';" 
+          onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>[Mid-Fidelity Wireframe Placeholder - Swap src]</div>';" 
         />
       </div>
     </section>
 
-    <!-- EMBEDDED PAGE CAROUSEL: THEME MODES INTERFACE PREVIEW -->
+    <!-- SECTION 3: THEME MODES CAROUSEL (4 SLIDES & 4 DOTS) -->
     <section id="themes" class="section">
       <h2 class="section-title">Theme Modes Interface Preview</h2>
       <p class="section-subtitle">Simulating retro terminal ergonomics inspired by 1980s CRT displays to minimize eye fatigue during extended composition sessions.</p>
 
-      <!-- EMBEDDED INLINE CAROUSEL (NO THEATER MODAL) -->
-      <div class="embedded-carousel-container">
+      <div class="carousel-container">
+        <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous Slide">‹</button>
+        <button class="carousel-btn next" id="carouselNext" aria-label="Next Slide">›</button>
         
-        <div class="embedded-carousel-stage">
-          <!-- Left Arrow -->
-          <button class="carousel-nav-arrow prev" onclick="navigateThemeSlide(-1)" aria-label="Previous Theme Slide">‹</button>
+        <div class="carousel-stage" id="carouselStage">
+          <!-- Slide 1: Classic Dark Theme -->
+          <div class="carousel-slide active" data-caption="Classic Dark Theme — High-contrast, minimal distraction interface">
+            <img 
+              src="Assets/scribe85/00_scribe85/scribe85_LandingPageClassic.png" 
+              alt="Classic Dark Theme" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>[Slide 1: Classic Dark Theme Placeholder - Swap src]</div>';" 
+            />
+          </div>
           
-          <!-- Slide Image Render Target -->
-          <img id="themeSlideImage" src="Assets/scribe85/00_scribe85/scribe85_Narrative85_Canvas.png",
-          <img id="themeSlideImage" src="Assets/scribe85/00_scribe85/scribe85_Narrative85_CanvasAmber.png",
-          <img id="themeSlideImage" src="Assets/scribe85/00_scribe85/scribe85_Narrative85_CanvasCobalt.png",
-          <img id="themeSlideImage" src="Assets/scribe85/00_scribe85/scribe85_Narrative85_CanvasMatrix.png",
-            >
-          <!-- Right Arrow -->
-          <button class="carousel-nav-arrow next" onclick="navigateThemeSlide(1)" aria-label="Next Theme Slide">›</button>
+          <!-- Slide 2: Amber CRT Theme -->
+          <div class="carousel-slide" data-caption="Amber CRT Theme — Warm monochrome phosphor glow">
+            <img 
+              src="Assets/scribe85/00_scribe85/scribe85_LandingPageAmber.png" 
+              alt="Amber CRT Theme" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>[Slide 2: Amber CRT Theme Placeholder - Swap src]</div>';" 
+            />
+          </div>
+          
+          <!-- Slide 3: Matrix Green Theme -->
+          <div class="carousel-slide" data-caption="Matrix Green Theme — Retro terminal green palette">
+            <img 
+              src="Assets/scribe85/00_scribe85/scribe85_LandingPageMatrix.png" 
+              alt="Matrix Green Theme" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>[Slide 3: Matrix Green Theme Placeholder - Swap src]</div>';" 
+            />
+          </div>
+
+          <!-- Slide 4: Retro Cobalt Theme -->
+          <div class="carousel-slide" data-caption="Retro Cobalt Theme — Cool deep blue workspace ambience">
+            <img 
+              src="Assets/scribe85/00_scribe85/scribe85_LandingPageCobalt.png" 
+              alt="Retro Cobalt Theme" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>[Slide 4: Retro Cobalt Theme Placeholder - Swap src]</div>';" 
+            />
+          </div>
         </div>
 
-        <!-- Glowing White Dot Indicators -->
-        <div class="carousel-dots-container" id="themeDotsContainer"></div>
+        <div class="carousel-caption-container">
+          <p class="carousel-caption" id="carouselCaption">Classic Dark Theme — High-contrast, minimal distraction interface</p>
+        </div>
 
+        <div class="carousel-indicators" id="carouselIndicators">
+          <button class="indicator-dot active" aria-label="Go to slide 1"></button>
+          <button class="indicator-dot" aria-label="Go to slide 2"></button>
+          <button class="indicator-dot" aria-label="Go to slide 3"></button>
+          <button class="indicator-dot" aria-label="Go to slide 4"></button>
+        </div>
       </div>
     </section>
 
@@ -778,7 +837,12 @@
           <p><strong>Feedback:</strong> Users were uncertain if the top document title was editable without visible UI cues.</p>
           <p style="margin-top: 0.5rem;"><strong>Solution:</strong> Added subtle hover states, inline focus styling, and a micro-pencil icon indicator.</p>
           <div class="media-placeholder" style="aspect-ratio: 16 / 7;">
-            <img src="Assets/scribe85/scribe85-title-microinteraction.webp" alt="Document Title Microinteraction" onerror="this.onerror=null; this.parentElement.innerHTML='[Document Title Microinteraction Image Placeholder]';" />
+            <!-- PASTE TITLE MICROINTERACTION IMAGE PATH BELOW -->
+            <img 
+              src="Assets/scribe85/scribe85-title-microinteraction.webp" 
+              alt="Document Title Microinteraction" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>[Document Title Microinteraction Placeholder - Swap src]</div>';" 
+            />
           </div>
         </article>
 
@@ -787,7 +851,12 @@
           <p><strong>Feedback:</strong> Writers requested access to markdown and screenplay shortcuts without opening extra browser tabs.</p>
           <p style="margin-top: 0.5rem;"><strong>Solution:</strong> Engineered a slide-out Markdown & Scripting shortcut drawer available on demand.</p>
           <div class="media-placeholder" style="aspect-ratio: 16 / 7;">
-            <img src="Assets/scribe85/scribe85-shortcut-drawer.webp" alt="Shortcut Drawer Interface" onerror="this.onerror=null; this.parentElement.innerHTML='[Shortcut Drawer Interface Image Placeholder]';" />
+            <!-- PASTE SHORTCUT DRAWER IMAGE PATH BELOW -->
+            <img 
+              src="Assets/scribe85/scribe85-shortcut-drawer.webp" 
+              alt="Shortcut Drawer Interface" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>[Shortcut Drawer Interface Placeholder - Swap src]</div>';" 
+            />
           </div>
         </article>
       </div>
@@ -808,77 +877,67 @@
     </div>
   </footer>
 
-  <!-- LIGHTWEIGHT JAVASCRIPT FOR HEADER SCROLL & EMBEDDED CAROUSEL -->
   <script>
-    // 1. DYNAMIC NAV HEADER SCROLL SCRIPT
+    // Header scroll background toggle
     const header = document.getElementById('siteHeader');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
+      if (window.scrollY > 20) { 
+        header.classList.add('scrolled'); 
+      } else { 
+        header.classList.remove('scrolled'); 
       }
     });
 
-    // 2. EMBEDDED PAGE CAROUSEL DATA (SWAP IMAGE PATHS HERE)
-    const themeSlides = [
-      {
-        title: "Classic Dark Theme",
-        src: "Assets/scribe85/00scribe85/scribe85_LandingPageClassic.png"
-      },
-      {
-        title: "Amber CRT Theme",
-        src: "Assets/scribe85/00scribe85/scribe85_LandingPageAmber.png"
-      },
-      {
-        title: "Matrix Green Theme",
-        src: "Assets/scribe85/00scribe85/scribe85_LandingPageCobalt.png"
-      },
-      {
-        title: "Retro Cobalt Theme",
-        src: "Assets/scribe85/00scribe85/scribe85_LandingPageMatrix.png"
-      }
-    ];
+    // 4-Slide Carousel Logic
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.indicator-dot');
+    const captionEl = document.getElementById('carouselCaption');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    let currentIndex = 0;
 
-    let currentThemeIndex = 0;
-
-    function updateThemeCarousel() {
-      const img = document.getElementById('themeSlideImage');
-      const dotsContainer = document.getElementById('themeDotsContainer');
-      const slide = themeSlides[currentThemeIndex];
-
-      // Set image source and alt text
-      img.src = slide.src;
-      img.alt = slide.title;
-      img.onerror = () => {
-        img.onerror = null;
-        img.parentElement.innerHTML = `<div style="color: var(--text-muted); font-size: 0.95rem; text-align: center; padding: 2rem;">[Theme Slide ${currentThemeIndex + 1}: ${slide.title} Placeholder - Swap path in themeSlides array]</div>`;
-      };
-
-      // Render glowing white dots
-      dotsContainer.innerHTML = '';
-      themeSlides.forEach((_, i) => {
-        const dot = document.createElement('div');
-        dot.className = `carousel-dot ${i === currentThemeIndex ? 'active' : ''}`;
-        dot.onclick = () => goToThemeSlide(i);
-        dotsContainer.appendChild(dot);
+    function updateCarousel(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
       });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      captionEl.textContent = slides[index].getAttribute('data-caption');
+      currentIndex = index;
     }
 
-    function navigateThemeSlide(direction) {
-      currentThemeIndex = (currentThemeIndex + direction + themeSlides.length) % themeSlides.length;
-      updateThemeCarousel();
-    }
-
-    function goToThemeSlide(index) {
-      currentThemeIndex = index;
-      updateThemeCarousel();
-    }
-
-    // Initialize embedded carousel on DOM load
-    document.addEventListener('DOMContentLoaded', () => {
-      updateThemeCarousel();
+    prevBtn.addEventListener('click', () => {
+      let index = (currentIndex - 1 + slides.length) % slides.length;
+      updateCarousel(index);
     });
+
+    nextBtn.addEventListener('click', () => {
+      let index = (currentIndex + 1) % slides.length;
+      updateCarousel(index);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => updateCarousel(i));
+    });
+
+    // Mobile touch swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const stage = document.getElementById('carouselStage');
+
+    stage.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    stage.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) {
+        updateCarousel((currentIndex + 1) % slides.length);
+      } else if (touchEndX - touchStartX > 50) {
+        updateCarousel((currentIndex - 1 + slides.length) % slides.length);
+      }
+    }, { passive: true });
   </script>
 
 </body>
