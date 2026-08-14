@@ -427,32 +427,159 @@
       margin-bottom: 0.5rem;
     }
 
-    /* MEDIA PLACEHOLDERS */
-    .media-placeholder {
-      background-color: var(--bg-base);
-      border: 1px solid var(--border-subtle);
-      aspect-ratio: 16 / 9;
-      border-radius: 8px;
+    /* TRANSPARENT 3D PORTRAIT SPREADS CAROUSEL */
+    .portrait-carousel-wrapper {
+      position: relative;
+      width: 100%;
+      background: transparent;
+      padding: 1rem 0 2rem 0;
+      margin-top: 1.5rem;
+    }
+
+    .portrait-carousel-stage {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      height: 580px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--text-muted);
-      font-size: 0.9rem;
+      perspective: 1200px;
       overflow: hidden;
-      position: relative;
-      margin-top: 1.25rem;
     }
 
-    .media-placeholder img {
+    @media (max-width: 768px) {
+      .portrait-carousel-stage {
+        height: 440px;
+      }
+    }
+
+    .portrait-slide {
+      position: absolute;
+      width: 380px;
+      max-width: 75%;
+      aspect-ratio: 3 / 4; /* Clean Editorial Portrait Aspect Ratio */
+      border-radius: 12px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), 
+                  opacity 0.45s cubic-bezier(0.25, 1, 0.5, 1), 
+                  filter 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+                  border-color 0.45s ease,
+                  box-shadow 0.45s ease;
+      cursor: pointer;
+    }
+
+    .portrait-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.3s ease;
     }
 
-    .media-placeholder:hover img {
-      transform: scale(1.02);
+    /* CAROUSEL POSITION STATES (FADING OFF SIDES) */
+    .portrait-slide.active {
+      transform: translateX(0) scale(1) translateZ(0);
+      opacity: 1;
+      filter: blur(0px);
+      z-index: 5;
+      border-color: rgba(56, 225, 255, 0.6);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(56, 225, 255, 0.28);
+    }
+
+    .portrait-slide.prev-slide {
+      transform: translateX(-48%) scale(0.85) translateZ(-80px) rotateY(6deg);
+      opacity: 0.28;
+      filter: blur(2px);
+      z-index: 2;
+      pointer-events: auto;
+    }
+
+    .portrait-slide.next-slide {
+      transform: translateX(48%) scale(0.85) translateZ(-80px) rotateY(-6deg);
+      opacity: 0.28;
+      filter: blur(2px);
+      z-index: 2;
+      pointer-events: auto;
+    }
+
+    .portrait-slide.hidden-slide {
+      transform: scale(0.7) translateZ(-150px);
+      opacity: 0;
+      filter: blur(5px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* CAROUSEL ARROWS */
+    .carousel-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 20, 29, 0.8);
+      border: 1px solid var(--border-subtle);
+      color: #ffffff;
+      font-size: 1.6rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      z-index: 15;
+    }
+
+    .carousel-nav-arrow:hover {
+      background-color: var(--bg-surface-hover);
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(56, 225, 255, 0.5);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .carousel-nav-arrow.prev { left: 1rem; }
+    .carousel-nav-arrow.next { right: 1rem; }
+
+    @media (max-width: 600px) {
+      .carousel-nav-arrow.prev { left: 0.25rem; }
+      .carousel-nav-arrow.next { right: 0.25rem; }
+    }
+
+    /* SLIDE CAPTION TEXT */
+    .portrait-caption {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 1.25rem;
+      font-weight: 500;
+      min-height: 1.5rem;
+    }
+
+    /* GLOWING WHITE DOT INDICATORS */
+    .carousel-dots-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .carousel-dot.active {
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 16px rgba(255, 255, 255, 0.5);
+      transform: scale(1.3);
     }
 
     /* FOOTER */
@@ -600,35 +727,42 @@
       </div>
     </section>
 
-    <!-- SECTION: FEATURED SPREADS SHOWCASE -->
+    <!-- SECTION: FEATURED SPREADS SHOWCASE (TRANSPARENT 3D PORTRAIT CAROUSEL) -->
     <section id="spreads" class="section">
       <h2 class="section-title">Featured Editorial Spreads</h2>
-      <p class="section-subtitle">Exemplifying structured content layout across multi-page articles and technical briefings.</p>
+      <p class="section-subtitle">Browse through key publication spreads demonstrating editorial hierarchy, data sidebars, and visual pacing.</p>
 
-      <div class="grid-2">
-        <div>
-          <div class="media-placeholder">
-            <!-- SWAPPABLE SPREAD 1 IMAGE -->
-            <img 
-              src="Assets/IAEM/Vol42-No6-062025_03.webp" 
-              alt="IAEM Bulletin Editorial Spread 1" 
-              onerror="this.onerror=null; this.parentElement.innerHTML='[Editorial Spread 1 Image Placeholder - Assets/IAEM/spread-1.webp]';" 
-            />
+      <div class="portrait-carousel-wrapper">
+        <div class="portrait-carousel-stage">
+          
+          <!-- Nav Arrows -->
+          <button class="carousel-nav-arrow prev" onclick="navigateSpread(-1)" aria-label="Previous Spread">‹</button>
+          
+          <!-- 4 PORTRAIT SPREAD SLIDES (CONTROLLED BY JS) -->
+          <div class="portrait-slide" id="slide-0" onclick="goToSpread(0)">
+            <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Spread 1: Cover & Feature Lead" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;color:var(--text-muted);text-align:center;font-size:0.9rem;\'>[Spread 1 Placeholder - Assets/IAEM/spread-1.webp]</div>';" />
           </div>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; text-align: center;">Feature Article Layout & Multi-Column Structure</p>
+
+          <div class="portrait-slide" id="slide-1" onclick="goToSpread(1)">
+            <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Spread 2: Regional Technical Briefing" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;color:var(--text-muted);text-align:center;font-size:0.9rem;\'>[Spread 2 Placeholder - Assets/IAEM/spread-2.webp]</div>';" />
+          </div>
+
+          <div class="portrait-slide" id="slide-2" onclick="goToSpread(2)">
+            <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Spread 3: Emergency Protocol Layout" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;color:var(--text-muted);text-align:center;font-size:0.9rem;\'>[Spread 3 Placeholder - Assets/IAEM/spread-3.webp]</div>';" />
+          </div>
+
+          <div class="portrait-slide" id="slide-3" onclick="goToSpread(3)">
+            <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Spread 4: Association Data & Metrics" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;color:var(--text-muted);text-align:center;font-size:0.9rem;\'>[Spread 4 Placeholder - Assets/IAEM/spread-4.webp]</div>';" />
+          </div>
+
+          <button class="carousel-nav-arrow next" onclick="navigateSpread(1)" aria-label="Next Spread">›</button>
         </div>
 
-        <div>
-          <div class="media-placeholder">
-            <!-- SWAPPABLE SPREAD 2 IMAGE -->
-            <img 
-              src="Assets/IAEM/Vol42-No6-062025_03.webp" 
-              alt="IAEM Bulletin Editorial Spread 2" 
-              onerror="this.onerror=null; this.parentElement.innerHTML='[Editorial Spread 2 Image Placeholder - Assets/IAEM/spread-2.webp]';" 
-            />
-          </div>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; text-align: center;">Technical Data & Organizational Summary Pages</p>
-        </div>
+        <!-- Dynamic Caption -->
+        <p class="portrait-caption" id="spreadCaption">Loading spread...</p>
+
+        <!-- Dots Indicator -->
+        <div class="carousel-dots-container" id="spreadDotsContainer"></div>
       </div>
     </section>
 
@@ -658,8 +792,9 @@
     </div>
   </footer>
 
-  <!-- DYNAMIC NAV HEADER SCROLL SCRIPT -->
+  <!-- DYNAMIC JAVASCRIPT FOR HEADER SCROLL & 3D PORTRAIT SPREADS CAROUSEL -->
   <script>
+    // 1. DYNAMIC NAV HEADER SCROLL SCRIPT
     const header = document.getElementById('siteHeader');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
@@ -667,6 +802,80 @@
       } else {
         header.classList.remove('scrolled');
       }
+    });
+
+    // 2. 4 PORTRAIT SPREADS DATA (SWAP IMAGE PATHS & CAPTIONS HERE)
+    const iaemSpreads = [
+      {
+        title: "Spread 1: Publication Cover & Feature Lead Article",
+        src: "Assets/IAEM/Vol42-No6-062025_03.webp"
+      },
+      {
+        title: "Spread 2: Regional Technical Policy Briefing",
+        src: "Assets/IAEM/Vol42-No6-062025_03.webp"
+      },
+      {
+        title: "Spread 3: Emergency Protocol & Multi-Column Guide",
+        src: "Assets/IAEM/Vol42-No6-062025_03.webp"
+      },
+      {
+        title: "Spread 4: Association Data Tables & Metrics Summary",
+        src: "Assets/IAEM/Vol42-No6-062025_03.webp"
+      }
+    ];
+
+    let currentSpreadIndex = 0;
+
+    function updateSpreadCarousel() {
+      const total = iaemSpreads.length;
+      const caption = document.getElementById('spreadCaption');
+      const dotsContainer = document.getElementById('spreadDotsContainer');
+
+      // Update captions
+      caption.textContent = iaemSpreads[currentSpreadIndex].title;
+
+      // Assign position classes to all 4 slide DOM elements
+      for (let i = 0; i < total; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        if (!slide) continue;
+
+        // Reset classes
+        slide.className = 'portrait-slide';
+
+        if (i === currentSpreadIndex) {
+          slide.classList.add('active');
+        } else if (i === (currentSpreadIndex - 1 + total) % total) {
+          slide.classList.add('prev-slide');
+        } else if (i === (currentSpreadIndex + 1) % total) {
+          slide.classList.add('next-slide');
+        } else {
+          slide.classList.add('hidden-slide');
+        }
+      }
+
+      // Render glowing dots
+      dotsContainer.innerHTML = '';
+      iaemSpreads.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = `carousel-dot ${i === currentSpreadIndex ? 'active' : ''}`;
+        dot.onclick = () => goToSpread(i);
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function navigateSpread(direction) {
+      currentSpreadIndex = (currentSpreadIndex + direction + iaemSpreads.length) % iaemSpreads.length;
+      updateSpreadCarousel();
+    }
+
+    function goToSpread(index) {
+      currentSpreadIndex = index;
+      updateSpreadCarousel();
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      updateSpreadCarousel();
     });
   </script>
 
