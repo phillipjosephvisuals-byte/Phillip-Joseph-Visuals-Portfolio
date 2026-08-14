@@ -66,28 +66,11 @@
       z-index: 1;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
+    img, video { max-width: 100%; height: auto; display: block; border-radius: 8px; }
 
-    img, video {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
-    }
-
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .section {
-      padding: 4.5rem 0;
-      border-bottom: 1px solid var(--border-subtle);
-    }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: 4.5rem 0; border-bottom: 1px solid var(--border-subtle); }
 
     /* DYNAMIC TRANSPARENT HEADER (EARLY SCROLL TRANSITION) */
     .site-header {
@@ -110,14 +93,8 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 70px;
-    }
-
-    /* PJV LOGO - SEMIBOLD (600) */
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+    
     .brand {
       font-family: var(--font-heading);
       font-weight: 600;
@@ -127,30 +104,10 @@
       color: #ffffff;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links > li {
-      position: relative;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      padding: 0.5rem 0;
-    }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--text-main);
-    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color 0.2s ease; display: flex; align-items: center; gap: 0.3rem; padding: 0.5rem 0; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
 
     /* DROPDOWN SUB-MENU STYLES */
     .dropdown-menu {
@@ -190,27 +147,23 @@
       color: var(--accent);
     }
 
-    /* BASE HEADING SELECTOR */
-    h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
+    /* HEADINGS WITH ILLUMINATED GLOW */
+    h1, h2, h3, .brand, .hero-title, .section-title, .study-title {
       font-family: var(--font-heading);
       color: #ffffff;
-      text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.28),
-        0 0 20px rgba(255, 255, 255, 0.12);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.28), 0 0 20px rgba(255, 255, 255, 0.12);
     }
 
-    /* SUBPAGE HERO (COMPACT GRAPHITE SLATE GRADIENT) */
+    /* SUBPAGE HERO */
     .subpage-hero {
       padding: calc(70px + 3rem) 0 4rem 0;
       position: relative;
-      
       background: radial-gradient(
         ellipse 90% 70% at 50% 30%, 
         #141d2b 0%, 
         #0c121d 55%, 
         #05070a 100%
       );
-      
       margin-left: calc(-50vw + 50%);
       margin-right: calc(-50vw + 50%);
       padding-left: calc(50vw - 50%);
@@ -243,19 +196,6 @@
       z-index: 2;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    @media (min-width: 850px) {
-      .hero-grid {
-        grid-template-columns: 1.1fr 0.9fr;
-      }
-    }
-
     .hero-status-tag {
       display: inline-flex;
       align-items: center;
@@ -279,7 +219,6 @@
       box-shadow: 0 0 8px var(--accent);
     }
 
-    /* 1. HERO TITLE - BOLD (700) */
     .hero-title {
       font-size: clamp(2.1rem, 4vw, 3.2rem);
       font-weight: 700;
@@ -291,41 +230,10 @@
     .hero-bio {
       color: var(--text-muted);
       font-size: 1.075rem;
+      max-width: 750px;
       line-height: 1.7;
-      margin-bottom: 1.75rem;
-      max-width: 580px;
-      text-align: justify;
-      text-justify: inter-word;
     }
 
-    /* HERO PREVIEW FRAME */
-    .hero-media-frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      margin-left: auto;
-      margin-right: 0;
-      border-radius: 16px;
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      overflow: hidden;
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .hero-media-frame:hover {
-      border-color: var(--accent);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 225, 255, 0.3);
-    }
-
-    .hero-media-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* META PILLS GRID */
     .meta-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -337,51 +245,16 @@
       margin-top: 3.5rem;
     }
 
-    .meta-item h4 {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.25rem;
-    }
+    .meta-item h4 { font-size: 0.8rem; text-transform: uppercase; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 0.25rem; font-weight: 600; }
+    .meta-item p { font-size: 0.95rem; color: var(--text-main); font-weight: 500; }
 
-    .meta-item p {
-      font-size: 0.95rem;
-      color: var(--text-main);
-      font-weight: 500;
-    }
+    .section-title { font-size: 1.75rem; font-weight: 600; margin-bottom: 1rem; }
+    .section-subtitle { color: var(--text-muted); font-size: 1.05rem; max-width: 750px; margin-bottom: 2.5rem; }
 
-    /* 2. SECTION TITLE - SEMIBOLD (600) */
-    .section-title {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      letter-spacing: -0.01em;
-    }
-
-    .section-subtitle {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      max-width: 750px;
-      margin-bottom: 2.5rem;
-    }
-
-    /* CONTENT CARDS & GRIDS */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    @media (min-width: 768px) {
-      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (min-width: 768px) { 
+      .grid-2 { grid-template-columns: repeat(2, 1fr); } 
       .grid-3 { grid-template-columns: repeat(3, 1fr); }
     }
 
@@ -401,34 +274,44 @@
       box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 225, 255, 0.25);
     }
 
-    /* 3. CARD TITLES - MEDIUM (500) */
-    .card h3 {
-      font-size: 1.35rem;
-      font-weight: 500;
-      margin-bottom: 0.75rem;
-      color: var(--text-main);
+    .card h3 { font-size: 1.35rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--text-main); }
+    .card p, .card ul { color: var(--text-muted); font-size: 0.975rem; line-height: 1.65; }
+    .card ul { list-style-type: disc; padding-left: 1.25rem; margin-top: 0.5rem; }
+
+    /* --- HORIZONTAL STACKED STUDY CARDS FOR PRESENTATIONS --- */
+    .studies-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
 
-    .card p, .card ul {
-      color: var(--text-muted);
-      font-size: 0.975rem;
-      line-height: 1.65;
-      text-align: justify;
-      text-justify: inter-word;
+    .study-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      cursor: pointer;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4);
     }
 
-    .card ul {
-      list-style-type: disc;
-      padding-left: 1.25rem;
-      margin-top: 0.5rem;
+    @media (min-width: 768px) {
+      .study-card {
+        grid-template-columns: 1.2fr 2fr;
+        align-items: center;
+      }
     }
 
-    .card ul li {
-      margin-bottom: 0.5rem;
+    .study-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6), 0 0 18px rgba(56, 225, 255, 0.28);
     }
 
-    /* MEDIA PLACEHOLDERS */
-    .media-placeholder {
+    .study-media-placeholder {
       background-color: var(--bg-base);
       border: 1px solid var(--border-subtle);
       aspect-ratio: 16 / 9;
@@ -437,37 +320,167 @@
       align-items: center;
       justify-content: center;
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      text-align: center;
       overflow: hidden;
-      position: relative;
-      margin-top: 1.25rem;
     }
 
-    .media-placeholder img {
+    .study-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .study-title {
+      font-size: 1.35rem;
+      font-weight: 500;
+    }
+
+    .study-blurb {
+      color: var(--text-muted);
+      font-size: 0.975rem;
+      line-height: 1.65;
+    }
+
+    .click-hint {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* --- THEATER MODE SLIDESHOW MODAL --- */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(2, 3, 5, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 2rem;
+      right: 2.5rem;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.3);
+      transition: transform 0.2s ease, text-shadow 0.2s ease;
+      z-index: 1010;
+    }
+
+    .modal-close-btn:hover {
+      transform: scale(1.15);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.6);
+    }
+
+    .modal-stage {
+      position: relative;
+      width: 90%;
+      max-width: 1000px;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-slide-container {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .media-placeholder:hover img {
-      transform: scale(1.02);
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 20, 29, 0.8);
+      border: 1px solid var(--border-subtle);
+      color: #ffffff;
+      font-size: 1.5rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      z-index: 1005;
     }
 
-    /* FOOTER */
-    .site-footer {
-      padding: 3rem 0;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      text-align: center;
-      border-top: 1px solid var(--border-subtle);
+    .nav-arrow:hover {
+      background: var(--bg-surface-hover);
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(56, 225, 255, 0.5);
     }
+
+    .nav-arrow.prev { left: -70px; }
+    .nav-arrow.next { right: -70px; }
+
+    @media (max-width: 1150px) {
+      .nav-arrow.prev { left: 10px; }
+      .nav-arrow.next { right: 10px; }
+    }
+
+    /* GLOWING WHITE DOT INDICATORS */
+    .dots-container {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.75rem;
+      z-index: 1005;
+      max-width: 80%;
+      overflow-x: auto;
+      padding: 0.5rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .dot.active {
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 18px rgba(255, 255, 255, 0.5);
+      transform: scale(1.2);
+    }
+
+    .site-footer { padding: 3rem 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--border-subtle); }
   </style>
 </head>
 <body>
 
-  <!-- SITE HEADER (TRANSPARENT AT REST, BACKLIT IMMEDIATELY UPON SCROLLING) -->
+  <!-- SITE HEADER -->
   <header class="site-header" id="siteHeader">
     <div class="container nav-inner">
       <a href="index.html" class="brand">PJV</a>
@@ -476,12 +489,11 @@
           <li><a href="index.html">← Back to Portfolio</a></li>
           
           <li class="dropdown">
-            <a href="#overview" class="active">Portfolio ▾</a>
+            <a href="index.html#media" class="active">Portfolio ▾</a>
             <ul class="dropdown-menu">
-              <li><a href="#overview">Overview</a></li>
-              <li><a href="#architecture">Slide Architecture</a></li>
-              <li><a href="#showcase">Deck Showcase</a></li>
-              <li><a href="#impact">Strategic Impact</a></li>
+              <li><a href="presentations-case-study.html">Presentations</a></li>
+              <li><a href="corporate-video-case-study.html">Videography</a></li>
+              <li><a href="photography-case-study.html">Photography</a></li>
             </ul>
           </li>
 
@@ -491,39 +503,17 @@
     </div>
   </header>
 
-  <!-- SUBPAGE HERO SECTION -->
+  <!-- HERO SECTION -->
   <section id="overview" class="subpage-hero">
     <div class="hero-inner-container">
-      <div class="hero-grid">
-        
-        <!-- LEFT: CASE STUDY HEADER & BIO -->
-        <div>
-          <h1 class="hero-title">Presentations: Executive Decks & Strategic Pitch Frameworks</h1>
-          
-          <p class="hero-bio">
-            Designing grid-aligned presentation architectures that distill complex business plans, financial models, and strategic roadmaps into clear, high-impact executive narratives.
-          </p>
-
-          <div class="hero-status-tag">
-            <span class="status-dot"></span> Executive Communication & Visual Design
-          </div>
-        </div>
-
-        <!-- RIGHT: SWAPPABLE HERO PREVIEW FRAME -->
-        <div>
-          <div class="hero-media-frame">
-            <!-- SWAPPABLE HERO PREVIEW IMAGE -->
-            <img 
-              src="Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp" 
-              alt="Intelligent Forecasting Presentation Deck Preview" 
-              onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;\'>Presentation Deck Hero Preview</div>';" 
-            />
-          </div>
-        </div>
-
+      <div class="hero-status-tag">
+        <span class="status-dot"></span> Media & Art Direction
       </div>
+      <h1 class="hero-title">Presentations: Executive Decks & Strategic Pitch Frameworks</h1>
+      <p class="hero-bio">
+        Designing grid-aligned presentation architectures that distill complex business plans, financial models, and strategic roadmaps into clear, high-impact executive narratives.
+      </p>
 
-      <!-- PROJECT META GRID -->
       <div class="meta-grid">
         <div class="meta-item">
           <h4>Scope</h4>
@@ -546,7 +536,7 @@
   </section>
 
   <main class="container">
-
+    
     <!-- CHALLENGE & SOLUTION -->
     <section class="section">
       <h2 class="section-title">The Challenge vs. The Structural Approach</h2>
@@ -600,57 +590,63 @@
       </div>
     </section>
 
-    <!-- SECTION: DECK SHOWCASE -->
-    <section id="showcase" class="section">
-      <h2 class="section-title">Selected Deck Spreads</h2>
-      <p class="section-subtitle">Representative slide layouts showcasing information structure and visual discipline.</p>
+    <!-- SELECTED STACKED PRESENTATION DECKS -->
+    <section id="studies" class="section">
+      <h2 class="section-title">Selected Presentation Decks</h2>
+      <p class="section-subtitle">Click any study below to launch the interactive slide deck gallery.</p>
 
-      <div class="grid-2">
-        <div>
-          <div class="media-placeholder">
-            <!-- SWAPPABLE SLIDE 1 -->
-            <img 
-              src="Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp" 
-              alt="Strategic Forecasting Slide Layout" 
-              onerror="this.onerror=null; this.parentElement.innerHTML='[Slide 1 Placeholder - Assets/Presentations/slide-1.webp]';" 
-            />
+      <div class="studies-stack">
+        
+        <!-- STUDY 0 -->
+        <article class="study-card" onclick="openSlideshow(0)">
+          <div class="study-media-placeholder">
+            <!-- Thumbnail populates via JS -->
           </div>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; text-align: center;">Executive Summary & Market Opportunity Layout</p>
-        </div>
-
-        <div>
-          <div class="media-placeholder">
-            <!-- SWAPPABLE SLIDE 2 -->
-            <img 
-              src="Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp" 
-              alt="Financial Modeling Slide Layout" 
-              onerror="this.onerror=null; this.parentElement.innerHTML='[Slide 2 Placeholder - Assets/Presentations/slide-2.webp]';" 
-            />
+          <div class="study-content">
+            <h3 class="study-title">1. Intelligent Forecasting & Strategic Models</h3>
+            <p class="study-blurb">
+              An executive-level presentation deck demonstrating predictive financial forecasting, user acquisition metrics, and data-driven product roadmaps.
+            </p>
+            <span class="click-hint">Launch Slide Deck Gallery (8 Slides) →</span>
           </div>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; text-align: center;">Data Architecture & Metric Breakdown Slide</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION: IMPACT -->
-    <section id="impact" class="section">
-      <h2 class="section-title">Strategic Impact</h2>
-      <p class="section-subtitle">Delivering clarity, alignment, and executive buy-in across high-stakes business initiatives.</p>
-
-      <div class="grid-2">
-        <article class="card">
-          <h3>Clarity & Alignment</h3>
-          <p>Streamlined slide structures enabled executive stakeholders to grasp complex multi-phased project roadmaps and budget allocations within minutes.</p>
         </article>
 
-        <article class="card">
-          <h3>Repeatable System</h3>
-          <p>Standardized master component systems allowed internal teams to construct polished, on-brand decks with zero layout friction.</p>
+        <!-- STUDY 1 -->
+        <article class="study-card" onclick="openSlideshow(1)">
+          <div class="study-media-placeholder">
+            <!-- Thumbnail populates via JS -->
+          </div>
+          <div class="study-content">
+            <h3 class="study-title">2. Design Systems & Scale</h3>
+            <p class="study-blurb">
+              A comprehensive briefing deck outlining component architecture, tokenized styling, and cross-platform design system adoption strategies.
+            </p>
+            <span class="click-hint">Launch Slide Deck Gallery (12 Slides) →</span>
+          </div>
         </article>
+
       </div>
     </section>
 
   </main>
+
+  <!-- THEATER MODE SLIDESHOW MODAL -->
+  <div id="slideshowModal" class="modal-overlay">
+    <button class="modal-close-btn" onclick="closeSlideshow()" aria-label="Close Theater Mode">✕</button>
+    
+    <div class="modal-stage">
+      <button class="nav-arrow prev" onclick="navigateSlide(-1)">‹</button>
+      
+      <div class="modal-slide-container" id="slideStage">
+        <!-- Slide image renders dynamically via JavaScript -->
+      </div>
+      
+      <button class="nav-arrow next" onclick="navigateSlide(1)">›</button>
+    </div>
+
+    <!-- Glowing White Slide Indicators -->
+    <div class="dots-container" id="dotsContainer"></div>
+  </div>
 
   <footer class="site-footer">
     <div class="container">
@@ -658,7 +654,7 @@
     </div>
   </footer>
 
-  <!-- DYNAMIC NAV HEADER SCROLL SCRIPT -->
+  <!-- SCRIPT -->
   <script>
     const header = document.getElementById('siteHeader');
     window.addEventListener('scroll', () => {
@@ -667,6 +663,114 @@
       } else {
         header.classList.remove('scrolled');
       }
+    });
+
+    const galleryData = [
+      {
+        title: "Intelligent Forecasting & Strategic Models",
+        coverImage: "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+        slides: [
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp"
+        ]
+      },
+      {
+        title: "Design Systems & Scale",
+        coverImage: "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+        slides: [
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp",
+          "Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp"
+        ]
+      }
+    ];
+
+    let currentStudyIndex = 0;
+    let currentSlideIndex = 0;
+
+    function openSlideshow(studyIndex) {
+      currentStudyIndex = studyIndex;
+      currentSlideIndex = 0;
+      updateSlideshow();
+      document.getElementById('slideshowModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSlideshow() {
+      document.getElementById('slideshowModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function navigateSlide(direction) {
+      const slides = galleryData[currentStudyIndex].slides;
+      currentSlideIndex = (currentSlideIndex + direction + slides.length) % slides.length;
+      updateSlideshow();
+    }
+
+    function goToSlide(index) {
+      currentSlideIndex = index;
+      updateSlideshow();
+    }
+
+    function updateSlideshow() {
+      const study = galleryData[currentStudyIndex];
+      const stage = document.getElementById('slideStage');
+      const dotsContainer = document.getElementById('dotsContainer');
+
+      const currentImageSrc = study.slides[currentSlideIndex];
+      stage.innerHTML = `
+        <img 
+          src="${currentImageSrc}" 
+          alt="${study.title} - Slide ${currentSlideIndex + 1}" 
+          style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);" 
+        />
+      `;
+
+      dotsContainer.innerHTML = '';
+      study.slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = `dot ${i === currentSlideIndex ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.study-card');
+      galleryData.forEach((item, index) => {
+        if (cards[index]) {
+          const placeholder = cards[index].querySelector('.study-media-placeholder');
+          placeholder.innerHTML = `<img src="${item.coverImage}" alt="${item.title} Cover" style="width:100%; height:100%; object-fit:cover; border-radius:8px;" />`;
+        }
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('slideshowModal');
+      if (!modal.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') closeSlideshow();
+      if (e.key === 'ArrowRight') navigateSlide(1);
+      if (e.key === 'ArrowLeft') navigateSlide(-1);
+    });
+
+    document.getElementById('slideshowModal').addEventListener('click', (e) => {
+      if (e.target.id === 'slideshowModal') closeSlideshow();
     });
   </script>
 
