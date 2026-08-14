@@ -476,10 +476,9 @@
        ========================================================================== */
     @media (max-width: 768px) {
       .section {
-        padding: 3.5rem 0; /* Breathing room between sections */
+        padding: 3.5rem 0;
       }
 
-      /* Center-align all headings and intro texts on mobile */
       .hero-title,
       .section-title,
       .section-subtitle,
@@ -587,7 +586,7 @@
 
   <main class="container">
     
-    <!-- SELECTED STACKED PRESENTATION DECKS -->
+    <!-- 1. SELECTED STACKED PRESENTATION DECKS (NOW ON TOP) -->
     <section id="studies" class="section">
       <h2 class="section-title">Selected Presentation Decks</h2>
       <p class="section-subtitle">Click any study below to launch the interactive slide deck gallery.</p>
@@ -647,6 +646,36 @@
       </div>
     </section>
 
+    <!-- 2. CHALLENGE & SOLUTION (NOW BELOW PRESENTATIONS) -->
+    <section class="section">
+      <h2 class="section-title">The Challenge vs. The Structural Approach</h2>
+      <p class="section-subtitle">Traditional corporate slide decks often suffer from cognitive overload, text density, and inconsistent visual layouts.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3 style="color: #f87171;">The Challenge (Cognitive Overload)</h3>
+          <p>Conventional presentation design frequently creates friction for leadership teams:</p>
+          <ul>
+            <li>Wall-to-wall bullet points masking key takeaways and financial metrics.</li>
+            <li>Inconsistent grid alignments causing visual distraction between slides.</li>
+            <li>Lack of narrative pacing leading to audience disengagement.</li>
+            <li>Generic templates that fail to reinforce brand authority.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 style="color: var(--accent);">The Structural Approach</h3>
+          <p>Engineering presentation decks around executive comprehension:</p>
+          <ul>
+            <li><strong>Headline-Driven Takeaways:</strong> Every slide features a clear assertive statement rather than a generic topic header.</li>
+            <li><strong>Modular 16:9 Grid Layouts:</strong> Clean spatial alignment separating data charts, key metrics, and qualitative highlights.</li>
+            <li><strong>Pacing & Hierarchy:</strong> Strategic use of focal contrast, whitespace, and visual anchors to guide audience attention.</li>
+            <li><strong>Reusable Component Kits:</strong> Master template libraries enabling rapid iteration across product, finance, and strategy teams.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
   </main>
 
   <!-- THEATER MODE SLIDESHOW MODAL -->
@@ -672,38 +701,6 @@
       <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
     </div>
   </footer>
-
-  
-    <!-- CHALLENGE & SOLUTION -->
-    <section class="section">
-      <h2 class="section-title">The Challenge vs. The Structural Approach</h2>
-      <p class="section-subtitle">Traditional corporate slide decks often suffer from cognitive overload, text density, and inconsistent visual layouts.</p>
-
-      <div class="grid-2">
-        <article class="card">
-          <h3 style="color: var(--accent);">The Challenge (Cognitive Overload)</h3>
-          <p>Conventional presentation design frequently creates friction for leadership teams:</p>
-          <ul>
-            <li>Wall-to-wall bullet points masking key takeaways and financial metrics.</li>
-            <li>Inconsistent grid alignments causing visual distraction between slides.</li>
-            <li>Lack of narrative pacing leading to audience disengagement.</li>
-            <li>Generic templates that fail to reinforce brand authority.</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3 style="color: #ffffff;">The Structural Approach</h3>
-          <p>Engineering presentation decks around executive comprehension:</p>
-          <ul>
-            <li><strong>Headline-Driven Takeaways:</strong> Every slide features a clear assertive statement rather than a generic topic header.</li>
-            <li><strong>Modular 16:9 Grid Layouts:</strong> Clean spatial alignment separating data charts, key metrics, and qualitative highlights.</li>
-            <li><strong>Pacing & Hierarchy:</strong> Strategic use of focal contrast, whitespace, and visual anchors to guide audience attention.</li>
-            <li><strong>Reusable Component Kits:</strong> Master template libraries enabling rapid iteration across product, finance, and strategy teams.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
 
   <!-- JAVASCRIPT -->
   <script>
@@ -733,15 +730,15 @@
       },
       {
         title: "Q4 Financial Results",
-        coverImage: "Assets/Q4_FinancialResults_0001.png",
+        coverImage: "Assets/Q4FinancialResults_0001.png",
         slides: [
-          "Assets/Q4_FinancialResults_0001.png",
-          "Assets/Q4_FinancialResults_0002.png",
-          "Assets/Q4_FinancialResults_0003.png",
-          "Assets/Q4_FinancialResults_0004.png",
-          "Assets/Q4_FinancialResults_0005.png",
-          "Assets/Q4_FinancialResults_0006.png",
-          "Assets/Q4_FinancialResults_0007.png"
+          "Assets/Q4FinancialResults_0001.png",
+          "Assets/Q4FinancialResults_0002.png",
+          "Assets/Q4FinancialResults_0003.png",
+          "Assets/Q4FinancialResults_0004.png",
+          "Assets/Q4FinancialResults_0005.png",
+          "Assets/Q4FinancialResults_0006.png",
+          "Assets/Q4FinancialResults_0007.png"
         ]
       },
       {
@@ -772,16 +769,6 @@
           "Assets/Cloud_Migration/NebulaCore-Oral-Proposal-Presentation.022.png"
         ]
       }
-      /* ADD 4TH PRESENTATION OBJECT HERE:
-      ,{
-        title: "Your 4th Title",
-        coverImage: "Assets/Folder/slide1.png",
-        slides: [
-          "Assets/Folder/slide1.png",
-          "Assets/Folder/slide2.png"
-        ]
-      }
-      */
     ];
 
     let currentStudyIndex = 0;
