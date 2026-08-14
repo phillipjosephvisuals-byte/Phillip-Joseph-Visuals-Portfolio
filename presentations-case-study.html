@@ -475,6 +475,37 @@
        MOBILE RESPONSIVE & BREATHING ROOM OPTIMIZATIONS
        ========================================================================== */
     @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      /* Clean, compact header navigation for mobile */
+      .nav-inner {
+        height: 60px;
+      }
+
+      .brand {
+        font-size: 1.15rem;
+      }
+
+      .nav-links {
+        gap: 0.85rem;
+      }
+
+      .nav-links a {
+        font-size: 0.825rem;
+        padding: 0.35rem 0;
+      }
+
+      .dropdown-menu {
+        min-width: 180px;
+      }
+
+      .dropdown-menu li a {
+        padding: 0.5rem 1rem;
+        font-size: 0.825rem;
+      }
+
       .section {
         padding: 3.5rem 0;
       }
@@ -541,8 +572,8 @@
               <li><a href="iaem-bulletin-case-study.html">IAEM</a></li>
               <li><a href="k12-insight-illustration-project-case-study.html">K12 Insight</a></li>
               <li><a href="presentations-case-study.html" class="active">Presentations</a></li>
-              <li><a href="photography-case-study.html">Photography</a></li>
               <li><a href="videography.html">Videography</a></li>
+              <li><a href="photography-case-study.html">Photography</a></li>
             </ul>
           </li>
           <li><a href="Resume.html">Resume</a></li>
@@ -586,7 +617,7 @@
 
   <main class="container">
     
-    <!-- 1. SELECTED STACKED PRESENTATION DECKS (NOW ON TOP) -->
+    <!-- 1. SELECTED STACKED PRESENTATION DECKS -->
     <section id="studies" class="section">
       <h2 class="section-title">Selected Presentation Decks</h2>
       <p class="section-subtitle">Click any study below to launch the interactive slide deck gallery.</p>
@@ -635,25 +666,17 @@
           </div>
         </article>
 
-        <!-- ==============================================================
-             HOW TO ADD A 4TH CARD IN THE FUTURE:
-             1. Copy/paste the block above right here.
-             2. Change onclick="openSlideshow(2)" to onclick="openSlideshow(3)".
-             3. Update the title, description, and slide count.
-             4. Add the 4th presentation object to the galleryData array in JS.
-             ============================================================== -->
-
       </div>
     </section>
 
-    <!-- 2. CHALLENGE & SOLUTION (NOW BELOW PRESENTATIONS) -->
+    <!-- 2. CHALLENGE & SOLUTION -->
     <section class="section">
       <h2 class="section-title">The Challenge vs. The Structural Approach</h2>
       <p class="section-subtitle">Traditional corporate slide decks often suffer from cognitive overload, text density, and inconsistent visual layouts.</p>
 
       <div class="grid-2">
         <article class="card">
-          <h3 style="color: #f87171;">The Challenge (Cognitive Overload)</h3>
+          <h3 style="color: var(--accent);">The Challenge (Cognitive Overload)</h3>
           <p>Conventional presentation design frequently creates friction for leadership teams:</p>
           <ul>
             <li>Wall-to-wall bullet points masking key takeaways and financial metrics.</li>
@@ -664,7 +687,7 @@
         </article>
 
         <article class="card">
-          <h3 style="color: var(--accent);">The Structural Approach</h3>
+          <h3 style="color: #ffffff;">The Structural Approach</h3>
           <p>Engineering presentation decks around executive comprehension:</p>
           <ul>
             <li><strong>Headline-Driven Takeaways:</strong> Every slide features a clear assertive statement rather than a generic topic header.</li>
