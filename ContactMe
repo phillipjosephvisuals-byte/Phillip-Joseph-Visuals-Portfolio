@@ -6,7 +6,6 @@
   <title>Contact | Phillip Joseph Villarreal</title>
   
   <style>
-    /* IMPORT INTER FROM GOOGLE FONTS CDN (WEIGHTS 100 THROUGH 900) */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
     :root {
@@ -22,15 +21,8 @@
       --max-width: 1120px;
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
       background-color: var(--bg-base);
@@ -42,388 +34,127 @@
       min-height: 100vh;
     }
 
-    /* MULTIPLY VIGNETTE OVERLAY */
     body::before {
       content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(
-        circle at 50% 30%, 
-        rgba(20, 27, 41, 0.45) 0%, 
-        rgba(5, 7, 10, 0.85) 65%, 
-        rgba(2, 3, 5, 0.98) 100%
-      );
-      mix-blend-mode: multiply;
-      pointer-events: none;
-      z-index: 0;
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: radial-gradient(circle at 50% 30%, rgba(20, 27, 41, 0.45) 0%, rgba(5, 7, 10, 0.85) 65%, rgba(2, 3, 5, 0.98) 100%);
+      mix-blend-mode: multiply; pointer-events: none; z-index: 0;
     }
 
-    .site-header, main, .site-footer {
-      position: relative;
-      z-index: 1;
-    }
+    .site-header, main, .site-footer { position: relative; z-index: 1; }
+    a { color: inherit; text-decoration: none; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: 4.5rem 0; }
 
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .section {
-      padding: 4.5rem 0;
-    }
-
-    /* DYNAMIC TRANSPARENT HEADER (EARLY SCROLL TRANSITION) */
     .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      background-color: transparent;
-      backdrop-filter: blur(0px);
-      -webkit-backdrop-filter: blur(0px);
-      border-bottom: 1px solid transparent;
-      transition: background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      background-color: transparent; backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px);
+      border-bottom: 1px solid transparent; transition: background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
     }
-
     .site-header.scrolled {
-      background-color: rgba(5, 7, 10, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-subtle);
+      background-color: rgba(5, 7, 10, 0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-subtle);
     }
 
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 70px;
-    }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+    .brand { font-family: var(--font-heading); font-weight: 600; font-size: 1.35rem; letter-spacing: -0.02em; text-shadow: 0 0 10px rgba(255, 255, 255, 0.28); color: #ffffff; }
 
-    /* PJV LOGO - SEMIBOLD (600) */
-    .brand {
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: 1.35rem;
-      letter-spacing: -0.02em;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
-      color: #ffffff;
-    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color 0.2s ease; display: flex; align-items: center; gap: 0.3rem; padding: 0.5rem 0; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links > li {
-      position: relative;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      padding: 0.5rem 0;
-    }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--text-main);
-    }
-
-    /* DROPDOWN SUB-MENU STYLES */
     .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      min-width: 230px;
-      background-color: rgba(15, 20, 29, 0.95);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 0.6rem 0;
-      list-style: none;
+      position: absolute; top: 100%; left: 0; min-width: 230px;
+      background-color: rgba(15, 20, 29, 0.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.6rem 0; list-style: none;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(56, 225, 255, 0.1);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(10px);
-      transition: all 0.25s ease;
+      opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.25s ease;
     }
+    .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-menu li a { padding: 0.6rem 1.25rem; font-size: 0.9rem; color: var(--text-muted); transition: background-color 0.2s ease, color 0.2s ease; }
+    .dropdown-menu li a:hover { background-color: var(--bg-surface-hover); color: var(--accent); }
 
-    .dropdown:hover .dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .dropdown-menu li a {
-      padding: 0.6rem 1.25rem;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      transition: background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .dropdown-menu li a:hover {
-      background-color: var(--bg-surface-hover);
-      color: var(--accent);
-    }
-
-    /* HEADINGS & BACKLIT GLOW */
     h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
-      font-family: var(--font-heading);
-      color: #ffffff;
-      text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.28),
-        0 0 20px rgba(255, 255, 255, 0.12);
+      font-family: var(--font-heading); color: #ffffff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.28), 0 0 20px rgba(255, 255, 255, 0.12);
     }
 
-    /* SUBPAGE HERO */
     .subpage-hero {
-      padding: calc(70px + 3rem) 0 3.5rem 0;
-      position: relative;
-      
-      background: radial-gradient(
-        ellipse 90% 70% at 50% 30%, 
-        #141d2b 0%, 
-        #0c121d 55%, 
-        #05070a 100%
-      );
-      
-      margin-left: calc(-50vw + 50%);
-      margin-right: calc(-50vw + 50%);
-      padding-left: calc(50vw - 50%);
-      padding-right: calc(50vw - 50%);
-      border-bottom: 1px solid var(--border-subtle);
+      padding: calc(70px + 3rem) 0 3.5rem 0; position: relative;
+      background: radial-gradient(ellipse 90% 70% at 50% 30%, #141d2b 0%, #0c121d 55%, #05070a 100%);
+      margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%);
+      padding-left: calc(50vw - 50%); padding-right: calc(50vw - 50%); border-bottom: 1px solid var(--border-subtle);
     }
-
     .subpage-hero::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      background: linear-gradient(
-        to bottom, 
-        rgba(5, 7, 10, 0) 0%, 
-        rgba(5, 7, 10, 0.8) 70%, 
-        #05070a 100%
-      );
-      pointer-events: none;
+      content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 100px;
+      background: linear-gradient(to bottom, rgba(5, 7, 10, 0) 0%, rgba(5, 7, 10, 0.8) 70%, #05070a 100%); pointer-events: none;
     }
 
-    .hero-inner-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      width: 100%;
-      position: relative;
-      z-index: 2;
-    }
-
+    .hero-inner-container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; width: 100%; position: relative; z-index: 2; }
     .hero-status-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background-color: rgba(56, 225, 255, 0.08);
-      border: 1px solid rgba(56, 225, 255, 0.25);
-      color: var(--accent);
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 0.35rem 0.85rem;
-      border-radius: 20px;
-      margin-bottom: 1.25rem;
-      width: fit-content;
+      display: inline-flex; align-items: center; gap: 0.5rem; background-color: rgba(56, 225, 255, 0.08);
+      border: 1px solid rgba(56, 225, 255, 0.25); color: var(--accent); font-size: 0.85rem; font-weight: 600;
+      padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 1.25rem; width: fit-content;
     }
+    .status-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); }
 
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent);
-    }
+    .hero-title { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+    .hero-bio { color: var(--text-muted); font-size: 1.075rem; line-height: 1.7; max-width: 620px; }
 
-    .hero-title {
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.25rem;
-    }
-
-    .hero-bio {
-      color: var(--text-muted);
-      font-size: 1.075rem;
-      line-height: 1.7;
-      max-width: 620px;
-    }
-
-    /* CONTACT LAYOUT GRID */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-      margin-top: 1rem;
-    }
-
-    @media (min-width: 850px) {
-      .contact-grid {
-        grid-template-columns: 1fr 1.3fr;
-      }
-    }
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-top: 1rem; }
+    @media (min-width: 850px) { .contact-grid { grid-template-columns: 1fr 1.3fr; } }
 
     .card {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 2.5rem;
-      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4);
+      background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 2.5rem; box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4);
     }
+    .card h3 { font-size: 1.35rem; font-weight: 500; margin-bottom: 1rem; }
 
-    .card h3 {
-      font-size: 1.35rem;
-      font-weight: 500;
-      margin-bottom: 1rem;
-    }
+    .info-list { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.5rem; }
+    .info-item h4 { font-size: 0.8rem; text-transform: uppercase; color: var(--accent); font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.35rem; }
+    .info-item p, .info-item a { color: var(--text-main); font-size: 1rem; font-weight: 500; transition: color 0.2s ease; }
+    .info-item a:hover { color: var(--accent); }
 
-    .info-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .info-item h4 {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.35rem;
-    }
-
-    .info-item p, .info-item a {
-      color: var(--text-main);
-      font-size: 1rem;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
-
-    .info-item a:hover {
-      color: var(--accent);
-    }
-
-    /* CONTACT FORM STYLING */
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
     .form-control {
-      width: 100%;
-      background-color: var(--bg-base);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 0.85rem 1rem;
-      color: var(--text-main);
-      font-family: var(--font-body);
-      font-size: 1rem;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      outline: none;
+      width: 100%; background-color: var(--bg-base); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.85rem 1rem;
+      color: var(--text-main); font-family: var(--font-body); font-size: 1rem; transition: border-color 0.2s ease, box-shadow 0.2s ease; outline: none;
     }
-
-    .form-control:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 12px rgba(56, 225, 255, 0.25);
-    }
-
-    textarea.form-control {
-      min-height: 140px;
-      resize: vertical;
-    }
+    .form-control:focus { border-color: var(--accent); box-shadow: 0 0 12px rgba(56, 225, 255, 0.25); }
+    textarea.form-control { min-height: 140px; resize: vertical; }
 
     .btn-submit {
-      width: 100%;
-      background-color: var(--text-main);
-      color: var(--bg-base);
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1rem;
-      padding: 0.95rem 1.75rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+      width: 100%; background-color: var(--text-main); color: var(--bg-base); font-family: var(--font-heading); font-weight: 700;
+      font-size: 1rem; padding: 0.95rem 1.75rem; border: none; border-radius: 8px; cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 0 22px rgba(255, 255, 255, 0.4); background-color: #ffffff; }
 
-    .btn-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 22px rgba(255, 255, 255, 0.4);
-      background-color: #ffffff;
-    }
-
-    /* FOOTER */
-    .site-footer {
-      padding: 3rem 0;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      text-align: center;
-      border-top: 1px solid var(--border-subtle);
-    }
+    .site-footer { padding: 3rem 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--border-subtle); }
   </style>
 </head>
 <body>
 
-  <!-- SITE HEADER (TRANSPARENT AT REST, BACKLIT IMMEDIATELY UPON SCROLLING) -->
   <header class="site-header" id="siteHeader">
     <div class="container nav-inner">
       <a href="index.html" class="brand">PJV</a>
       <nav>
         <ul class="nav-links">
           <li><a href="index.html">← Back to Portfolio</a></li>
-          
           <li class="dropdown">
-            <a href="index.html#scribe85">Portfolio ▾</a>
+            <a href="index.html#corporate">Portfolio ▾</a>
             <ul class="dropdown-menu">
               <li><a href="scribe85-case-study.html">scribe85</a></li>
               <li><a href="iaem-bulletin-case-study.html">Corporate Communication</a></li>
-              <li><a href="presentations-case-study.html">Media & Art Direction</a></li>
+              <li><a href="k12-insight-illustration-project-case-study.html">K12 Insight</a></li>
             </ul>
           </li>
-
           <li><a href="ContactMe.html" class="active">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- SUBPAGE HERO SECTION -->
   <section class="subpage-hero">
     <div class="hero-inner-container">
       <div class="hero-status-tag">
@@ -437,90 +168,53 @@
   </section>
 
   <main class="container section">
-    
     <div class="contact-grid">
-      
-      <!-- LEFT: CONTACT INFORMATION & AVAILABILITY -->
       <aside class="card">
         <h3>Contact Channels</h3>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">
-          Direct communication channels and professional profiles.
-        </p>
-
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Direct communication channels and professional profiles.</p>
         <ul class="info-list">
-          <li class="info-item">
-            <h4>Location</h4>
-            <p>United States (Open to Remote & Hybrid)</p>
-          </li>
-          
-          <li class="info-item">
-            <h4>Email</h4>
-            <p><a href="mailto:phillip@example.com">phillip@example.com</a></p>
-          </li>
-
-          <li class="info-item">
-            <h4>Professional Focus</h4>
-            <p>UX / Product Design & Front-End Engineering</p>
-          </li>
-
-          <li class="info-item">
-            <h4>Profiles</h4>
-            <p><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a> &nbsp;•&nbsp; <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub ↗</a></p>
-          </li>
+          <li class="info-item"><h4>Location</h4><p>United States (Open to Remote & Hybrid)</p></li>
+          <li class="info-item"><h4>Email</h4><p><a href="mailto:phillip@example.com">phillip@example.com</a></p></li>
+          <li class="info-item"><h4>Professional Focus</h4><p>UX / Product Design & Front-End Engineering</p></li>
+          <li class="info-item"><h4>Profiles</h4><p><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a> &nbsp;•&nbsp; <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub ↗</a></p></li>
         </ul>
       </aside>
 
-      <!-- RIGHT: INTERACTIVE CONTACT FORM -->
       <section class="card">
         <h3>Send a Message</h3>
-        
         <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you for reaching out! This message form is ready to be connected to Formspree, Netlify Forms, or your preferred endpoint.');">
-          
           <div class="form-group">
             <label for="name">Your Name</label>
             <input type="text" id="name" name="name" class="form-control" placeholder="Jane Doe" required />
           </div>
-
           <div class="form-group">
             <label for="email">Email Address</label>
             <input type="email" id="email" name="email" class="form-control" placeholder="jane@example.com" required />
           </div>
-
           <div class="form-group">
             <label for="subject">Project or Role Subject</label>
             <input type="text" id="subject" name="subject" class="form-control" placeholder="Product Design Opportunity / Project Inquiry" required />
           </div>
-
           <div class="form-group">
             <label for="message">Message</label>
             <textarea id="message" name="message" class="form-control" placeholder="Tell me a bit about your timeline, scope, or team..." required></textarea>
           </div>
-
           <button type="submit" class="btn-submit">Send Message →</button>
         </form>
       </section>
-
     </div>
-
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
-    </div>
+    <div class="container"><p>Copyright © 2026 - Phillip Joseph Villarreal</p></div>
   </footer>
 
-  <!-- DYNAMIC NAV HEADER SCROLL SCRIPT -->
   <script>
     const header = document.getElementById('siteHeader');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
+      if (window.scrollY > 20) { header.classList.add('scrolled'); } 
+      else { header.classList.remove('scrolled'); }
     });
   </script>
-
 </body>
 </html>
