@@ -412,7 +412,41 @@
       margin-bottom: 0.5rem;
     }
 
-    /* MEDIA PLACEHOLDERS */
+    /* FLOATING UNCONSTRAINED WIREFRAME MEDIA FRAME */
+    .floating-media-frame {
+      position: relative;
+      width: 100%;
+      margin-top: 1.5rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background-color: var(--bg-surface);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 25px rgba(56, 225, 255, 0.08);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .floating-media-frame:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 225, 255, 0.25);
+    }
+
+    .floating-media-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .floating-media-placeholder {
+      padding: 4rem 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      background-color: var(--bg-surface);
+    }
+
+    /* CARD MEDIA PLACEHOLDERS */
     .media-placeholder {
       background-color: var(--bg-base);
       border: 1px solid var(--border-subtle);
@@ -645,7 +679,6 @@
         <!-- RIGHT: HERO PREVIEW FRAME -->
         <div>
           <div class="hero-media-frame">
-            <!-- PASTE HERO IMAGE PATH BELOW -->
             <img 
               src="Assets/scribe85/00_scribe85/scribe85_LandingPage.png" 
               alt="scribe85 Main Workspace Interface" 
@@ -710,37 +743,35 @@
       </div>
     </section>
 
-    <!-- SECTION 1: LOW-FIDELITY WIREFRAMES -->
+    <!-- SECTION 1: LOW-FIDELITY WIREFRAMES (FLOATING FREE-FORM) -->
     <section id="wireframes" class="section">
       <h2 class="section-title">1. Low-Fidelity Wireframes</h2>
       <p class="section-subtitle">Initial architectural sketches focusing on spatial ratios, line-length constraints, and essential control placement before styling.</p>
 
-      <div class="media-placeholder">
-        <!-- PASTE LOW-FIDELITY WIREFRAME PATH BELOW -->
+      <div class="floating-media-frame">
         <img 
           src="Assets/scribe85/00_scribe85/scribe85_LoFi_Full.JPG" 
           alt="scribe85 Low-Fidelity Wireframe" 
-          onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>[Low-Fidelity Wireframe Placeholder - Swap src]</div>';" 
+          onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'floating-media-placeholder\'>[Low-Fidelity Wireframe Placeholder - Swap src]</div>';" 
         />
       </div>
     </section>
 
-    <!-- SECTION 2: MID-FIDELITY WIREFRAMES -->
+    <!-- SECTION 2: MID-FIDELITY WIREFRAMES (FLOATING FREE-FORM) -->
     <section class="section">
       <h2 class="section-title">2. Mid-Fidelity Wireframes</h2>
       <p class="section-subtitle">Refining typography scales, drawer micro-interactions, and testing the auto-fading control triggers across tablet and desktop canvas sizes.</p>
 
-      <div class="media-placeholder">
-        <!-- PASTE MID-FIDELITY WIREFRAME PATH BELOW -->
+      <div class="floating-media-frame">
         <img 
           src="Assets/scribe85/scribe85-midfi-wireframe.webp" 
           alt="scribe85 Mid-Fidelity Wireframe" 
-          onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>[Mid-Fidelity Wireframe Placeholder - Swap src]</div>';" 
+          onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'floating-media-placeholder\'>[Mid-Fidelity Wireframe Placeholder - Swap src]</div>';" 
         />
       </div>
     </section>
 
-    <!-- SECTION 3: THEME MODES CAROUSEL (4 SLIDES & 4 DOTS) -->
+    <!-- SECTION 3: THEME MODES CAROUSEL -->
     <section id="themes" class="section">
       <h2 class="section-title">Theme Modes Interface Preview</h2>
       <p class="section-subtitle">Simulating retro terminal ergonomics inspired by 1980s CRT displays to minimize eye fatigue during extended composition sessions.</p>
@@ -837,7 +868,6 @@
           <p><strong>Feedback:</strong> Users were uncertain if the top document title was editable without visible UI cues.</p>
           <p style="margin-top: 0.5rem;"><strong>Solution:</strong> Added subtle hover states, inline focus styling, and a micro-pencil icon indicator.</p>
           <div class="media-placeholder" style="aspect-ratio: 16 / 7;">
-            <!-- PASTE TITLE MICROINTERACTION IMAGE PATH BELOW -->
             <img 
               src="Assets/scribe85/scribe85-title-microinteraction.webp" 
               alt="Document Title Microinteraction" 
@@ -851,7 +881,6 @@
           <p><strong>Feedback:</strong> Writers requested access to markdown and screenplay shortcuts without opening extra browser tabs.</p>
           <p style="margin-top: 0.5rem;"><strong>Solution:</strong> Engineered a slide-out Markdown & Scripting shortcut drawer available on demand.</p>
           <div class="media-placeholder" style="aspect-ratio: 16 / 7;">
-            <!-- PASTE SHORTCUT DRAWER IMAGE PATH BELOW -->
             <img 
               src="Assets/scribe85/scribe85-shortcut-drawer.webp" 
               alt="Shortcut Drawer Interface" 
