@@ -6,29 +6,8 @@
   <title>Phillip Joseph Villarreal | Product Designer & Front-End Developer</title>
   
   <style>
-    /* TYPOGRAPHY IMPORT: ADVENT PRO (REGULAR / UPRIGHT VARIABLE WEIGHTS) */
-    @font-face {
-      font-family: 'Advent Pro';
-      src: local('Advent Pro Regular'), local('AdventPro-Regular'),
-           url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff2') format('woff2-variations'),
-           url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff2') format('woff2'),
-           url('Assets/Fonts/Advent_Pro/adventpro-variablefont_wdthwght-webfont.woff') format('woff');
-      font-weight: 100 900;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    /* TYPOGRAPHY IMPORT: ADVENT PRO (ITALIC VARIABLE WEIGHTS) */
-    @font-face {
-      font-family: 'Advent Pro';
-      src: local('Advent Pro Italic'), local('AdventPro-Italic'),
-           url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff2') format('woff2-variations'),
-           url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff2') format('woff2'),
-           url('Assets/Fonts/Advent_Pro/adventpro-italic-variablefont_wdthwght-webfont.woff') format('woff');
-      font-weight: 100 900;
-      font-style: italic;
-      font-display: swap;
-    }
+    /* IMPORT INTER FROM GOOGLE FONTS CDN (WEIGHTS 100 THROUGH 900) */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
     :root {
       --bg-base: #05070a;
@@ -38,8 +17,8 @@
       --text-main: #f1f5f9;
       --text-muted: #94a3b8;
       --accent: #38e1ff;
-      --font-heading: 'Advent Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --max-width: 1120px;
     }
 
@@ -117,7 +96,7 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    /* DYNAMIC TRANSPARENT HEADER (TRANSITIONS AS SCROLLED OVER HERO HEADING) */
+    /* DYNAMIC TRANSPARENT HEADER (EARLY SCROLL TRANSITION) */
     .site-header {
       position: fixed;
       top: 0;
@@ -128,11 +107,11 @@
       backdrop-filter: blur(0px);
       -webkit-backdrop-filter: blur(0px);
       border-bottom: 1px solid transparent;
-      transition: background-color 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
+      transition: background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
     }
 
     .site-header.scrolled {
-      background-color: rgba(5, 7, 10, 0.85);
+      background-color: rgba(5, 7, 10, 0.88);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
@@ -149,9 +128,8 @@
     .brand {
       font-family: var(--font-heading);
       font-weight: 600;
-      font-style: normal;
       font-size: 1.35rem;
-      letter-spacing: 0.02em;
+      letter-spacing: -0.02em;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
       color: #ffffff;
     }
@@ -221,7 +199,6 @@
     /* BASE HEADING SELECTOR */
     h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
       font-family: var(--font-heading);
-      font-style: normal;
       color: #ffffff;
       text-shadow: 
         0 0 10px rgba(255, 255, 255, 0.28),
@@ -297,37 +274,39 @@
       margin-bottom: 1.25rem;
     }
 
+    /* 1. HERO TITLE - BOLD (700) */
     .hero-title {
       font-weight: 700;
       line-height: 1.08;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
       text-shadow: 
         0 0 12px rgba(255, 255, 255, 0.32),
         0 0 28px rgba(255, 255, 255, 0.15);
     }
 
-    /* DYNAMIC EQUAL-WIDTH SIZING USING CONTAINER INLINE UNITS (cqw) */
     .hero-title-line-1 {
       display: block;
-      font-size: 13.1cqw; /* Perfectly matches line 2 width */
+      font-size: 11.2cqw;
       white-space: nowrap;
     }
 
     .hero-title-line-2 {
       display: block;
-      font-size: 11cqw; /* Perfectly matches line 1 width */
+      font-size: 9.4cqw;
       white-space: nowrap;
     }
 
+    /* CENTERED AND DOUBLED-SIZE STYLISTIC PLUS (+) */
     .hero-title-plus {
       display: block;
-      font-size: 1.8rem;
+      font-size: 3.2rem; /* Doubled size */
       color: var(--accent);
-      font-weight: 400;
-      line-height: 1;
-      margin: 0.2rem 0;
-      padding-left: 5.5rem;
-      text-shadow: 0 0 12px rgba(56, 225, 255, 0.6);
+      font-weight: 300;
+      line-height: 0.8;
+      margin: 0.4rem 0;
+      padding-left: 0;
+      text-align: center; /* Horizontally centered in title width */
+      text-shadow: 0 0 16px rgba(56, 225, 255, 0.7);
     }
 
     .hero-bio {
@@ -373,8 +352,7 @@
       background-color: var(--text-main);
       color: var(--bg-base);
       font-family: var(--font-heading);
-      font-weight: 700;
-      font-style: normal;
+      font-weight: 600;
       padding: 0.85rem 1.75rem;
       border-radius: 8px;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
@@ -392,8 +370,7 @@
       color: var(--text-main);
       border: 1px solid var(--border-subtle);
       font-family: var(--font-heading);
-      font-weight: 700;
-      font-style: normal;
+      font-weight: 600;
       padding: 0.85rem 1.75rem;
       border-radius: 8px;
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -462,17 +439,17 @@
       font-size: 0.8rem;
       text-transform: uppercase;
       color: var(--accent);
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.05em;
     }
 
     .metric-value {
       font-size: 1rem;
       color: var(--text-main);
-      font-weight: 600;
+      font-weight: 500;
     }
 
-    /* SECTION TITLE - SEMIBOLD (600) */
+    /* 2. SECTION TITLE - SEMIBOLD (600) */
     .section-title {
       font-size: 1.75rem;
       font-weight: 600;
@@ -507,7 +484,7 @@
         0 0 18px rgba(56, 225, 255, 0.28);
     }
 
-    /* PROJECT CARD TITLES - MEDIUM (500) */
+    /* 3. PROJECT CARD TITLES - MEDIUM (500) */
     .card-title {
       font-size: 1.75rem;
       font-weight: 500;
@@ -607,7 +584,7 @@
       margin-bottom: 1.25rem;
     }
 
-    /* PROJECT CARD TITLES - MEDIUM (500) */
+    /* 3. PROJECT CARD TITLES - MEDIUM (500) */
     .card h3 {
       font-size: 1.35rem;
       font-weight: 500;
@@ -644,7 +621,7 @@
 </head>
 <body>
 
-  <!-- SITE HEADER (TRANSPARENT AT TOP, BACKLIT AS IT SCROLLS PAST HERO HEADING) -->
+  <!-- SITE HEADER (TRANSPARENT AT REST, BACKLIT IMMEDIATELY UPON SCROLLING) -->
   <header class="site-header" id="siteHeader">
     <div class="container nav-inner">
       <a href="index.html" class="brand">PJV</a>
@@ -830,16 +807,13 @@
     </div>
   </footer>
 
-  <!-- DYNAMIC NAV HEADER SCROLL SCRIPT (TRANSITIONS AS SCROLLED OVER HERO TITLE) -->
+  <!-- DYNAMIC NAV HEADER SCROLL SCRIPT (TRANSITIONS EARLY UPON SCROLLING) -->
   <script>
     const header = document.getElementById('siteHeader');
-    const heroTitleContainer = document.getElementById('heroTitleContainer');
 
     window.addEventListener('scroll', () => {
-      // Triggers transition as the bottom of the hero heading passes near the header height
-      const titleBottom = heroTitleContainer.getBoundingClientRect().bottom;
-      
-      if (titleBottom < 80) {
+      // Transitions immediately as user scrolls down 20px
+      if (window.scrollY > 20) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
