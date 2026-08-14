@@ -252,11 +252,7 @@
     .section-subtitle { color: var(--text-muted); font-size: 1.05rem; max-width: 750px; margin-bottom: 2.5rem; }
 
     .grid-2 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-    .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-    @media (min-width: 768px) { 
-      .grid-2 { grid-template-columns: repeat(2, 1fr); } 
-      .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    }
+    @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
 
     .card {
       background-color: var(--bg-surface);
@@ -278,7 +274,7 @@
     .card p, .card ul { color: var(--text-muted); font-size: 0.975rem; line-height: 1.65; }
     .card ul { list-style-type: disc; padding-left: 1.25rem; margin-top: 0.5rem; }
 
-    /* --- HORIZONTAL STACKED STUDY CARDS FOR PRESENTATIONS --- */
+    /* --- HORIZONTAL STACKED STUDY CARDS --- */
     .studies-stack {
       display: flex;
       flex-direction: column;
@@ -300,7 +296,7 @@
 
     @media (min-width: 768px) {
       .study-card {
-        grid-template-columns: 1.2fr 2fr;
+        grid-template-columns: 1.2fr 2fr; /* 16:9 presentation thumbnail ratio */
         align-items: center;
       }
     }
@@ -314,7 +310,7 @@
     .study-media-placeholder {
       background-color: var(--bg-base);
       border: 1px solid var(--border-subtle);
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 16 / 9; /* Perfect presentation slide ratio */
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -480,7 +476,7 @@
 </head>
 <body>
 
-  <!-- SITE HEADER -->
+  <!-- HEADER -->
   <header class="site-header" id="siteHeader">
     <div class="container nav-inner">
       <a href="index.html" class="brand">PJV</a>
@@ -563,29 +559,6 @@
             <li><strong>Pacing & Hierarchy:</strong> Strategic use of focal contrast, whitespace, and visual anchors to guide audience attention.</li>
             <li><strong>Reusable Component Kits:</strong> Master template libraries enabling rapid iteration across product, finance, and strategy teams.</li>
           </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- SECTION: SLIDE ARCHITECTURE -->
-    <section id="architecture" class="section">
-      <h2 class="section-title">Slide Architecture & Frameworks</h2>
-      <p class="section-subtitle">Core design principles applied across executive briefing decks and strategic roadmap presentations.</p>
-
-      <div class="grid-3">
-        <article class="card">
-          <h3>1. Data Visualization</h3>
-          <p>Translating complex financial spreadsheets and user analytics into clean, scannable charts and highlighted KPI callouts.</p>
-        </article>
-
-        <article class="card">
-          <h3>2. Narrative Flow</h3>
-          <p>Structuring decks with clear problem-solution arcs that lead stakeholders naturally from market validation to strategic execution.</p>
-        </article>
-
-        <article class="card">
-          <h3>3. Visual Breathing Room</h3>
-          <p>Leveraging generous whitespace and dark-surface framing to prevent cognitive fatigue during extended board meetings.</p>
         </article>
       </div>
     </section>
