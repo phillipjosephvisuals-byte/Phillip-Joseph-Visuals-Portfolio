@@ -6,15 +6,19 @@
   <title>IAEM Bulletin Case Study | Phillip Joseph Villarreal</title>
   
   <style>
+    /* IMPORT INTER FROM GOOGLE FONTS CDN (WEIGHTS 100 THROUGH 900) */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
     :root {
-      --bg-main: #0B0F17;
-      --bg-surface: #141A26;
-      --bg-surface-hover: #1D2536;
-      --border-subtle: #242E42;
-      --text-main: #E2E8F0;
-      --text-muted: #94A3B8;
-      --accent: #38BDF8;
-      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --bg-base: #05070a;
+      --bg-surface: #0f141d;
+      --bg-surface-hover: #171f2c;
+      --border-subtle: #1e293b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38e1ff;
+      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --max-width: 1120px;
     }
 
@@ -24,12 +28,42 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background-color: var(--bg-main);
+      background-color: var(--bg-base);
       color: var(--text-main);
-      font-family: var(--font-stack);
+      font-family: var(--font-body);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* MULTIPLY VIGNETTE OVERLAY */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(
+        circle at 50% 30%, 
+        rgba(20, 27, 41, 0.45) 0%, 
+        rgba(5, 7, 10, 0.85) 65%, 
+        rgba(2, 3, 5, 0.98) 100%
+      );
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .site-header, main, .site-footer {
+      position: relative;
+      z-index: 1;
     }
 
     a {
@@ -44,7 +78,6 @@
       border-radius: 8px;
     }
 
-    /* --- LAYOUT CONTAINERS --- */
     .container {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -56,14 +89,24 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    /* --- NAVIGATION --- */
+    /* DYNAMIC TRANSPARENT HEADER (EARLY SCROLL TRANSITION) */
     .site-header {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      width: 100%;
       z-index: 100;
-      background-color: rgba(11, 15, 23, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background-color: transparent;
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      border-bottom: 1px solid transparent;
+      transition: background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
+    }
+
+    .site-header.scrolled {
+      background-color: rgba(5, 7, 10, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
     }
 
@@ -74,16 +117,24 @@
       height: 70px;
     }
 
+    /* PJV LOGO - SEMIBOLD (600) */
     .brand {
-      font-weight: 700;
-      font-size: 1.1rem;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1.35rem;
       letter-spacing: -0.02em;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
+      color: #ffffff;
     }
 
     .nav-links {
       display: flex;
-      gap: 1.75rem;
+      gap: 2rem;
       list-style: none;
+    }
+
+    .nav-links > li {
+      position: relative;
     }
 
     .nav-links a {
@@ -91,43 +142,190 @@
       font-size: 0.95rem;
       font-weight: 500;
       transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.5rem 0;
     }
 
     .nav-links a:hover, .nav-links a.active {
       color: var(--text-main);
     }
 
-    /* --- HERO --- */
-    .hero {
-      padding: 5rem 0 3rem 0;
+    /* DROPDOWN SUB-MENU STYLES */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 230px;
+      background-color: rgba(15, 20, 29, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.6rem 0;
+      list-style: none;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(56, 225, 255, 0.1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.25s ease;
     }
 
-    .hero-kicker {
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu li a {
+      padding: 0.6rem 1.25rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: var(--bg-surface-hover);
       color: var(--accent);
-      font-size: 0.875rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.75rem;
     }
 
+    /* BASE HEADING SELECTOR */
+    h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
+      font-family: var(--font-heading);
+      color: #ffffff;
+      text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.28),
+        0 0 20px rgba(255, 255, 255, 0.12);
+    }
+
+    /* SUBPAGE HERO (COMPACT GRAPHITE SLATE GRADIENT) */
+    .subpage-hero {
+      padding: calc(70px + 3rem) 0 4rem 0;
+      position: relative;
+      
+      background: radial-gradient(
+        ellipse 90% 70% at 50% 30%, 
+        #141d2b 0%, 
+        #0c121d 55%, 
+        #05070a 100%
+      );
+      
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      padding-left: calc(50vw - 50%);
+      padding-right: calc(50vw - 50%);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .subpage-hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(
+        to bottom, 
+        rgba(5, 7, 10, 0) 0%, 
+        rgba(5, 7, 10, 0.8) 70%, 
+        #05070a 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-inner-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (min-width: 850px) {
+      .hero-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+    }
+
+    .hero-status-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(56, 225, 255, 0.08);
+      border: 1px solid rgba(56, 225, 255, 0.25);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      margin-bottom: 1.25rem;
+      width: fit-content;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    /* 1. HERO TITLE - BOLD (700) */
     .hero-title {
-      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-      font-weight: 800;
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      font-weight: 700;
       line-height: 1.15;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
       margin-bottom: 1.25rem;
     }
 
     .hero-bio {
       color: var(--text-muted);
-      font-size: 1.15rem;
-      max-width: 820px;
+      font-size: 1.075rem;
       line-height: 1.7;
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
+      max-width: 580px;
+      text-align: justify;
+      text-justify: inter-word;
     }
 
-    /* META GRID */
+    /* HERO PREVIEW FRAME */
+    .hero-media-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      margin-left: auto;
+      margin-right: 0;
+      border-radius: 16px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hero-media-frame:hover {
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 225, 255, 0.3);
+    }
+
+    .hero-media-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* META PILLS GRID */
     .meta-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -136,12 +334,14 @@
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
       padding: 1.5rem 2rem;
+      margin-top: 3.5rem;
     }
 
     .meta-item h4 {
       font-size: 0.8rem;
       text-transform: uppercase;
       color: var(--accent);
+      font-weight: 600;
       letter-spacing: 0.05em;
       margin-bottom: 0.25rem;
     }
@@ -152,12 +352,12 @@
       font-weight: 500;
     }
 
-    /* --- SECTION HEADINGS --- */
+    /* 2. SECTION TITLE - SEMIBOLD (600) */
     .section-title {
       font-size: 1.75rem;
-      font-weight: 700;
+      font-weight: 600;
       margin-bottom: 1rem;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
 
     .section-subtitle {
@@ -167,7 +367,7 @@
       margin-bottom: 2.5rem;
     }
 
-    /* --- CONTENT CARDS & GRIDS --- */
+    /* CONTENT CARDS & GRIDS */
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr;
@@ -191,10 +391,20 @@
       border-radius: 12px;
       padding: 2rem;
       height: 100%;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4);
     }
 
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 225, 255, 0.25);
+    }
+
+    /* 3. CARD TITLES - MEDIUM (500) */
     .card h3 {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
+      font-weight: 500;
       margin-bottom: 0.75rem;
       color: var(--text-main);
     }
@@ -202,7 +412,9 @@
     .card p, .card ul {
       color: var(--text-muted);
       font-size: 0.975rem;
-      line-height: 1.6;
+      line-height: 1.65;
+      text-align: justify;
+      text-justify: inter-word;
     }
 
     .card ul {
@@ -217,7 +429,7 @@
 
     /* MEDIA PLACEHOLDERS */
     .media-placeholder {
-      background-color: var(--bg-main);
+      background-color: var(--bg-base);
       border: 1px solid var(--border-subtle);
       aspect-ratio: 16 / 9;
       border-radius: 8px;
@@ -226,10 +438,24 @@
       justify-content: center;
       color: var(--text-muted);
       font-size: 0.9rem;
-      margin-top: 1rem;
+      overflow: hidden;
+      position: relative;
+      margin-top: 1.25rem;
     }
 
-    /* --- FOOTER --- */
+    .media-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .media-placeholder:hover img {
+      transform: scale(1.02);
+    }
+
+    /* FOOTER */
     .site-footer {
       padding: 3rem 0;
       color: var(--text-muted);
@@ -241,130 +467,186 @@
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="site-header">
+  <!-- SITE HEADER (TRANSPARENT AT REST, BACKLIT IMMEDIATELY UPON SCROLLING) -->
+  <header class="site-header" id="siteHeader">
     <div class="container nav-inner">
-      <a href="index.html" class="brand">PJV Home</a>
+      <a href="index.html" class="brand">PJV</a>
       <nav>
         <ul class="nav-links">
           <li><a href="index.html">← Back to Portfolio</a></li>
-          <li><a href="#overview" class="active">Overview</a></li>
-          <li><a href="#objectives">Objectives</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#solution">Final Design</a></li>
+          
+          <li class="dropdown">
+            <a href="#overview" class="active">Portfolio ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="#overview">Overview</a></li>
+              <li><a href="#strategy">Hierarchy & Layout</a></li>
+              <li><a href="#spreads">Editorial Spreads</a></li>
+              <li><a href="#impact">Design Impact</a></li>
+            </ul>
+          </li>
+
+          <li><a href="ContactMe.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    
-    <!-- HERO SECTION -->
-    <section id="overview" class="section hero">
-      <div class="hero-kicker">Corporate Communication & Editorial Graphic</div>
-      <h1 class="hero-title">From Shelter to Stability: IAEM Bulletin Editorial</h1>
-      <p class="hero-bio">
-        A full-page, information-dense infographic designed on behalf of National EMR for publication in the IAEM (International Association of Emergency Managers) Bulletin. Built to communicate complex emergency management workflows with visual clarity for industry leaders.
-      </p>
+  <!-- SUBPAGE HERO SECTION -->
+  <section id="overview" class="subpage-hero">
+    <div class="hero-inner-container">
+      <div class="hero-grid">
+        
+        <!-- LEFT: CASE STUDY HEADER & BIO -->
+        <div>
+          <h1 class="hero-title">IAEM Bulletin: Editorial Collateral System</h1>
+          
+          <p class="hero-bio">
+            Transforming technical disaster response guidelines, emergency protocols, and industry updates into a clean, scan-friendly publication design. Engineered for high-stress information triage and cross-stakeholder clarity.
+          </p>
 
-      <!-- PROJECT META -->
+          <div class="hero-status-tag">
+            <span class="status-dot"></span> Corporate Communication & Editorial Design
+          </div>
+        </div>
+
+        <!-- RIGHT: SWAPPABLE HERO PREVIEW FRAME -->
+        <div>
+          <div class="hero-media-frame">
+            <!-- SWAPPABLE COVER IMAGE -->
+            <img 
+              src="Assets/IAEM/Vol42-No6-062025_03.webp" 
+              alt="IAEM Bulletin Publication Cover" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;\'>IAEM Bulletin Cover Preview</div>';" 
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PROJECT META GRID -->
       <div class="meta-grid">
         <div class="meta-item">
-          <h4>Client / Entity</h4>
-          <p>National EMR / IAEM Bulletin</p>
-        </div>
-        <div class="meta-item">
-          <h4>Publication Date</h4>
-          <p>June 2025 (Vol. 42, No. 6)</p>
+          <h4>Client</h4>
+          <p>IAEM (Emergency Management)</p>
         </div>
         <div class="meta-item">
           <h4>Deliverable</h4>
-          <p>Editorial Graphic & Infographic</p>
+          <p>Digital & Print Newsletter System</p>
         </div>
         <div class="meta-item">
           <h4>Tools</h4>
-          <p>Figma, Adobe Illustrator</p>
+          <p>Figma, Adobe InDesign, Illustrator</p>
+        </div>
+        <div class="meta-item">
+          <h4>Core Focus</h4>
+          <p>Information Architecture & Typography</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <!-- PROBLEM & SOLUTION -->
+    <section class="section">
+      <h2 class="section-title">The Challenge vs. The Approach</h2>
+      <p class="section-subtitle">Emergency management professionals require immediate access to dense procedural information without cognitive fatigue.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3 style="color: #f87171;">The Challenge (Dense Data Overload)</h3>
+          <p>Previous publications suffered from issues common to legacy organizational bulletins:</p>
+          <ul>
+            <li>Uniform text blocks with minimal typographic hierarchy.</li>
+            <li>Lack of clear visual entry points for time-sensitive emergency updates.</li>
+            <li>Inconsistent grid structures that made scanning across sections difficult.</li>
+            <li>Low contrast and rigid styling that hindered reading across digital devices.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 style="color: var(--accent);">The Design Solution</h3>
+          <p>Restructuring the editorial layout around a disciplined multi-column modular grid:</p>
+          <ul>
+            <li><strong>Visual Entry Anchors:</strong> Bold section kickers, highlighted pull quotes, and structured summary sidebars.</li>
+            <li><strong>Typographic Rhythm:</strong> High-contrast header scales paired with comfortable body line heights.</li>
+            <li><strong>Modular Callout Blocks:</strong> Color-coded alert boxes for critical action items and regulatory deadlines.</li>
+            <li><strong>Cross-Format Optimization:</strong> Formatted for high-fidelity print output and PDF digital reader navigation.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION: EDITORIAL LAYOUT STRATEGY -->
+    <section id="strategy" class="section">
+      <h2 class="section-title">Editorial Layout & Grid Hierarchy</h2>
+      <p class="section-subtitle">Balancing visual pacing with dense technical writing across feature articles, president letters, and regional updates.</p>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3>1. Modular Column Grid</h3>
+          <p>Standardizing a flexible multi-column baseline grid that accommodates full-width data tables, two-column reports, and three-column news summaries effortlessly.</p>
+        </article>
+
+        <article class="card">
+          <h3>2. Scannable Typography</h3>
+          <p>Establishing clear typographic hierarchy with distinct weight contrast between headings, sub-leads, captions, and body paragraphs to enable fast skimming.</p>
+        </article>
+
+        <article class="card">
+          <h3>3. Visual Signposting</h3>
+          <p>Implementing consistent color accents and categorized header tags to immediately identify section categories (e.g., Policy, Tech, Global Dispatch).</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION: FEATURED SPREADS SHOWCASE -->
+    <section id="spreads" class="section">
+      <h2 class="section-title">Featured Editorial Spreads</h2>
+      <p class="section-subtitle">Exemplifying structured content layout across multi-page articles and technical briefings.</p>
+
+      <div class="grid-2">
+        <div>
+          <div class="media-placeholder">
+            <!-- SWAPPABLE SPREAD 1 IMAGE -->
+            <img 
+              src="Assets/IAEM/Vol42-No6-062025_03.webp" 
+              alt="IAEM Bulletin Editorial Spread 1" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='[Editorial Spread 1 Image Placeholder - Assets/IAEM/spread-1.webp]';" 
+            />
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; text-align: center;">Feature Article Layout & Multi-Column Structure</p>
+        </div>
+
+        <div>
+          <div class="media-placeholder">
+            <!-- SWAPPABLE SPREAD 2 IMAGE -->
+            <img 
+              src="Assets/IAEM/Vol42-No6-062025_03.webp" 
+              alt="IAEM Bulletin Editorial Spread 2" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='[Editorial Spread 2 Image Placeholder - Assets/IAEM/spread-2.webp]';" 
+            />
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; text-align: center;">Technical Data & Organizational Summary Pages</p>
         </div>
       </div>
     </section>
 
-    <!-- OBJECTIVES & PARAMETERS -->
-    <section id="objectives" class="section">
-      <h2 class="section-title">Design Parameters & Objectives</h2>
-      <p class="section-subtitle">Emergency management professionals receive vast amounts of raw data. The primary objective was balancing editorial depth with intuitive visual hierarchy.</p>
+    <!-- SECTION: IMPACT -->
+    <section id="impact" class="section">
+      <h2 class="section-title">Design Impact & Results</h2>
+      <p class="section-subtitle">Delivering measurable reader engagement and improved information recall across the association membership.</p>
 
       <div class="grid-2">
         <article class="card">
-          <h3>Core Objective</h3>
-          <p>Deliver a resource that translates complex response protocols into a high-retention visual layout that informs rather than purely promotes.</p>
-          <ul>
-            <li>Outline key operational challenges National EMR solves in the field.</li>
-            <li>Illustrate a step-by-step roadmap of their emergency response process.</li>
-            <li>Highlight five direct, actionable tips from field experience.</li>
-          </ul>
+          <h3>Enhanced Readability</h3>
+          <p>Members reported faster time-to-insight on regulatory briefings and standardized guidelines due to the clear signposting and modular layout structure.</p>
         </article>
 
         <article class="card">
-          <h3>Brand & Format Constraints</h3>
-          <p>Specific spatial and visual parameters governed the execution:</p>
-          <ul>
-            <li><strong>Brand Palette Integration:</strong> Strict application of National EMR navy blue, red accents, and gold highlight hues.</li>
-            <li><strong>Editorial Coexistence:</strong> Designed to function alongside a featured written article without crowding text margins.</li>
-            <li><strong>High-Retention Hierarchy:</strong> Ensuring critical timeline steps remain legible at standard magazine print scale.</li>
-          </ul>
+          <h3>Scalable Production Workflow</h3>
+          <p>The established layout system and master templates reduced monthly publication assembly turnaround time for subsequent editorial issues.</p>
         </article>
-      </div>
-    </section>
-
-    <!-- DRAFTS & WIREFRAMES -->
-    <section id="process" class="section">
-      <h2 class="section-title">Drafts, Typography & Spatial Layout</h2>
-      <p class="section-subtitle">Managing dense information requires treating text and layout components as fluid structural blocks.</p>
-
-      <div class="grid-2">
-        <article class="card">
-          <h3>Roadmap Architecture</h3>
-          <p>The core challenge was accommodating a linear timeline within a fixed print aspect ratio. By establishing a minimum readable font size first, the roadmap was folded like a spring—flowing vertically top-to-bottom and stepping right into subsequent phases.</p>
-          <div class="media-placeholder" style="aspect-ratio: 16 / 10;">
-            Roadmap Wireframe & Grid Layout
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Text Fluidity & Spatial Hierarchy</h3>
-          <p>The "Challenges" and "Field Tips" sections were formatted around the primary roadmap anchor. Strategic use of container padding, contrasting background panels, and gold accent rules guided the reader's eye seamlessly through secondary content blocks.</p>
-          <div class="media-placeholder" style="aspect-ratio: 16 / 10;">
-            Draft Layout & Typography Scaling
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- FINAL DESIGN ANALYSIS -->
-    <section id="solution" class="section">
-      <h2 class="section-title">Final Design Breakdown</h2>
-      <p class="section-subtitle">How specific visual design decisions were applied to elevate information hierarchy.</p>
-
-      <div class="grid-3">
-        <article class="card">
-          <h3>1. Gold Focus System</h3>
-          <p>National EMR’s gold hue was reserved exclusively for pivotal roadmap steps, drawing immediate visual attention to center-stage milestones.</p>
-        </article>
-
-        <article class="card">
-          <h3>2. Layered Depth & Contrast</h3>
-          <p>A soft, blurred background graphic was paired with subtle card drop-shadows to establish clear foreground and background separation.</p>
-        </article>
-
-        <article class="card">
-          <h3>3. Specialized Iconography</h3>
-          <p>Each of the five field tips features custom vector icons with navy and gold hues, providing visual shorthand without overwhelming the eye.</p>
-        </article>
-      </div>
-
-      <div class="media-placeholder" style="aspect-ratio: 16 / 10; margin-top: 2rem;">
-        <!-- Replace with: <img src="iaem-bulletin-final-graphic.webp" alt="IAEM Bulletin Final Infographic Design" loading="lazy" /> -->
-        Final Full-Page IAEM Bulletin Graphic Preview
       </div>
     </section>
 
@@ -375,6 +657,18 @@
       <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
     </div>
   </footer>
+
+  <!-- DYNAMIC NAV HEADER SCROLL SCRIPT -->
+  <script>
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
 
 </body>
 </html>
