@@ -58,6 +58,7 @@
     .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
     .section { padding: 5rem 0; border-bottom: 1px solid var(--border-subtle); }
 
+    /* DYNAMIC TRANSPARENT HEADER */
     .site-header {
       position: fixed;
       top: 0; left: 0; width: 100%;
@@ -92,6 +93,7 @@
     .nav-links a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color 0.2s ease; display: flex; align-items: center; gap: 0.3rem; padding: 0.5rem 0; }
     .nav-links a:hover { color: var(--text-main); }
 
+    /* DROPDOWN MENU */
     .dropdown-menu {
       position: absolute;
       top: 100%; left: 0;
@@ -119,6 +121,7 @@
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.28), 0 0 20px rgba(255, 255, 255, 0.12);
     }
 
+    /* SUBPAGE / MAIN HERO */
     .hero-full {
       min-height: 100vh;
       display: flex; flex-direction: column; justify-content: center;
@@ -219,30 +222,33 @@
     .media-placeholder img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
     .card-link:hover .media-placeholder img { transform: scale(1.03); }
 
-    /* FLOATING CARD MEDIA (UNCONSTRAINED ASPECT RATIO) */
-    .floating-card-media {
-      background-color: transparent;
-      border: none;
+    /* FLOATING CARD STAGE FOR NATURAL ASPECT RATIO MEDIA */
+    .floating-card-stage {
+      width: 100%;
       aspect-ratio: 16 / 10;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: visible;
+      background: transparent;
       margin-bottom: 1.25rem;
+      position: relative;
     }
-    .floating-card-media img {
-      max-height: 100%;
+
+    .floating-card-stage img {
+      height: 100%;
       width: auto;
+      max-width: 100%;
       object-fit: contain;
       border-radius: 8px;
       border: 1px solid var(--border-subtle);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(56, 225, 255, 0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(56, 225, 255, 0.12);
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .card-link:hover .floating-card-media img {
-      transform: translateY(-2px) scale(1.03);
+
+    .card-link:hover .floating-card-stage img {
+      transform: translateY(-3px) scale(1.02);
       border-color: var(--accent);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 20px rgba(56, 225, 255, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85), 0 0 24px rgba(56, 225, 255, 0.28);
     }
 
     .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
@@ -368,6 +374,7 @@
     </div>
   </header>
 
+  <!-- HERO SECTION -->
   <section id="about" class="hero-full">
     <div class="hero-inner-container">
       <div class="hero-grid">
@@ -405,6 +412,8 @@
   </section>
 
   <main class="container">
+    
+    <!-- FEATURED PRODUCT CASE STUDY -->
     <section id="scribe85" class="section">
       <h2 class="section-title">Featured Product Case Study</h2>
       <a href="scribe85-case-study.html" class="card-link">
@@ -426,13 +435,15 @@
       </a>
     </section>
 
+    <!-- CORPORATE COMMUNICATION -->
     <section id="corporate" class="section">
       <h2 class="section-title">Corporate Communication</h2>
       <div class="grid-2">
+        
+        <!-- IAEM CARD (WITH FREE-FLOATING NATURAL ASPECT RATIO IMAGE) -->
         <a href="iaem-bulletin-case-study.html" class="card-link">
           <article class="card">
-            <!-- FLOATING FREE-FORM IAEM CARD PREVIEW -->
-            <div class="floating-card-media">
+            <div class="floating-card-stage">
               <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Collateral" onerror="this.onerror=null; this.parentElement.innerHTML='IAEM Collateral';" />
             </div>
             <h3>IAEM Bulletin</h3>
@@ -441,7 +452,7 @@
           </article>
         </a>
 
-        <!-- LINKED TO K12 INSIGHT CASE STUDY FILE -->
+        <!-- K12 INSIGHT CARD -->
         <a href="k12-insight-illustration-project-case-study.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
@@ -455,9 +466,12 @@
       </div>
     </section>
 
+    <!-- MEDIA & ART DIRECTION -->
     <section id="media" class="section">
       <h2 class="section-title">Media & Art Direction</h2>
       <div class="grid-3">
+        
+        <!-- PRESENTATIONS -->
         <a href="presentations-case-study.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
@@ -469,6 +483,7 @@
           </article>
         </a>
 
+        <!-- VIDEOGRAPHY -->
         <a href="videography.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
@@ -480,6 +495,7 @@
           </article>
         </a>
 
+        <!-- PHOTOGRAPHY -->
         <a href="photography-case-study.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
