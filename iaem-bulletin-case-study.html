@@ -6,7 +6,6 @@
   <title>IAEM Bulletin Case Study | Phillip Joseph Villarreal</title>
   
   <style>
-    /* IMPORT INTER FROM GOOGLE FONTS CDN (WEIGHTS 100 THROUGH 900) */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
     :root {
@@ -89,7 +88,7 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    /* DYNAMIC TRANSPARENT HEADER (EARLY SCROLL TRANSITION) */
+    /* DYNAMIC TRANSPARENT HEADER */
     .site-header {
       position: fixed;
       top: 0;
@@ -117,7 +116,6 @@
       height: 70px;
     }
 
-    /* PJV LOGO - SEMIBOLD (600) */
     .brand {
       font-family: var(--font-heading);
       font-weight: 600;
@@ -152,7 +150,7 @@
       color: var(--text-main);
     }
 
-    /* DROPDOWN SUB-MENU STYLES */
+    /* DROPDOWN MENU */
     .dropdown-menu {
       position: absolute;
       top: 100%;
@@ -185,12 +183,12 @@
       transition: background-color 0.2s ease, color 0.2s ease;
     }
 
-    .dropdown-menu li a:hover {
+    .dropdown-menu li a:hover, .dropdown-menu li a.active {
       background-color: var(--bg-surface-hover);
       color: var(--accent);
     }
 
-    /* BASE HEADING SELECTOR */
+    /* HEADINGS WITH ILLUMINATED GLOW */
     h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
       font-family: var(--font-heading);
       color: #ffffff;
@@ -199,18 +197,16 @@
         0 0 20px rgba(255, 255, 255, 0.12);
     }
 
-    /* SUBPAGE HERO (COMPACT GRAPHITE SLATE GRADIENT) */
+    /* SUBPAGE HERO */
     .subpage-hero {
       padding: calc(70px + 3rem) 0 4rem 0;
       position: relative;
-      
       background: radial-gradient(
         ellipse 90% 70% at 50% 30%, 
         #141d2b 0%, 
         #0c121d 55%, 
         #05070a 100%
       );
-      
       margin-left: calc(-50vw + 50%);
       margin-right: calc(-50vw + 50%);
       padding-left: calc(50vw - 50%);
@@ -279,7 +275,6 @@
       box-shadow: 0 0 8px var(--accent);
     }
 
-    /* 1. HERO TITLE - BOLD (700) */
     .hero-title {
       font-size: clamp(2.1rem, 4vw, 3.2rem);
       font-weight: 700;
@@ -298,34 +293,31 @@
       text-justify: inter-word;
     }
 
-    /* HERO PREVIEW FRAME */
+    /* FLOATING HERO PREVIEW FRAME */
     .hero-media-frame {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 10;
-      margin-left: auto;
-      margin-right: 0;
-      border-radius: 16px;
+      border-radius: 12px;
       background-color: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       overflow: hidden;
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 25px rgba(56, 225, 255, 0.12);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .hero-media-frame:hover {
+      transform: translateY(-3px);
       border-color: var(--accent);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 225, 255, 0.3);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(56, 225, 255, 0.3);
     }
 
     .hero-media-frame img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      object-fit: contain;
       display: block;
     }
 
-    /* META PILLS GRID */
     .meta-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -352,7 +344,6 @@
       font-weight: 500;
     }
 
-    /* 2. SECTION TITLE - SEMIBOLD (600) */
     .section-title {
       font-size: 1.75rem;
       font-weight: 600;
@@ -367,7 +358,7 @@
       margin-bottom: 2.5rem;
     }
 
-    /* CONTENT CARDS & GRIDS */
+    /* --- CONTENT CARDS & GRIDS --- */
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr;
@@ -401,7 +392,6 @@
       box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 225, 255, 0.25);
     }
 
-    /* 3. CARD TITLES - MEDIUM (500) */
     .card h3 {
       font-size: 1.35rem;
       font-weight: 500;
@@ -425,6 +415,40 @@
 
     .card ul li {
       margin-bottom: 0.5rem;
+    }
+
+    /* FLOATING UNCONSTRAINED MEDIA FRAME */
+    .floating-media-frame {
+      position: relative;
+      width: 100%;
+      margin-top: 1rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background-color: var(--bg-surface);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 25px rgba(56, 225, 255, 0.08);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .floating-media-frame:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 225, 255, 0.25);
+    }
+
+    .floating-media-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .floating-media-placeholder {
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      background-color: var(--bg-surface);
     }
 
     /* TRANSPARENT 3D PORTRAIT SPREADS CAROUSEL */
@@ -459,7 +483,7 @@
       position: absolute;
       width: 380px;
       max-width: 75%;
-      aspect-ratio: 3 / 4; /* Clean Editorial Portrait Aspect Ratio */
+      aspect-ratio: 3 / 4;
       border-radius: 12px;
       background-color: var(--bg-surface);
       border: 1px solid var(--border-subtle);
@@ -480,7 +504,6 @@
       display: block;
     }
 
-    /* CAROUSEL POSITION STATES (FADING OFF SIDES) */
     .portrait-slide.active {
       transform: translateX(0) scale(1) translateZ(0);
       opacity: 1;
@@ -514,7 +537,6 @@
       pointer-events: none;
     }
 
-    /* CAROUSEL ARROWS */
     .carousel-nav-arrow {
       position: absolute;
       top: 50%;
@@ -549,7 +571,6 @@
       .carousel-nav-arrow.next { right: 0.25rem; }
     }
 
-    /* SLIDE CAPTION TEXT */
     .portrait-caption {
       text-align: center;
       color: var(--text-muted);
@@ -559,7 +580,6 @@
       min-height: 1.5rem;
     }
 
-    /* GLOWING WHITE DOT INDICATORS */
     .carousel-dots-container {
       display: flex;
       justify-content: center;
@@ -582,7 +602,69 @@
       transform: scale(1.3);
     }
 
-    /* FOOTER */
+    /* ==========================================================================
+       MOBILE RESPONSIVE & BREATHING ROOM OPTIMIZATIONS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .nav-inner {
+        height: 60px;
+      }
+
+      .brand {
+        font-size: 1.15rem;
+      }
+
+      .nav-links {
+        gap: 0.85rem;
+      }
+
+      .nav-links a {
+        font-size: 0.825rem;
+        padding: 0.35rem 0;
+      }
+
+      .dropdown-menu {
+        min-width: 180px;
+      }
+
+      .dropdown-menu li a {
+        padding: 0.5rem 1rem;
+        font-size: 0.825rem;
+      }
+
+      .section {
+        padding: 3.5rem 0;
+      }
+
+      .hero-title,
+      .section-title,
+      .section-subtitle {
+        text-align: center;
+      }
+
+      .hero-status-tag {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-bio {
+        text-align: justify;
+        margin: 0 auto 1.5rem auto;
+      }
+
+      .section-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 1rem;
+      }
+    }
+
     .site-footer {
       padding: 3rem 0;
       color: var(--text-muted);
@@ -602,16 +684,17 @@
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li class="dropdown">
-            <a href="index.html#scribe85">Portfolio ▾</a>
+            <a href="index.html#portfolio" class="active">Portfolio ▾</a>
             <ul class="dropdown-menu">
               <li><a href="scribe85-case-study.html">scribe85</a></li>
-              <li><a href="iaem-bulletin-case-study.html">Corporate Communication</a></li>
+              <li><a href="iaem-bulletin-case-study.html" class="active">IAEM</a></li>
               <li><a href="k12-insight-illustration-project-case-study.html">K12 Insight</a></li>
               <li><a href="presentations-case-study.html">Presentations</a></li>
+              <li><a href="videography.html">Videography</a></li>
               <li><a href="photography-case-study.html">Photography</a></li>
             </ul>
           </li>
-          <li><a href="Resume.html" class="active">Resume</a></li>
+          <li><a href="Resume.html">Resume</a></li>
           <li><a href="ContactMe.html">Contact</a></li>
         </ul>
       </nav>
@@ -636,14 +719,13 @@
           </div>
         </div>
 
-        <!-- RIGHT: SWAPPABLE HERO PREVIEW FRAME -->
+        <!-- RIGHT: SWAPPABLE HERO PREVIEW FRAME (FLOATING OVER BACKGROUND) -->
         <div>
           <div class="hero-media-frame">
-            <!-- SWAPPABLE COVER IMAGE -->
             <img 
               src="Assets/IAEM/Vol42-No6-062025_03.webp" 
               alt="IAEM Bulletin Publication Cover" 
-              onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;\'>IAEM Bulletin Cover Preview</div>';" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:3rem 1.5rem;text-align:center;color:var(--text-muted);font-size:0.9rem;\'>[IAEM Bulletin Cover Preview - Swap src]</div>';" 
             />
           </div>
         </div>
@@ -674,7 +756,46 @@
 
   <main class="container">
 
-    <!-- PROBLEM & SOLUTION -->
+    <!-- 1. FEATURED SPREADS SHOWCASE (MOVED TO TOP) -->
+    <section id="spreads" class="section">
+      <h2 class="section-title">Featured Editorial Spreads</h2>
+      <p class="section-subtitle">Browse through key publication spreads demonstrating editorial hierarchy, data sidebars, and visual pacing.</p>
+
+      <div class="portrait-carousel-wrapper">
+        <div class="portrait-carousel-stage">
+          
+          <!-- Nav Arrows -->
+          <button class="carousel-nav-arrow prev" onclick="navigateSpread(-1)" aria-label="Previous Spread">‹</button>
+          
+          <!-- 4 PORTRAIT SPREAD SLIDES -->
+          <div class="portrait-slide" id="slide-0" onclick="goToSpread(0)">
+            <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Spread 1: Cover & Feature Lead" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;color:var(--text-muted);text-align:center;font-size:0.9rem;\'>[Spread 1 Placeholder - Swap src]</div>';" />
+          </div>
+
+          <div class="portrait-slide" id="slide-1" onclick="goToSpread(1)">
+            <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Spread 2: Regional Technical Briefing" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;color:var(--text-muted);text-align:center;font-size:0.9rem;\'>[Spread 2 Placeholder - Swap src]</div>';" />
+          </div>
+
+          <div class="portrait-slide" id="slide-2" onclick="goToSpread(2)">
+            <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Spread 3: Emergency Protocol Layout" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;color:var(--text-muted);text-align:center;font-size:0.9rem;\'>[Spread 3 Placeholder - Swap src]</div>';" />
+          </div>
+
+          <div class="portrait-slide" id="slide-3" onclick="goToSpread(3)">
+            <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Spread 4: Association Data & Metrics" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;color:var(--text-muted);text-align:center;font-size:0.9rem;\'>[Spread 4 Placeholder - Swap src]</div>';" />
+          </div>
+
+          <button class="carousel-nav-arrow next" onclick="navigateSpread(1)" aria-label="Next Spread">›</button>
+        </div>
+
+        <!-- Dynamic Caption -->
+        <p class="portrait-caption" id="spreadCaption">Loading spread...</p>
+
+        <!-- Dots Indicator -->
+        <div class="carousel-dots-container" id="spreadDotsContainer"></div>
+      </div>
+    </section>
+
+    <!-- 2. PROBLEM & SOLUTION (MOVED BELOW SPREADS) -->
     <section class="section">
       <h2 class="section-title">The Challenge vs. The Approach</h2>
       <p class="section-subtitle">Emergency management professionals require immediate access to dense procedural information without cognitive fatigue.</p>
@@ -704,7 +825,30 @@
       </div>
     </section>
 
-    <!-- SECTION: EDITORIAL LAYOUT STRATEGY -->
+    <!-- 3. NEW SECTION: REQUESTED INFORMATION -->
+    <section id="requested-info" class="section">
+      <h2 class="section-title">Requested Information</h2>
+      <p class="section-subtitle">Structuring complex operational briefs and stakeholder data into clear, scannable editorial modules.</p>
+
+      <div class="grid-2" style="align-items: center;">
+        <article class="card">
+          <h3>Information Architecture & Content Strategy</h3>
+          <p>
+            [Type your narrative text here. Describe how requested information, editorial briefs, and emergency management guidelines were triaged and formatted to meet strict publication standards.]
+          </p>
+        </article>
+        <div class="floating-media-frame">
+          <!-- SWAPPABLE IMAGE PATH FOR REQUESTED INFORMATION -->
+          <img 
+            src="Assets/IAEM/iaem-requested-info.webp" 
+            alt="Requested Information Asset" 
+            onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'floating-media-placeholder\'>[Requested Information Image Placeholder - Swap src]</div>';" 
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. EDITORIAL LAYOUT & GRID HIERARCHY -->
     <section id="strategy" class="section">
       <h2 class="section-title">Editorial Layout & Grid Hierarchy</h2>
       <p class="section-subtitle">Balancing visual pacing with dense technical writing across feature articles, president letters, and regional updates.</p>
@@ -727,46 +871,38 @@
       </div>
     </section>
 
-    <!-- SECTION: FEATURED SPREADS SHOWCASE (TRANSPARENT 3D PORTRAIT CAROUSEL) -->
-    <section id="spreads" class="section">
-      <h2 class="section-title">Featured Editorial Spreads</h2>
-      <p class="section-subtitle">Browse through key publication spreads demonstrating editorial hierarchy, data sidebars, and visual pacing.</p>
+    <!-- 5. NEW SECTION: WIREFRAME TO FINAL -->
+    <section id="wireframe-to-final" class="section">
+      <h2 class="section-title">Wireframe to Final</h2>
+      <p class="section-subtitle">Tracing the evolution from early structural layout wireframes to final production publication spreads.</p>
 
-      <div class="portrait-carousel-wrapper">
-        <div class="portrait-carousel-stage">
-          
-          <!-- Nav Arrows -->
-          <button class="carousel-nav-arrow prev" onclick="navigateSpread(-1)" aria-label="Previous Spread">‹</button>
-          
-          <!-- 4 PORTRAIT SPREAD SLIDES (CONTROLLED BY JS) -->
-          <div class="portrait-slide" id="slide-0" onclick="goToSpread(0)">
-            <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Spread 1: Cover & Feature Lead" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;color:var(--text-muted);text-align:center;font-size:0.9rem;\'>[Spread 1 Placeholder - Assets/IAEM/spread-1.webp]</div>';" />
+      <div class="grid-2">
+        <div>
+          <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.25rem;">Mid-fi Wireframe</h3>
+          <div class="floating-media-frame">
+            <!-- PASTE MID-FI WIREFRAME IMAGE PATH BELOW -->
+            <img 
+              src="Assets/IAEM/iaem-midfi-wireframe.webp" 
+              alt="Mid-fidelity Editorial Wireframe" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'floating-media-placeholder\'>[Mid-fi Wireframe Placeholder - Swap src]</div>';" 
+            />
           </div>
-
-          <div class="portrait-slide" id="slide-1" onclick="goToSpread(1)">
-            <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Spread 2: Regional Technical Briefing" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;color:var(--text-muted);text-align:center;font-size:0.9rem;\'>[Spread 2 Placeholder - Assets/IAEM/spread-2.webp]</div>';" />
-          </div>
-
-          <div class="portrait-slide" id="slide-2" onclick="goToSpread(2)">
-            <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Spread 3: Emergency Protocol Layout" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;color:var(--text-muted);text-align:center;font-size:0.9rem;\'>[Spread 3 Placeholder - Assets/IAEM/spread-3.webp]</div>';" />
-          </div>
-
-          <div class="portrait-slide" id="slide-3" onclick="goToSpread(3)">
-            <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Spread 4: Association Data & Metrics" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;color:var(--text-muted);text-align:center;font-size:0.9rem;\'>[Spread 4 Placeholder - Assets/IAEM/spread-4.webp]</div>';" />
-          </div>
-
-          <button class="carousel-nav-arrow next" onclick="navigateSpread(1)" aria-label="Next Spread">›</button>
         </div>
-
-        <!-- Dynamic Caption -->
-        <p class="portrait-caption" id="spreadCaption">Loading spread...</p>
-
-        <!-- Dots Indicator -->
-        <div class="carousel-dots-container" id="spreadDotsContainer"></div>
+        <div>
+          <h3 style="color: #ffffff; margin-bottom: 1rem; font-size: 1.25rem;">Final Design</h3>
+          <div class="floating-media-frame">
+            <!-- PASTE FINAL DESIGN SPREAD IMAGE PATH BELOW -->
+            <img 
+              src="Assets/IAEM/iaem-final-design.webp" 
+              alt="Final Design Spread" 
+              onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'floating-media-placeholder\'>[Final Design Placeholder - Swap src]</div>';" 
+            />
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- SECTION: IMPACT -->
+    <!-- 6. DESIGN IMPACT & RESULTS -->
     <section id="impact" class="section">
       <h2 class="section-title">Design Impact & Results</h2>
       <p class="section-subtitle">Delivering measurable reader engagement and improved information recall across the association membership.</p>
@@ -792,9 +928,9 @@
     </div>
   </footer>
 
-  <!-- DYNAMIC JAVASCRIPT FOR HEADER SCROLL & 3D PORTRAIT SPREADS CAROUSEL -->
+  <!-- DYNAMIC JAVASCRIPT -->
   <script>
-    // 1. DYNAMIC NAV HEADER SCROLL SCRIPT
+    // Header scroll background toggle
     const header = document.getElementById('siteHeader');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
@@ -804,7 +940,7 @@
       }
     });
 
-    // 2. 4 PORTRAIT SPREADS DATA (SWAP IMAGE PATHS & CAPTIONS HERE)
+    // 4 PORTRAIT SPREADS DATA (SWAP IMAGE PATHS & CAPTIONS HERE)
     const iaemSpreads = [
       {
         title: "Spread 1: Publication Cover & Feature Lead Article",
@@ -831,15 +967,12 @@
       const caption = document.getElementById('spreadCaption');
       const dotsContainer = document.getElementById('spreadDotsContainer');
 
-      // Update captions
       caption.textContent = iaemSpreads[currentSpreadIndex].title;
 
-      // Assign position classes to all 4 slide DOM elements
       for (let i = 0; i < total; i++) {
         const slide = document.getElementById(`slide-${i}`);
         if (!slide) continue;
 
-        // Reset classes
         slide.className = 'portrait-slide';
 
         if (i === currentSpreadIndex) {
@@ -853,7 +986,6 @@
         }
       }
 
-      // Render glowing dots
       dotsContainer.innerHTML = '';
       iaemSpreads.forEach((_, i) => {
         const dot = document.createElement('div');
@@ -877,6 +1009,26 @@
     document.addEventListener('DOMContentLoaded', () => {
       updateSpreadCarousel();
     });
+
+    // Mobile touch swipe support for portrait carousel
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const carouselStage = document.querySelector('.portrait-carousel-stage');
+
+    if (carouselStage) {
+      carouselStage.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      carouselStage.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 50) {
+          navigateSpread(1);
+        } else if (touchEndX - touchStartX > 50) {
+          navigateSpread(-1);
+        }
+      }, { passive: true });
+    }
   </script>
 
 </body>
