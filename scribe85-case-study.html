@@ -552,11 +552,6 @@
     .carousel-btn.prev { left: -22px; }
     .carousel-btn.next { right: -22px; }
 
-    @media (max-width: 768px) {
-      .carousel-btn.prev { left: 10px; }
-      .carousel-btn.next { right: 10px; }
-    }
-
     .carousel-caption-container {
       margin-top: 1.25rem;
       text-align: center;
@@ -622,6 +617,73 @@
       background-color: #ffffff;
     }
 
+    /* ==========================================================================
+       MOBILE RESPONSIVE & BREATHING ROOM OPTIMIZATIONS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      /* Compact, clean mobile navigation bar */
+      .nav-inner {
+        height: 60px;
+      }
+
+      .brand {
+        font-size: 1.15rem;
+      }
+
+      .nav-links {
+        gap: 0.85rem;
+      }
+
+      .nav-links a {
+        font-size: 0.825rem;
+        padding: 0.35rem 0;
+      }
+
+      .dropdown-menu {
+        min-width: 180px;
+      }
+
+      .dropdown-menu li a {
+        padding: 0.5rem 1rem;
+        font-size: 0.825rem;
+      }
+
+      .section {
+        padding: 3.5rem 0;
+      }
+
+      .hero-title,
+      .section-title,
+      .section-subtitle {
+        text-align: center;
+      }
+
+      .hero-status-tag {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-bio {
+        text-align: justify;
+        margin: 0 auto 1.5rem auto;
+      }
+
+      .section-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 1rem;
+      }
+
+      .carousel-btn.prev { left: 10px; }
+      .carousel-btn.next { right: 10px; }
+    }
+
     .site-footer {
       padding: 3rem 0;
       color: var(--text-muted);
@@ -647,8 +709,8 @@
               <li><a href="iaem-bulletin-case-study.html">IAEM</a></li>
               <li><a href="k12-insight-illustration-project-case-study.html">K12 Insight</a></li>
               <li><a href="presentations-case-study.html">Presentations</a></li>
-              <li><a href="photography-case-study.html">Photography</a></li>
               <li><a href="videography.html">Videography</a></li>
+              <li><a href="photography-case-study.html">Photography</a></li>
             </ul>
           </li>
           <li><a href="Resume.html">Resume</a></li>
