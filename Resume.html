@@ -47,7 +47,7 @@
     .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
     .section { padding: 4rem 0; border-bottom: 1px solid var(--border-subtle); }
 
-    /* HEADER */
+    /* DYNAMIC TRANSPARENT HEADER */
     .site-header {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
       background-color: transparent; backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px);
@@ -74,7 +74,7 @@
     }
     .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
     .dropdown-menu li a { padding: 0.6rem 1.25rem; font-size: 0.9rem; color: var(--text-muted); transition: background-color 0.2s ease, color 0.2s ease; }
-    .dropdown-menu li a:hover { background-color: var(--bg-surface-hover); color: var(--accent); }
+    .dropdown-menu li a:hover, .dropdown-menu li a.active { background-color: var(--bg-surface-hover); color: var(--accent); }
 
     h1, h2, h3, .brand, .hero-title, .section-title, .resume-card-title {
       font-family: var(--font-heading); color: #ffffff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.28), 0 0 20px rgba(255, 255, 255, 0.12);
@@ -142,6 +142,8 @@
       color: var(--text-muted);
       font-size: 0.975rem;
       line-height: 1.65;
+      text-align: justify;
+      text-justify: inter-word;
     }
     .resume-bullets li { margin-bottom: 0.65rem; }
 
@@ -192,6 +194,72 @@
       background-color: #ffffff;
     }
 
+    /* ==========================================================================
+       MOBILE RESPONSIVE & BREATHING ROOM OPTIMIZATIONS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .nav-inner {
+        height: 60px;
+      }
+
+      .brand {
+        font-size: 1.15rem;
+      }
+
+      .nav-links {
+        gap: 0.85rem;
+      }
+
+      .nav-links a {
+        font-size: 0.825rem;
+        padding: 0.35rem 0;
+      }
+
+      .dropdown-menu {
+        min-width: 180px;
+      }
+
+      .dropdown-menu li a {
+        padding: 0.5rem 1rem;
+        font-size: 0.825rem;
+      }
+
+      .section {
+        padding: 3.5rem 0;
+      }
+
+      .hero-title,
+      .section-title {
+        text-align: center;
+      }
+
+      .hero-status-tag {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-bio {
+        text-align: justify;
+        margin: 0 auto;
+      }
+
+      .timeline-card {
+        padding: 1.5rem;
+      }
+
+      .timeline-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+      }
+    }
+
     .site-footer { padding: 3rem 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--border-subtle); }
   </style>
 </head>
@@ -205,12 +273,13 @@
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li class="dropdown">
-            <a href="index.html#scribe85">Portfolio ▾</a>
+            <a href="index.html#portfolio">Portfolio ▾</a>
             <ul class="dropdown-menu">
               <li><a href="scribe85-case-study.html">scribe85</a></li>
-              <li><a href="iaem-bulletin-case-study.html">Corporate Communication</a></li>
+              <li><a href="iaem-bulletin-case-study.html">IAEM</a></li>
               <li><a href="k12-insight-illustration-project-case-study.html">K12 Insight</a></li>
               <li><a href="presentations-case-study.html">Presentations</a></li>
+              <li><a href="videography.html">Videography</a></li>
               <li><a href="photography-case-study.html">Photography</a></li>
             </ul>
           </li>
@@ -229,7 +298,7 @@
       </div>
       <h1 class="hero-title">Phillip Joseph Villarreal</h1>
       <p class="hero-bio">
-        UX Designer with over 10 years of experience architecting intuitive, human-centered digital solutions across enterprise environments. Expert at translating complex strategic concepts into scalable information architectures, wireframes, and interactive prototypes using Figma. Partners with executive stakeholders and cross-functional teams to deliver accessible, data-driven digital experiences compliant with Section 508/WCAG standards.[cite: 1]
+        UX Designer with over 10 years of experience architecting intuitive, human-centered digital solutions across enterprise environments. Expert at translating complex strategic concepts into scalable information architectures, wireframes, and interactive prototypes using Figma. Partners with executive stakeholders and cross-functional teams to deliver accessible, data-driven digital experiences compliant with Section 508/WCAG standards.
       </p>
     </div>
   </section>
@@ -249,11 +318,11 @@
           </div>
           <p class="company-location">FirstDay Foundation • San Antonio, TX</p>
           <ul class="resume-bullets">
-            <li>Spearheaded UX audit, information architecture overhaul, and responsive redesign of SharePoint portals for 10+ affiliate organizations, optimizing user navigation and digital asset findability.[cite: 1]</li>
-            <li>Partnered with executive leadership and cross-functional stakeholders to translate complex product visions into intuitive digital workflows and strategic communication frameworks.[cite: 1]</li>
-            <li>Designed advanced data visualizations, interactive presentation frameworks, and informational layouts that synthesized complex operational data into clear, actionable insights for senior leaders and government officials.[cite: 1]</li>
-            <li>Championed human-centered design (HCD) principles across digital and print experiences, ensuring all enterprise assets conformed to modern usability standards and Section 508 accessibility guidelines.[cite: 1]</li>
-            <li>Managed a demanding pipeline of concurrent digital design projects, applying rapid iteration and sprint management to deliver production-ready UX solutions within accelerated timelines.[cite: 1]</li>
+            <li>Spearheaded UX audit, information architecture overhaul, and responsive redesign of SharePoint portals for 10+ affiliate organizations, optimizing user navigation and digital asset findability.</li>
+            <li>Partnered with executive leadership and cross-functional stakeholders to translate complex product visions into intuitive digital workflows and strategic communication frameworks.</li>
+            <li>Designed advanced data visualizations, interactive presentation frameworks, and informational layouts that synthesized complex operational data into clear, actionable insights for senior leaders and government officials.</li>
+            <li>Championed human-centered design (HCD) principles across digital and print experiences, ensuring all enterprise assets conformed to modern usability standards and Section 508 accessibility guidelines.</li>
+            <li>Managed a demanding pipeline of concurrent digital design projects, applying rapid iteration and sprint management to deliver production-ready UX solutions within accelerated timelines.</li>
           </ul>
         </article>
 
@@ -265,9 +334,9 @@
           </div>
           <p class="company-location">FirstDay Foundation • San Antonio, TX</p>
           <ul class="resume-bullets">
-            <li>Built comprehensive layout systems, user-centric proposal frameworks, and structured compliance matrices using Figma, Adobe Illustrator, and InDesign to optimize document readability for evaluators.[cite: 1]</li>
-            <li>Coordinated cross-functional workflows and timeline mapping to synthesize technical inputs from multiple subject matter experts into cohesive, user-friendly submissions.[cite: 1]</li>
-            <li>Architected user journeys and graphic communication frameworks for executive-level presentations, corporate pitch decks, and leadership-facing interactive materials.[cite: 1]</li>
+            <li>Built comprehensive layout systems, user-centric proposal frameworks, and structured compliance matrices using Figma, Adobe Illustrator, and InDesign to optimize document readability for evaluators.</li>
+            <li>Coordinated cross-functional workflows and timeline mapping to synthesize technical inputs from multiple subject matter experts into cohesive, user-friendly submissions.</li>
+            <li>Architected user journeys and graphic communication frameworks for executive-level presentations, corporate pitch decks, and leadership-facing interactive materials.</li>
           </ul>
         </article>
 
@@ -279,8 +348,8 @@
           </div>
           <p class="company-location">VetsEZ • Norfolk, VA</p>
           <ul class="resume-bullets">
-            <li>Engineered scalable user interfaces, technical workflow wireframes, and digital presentation graphics in collaboration with cross-functional teams using Figma and Adobe Illustrator.[cite: 1]</li>
-            <li>Standardized enterprise-level layout systems and component libraries to maintain visual consistency and accelerate multi-channel communication workflows.[cite: 1]</li>
+            <li>Engineered scalable user interfaces, technical workflow wireframes, and digital presentation graphics in collaboration with cross-functional teams using Figma and Adobe Illustrator.</li>
+            <li>Standardized enterprise-level layout systems and component libraries to maintain visual consistency and accelerate multi-channel communication workflows.</li>
           </ul>
         </article>
 
@@ -292,8 +361,8 @@
           </div>
           <p class="company-location">ProposalHelper • Herndon, VA</p>
           <ul class="resume-bullets">
-            <li>Established and maintained centralized Figma component libraries and layout templates to accelerate cross-functional design-to-delivery workflows across 15+ concurrent projects.[cite: 1]</li>
-            <li>Collaborated with technical subject matter experts to map complex technical processes into digestible, user-focused visual systems and web layouts.[cite: 1]</li>
+            <li>Established and maintained centralized Figma component libraries and layout templates to accelerate cross-functional design-to-delivery workflows across 15+ concurrent projects.</li>
+            <li>Collaborated with technical subject matter experts to map complex technical processes into digestible, user-focused visual systems and web layouts.</li>
           </ul>
         </article>
 
@@ -305,8 +374,8 @@
           </div>
           <p class="company-location">K12 <em>Insight</em> • Herndon, VA</p>
           <ul class="resume-bullets">
-            <li>Designed educational and SaaS tutorial digital media, optimizing user onboarding and interface familiarity for web-based software products.[cite: 1]</li>
-            <li>Applied ADDIE instructional design frameworks and user behavior principles to map intuitive narrative structures, minimizing cognitive load for platform users.[cite: 1]</li>
+            <li>Designed educational and SaaS tutorial digital media, optimizing user onboarding and interface familiarity for web-based software products.</li>
+            <li>Applied ADDIE instructional design frameworks and user behavior principles to map intuitive narrative structures, minimizing cognitive load for platform users.</li>
           </ul>
         </article>
 
@@ -318,8 +387,8 @@
           </div>
           <p class="company-location">Study.com • Mountain View, CA</p>
           <ul class="resume-bullets">
-            <li>Developed high-volume, user-centered multimedia and interactive educational frameworks to enhance digital learner engagement and knowledge retention.[cite: 1]</li>
-            <li>Designed structured user flows and narrative paths to break down complex academic concepts into clear, accessible digital experiences.[cite: 1]</li>
+            <li>Developed high-volume, user-centered multimedia and interactive educational frameworks to enhance digital learner engagement and knowledge retention.</li>
+            <li>Designed structured user flows and narrative paths to break down complex academic concepts into clear, accessible digital experiences.</li>
           </ul>
         </article>
 
@@ -336,10 +405,10 @@
         </div>
         <p class="company-location">Independent Web Application</p>
         <ul class="resume-bullets">
-          <li>Independently designed and developed a zero-to-one, browser-based writing workspace.[cite: 1]</li>
-          <li>Implemented markdown formatting, fluid UX principles, and single-file browser functionality.[cite: 1]</li>
-          <li>Engineered custom dark-surface UI token systems in CSS/JS, optimizing typographic hierarchy, line-height dynamics, and high-contrast accessibility.[cite: 1]</li>
-          <li>Implemented both local storage and Google cloud storage auto-save state indicators and custom event listeners to ensure seamless client-side performance without external dependencies.[cite: 1]</li>
+          <li>Independently designed and developed a zero-to-one, browser-based writing workspace.</li>
+          <li>Implemented markdown formatting, fluid UX principles, and single-file browser functionality.</li>
+          <li>Engineered custom dark-surface UI token systems in CSS/JS, optimizing typographic hierarchy, line-height dynamics, and high-contrast accessibility.</li>
+          <li>Implemented both local storage and Google cloud storage auto-save state indicators and custom event listeners to ensure seamless client-side performance without external dependencies.</li>
         </ul>
       </article>
     </section>
@@ -350,15 +419,15 @@
       <div class="grid-3">
         <div class="info-card">
           <h3>UX & UI Design</h3>
-          <p>Wireframing, Low/High-Fidelity Prototyping, Information Architecture (IA), User Journey Mapping, Interaction Design, Responsive Design, Design Systems, Accessibility (Section 508/WCAG).[cite: 1]</p>
+          <p>Wireframing, Low/High-Fidelity Prototyping, Information Architecture (IA), User Journey Mapping, Interaction Design, Responsive Design, Design Systems, Accessibility (Section 508/WCAG).</p>
         </div>
         <div class="info-card">
           <h3>User Research</h3>
-          <p>Usability Testing, UX Audits, Persona Development, Heuristic Evaluation.[cite: 1]</p>
+          <p>Usability Testing, UX Audits, Persona Development, Heuristic Evaluation.</p>
         </div>
         <div class="info-card">
           <h3>Software & Tech Stack</h3>
-          <p>Figma, Adobe Creative Suite (Illustrator, Photoshop, InDesign, After Effects, Premiere), SharePoint, WordPress, Office 365, Articulate Storyline, HTML/CSS/JS.[cite: 1]</p>
+          <p>Figma, Adobe Creative Suite (Illustrator, Photoshop, InDesign, After Effects, Premiere), SharePoint, WordPress, Office 365, Articulate Storyline, HTML/CSS/JS.</p>
         </div>
       </div>
     </section>
@@ -369,21 +438,21 @@
         <div class="info-card">
           <h2 class="section-title" style="font-size: 1.4rem; margin-bottom: 1rem;">Education</h2>
           <div style="margin-bottom: 1.25rem;">
-            <p><strong>The University of Maryland - Baltimore County</strong>[cite: 1]</p>
-            <p>B.A. Visual Arts • 2025 – Present[cite: 1]</p>
+            <p><strong>The University of Maryland - Baltimore County</strong></p>
+            <p>B.A. Visual Arts • 2025 – Present</p>
           </div>
           <div>
-            <p><strong>The University of Texas - Austin</strong>[cite: 1]</p>
-            <p>B.S. Communication Studies • 2008 – 2013[cite: 1]</p>
+            <p><strong>The University of Texas - Austin</strong></p>
+            <p>B.S. Communication Studies • 2008 – 2013</p>
           </div>
         </div>
 
         <div class="info-card">
           <h2 class="section-title" style="font-size: 1.4rem; margin-bottom: 1rem;">Certifications</h2>
           <ul class="resume-bullets" style="padding-left: 1.2rem;">
-            <li><strong>User Experience Design Fundamentals</strong> — IBM[cite: 1]</li>
-            <li><strong>Enterprise Design Thinking Practitioner</strong> — IBM[cite: 1]</li>
-            <li><strong>Instructional Designer Learning Path</strong> — LinkedIn[cite: 1]</li>
+            <li><strong>User Experience Design Fundamentals</strong> — IBM</li>
+            <li><strong>Enterprise Design Thinking Practitioner</strong> — IBM</li>
+            <li><strong>Instructional Designer Learning Path</strong> — LinkedIn</li>
           </ul>
         </div>
       </div>
@@ -393,7 +462,6 @@
     <section class="cta-banner">
       <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; color: #ffffff;">Download Full Resume</h2>
       <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Get an offline, ATS-friendly PDF version of my resume.</p>
-      <!-- Ensure the path matches your PDF filename in the repository -->
       <a href="Assets/Resume_VillarrealPhillip_2026.pdf" download="Phillip_Villarreal_Resume_2026.pdf" class="cta-button">Download Official PDF ↗</a>
     </section>
 
