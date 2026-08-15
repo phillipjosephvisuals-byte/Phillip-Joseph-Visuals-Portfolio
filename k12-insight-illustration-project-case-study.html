@@ -109,12 +109,17 @@
     .hero-bio { color: var(--text-muted); font-size: 1.075rem; line-height: 1.7; margin-bottom: 1.75rem; max-width: 580px; text-align: justify; text-justify: inter-word; }
 
     .hero-media-frame {
-      position: relative; width: 100%; aspect-ratio: 16 / 10; margin-left: auto; margin-right: 0;
-      border-radius: 16px; background-color: var(--bg-surface); border: 1px solid var(--border-subtle);
-      overflow: hidden; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8); transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative; width: 100%; border-radius: 12px;
+      background-color: var(--bg-surface); border: 1px solid var(--border-subtle);
+      overflow: hidden; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 25px rgba(56, 225, 255, 0.12);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .hero-media-frame:hover { border-color: var(--accent); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 225, 255, 0.3); }
-    .hero-media-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-media-frame:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(56, 225, 255, 0.3);
+    }
+    .hero-media-frame img { width: 100%; height: auto; object-fit: contain; display: block; }
 
     .meta-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem;
@@ -138,6 +143,36 @@
     .card p, .card ul { color: var(--text-muted); font-size: 0.975rem; line-height: 1.65; text-align: justify; text-justify: inter-word; }
     .card ul { list-style-type: disc; padding-left: 1.25rem; margin-top: 0.5rem; }
     .card ul li { margin-bottom: 0.5rem; }
+
+    /* FLOATING UNCONSTRAINED MEDIA FRAME */
+    .floating-media-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background-color: var(--bg-surface);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 25px rgba(56, 225, 255, 0.08);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .floating-media-frame:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 225, 255, 0.25);
+    }
+    .floating-media-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+    .floating-media-placeholder {
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      background-color: var(--bg-surface);
+    }
 
     /* --- CAROUSEL STYLES --- */
     .carousel-container {
@@ -209,11 +244,6 @@
     .carousel-btn.prev { left: -22px; }
     .carousel-btn.next { right: -22px; }
 
-    @media (max-width: 768px) {
-      .carousel-btn.prev { left: 10px; }
-      .carousel-btn.next { right: 10px; }
-    }
-
     .carousel-caption-container {
       margin-top: 1.25rem;
       text-align: center;
@@ -230,6 +260,10 @@
       justify-content: center;
       gap: 0.6rem;
       margin-top: 0.75rem;
+      flex-wrap: wrap;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
     }
     .indicator-dot {
       width: 10px;
@@ -245,6 +279,72 @@
       background-color: var(--accent);
       transform: scale(1.2);
       box-shadow: 0 0 8px var(--accent);
+    }
+
+    /* ==========================================================================
+       MOBILE RESPONSIVE & BREATHING ROOM OPTIMIZATIONS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .nav-inner {
+        height: 60px;
+      }
+
+      .brand {
+        font-size: 1.15rem;
+      }
+
+      .nav-links {
+        gap: 0.85rem;
+      }
+
+      .nav-links a {
+        font-size: 0.825rem;
+        padding: 0.35rem 0;
+      }
+
+      .dropdown-menu {
+        min-width: 180px;
+      }
+
+      .dropdown-menu li a {
+        padding: 0.5rem 1rem;
+        font-size: 0.825rem;
+      }
+
+      .section {
+        padding: 3.5rem 0;
+      }
+
+      .hero-title,
+      .section-title,
+      .section-subtitle {
+        text-align: center;
+      }
+
+      .hero-status-tag {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-bio {
+        text-align: justify;
+        margin: 0 auto 1.5rem auto;
+      }
+
+      .section-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 1rem;
+      }
+
+      .carousel-btn.prev { left: 10px; }
+      .carousel-btn.next { right: 10px; }
     }
 
     .site-footer { padding: 3rem 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--border-subtle); }
@@ -266,8 +366,8 @@
               <li><a href="iaem-bulletin-case-study.html">IAEM</a></li>
               <li><a href="k12-insight-illustration-project-case-study.html" class="active">K12 Insight</a></li>
               <li><a href="presentations-case-study.html">Presentations</a></li>
-              <li><a href="photography-case-study.html">Photography</a></li>
               <li><a href="videography.html">Videography</a></li>
+              <li><a href="photography-case-study.html">Photography</a></li>
             </ul>
           </li>
           <li><a href="Resume.html">Resume</a></li>
@@ -277,6 +377,7 @@
     </div>
   </header>
 
+  <!-- SUBPAGE HERO SECTION -->
   <section id="overview" class="subpage-hero">
     <div class="hero-inner-container">
       <div class="hero-grid">
@@ -291,7 +392,7 @@
         </div>
         <div>
           <div class="hero-media-frame">
-            <img src="Assets/K12Insight/K12Insight_012.webp" alt="K12 Insight Featured Artwork" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;\'>K12 Insight Hero Artwork</div>';" />
+            <img src="Assets/K12Insight/K12Insight_012.webp" alt="K12 Insight Featured Artwork" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:3rem 1.5rem;text-align:center;color:var(--text-muted);font-size:0.9rem;\'>[K12 Insight Hero Artwork - Swap src]</div>';" />
           </div>
         </div>
       </div>
@@ -305,6 +406,50 @@
   </section>
 
   <main class="container">
+
+    <!-- 1. THE PROJECT (3 FLOATING IMAGES + NARRATIVE PARAGRAPH) -->
+    <section id="the-project" class="section">
+      <h2 class="section-title">The Project</h2>
+      <p class="section-subtitle">Origins, cross-functional collaboration, and creative mandate for K12 <em>Insight</em>'s visual brand evolution.</p>
+
+      <!-- 3 Floating Images Row -->
+      <div class="grid-3" style="margin-bottom: 2rem;">
+        <div class="floating-media-frame">
+          <!-- SWAPPABLE IMAGE 1 -->
+          <img 
+            src="Assets/K12Insight/K12Insight_001.webp" 
+            alt="The Project Study 1" 
+            onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'floating-media-placeholder\'>[Project Image 1 Placeholder - Swap src]</div>';" 
+          />
+        </div>
+        <div class="floating-media-frame">
+          <!-- SWAPPABLE IMAGE 2 -->
+          <img 
+            src="Assets/K12Insight/K12Insight_002.webp" 
+            alt="The Project Study 2" 
+            onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'floating-media-placeholder\'>[Project Image 2 Placeholder - Swap src]</div>';" 
+          />
+        </div>
+        <div class="floating-media-frame">
+          <!-- SWAPPABLE IMAGE 3 -->
+          <img 
+            src="Assets/K12Insight/K12Insight_003.webp" 
+            alt="The Project Study 3" 
+            onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'floating-media-placeholder\'>[Project Image 3 Placeholder - Swap src]</div>';" 
+          />
+        </div>
+      </div>
+
+      <!-- Narrative Text Card -->
+      <article class="card">
+        <h3>Project Background & Stakeholders</h3>
+        <p>
+          [Type your narrative text here. Detail what the project entailed, how the engagement originated, who you worked with across product, design, and marketing teams, and the overarching goals for this illustration initiative.]
+        </p>
+      </article>
+    </section>
+
+    <!-- 2. THE CHALLENGE VS. THE CREATIVE DIRECTION -->
     <section class="section">
       <h2 class="section-title">The Challenge vs. The Creative Direction</h2>
       <p class="section-subtitle">EdTech communications frequently lean on generic stock photography that fails to represent diverse student and educator experiences authentically.</p>
@@ -332,137 +477,7 @@
       </div>
     </section>
 
-    <!-- SELECTED ILLUSTRATION STUDIES CAROUSEL -->
-    <section id="illustrations" class="section">
-      <h2 class="section-title">Selected Illustration Studies</h2>
-      <p class="section-subtitle">A showcase of bespoke visual storytelling assets produced for campaign touchpoints and platform features.</p>
-      
-      <div class="carousel-container">
-        <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous Slide">‹</button>
-        <button class="carousel-btn next" id="carouselNext" aria-label="Next Slide">›</button>
-        
-        <div class="carousel-stage" id="carouselStage">
-          <!-- Slide 1 -->
-          <div class="carousel-slide active" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_001.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 1 Placeholder</div>';" />
-          </div>
-          <!-- Slide 2 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_002.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 2 Placeholder</div>';" />
-          </div>
-          <!-- Slide 3 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_003.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 3 Placeholder</div>';" />
-          </div>
-           <!-- Slide 4 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_004.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 4 Placeholder</div>';" />
-          </div>
-           <!-- Slide 5 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_005.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 5 Placeholder</div>';" />
-          </div>
-           <!-- Slide 6 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_006.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 6 Placeholder</div>';" />
-          </div>
-           <!-- Slide 7 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_007.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 7 Placeholder</div>';" />
-          </div>
-           <!-- Slide 8 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_008.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 8 Placeholder</div>';" />
-          </div>
-           <!-- Slide 9 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_009.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 9 Placeholder</div>';" />
-          </div>
-           <!-- Slide 10 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_010.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 10 Placeholder</div>';" />
-          </div>
-          <!-- Slide 11 -->
-          <div class="carousel-slide active" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_011.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 11 Placeholder</div>';" />
-          </div>
-          <!-- Slide 12 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_012.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 12 Placeholder</div>';" />
-          </div>
-          <!-- Slide 13 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_013.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 13 Placeholder</div>';" />
-          </div>
-           <!-- Slide 14 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_014.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 14 Placeholder</div>';" />
-          </div>
-           <!-- Slide 15 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_015.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 15 Placeholder</div>';" />
-          </div>
-           <!-- Slide 16 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_016.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 16 Placeholder</div>';" />
-          </div>
-           <!-- Slide 17 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_017.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 17 Placeholder</div>';" />
-          </div>
-           <!-- Slide 18 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_018.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 18 Placeholder</div>';" />
-          </div>
-           <!-- Slide 19 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_019.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 19 Placeholder</div>';" />
-          </div>
-           <!-- Slide 20 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_020.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 20 Placeholder</div>';" />
-          </div>
-           <!-- Slide 21 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_021.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 21 Placeholder</div>';" />
-          </div>
-           <!-- Slide 22 -->
-          <div class="carousel-slide" data-caption="">
-            <img src="Assets/K12Insight/K12Insight_022.webp" alt="" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 22 Placeholder</div>';" />
-          </div>
-        </div>
-
-        <div class="carousel-caption-container">
-          <p class="carousel-caption" id="carouselCaption"></p>
-        </div>
-
-        <div class="carousel-indicators" id="carouselIndicators">
-          <button class="indicator-dot active" aria-label="Go to slide 1"></button>
-          <button class="indicator-dot" aria-label="Go to slide 2"></button>
-          <button class="indicator-dot" aria-label="Go to slide 3"></button>
-          <button class="indicator-dot" aria-label="Go to slide 4"></button>
-          <button class="indicator-dot" aria-label="Go to slide 5"></button>
-           <button class="indicator-dot" aria-label="Go to slide 6"></button>
-          <button class="indicator-dot" aria-label="Go to slide 7"></button>
-          <button class="indicator-dot" aria-label="Go to slide 8"></button>
-          <button class="indicator-dot" aria-label="Go to slide 9"></button>
-          <button class="indicator-dot" aria-label="Go to slide 10"></button>
-          <button class="indicator-dot" aria-label="Go to slide 11"></button>
-          <button class="indicator-dot" aria-label="Go to slide 12"></button>
-          <button class="indicator-dot" aria-label="Go to slide 13"></button>
-          <button class="indicator-dot" aria-label="Go to slide 14"></button>
-          <button class="indicator-dot" aria-label="Go to slide 15"></button>
-          <button class="indicator-dot" aria-label="Go to slide 16"></button>
-          <button class="indicator-dot" aria-label="Go to slide 17"></button>
-          <button class="indicator-dot" aria-label="Go to slide 18"></button>
-          <button class="indicator-dot" aria-label="Go to slide 19"></button>
-          <button class="indicator-dot" aria-label="Go to slide 20"></button>
-          <button class="indicator-dot" aria-label="Go to slide 21"></button>
-           <button class="indicator-dot" aria-label="Go to slide 22"></button>
-        </div>
-      </div>
-    </section>
-
+    <!-- 3. DESIGN SYSTEM & WORKFLOW -->
     <section id="system" class="section">
       <h2 class="section-title">Design System & Workflow</h2>
       <p class="section-subtitle">From initial thumbnail sketches to production-ready scalable vector assets.</p>
@@ -482,6 +497,138 @@
       </div>
     </section>
 
+    <!-- 4. SELECTED ILLUSTRATION STUDIES CAROUSEL (POSITIONED ABOVE IMPACT) -->
+    <section id="illustrations" class="section">
+      <h2 class="section-title">Selected Illustration Studies</h2>
+      <p class="section-subtitle">A showcase of bespoke visual storytelling assets produced for campaign touchpoints and platform features.</p>
+      
+      <div class="carousel-container">
+        <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous Slide">‹</button>
+        <button class="carousel-btn next" id="carouselNext" aria-label="Next Slide">›</button>
+        
+        <div class="carousel-stage" id="carouselStage">
+          <!-- Slide 1 -->
+          <div class="carousel-slide active" data-caption="Stakeholder Collaboration & Community Voice">
+            <img src="Assets/K12Insight/K12Insight_001.webp" alt="Stakeholder Collaboration & Community Voice" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 1 Placeholder</div>';" />
+          </div>
+          <!-- Slide 2 -->
+          <div class="carousel-slide" data-caption="School Climate & Continuous Feedback">
+            <img src="Assets/K12Insight/K12Insight_002.webp" alt="School Climate & Continuous Feedback" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 2 Placeholder</div>';" />
+          </div>
+          <!-- Slide 3 -->
+          <div class="carousel-slide" data-caption="Educational Leadership & Strategic Planning">
+            <img src="Assets/K12Insight/K12Insight_003.webp" alt="Educational Leadership & Strategic Planning" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 3 Placeholder</div>';" />
+          </div>
+          <!-- Slide 4 -->
+          <div class="carousel-slide" data-caption="Inclusive Student Experience">
+            <img src="Assets/K12Insight/K12Insight_004.webp" alt="Inclusive Student Experience" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 4 Placeholder</div>';" />
+          </div>
+          <!-- Slide 5 -->
+          <div class="carousel-slide" data-caption="Parent & Educator Communication">
+            <img src="Assets/K12Insight/K12Insight_005.webp" alt="Parent & Educator Communication" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 5 Placeholder</div>';" />
+          </div>
+          <!-- Slide 6 -->
+          <div class="carousel-slide" data-caption="Digital Survey & Metric Dashboards">
+            <img src="Assets/K12Insight/K12Insight_006.webp" alt="Digital Survey & Metric Dashboards" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 6 Placeholder</div>';" />
+          </div>
+          <!-- Slide 7 -->
+          <div class="carousel-slide" data-caption="Safe & Supportive School Environment">
+            <img src="Assets/K12Insight/K12Insight_007.webp" alt="Safe & Supportive School Environment" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 7 Placeholder</div>';" />
+          </div>
+          <!-- Slide 8 -->
+          <div class="carousel-slide" data-caption="District-Wide Alignment & Strategy">
+            <img src="Assets/K12Insight/K12Insight_008.webp" alt="District-Wide Alignment & Strategy" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 8 Placeholder</div>';" />
+          </div>
+          <!-- Slide 9 -->
+          <div class="carousel-slide" data-caption="Teacher Professional Growth">
+            <img src="Assets/K12Insight/K12Insight_009.webp" alt="Teacher Professional Growth" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 9 Placeholder</div>';" />
+          </div>
+          <!-- Slide 10 -->
+          <div class="carousel-slide" data-caption="Data Analytics & Real-Time Action">
+            <img src="Assets/K12Insight/K12Insight_010.webp" alt="Data Analytics & Real-Time Action" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 10 Placeholder</div>';" />
+          </div>
+          <!-- Slide 11 -->
+          <div class="carousel-slide" data-caption="Collaborative Workspaces">
+            <img src="Assets/K12Insight/K12Insight_011.webp" alt="Collaborative Workspaces" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 11 Placeholder</div>';" />
+          </div>
+          <!-- Slide 12 -->
+          <div class="carousel-slide" data-caption="Unified Brand Storytelling">
+            <img src="Assets/K12Insight/K12Insight_012.webp" alt="Unified Brand Storytelling" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 12 Placeholder</div>';" />
+          </div>
+          <!-- Slide 13 -->
+          <div class="carousel-slide" data-caption="Technology Empowering Educators">
+            <img src="Assets/K12Insight/K12Insight_013.webp" alt="Technology Empowering Educators" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 13 Placeholder</div>';" />
+          </div>
+          <!-- Slide 14 -->
+          <div class="carousel-slide" data-caption="Student-Centered Learning Modalities">
+            <img src="Assets/K12Insight/K12Insight_014.webp" alt="Student-Centered Learning Modalities" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 14 Placeholder</div>';" />
+          </div>
+          <!-- Slide 15 -->
+          <div class="carousel-slide" data-caption="Community Forum & Civic Engagement">
+            <img src="Assets/K12Insight/K12Insight_015.webp" alt="Community Forum & Civic Engagement" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 15 Placeholder</div>';" />
+          </div>
+          <!-- Slide 16 -->
+          <div class="carousel-slide" data-caption="Creative Curriculum Expansion">
+            <img src="Assets/K12Insight/K12Insight_016.webp" alt="Creative Curriculum Expansion" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 16 Placeholder</div>';" />
+          </div>
+          <!-- Slide 17 -->
+          <div class="carousel-slide" data-caption="Operational Excellence in Education">
+            <img src="Assets/K12Insight/K12Insight_017.webp" alt="Operational Excellence in Education" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 17 Placeholder</div>';" />
+          </div>
+          <!-- Slide 18 -->
+          <div class="carousel-slide" data-caption="Transparent Communication Channels">
+            <img src="Assets/K12Insight/K12Insight_018.webp" alt="Transparent Communication Channels" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 18 Placeholder</div>';" />
+          </div>
+          <!-- Slide 19 -->
+          <div class="carousel-slide" data-caption="Accessible Learning Across All Backgrounds">
+            <img src="Assets/K12Insight/K12Insight_019.webp" alt="Accessible Learning Across All Backgrounds" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 19 Placeholder</div>';" />
+          </div>
+          <!-- Slide 20 -->
+          <div class="carousel-slide" data-caption="Future-Ready District Solutions">
+            <img src="Assets/K12Insight/K12Insight_020.webp" alt="Future-Ready District Solutions" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 20 Placeholder</div>';" />
+          </div>
+          <!-- Slide 21 -->
+          <div class="carousel-slide" data-caption="Holistic School Ecosystems">
+            <img src="Assets/K12Insight/K12Insight_021.webp" alt="Holistic School Ecosystems" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 21 Placeholder</div>';" />
+          </div>
+          <!-- Slide 22 -->
+          <div class="carousel-slide" data-caption="Continuous Growth & Community Trust">
+            <img src="Assets/K12Insight/K12Insight_022.webp" alt="Continuous Growth & Community Trust" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'color:var(--text-muted);font-size:0.9rem;\'>Artwork 22 Placeholder</div>';" />
+          </div>
+        </div>
+
+        <div class="carousel-caption-container">
+          <p class="carousel-caption" id="carouselCaption">Stakeholder Collaboration & Community Voice</p>
+        </div>
+
+        <div class="carousel-indicators" id="carouselIndicators">
+          <button class="indicator-dot active" aria-label="Go to slide 1"></button>
+          <button class="indicator-dot" aria-label="Go to slide 2"></button>
+          <button class="indicator-dot" aria-label="Go to slide 3"></button>
+          <button class="indicator-dot" aria-label="Go to slide 4"></button>
+          <button class="indicator-dot" aria-label="Go to slide 5"></button>
+          <button class="indicator-dot" aria-label="Go to slide 6"></button>
+          <button class="indicator-dot" aria-label="Go to slide 7"></button>
+          <button class="indicator-dot" aria-label="Go to slide 8"></button>
+          <button class="indicator-dot" aria-label="Go to slide 9"></button>
+          <button class="indicator-dot" aria-label="Go to slide 10"></button>
+          <button class="indicator-dot" aria-label="Go to slide 11"></button>
+          <button class="indicator-dot" aria-label="Go to slide 12"></button>
+          <button class="indicator-dot" aria-label="Go to slide 13"></button>
+          <button class="indicator-dot" aria-label="Go to slide 14"></button>
+          <button class="indicator-dot" aria-label="Go to slide 15"></button>
+          <button class="indicator-dot" aria-label="Go to slide 16"></button>
+          <button class="indicator-dot" aria-label="Go to slide 17"></button>
+          <button class="indicator-dot" aria-label="Go to slide 18"></button>
+          <button class="indicator-dot" aria-label="Go to slide 19"></button>
+          <button class="indicator-dot" aria-label="Go to slide 20"></button>
+          <button class="indicator-dot" aria-label="Go to slide 21"></button>
+          <button class="indicator-dot" aria-label="Go to slide 22"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. IMPACT & BRAND ALIGNMENT -->
     <section id="outcomes" class="section">
       <h2 class="section-title">Impact & Brand Alignment</h2>
       <p class="section-subtitle">Elevating brand distinction and humanizing technical communication in the K-12 education sector.</p>
@@ -525,7 +672,7 @@
       dots.forEach((dot, i) => {
         dot.classList.toggle('active', i === index);
       });
-      captionEl.textContent = slides[index].getAttribute('data-caption');
+      captionEl.textContent = slides[index].getAttribute('data-caption') || `Study ${index + 1}`;
       currentIndex = index;
     }
 
@@ -555,10 +702,8 @@
     stage.addEventListener('touchend', (e) => {
       touchEndX = e.changedTouches[0].screenX;
       if (touchStartX - touchEndX > 50) {
-        // Swiped left -> Next
         updateCarousel((currentIndex + 1) % slides.length);
       } else if (touchEndX - touchStartX > 50) {
-        // Swiped right -> Prev
         updateCarousel((currentIndex - 1 + slides.length) % slides.length);
       }
     }, { passive: true });
