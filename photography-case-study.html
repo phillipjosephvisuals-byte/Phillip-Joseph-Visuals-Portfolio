@@ -143,7 +143,7 @@
       transition: background-color 0.2s ease, color 0.2s ease;
     }
 
-    .dropdown-menu li a:hover {
+    .dropdown-menu li a:hover, .dropdown-menu li a.active {
       background-color: var(--bg-surface-hover);
       color: var(--accent);
     }
@@ -372,6 +372,7 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
+      padding: 1rem;
     }
 
     .modal-overlay.active {
@@ -381,8 +382,8 @@
 
     .modal-close-btn {
       position: absolute;
-      top: 2rem;
-      right: 2.5rem;
+      top: 1.5rem;
+      right: 1.75rem;
       background: transparent;
       border: none;
       color: #ffffff;
@@ -446,8 +447,8 @@
     .nav-arrow.next { right: -70px; }
 
     @media (max-width: 1150px) {
-      .nav-arrow.prev { left: 10px; }
-      .nav-arrow.next { right: 10px; }
+      .nav-arrow.prev { left: -10px; }
+      .nav-arrow.next { right: -10px; }
     }
 
     /* GLOWING WHITE DOT INDICATORS */
@@ -477,12 +478,95 @@
       transform: scale(1.2);
     }
 
+    /* ==========================================================================
+       MOBILE RESPONSIVE & BREATHING ROOM OPTIMIZATIONS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      /* Compact, clean mobile navigation bar */
+      .nav-inner {
+        height: 60px;
+      }
+
+      .brand {
+        font-size: 1.15rem;
+      }
+
+      .nav-links {
+        gap: 0.85rem;
+      }
+
+      .nav-links a {
+        font-size: 0.825rem;
+        padding: 0.35rem 0;
+      }
+
+      .dropdown-menu {
+        min-width: 180px;
+      }
+
+      .dropdown-menu li a {
+        padding: 0.5rem 1rem;
+        font-size: 0.825rem;
+      }
+
+      .section {
+        padding: 3.5rem 0;
+      }
+
+      .hero-title,
+      .section-title,
+      .section-subtitle,
+      .study-title {
+        text-align: center;
+      }
+
+      .hero-status-tag {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-bio {
+        text-align: justify;
+        margin: 0 auto 1.5rem auto;
+      }
+
+      .section-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 1rem;
+      }
+
+      .study-card {
+        padding: 1.25rem;
+        gap: 1.25rem;
+      }
+
+      .study-content {
+        text-align: justify;
+        align-items: center;
+      }
+
+      .modal-stage {
+        width: 100%;
+        height: 50vh;
+      }
+
+      .nav-arrow.prev { left: 5px; }
+      .nav-arrow.next { right: 5px; }
+    }
+
     .site-footer { padding: 3rem 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--border-subtle); }
   </style>
 </head>
 <body>
 
-<!-- SITE HEADER -->
+  <!-- SITE HEADER -->
   <header class="site-header" id="siteHeader">
     <div class="container nav-inner">
       <a href="index.html" class="brand">PJV</a>
@@ -490,16 +574,17 @@
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li class="dropdown">
-            <a href="index.html#scribe85">Portfolio ▾</a>
+            <a href="index.html#portfolio" class="active">Portfolio ▾</a>
             <ul class="dropdown-menu">
               <li><a href="scribe85-case-study.html">scribe85</a></li>
-              <li><a href="iaem-bulletin-case-study.html">Corporate Communication</a></li>
+              <li><a href="iaem-bulletin-case-study.html">IAEM</a></li>
               <li><a href="k12-insight-illustration-project-case-study.html">K12 Insight</a></li>
               <li><a href="presentations-case-study.html">Presentations</a></li>
-              <li><a href="photography-case-study.html">Photography</a></li>
+              <li><a href="videography.html">Videography</a></li>
+              <li><a href="photography-case-study.html" class="active">Photography</a></li>
             </ul>
           </li>
-          <li><a href="Resume.html" class="active">Resume</a></li>
+          <li><a href="Resume.html">Resume</a></li>
           <li><a href="ContactMe.html">Contact</a></li>
         </ul>
       </nav>
@@ -540,35 +625,7 @@
 
   <main class="container">
     
-    <!-- APPROACH SECTION -->
-    <section id="approach" class="section">
-      <h2 class="section-title">Compositional Strategy & Workflow</h2>
-      <p class="section-subtitle">A methodical approach to visual storytelling—balancing raw capture with disciplined color science.</p>
-
-      <div class="grid-2">
-        <article class="card">
-          <h3>1. Environmental Framing</h3>
-          <p>Utilizing leading lines, depth-of-field separation, and architectural geometry to isolate key subjects and direct visual priority.</p>
-          <ul>
-            <li>Natural light manipulation and dynamic range management.</li>
-            <li>Subject isolation through tactical focal length selection.</li>
-            <li>Foreground/background depth staging.</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>2. Color Science & Grading</h3>
-          <p>Developing subtle, non-destructive color profiles in Camera RAW and Photoshop to establish cohesive visual tone across image series.</p>
-          <ul>
-            <li>Highlights and shadows tonal curve balancing.</li>
-            <li>Selective split-toning for cinematic mood.</li>
-            <li>Preserving skin-tone fidelity across varied lighting.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- SELECTED STACKED PHOTOGRAPHY STUDIES -->
+    <!-- 1. SELECTED STACKED PHOTOGRAPHY STUDIES (NOW ON TOP) -->
     <section id="studies" class="section">
       <h2 class="section-title">Selected Photography Studies</h2>
       <p class="section-subtitle">Click any study below to open the full theater mode slideshow gallery.</p>
@@ -643,13 +700,41 @@
       </div>
     </section>
 
+    <!-- 2. APPROACH SECTION (NOW BELOW STUDIES) -->
+    <section id="approach" class="section">
+      <h2 class="section-title">Compositional Strategy & Workflow</h2>
+      <p class="section-subtitle">A methodical approach to visual storytelling—balancing raw capture with disciplined color science.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3 style="color: var(--accent);">1. Environmental Framing</h3>
+          <p>Utilizing leading lines, depth-of-field separation, and architectural geometry to isolate key subjects and direct visual priority.</p>
+          <ul>
+            <li>Natural light manipulation and dynamic range management.</li>
+            <li>Subject isolation through tactical focal length selection.</li>
+            <li>Foreground/background depth staging.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 style="color: #ffffff;">2. Color Science & Grading</h3>
+          <p>Developing subtle, non-destructive color profiles in Camera RAW and Photoshop to establish cohesive visual tone across image series.</p>
+          <ul>
+            <li>Highlights and shadows tonal curve balancing.</li>
+            <li>Selective split-toning for cinematic mood.</li>
+            <li>Preserving skin-tone fidelity across varied lighting.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
   </main>
 
   <!-- THEATER MODE SLIDESHOW MODAL -->
   <div id="slideshowModal" class="modal-overlay">
     <button class="modal-close-btn" onclick="closeSlideshow()" aria-label="Close Theater Mode">✕</button>
     
-    <div class="modal-stage">
+    <div class="modal-stage" id="modalStage">
       <button class="nav-arrow prev" onclick="navigateSlide(-1)">‹</button>
       
       <div class="modal-slide-container" id="slideStage">
@@ -831,6 +916,24 @@
     document.getElementById('slideshowModal').addEventListener('click', (e) => {
       if (e.target.id === 'slideshowModal') closeSlideshow();
     });
+
+    // Mobile touch swipe support for theater mode slideshow
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const modalStage = document.getElementById('modalStage');
+
+    modalStage.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    modalStage.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) {
+        navigateSlide(1);
+      } else if (touchEndX - touchStartX > 50) {
+        navigateSlide(-1);
+      }
+    }, { passive: true });
   </script>
 
 </body>
