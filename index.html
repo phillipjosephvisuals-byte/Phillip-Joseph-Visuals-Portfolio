@@ -320,16 +320,30 @@
 
       .hero-title-container {
         text-align: center;
-        margin: 0 auto 1.25rem auto;
+        margin: 0 auto 2.25rem auto; /* Extra breathing room below title */
       }
 
       .hero-bio {
         text-align: justify;
-        margin: 0 auto 1.5rem auto;
+        margin: 0 auto 2rem auto;
       }
 
+      /* Clean side-by-side action buttons on mobile */
       .hero-actions {
+        display: flex;
+        flex-direction: row;
         justify-content: center;
+        gap: 0.75rem;
+        flex-wrap: nowrap;
+        margin-bottom: 1.75rem;
+      }
+
+      .hero-actions .btn-primary,
+      .hero-actions .btn-secondary {
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+        text-align: center;
+        white-space: nowrap;
       }
 
       .hero-status-tag {
