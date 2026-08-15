@@ -58,6 +58,7 @@
     .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
     .section { padding: 5rem 0; border-bottom: 1px solid var(--border-subtle); }
 
+    /* DYNAMIC TRANSPARENT HEADER */
     .site-header {
       position: fixed;
       top: 0; left: 0; width: 100%;
@@ -219,6 +220,31 @@
     .media-placeholder img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
     .card-link:hover .media-placeholder img { transform: scale(1.03); }
 
+    /* FLOATING MEDIA FOR IAEM CARD */
+    .floating-card-media {
+      position: relative;
+      width: 100%;
+      border-radius: 10px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 18px rgba(56, 225, 255, 0.1);
+      margin-bottom: 1.25rem;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-link:hover .floating-card-media {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 25px rgba(56, 225, 255, 0.25);
+    }
+    .floating-card-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
     .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
     .grid-2 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
     @media (min-width: 640px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } .grid-2 { grid-template-columns: repeat(2, 1fr); } }
@@ -239,6 +265,87 @@
     .card h3 em { font-style: italic; }
     .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; margin-bottom: 1rem; flex-grow: 1; text-align: justify; text-justify: inter-word; }
     .card-tags { font-size: 0.8rem; color: var(--accent); font-weight: 500; }
+
+    /* ==========================================================================
+       MOBILE RESPONSIVE & BREATHING ROOM OPTIMIZATIONS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .nav-inner {
+        height: 60px;
+      }
+
+      .brand {
+        font-size: 1.15rem;
+      }
+
+      .nav-links {
+        gap: 0.85rem;
+      }
+
+      .nav-links a {
+        font-size: 0.825rem;
+        padding: 0.35rem 0;
+      }
+
+      .dropdown-menu {
+        min-width: 180px;
+      }
+
+      .dropdown-menu li a {
+        padding: 0.5rem 1rem;
+        font-size: 0.825rem;
+      }
+
+      .section {
+        padding: 3.5rem 0;
+      }
+
+      .hero-full {
+        padding: calc(60px + 2rem) 0 4rem 0;
+      }
+
+      .section-title {
+        text-align: center;
+      }
+
+      .hero-title-container {
+        text-align: center;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-status-tag {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-bio {
+        text-align: justify;
+        margin: 0 auto 1.5rem auto;
+      }
+
+      .profile-frame {
+        max-width: 280px;
+        margin: 0 auto;
+      }
+
+      .hero-metrics {
+        margin-top: 3rem;
+        text-align: center;
+      }
+
+      .featured-card {
+        padding: 1.5rem;
+      }
+    }
+
     .site-footer { padding: 3rem 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; }
   </style>
 </head>
@@ -254,9 +361,10 @@
             <a href="#scribe85">Portfolio ▾</a>
             <ul class="dropdown-menu">
               <li><a href="scribe85-case-study.html">scribe85</a></li>
-              <li><a href="iaem-bulletin-case-study.html">Corporate Communication</a></li>
+              <li><a href="iaem-bulletin-case-study.html">IAEM</a></li>
               <li><a href="k12-insight-illustration-project-case-study.html">K12 Insight</a></li>
               <li><a href="presentations-case-study.html">Presentations</a></li>
+              <li><a href="videography.html">Videography</a></li>
               <li><a href="photography-case-study.html">Photography</a></li>
             </ul>
           </li>
@@ -328,10 +436,11 @@
     <section id="corporate" class="section">
       <h2 class="section-title">Corporate Communication</h2>
       <div class="grid-2">
+        <!-- IAEM CARD (WITH FLOATING UNCONSTRAINED MEDIA) -->
         <a href="iaem-bulletin-case-study.html" class="card-link">
           <article class="card">
-            <div class="media-placeholder">
-              <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Collateral" onerror="this.onerror=null; this.parentElement.innerHTML='IAEM Collateral';" />
+            <div class="floating-card-media">
+              <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Collateral" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;text-align:center;color:var(--text-muted);font-size:0.9rem;\'>IAEM Collateral</div>';" />
             </div>
             <h3>IAEM Bulletin</h3>
             <p>Web newsletter collateral designed for fast information hierarchy and effortless scanning across stakeholder groups.</p>
@@ -339,7 +448,7 @@
           </article>
         </a>
 
-        <!-- LINKED TO K12 INSIGHT CASE STUDY FILE -->
+        <!-- K12 INSIGHT CARD -->
         <a href="k12-insight-illustration-project-case-study.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
@@ -367,7 +476,7 @@
           </article>
         </a>
 
-        <a href="corporate-video-case-study.html" class="card-link">
+        <a href="videography.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
               <img src="Assets/videography.webp" alt="Videography Reel Preview" onerror="this.onerror=null; this.parentElement.innerHTML='Videography Showcase';" />
