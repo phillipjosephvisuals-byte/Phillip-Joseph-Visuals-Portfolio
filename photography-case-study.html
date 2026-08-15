@@ -208,7 +208,7 @@
       font-weight: 600;
       padding: 0.35rem 0.85rem;
       border-radius: 20px;
-      margin-bottom: 1.25rem;
+      margin-top: 1.25rem;
       width: fit-content;
     }
 
@@ -224,13 +224,6 @@
     .hero-title {
       font-size: clamp(2.1rem, 4vw, 3.2rem);
       font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.25rem;
-    }
-     .hero-subtitle {
-      font-size: 1.75rem;
-      font-weight: 50;
       line-height: 1.15;
       letter-spacing: -0.02em;
       margin-bottom: 1.25rem;
@@ -525,7 +518,6 @@
       }
 
       .hero-title,
-      .hero-subtitle,
       .section-title,
       .section-subtitle,
       .study-title {
@@ -744,7 +736,7 @@
   <div id="slideshowModal" class="modal-overlay">
     <button class="modal-close-btn" onclick="closeSlideshow()" aria-label="Close Theater Mode">✕</button>
     
-    <div class="modal-stage" id="modalStage">
+    <div class="modal-stage">
       <button class="nav-arrow prev" onclick="navigateSlide(-1)">‹</button>
       
       <div class="modal-slide-container" id="slideStage">
