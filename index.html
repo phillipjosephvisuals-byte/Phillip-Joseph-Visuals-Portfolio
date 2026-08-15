@@ -58,7 +58,6 @@
     .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
     .section { padding: 5rem 0; border-bottom: 1px solid var(--border-subtle); }
 
-    /* DYNAMIC TRANSPARENT HEADER */
     .site-header {
       position: fixed;
       top: 0; left: 0; width: 100%;
@@ -112,7 +111,7 @@
 
     .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
     .dropdown-menu li a { padding: 0.6rem 1.25rem; font-size: 0.9rem; color: var(--text-muted); transition: background-color 0.2s ease, color 0.2s ease; }
-    .dropdown-menu li a:hover { background-color: var(--bg-surface-hover); color: var(--accent); }
+    .dropdown-menu li a:hover, .dropdown-menu li a.active { background-color: var(--bg-surface-hover); color: var(--accent); }
 
     h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
       font-family: var(--font-heading);
@@ -220,29 +219,30 @@
     .media-placeholder img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
     .card-link:hover .media-placeholder img { transform: scale(1.03); }
 
-    /* FLOATING MEDIA FOR IAEM CARD */
+    /* FLOATING CARD MEDIA (UNCONSTRAINED ASPECT RATIO) */
     .floating-card-media {
-      position: relative;
-      width: 100%;
-      border-radius: 10px;
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 18px rgba(56, 225, 255, 0.1);
+      background-color: transparent;
+      border: none;
+      aspect-ratio: 16 / 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
       margin-bottom: 1.25rem;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card-link:hover .floating-card-media {
-      transform: translateY(-3px);
-      border-color: var(--accent);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 25px rgba(56, 225, 255, 0.25);
     }
     .floating-card-media img {
-      width: 100%;
-      height: auto;
-      display: block;
+      max-height: 100%;
+      width: auto;
       object-fit: contain;
-      transition: transform 0.3s ease;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(56, 225, 255, 0.1);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-link:hover .floating-card-media img {
+      transform: translateY(-2px) scale(1.03);
+      border-color: var(--accent);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 20px rgba(56, 225, 255, 0.3);
     }
 
     .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
@@ -305,7 +305,7 @@
       }
 
       .hero-full {
-        padding: calc(60px + 2rem) 0 4rem 0;
+        padding: calc(60px + 2rem) 0 3.5rem 0;
       }
 
       .section-title {
@@ -314,16 +314,7 @@
 
       .hero-title-container {
         text-align: center;
-      }
-
-      .hero-actions {
-        justify-content: center;
-      }
-
-      .hero-status-tag {
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
+        margin: 0 auto 1.25rem auto;
       }
 
       .hero-bio {
@@ -331,18 +322,20 @@
         margin: 0 auto 1.5rem auto;
       }
 
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-status-tag {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+      }
+
       .profile-frame {
-        max-width: 280px;
-        margin: 0 auto;
-      }
-
-      .hero-metrics {
-        margin-top: 3rem;
-        text-align: center;
-      }
-
-      .featured-card {
-        padding: 1.5rem;
+        margin-left: auto;
+        margin-right: auto;
       }
     }
 
@@ -436,11 +429,11 @@
     <section id="corporate" class="section">
       <h2 class="section-title">Corporate Communication</h2>
       <div class="grid-2">
-        <!-- IAEM CARD (WITH FLOATING UNCONSTRAINED MEDIA) -->
         <a href="iaem-bulletin-case-study.html" class="card-link">
           <article class="card">
+            <!-- FLOATING FREE-FORM IAEM CARD PREVIEW -->
             <div class="floating-card-media">
-              <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Collateral" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'padding:2rem;text-align:center;color:var(--text-muted);font-size:0.9rem;\'>IAEM Collateral</div>';" />
+              <img src="Assets/IAEM/Vol42-No6-062025_03.webp" alt="IAEM Bulletin Collateral" onerror="this.onerror=null; this.parentElement.innerHTML='IAEM Collateral';" />
             </div>
             <h3>IAEM Bulletin</h3>
             <p>Web newsletter collateral designed for fast information hierarchy and effortless scanning across stakeholder groups.</p>
@@ -448,7 +441,7 @@
           </article>
         </a>
 
-        <!-- K12 INSIGHT CARD -->
+        <!-- LINKED TO K12 INSIGHT CASE STUDY FILE -->
         <a href="k12-insight-illustration-project-case-study.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
@@ -468,7 +461,7 @@
         <a href="presentations-case-study.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
-              <img src="Assets/Presentations/Intelligent_Forecasting/Intelligent-Forecasting-001.webp" alt="Presentation Deck Design" onerror="this.onerror=null; this.parentElement.innerHTML='Presentation Deck';" />
+              <img src="Assets/Intelligent_Forecasting/Intelligent-Forecasting-001.webp" alt="Presentation Deck Design" onerror="this.onerror=null; this.parentElement.innerHTML='Presentation Deck';" />
             </div>
             <h3>Presentations</h3>
             <p>Grid-aligned presentation frameworks built for executive communications, strategic pitches, and stakeholder alignment.</p>
@@ -490,7 +483,7 @@
         <a href="photography-case-study.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
-              <img src="Assets/photography.webp" alt="Photography Showcase Preview" onerror="this.onerror=null; this.parentElement.innerHTML='Photography Showcase';" />
+              <img src="Assets/Photography/VillarrealPhillip_BirdsOfPattersonPark_012-scaled.webp" alt="Photography Showcase Preview" onerror="this.onerror=null; this.parentElement.innerHTML='Photography Showcase';" />
             </div>
             <h3>Photography</h3>
             <p>Precision framing, spatial composition, and custom RAW color grading for environmental and documentary studies.</p>
