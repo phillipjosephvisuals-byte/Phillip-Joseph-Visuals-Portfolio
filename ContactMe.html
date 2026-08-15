@@ -47,6 +47,7 @@
     .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
     .section { padding: 4.5rem 0; }
 
+    /* DYNAMIC TRANSPARENT HEADER */
     .site-header {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
       background-color: transparent; backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px);
@@ -73,7 +74,7 @@
     }
     .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
     .dropdown-menu li a { padding: 0.6rem 1.25rem; font-size: 0.9rem; color: var(--text-muted); transition: background-color 0.2s ease, color 0.2s ease; }
-    .dropdown-menu li a:hover { background-color: var(--bg-surface-hover); color: var(--accent); }
+    .dropdown-menu li a:hover, .dropdown-menu li a.active { background-color: var(--bg-surface-hover); color: var(--accent); }
 
     h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
       font-family: var(--font-heading); color: #ffffff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.28), 0 0 20px rgba(255, 255, 255, 0.12);
@@ -130,6 +131,65 @@
     }
     .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 0 22px rgba(255, 255, 255, 0.4); background-color: #ffffff; }
 
+    /* ==========================================================================
+       MOBILE RESPONSIVE & BREATHING ROOM OPTIMIZATIONS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .nav-inner {
+        height: 60px;
+      }
+
+      .brand {
+        font-size: 1.15rem;
+      }
+
+      .nav-links {
+        gap: 0.85rem;
+      }
+
+      .nav-links a {
+        font-size: 0.825rem;
+        padding: 0.35rem 0;
+      }
+
+      .dropdown-menu {
+        min-width: 180px;
+      }
+
+      .dropdown-menu li a {
+        padding: 0.5rem 1rem;
+        font-size: 0.825rem;
+      }
+
+      .section {
+        padding: 3.5rem 0;
+      }
+
+      .hero-title {
+        text-align: center;
+      }
+
+      .hero-status-tag {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-bio {
+        text-align: justify;
+        margin: 0 auto;
+      }
+
+      .card {
+        padding: 1.5rem;
+      }
+    }
+
     .site-footer { padding: 3rem 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--border-subtle); }
   </style>
 </head>
@@ -143,22 +203,24 @@
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li class="dropdown">
-            <a href="index.html#scribe85">Portfolio ▾</a>
+            <a href="index.html#portfolio">Portfolio ▾</a>
             <ul class="dropdown-menu">
               <li><a href="scribe85-case-study.html">scribe85</a></li>
-              <li><a href="iaem-bulletin-case-study.html">Corporate Communication</a></li>
+              <li><a href="iaem-bulletin-case-study.html">IAEM</a></li>
               <li><a href="k12-insight-illustration-project-case-study.html">K12 Insight</a></li>
               <li><a href="presentations-case-study.html">Presentations</a></li>
+              <li><a href="videography.html">Videography</a></li>
               <li><a href="photography-case-study.html">Photography</a></li>
             </ul>
           </li>
-          <li><a href="Resume.html" class="active">Resume</a></li>
-          <li><a href="ContactMe.html">Contact</a></li>
+          <li><a href="Resume.html">Resume</a></li>
+          <li><a href="ContactMe.html" class="active">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
+  <!-- SUBPAGE HERO SECTION -->
   <section class="subpage-hero">
     <div class="hero-inner-container">
       <div class="hero-status-tag">
@@ -173,20 +235,53 @@
 
   <main class="container section">
     <div class="contact-grid">
+      
+      <!-- LEFT ASIDE: CONTACT CHANNELS -->
       <aside class="card">
         <h3>Contact Channels</h3>
         <p style="color: var(--text-muted); font-size: 0.95rem;">Direct communication channels and professional profiles.</p>
         <ul class="info-list">
-          <li class="info-item"><h4>Location</h4><p>United States (Open to Remote & Hybrid)</p></li>
-          <li class="info-item"><h4>Email</h4><p><a href="mailto:phillip@example.com">phillip@example.com</a></p></li>
-          <li class="info-item"><h4>Professional Focus</h4><p>UX / Product Design & Front-End Engineering</p></li>
-          <li class="info-item"><h4>Profiles</h4><p><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a> &nbsp;•&nbsp; <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub ↗</a></p></li>
+          <li class="info-item">
+            <h4>Location</h4>
+            <p>United States (Open to Remote & Hybrid)</p>
+          </li>
+          <li class="info-item">
+            <h4>Professional Focus</h4>
+            <p>UX / Product Design & Front-End Engineering</p>
+          </li>
+          <li class="info-item">
+            <h4>Profiles</h4>
+            <p>
+              <!-- ===========================================================================
+                   LINKEDIN PROFILE: Paste your profile URL between quotes in href="..." below
+                   =========================================================================== -->
+              <a href="https://linkedin.com/in/YOUR-PROFILE-HERE" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              &nbsp;•&nbsp;
+              <!-- ===========================================================================
+                   INSTAGRAM PROFILE: Paste your Instagram URL between quotes in href="..." below
+                   =========================================================================== -->
+              <a href="https://instagram.com/YOUR-HANDLE-HERE" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+            </p>
+          </li>
         </ul>
       </aside>
 
+      <!-- RIGHT SECTION: CONTACT FORM -->
       <section class="card">
         <h3>Send a Message</h3>
-        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you for reaching out! This message form is ready to be connected to Formspree, Netlify Forms, or your preferred endpoint.');">
+        
+        <!-- 
+          ===========================================================================
+          FORM ENDPOINT SETUP:
+          To receive form submissions to your email:
+          1. Replace action="#" below with your Formspree endpoint:
+             action="https://formspree.io/f/YOUR_FORM_ID"
+             or your Formsubmit endpoint:
+             action="https://formsubmit.co/YOUR_EMAIL_HERE@example.com"
+          2. Remove the onsubmit="event.preventDefault(); ..." attribute when using a real form backend.
+          ===========================================================================
+        -->
+        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you for reaching out! Form is ready to connect to your email endpoint.');">
           <div class="form-group">
             <label for="name">Your Name</label>
             <input type="text" id="name" name="name" class="form-control" placeholder="Jane Doe" required />
@@ -206,6 +301,7 @@
           <button type="submit" class="btn-submit">Send Message →</button>
         </form>
       </section>
+
     </div>
   </main>
 
