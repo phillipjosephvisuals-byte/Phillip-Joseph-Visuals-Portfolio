@@ -35,6 +35,10 @@
       overflow-x: hidden;
     }
 
+    body.scroll-locked {
+      overflow: hidden;
+    }
+
     body::before {
       content: "";
       position: fixed;
@@ -59,7 +63,7 @@
     .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
     .section { padding: 5rem 0; border-bottom: 1px solid var(--border-subtle); }
 
-    /* DYNAMIC SITE HEADER */
+    /* DYNAMIC HEADER (Controlled by Phase State & Scroll) */
     .site-header {
       position: fixed;
       top: 0; left: 0; width: 100%;
@@ -69,15 +73,15 @@
       -webkit-backdrop-filter: blur(0px);
       border-bottom: 1px solid transparent;
       opacity: 0;
-      pointer-events: none;
       transform: translateY(-10px);
-      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
     }
 
-    .site-header.visible {
+    .site-header.nav-visible {
       opacity: 1;
-      pointer-events: auto;
       transform: translateY(0);
+      pointer-events: auto;
     }
 
     .site-header.scrolled {
@@ -132,66 +136,60 @@
     }
 
     /* ==========================================================================
-       TWO-PHASE INTERACTIVE HERO STAGE
+       HERO & TWO-PHASE STAGE
        ========================================================================== */
-    .hero-stage {
+    .hero-full {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      display: flex; 
+      flex-direction: column; 
       justify-content: center;
       align-items: center;
+      padding: 5rem 0;
       position: relative;
-      background: radial-gradient(ellipse 90% 70% at 50% 35%, #141d2b 0%, #0c121d 55%, #05070a 100%);
+      background: radial-gradient(ellipse 90% 70% at 50% 30%, #141d2b 0%, #0c121d 55%, #05070a 100%);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 5rem 1.5rem 3rem 1.5rem;
-      overflow: hidden;
+      transition: padding 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .hero-stage::after {
+    .hero-full::after {
       content: "";
       position: absolute; bottom: 0; left: 0; width: 100%; height: 120px;
       background: linear-gradient(to bottom, rgba(5, 7, 10, 0) 0%, rgba(5, 7, 10, 0.8) 70%, #05070a 100%);
       pointer-events: none;
     }
 
-    .hero-content-wrapper {
+    .hero-inner-container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
       width: 100%;
-      max-width: 720px;
+      position: relative;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
-      z-index: 2;
     }
 
-    /* PHASE 1 TOP BRAND OVERLAY */
-    .intro-brand {
+    /* Phase 1 Studio Moniker */
+    .phase1-brand-line {
       font-weight: 600;
-      font-size: 1.15rem;
-      letter-spacing: 0.22em;
+      font-size: 1.25rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--text-main);
-      margin-bottom: 1.75rem;
-      text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .hero-stage.phase-2 .intro-brand {
-      opacity: 0;
-      transform: translateY(-20px);
-      pointer-events: none;
-      margin-bottom: 0;
-      height: 0;
-      overflow: hidden;
-    }
-
-    /* CENTERED TITLE CONTAINER */
+    /* Hero Title Container & Scaling Animation */
     .hero-title-container {
       container-type: inline-size;
       width: 100%;
-      max-width: 620px;
       text-align: center;
-      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), margin-bottom 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-bottom: 0.5rem;
+      transform-origin: center top;
+      transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), margin-bottom 0.75s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .hero-title {
@@ -201,52 +199,38 @@
       text-shadow: 0 0 12px rgba(255, 255, 255, 0.32), 0 0 28px rgba(255, 255, 255, 0.15);
     }
 
-    .hero-title-line-1 { display: block; font-size: 10.5cqw; white-space: nowrap; }
-    .hero-title-line-2 { display: block; font-size: 8.8cqw; white-space: nowrap; }
+    .hero-title-line-1 { display: block; font-size: 10.2cqw; white-space: nowrap; }
+    .hero-title-line-2 { display: block; font-size: 8.6cqw; white-space: nowrap; }
 
     .hero-title-plus {
-      display: block;
-      font-size: 2.8rem;
-      color: var(--accent);
-      font-weight: 300;
-      line-height: 0.85;
-      margin: 0.35rem 0;
+      display: block; font-size: 2.75rem; color: var(--accent); font-weight: 300;
+      line-height: 0.8; margin: 0.35rem 0; padding-left: 0; text-align: center;
       text-shadow: 0 0 16px rgba(56, 225, 255, 0.7);
     }
 
-    /* Scaling shift into Phase 2 */
-    .hero-stage.phase-2 .hero-title-container {
-      transform: scale(0.92);
-      margin-bottom: 1.25rem;
-    }
-
-    /* PHASE 2 CONTENT CLUSTER (HIDDEN IN PHASE 1) */
-    .phase-2-cluster {
+    /* Phase 2 Animated Reveal Container */
+    .hero-phase2-content {
       width: 100%;
-      max-width: 620px;
+      display: flex;
+      flex-direction: column;
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(45px);
       pointer-events: none;
-      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-    }
-
-    .hero-stage.phase-2 .phase-2-cluster {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
     }
 
     .hero-bio {
       color: var(--text-muted);
       font-size: 1.05rem;
       line-height: 1.7;
-      margin-bottom: 1.5rem;
+      margin: 1.75rem 0;
+      width: 100%;
       text-align: justify;
       text-justify: inter-word;
-      width: 100%;
     }
 
-    .hero-action-row {
+    /* Aligned Status & Button Row */
+    .hero-interactive-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -264,12 +248,17 @@
       color: var(--accent);
       font-size: 0.85rem;
       font-weight: 600;
-      padding: 0.5rem 1rem;
+      padding: 0.45rem 0.95rem;
       border-radius: 20px;
       white-space: nowrap;
     }
 
-    .status-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); }
+    .status-dot {
+      width: 8px; height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+    }
 
     .btn-secondary {
       background-color: var(--bg-surface);
@@ -277,30 +266,34 @@
       border: 1px solid var(--border-subtle);
       font-family: var(--font-heading);
       font-weight: 600;
-      padding: 0.65rem 1.6rem;
+      padding: 0.75rem 1.6rem;
       border-radius: 8px;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
       white-space: nowrap;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    .btn-secondary:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 0 15px rgba(56, 225, 255, 0.25); }
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(56, 225, 255, 0.25);
+    }
 
     .hero-metrics {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      padding-top: 1.75rem;
-      border-top: 1px solid var(--border-subtle);
       width: 100%;
-      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-subtle);
     }
-    .metric-item { display: flex; flex-direction: column; gap: 0.25rem; }
-    .metric-label { font-size: 0.8rem; text-transform: uppercase; color: var(--accent); font-weight: 600; letter-spacing: 0.05em; }
-    .metric-value { font-size: 0.95rem; color: var(--text-main); font-weight: 500; }
 
-    /* INVERTED DELTA SCROLL INDICATOR */
-    .scroll-indicator {
+    .metric-item { display: flex; flex-direction: column; gap: 0.25rem; }
+    .metric-label { font-size: 0.75rem; text-transform: uppercase; color: var(--accent); font-weight: 600; letter-spacing: 0.05em; }
+    .metric-value { font-size: 0.925rem; color: var(--text-main); font-weight: 500; }
+
+    /* Phase 1 Inverted Delta Indicator */
+    .scroll-indicator-wrap {
       position: absolute;
-      bottom: 2.5rem;
+      bottom: 2.25rem;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -309,45 +302,82 @@
       gap: 0.5rem;
       cursor: pointer;
       z-index: 10;
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .scroll-delta {
-      width: 22px;
-      height: 18px;
-      fill: none;
-      stroke: var(--accent);
-      stroke-width: 2.5;
-      stroke-linejoin: round;
-      stroke-linecap: round;
-      filter: drop-shadow(0 0 8px var(--accent));
-      animation: pulseGlow 2s infinite ease-in-out;
+    .pulsing-delta {
+      width: 20px;
+      height: 14px;
+      clip-path: polygon(50% 100%, 0 0, 100% 0);
+      background-color: var(--accent);
+      animation: deltaPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
 
-    @keyframes pulseGlow {
-      0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 4px var(--accent)); opacity: 0.6; }
-      50% { transform: translateY(6px); filter: drop-shadow(0 0 14px var(--accent)); opacity: 1; }
-    }
-
-    .hero-stage.phase-2 .scroll-indicator {
-      opacity: 0;
-      pointer-events: none;
-      transform: translate(-50%, 15px);
+    @keyframes deltaPulse {
+      0%, 100% {
+        opacity: 0.4;
+        transform: translateY(0) scale(0.95);
+        filter: drop-shadow(0 0 4px rgba(56, 225, 255, 0.4));
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(5px) scale(1.08);
+        filter: drop-shadow(0 0 12px rgba(56, 225, 255, 0.9));
+      }
     }
 
     /* ==========================================================================
-       BODY SECTIONS & CARDS
+       PHASE TRANSITION STATES
+       ========================================================================== */
+    body.phase-two .hero-full {
+      padding: calc(70px + 2rem) 0 4rem 0;
+    }
+
+    body.phase-two .phase1-brand-line {
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+      height: 0;
+      margin-bottom: 0;
+    }
+
+    body.phase-two .hero-title-container {
+      transform: scale(0.92);
+      margin-bottom: 0;
+    }
+
+    body.phase-two .hero-phase2-content {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    body.phase-two .scroll-indicator-wrap {
+      opacity: 0;
+      transform: translate(-50%, 15px);
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       BODY CONTENT SECTIONS
        ========================================================================== */
     .section-title { font-size: 1.75rem; font-weight: 600; margin-bottom: 2rem; letter-spacing: -0.01em; }
 
     .featured-card {
-      background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 2.5rem;
-      display: grid; grid-template-columns: 1fr; gap: 2rem; transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
       box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
     @media (min-width: 850px) { .featured-card { grid-template-columns: 1.2fr 1fr; align-items: center; } }
     .card-link:hover .featured-card {
-      border-color: var(--accent); transform: translateY(-3px);
+      border-color: var(--accent);
+      transform: translateY(-3px);
       box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6), 0 0 18px rgba(56, 225, 255, 0.28);
     }
 
@@ -358,19 +388,38 @@
     .meta-list strong { color: var(--text-main); }
 
     .media-placeholder {
-      background-color: var(--bg-base); border: 1px solid var(--border-subtle); aspect-ratio: 16 / 10; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.9rem; overflow: hidden; position: relative;
+      background-color: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      aspect-ratio: 16 / 10;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      overflow: hidden;
+      position: relative;
     }
     .media-placeholder img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
     .card-link:hover .media-placeholder img { transform: scale(1.03); }
 
     .floating-card-stage {
-      width: 100%; aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center;
-      background: transparent; margin-bottom: 1.25rem; position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      margin-bottom: 1.25rem;
+      position: relative;
     }
 
     .floating-card-stage img {
-      height: 100%; width: auto; max-width: 100%; object-fit: contain; border-radius: 8px;
+      height: 100%;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: 8px;
       border: 1px solid var(--border-subtle);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(56, 225, 255, 0.12);
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -388,12 +437,19 @@
     @media (min-width: 960px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
 
     .card {
-      background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.5rem;
-      display: flex; flex-direction: column; height: 100%; transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
       box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4);
     }
     .card-link:hover .card {
-      border-color: var(--accent); transform: translateY(-3px);
+      border-color: var(--accent);
+      transform: translateY(-3px);
       box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 225, 255, 0.25);
     }
     .card .media-placeholder { margin-bottom: 1.25rem; }
@@ -403,7 +459,7 @@
     .card-tags { font-size: 0.8rem; color: var(--accent); font-weight: 500; }
 
     /* ==========================================================================
-       MOBILE RESPONSIVENESS
+       MOBILE RESPONSIVE TWEAKS
        ========================================================================== */
     @media (max-width: 768px) {
       .container { padding: 0 1rem; }
@@ -413,24 +469,34 @@
       .nav-links a { font-size: 0.825rem; padding: 0.35rem 0; }
       .dropdown-menu { min-width: 180px; }
       .dropdown-menu li a { padding: 0.5rem 1rem; font-size: 0.825rem; }
-
-      .hero-stage { padding: 4.5rem 1rem 3rem 1rem; }
-      .intro-brand { font-size: 0.95rem; letter-spacing: 0.18em; }
-
-      .hero-bio { font-size: 0.85rem; }
-      
-      .hero-action-row {
-        flex-direction: column-reverse;
-        gap: 0.75rem;
-        align-items: stretch;
-      }
-
-      .hero-status-tag { justify-content: center; width: 100%; font-size: 0.8rem; }
-      .btn-secondary { text-align: center; width: 100%; }
-
-      .hero-metrics { grid-template-columns: 1fr; gap: 1rem; }
       .section { padding: 3.5rem 0; }
       .section-title { text-align: center; }
+
+      .phase1-brand-line { font-size: 1.05rem; letter-spacing: 0.12em; }
+      .hero-bio { font-size: 0.85rem; line-height: 1.6; margin: 1.25rem 0; }
+      
+      .hero-interactive-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.85rem;
+      }
+
+      .hero-status-tag {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .btn-secondary {
+        text-align: center;
+        width: 100%;
+      }
+
+      .hero-metrics {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        text-align: center;
+      }
+
       .card-desc, .card p { font-size: 0.85rem; }
     }
 
@@ -463,14 +529,14 @@
     </div>
   </header>
 
-  <!-- TWO-PHASE HERO STAGE -->
-  <section id="heroStage" class="hero-stage">
-    <div class="hero-content-wrapper">
+  <!-- HERO SECTION -->
+  <section id="about" class="hero-full">
+    <div class="hero-inner-container">
       
-      <!-- Phase 1 Top Brand -->
-      <div class="intro-brand" id="introBrand">Phillip Joseph Visuals</div>
+      <!-- Phase 1 Intro Moniker -->
+      <div class="phase1-brand-line" id="phase1Brand">Phillip Joseph Visuals</div>
 
-      <!-- Centered Stack Title -->
+      <!-- Centered Hero Stack -->
       <div class="hero-title-container" id="heroTitleContainer">
         <h1 class="hero-title">
           <span class="hero-title-line-1">Product Designer</span>
@@ -479,13 +545,13 @@
         </h1>
       </div>
 
-      <!-- Phase 2 Loaded Content Cluster -->
-      <div class="phase-2-cluster" id="phase2Cluster">
+      <!-- Phase 2 Dynamic Content -->
+      <div class="hero-phase2-content" id="heroPhase2">
         <p class="hero-bio">
           Specializing in taking complex digital concepts from raw strategy to polished production. Blending human-centered UX design discipline with clean front-end code, I engineer scalable design systems, intuitive interfaces, and high-performance dark surface web tools.
         </p>
-        
-        <div class="hero-action-row">
+
+        <div class="hero-interactive-row">
           <div class="hero-status-tag">
             <span class="status-dot"></span> Available for Product & UX Roles
           </div>
@@ -501,11 +567,9 @@
 
     </div>
 
-    <!-- Pulsating Inverted Delta Indicator -->
-    <div class="scroll-indicator" id="scrollIndicator" onclick="triggerPhaseTwo()">
-      <svg class="scroll-delta" viewBox="0 0 24 24">
-        <polygon points="4 6, 20 6, 12 18" />
-      </svg>
+    <!-- Pulsing Inverted Delta Indicator -->
+    <div class="scroll-indicator-wrap" id="scrollIndicator" onclick="triggerPhaseTwo()">
+      <div class="pulsing-delta"></div>
     </div>
   </section>
 
@@ -614,79 +678,83 @@
 
   <script>
     const header = document.getElementById('siteHeader');
-    const heroStage = document.getElementById('heroStage');
-    
     let isPhaseTwo = false;
-    let isResistanceActive = false;
+    let isTransitioning = false;
 
-    // Check if the user navigated from another page inside the website
+    // Detect if coming from an internal page
     const isInternalNavigation = () => {
-      if (document.referrer && document.referrer.includes(window.location.hostname)) {
-        return true;
+      const referrer = document.referrer;
+      if (!referrer) return false;
+      try {
+        const referrerHost = new URL(referrer).hostname;
+        return referrerHost === window.location.hostname;
+      } catch (e) {
+        return false;
       }
-      return sessionStorage.getItem('visited_home') === 'true';
     };
 
-    // Transition directly into Phase 2
-    function triggerPhaseTwo(skipResistance = false) {
-      if (isPhaseTwo) return;
+    function applyPhaseTwoInstant() {
+      document.body.classList.add('phase-two');
+      header.classList.add('nav-visible');
       isPhaseTwo = true;
-      sessionStorage.setItem('visited_home', 'true');
-      
-      heroStage.classList.add('phase-2');
-      header.classList.add('visible');
-
-      if (!skipResistance) {
-        // Provide momentary resistance to let the phase settle cleanly
-        isResistanceActive = true;
-        document.body.style.overflow = 'hidden';
-        
-        setTimeout(() => {
-          document.body.style.overflow = '';
-          isResistanceActive = false;
-        }, 750);
-      }
     }
 
-    // Initialize state on page load
-    document.addEventListener('DOMContentLoaded', () => {
-      if (isInternalNavigation()) {
-        triggerPhaseTwo(true);
+    function triggerPhaseTwo() {
+      if (isPhaseTwo || isTransitioning) return;
+      isTransitioning = true;
+
+      // Add scroll lock for momentary resistance
+      document.body.classList.add('scroll-locked');
+      document.body.classList.add('phase-two');
+      header.classList.add('nav-visible');
+
+      // Momentary resistance delay (650ms) to allow the hook transition to complete cleanly
+      setTimeout(() => {
+        document.body.classList.remove('scroll-locked');
+        isPhaseTwo = true;
+        isTransitioning = false;
+        sessionStorage.setItem('site_intro_seen', 'true');
+      }, 650);
+    }
+
+    // Check entry route
+    window.addEventListener('DOMContentLoaded', () => {
+      if (isInternalNavigation() || sessionStorage.getItem('site_intro_seen') === 'true') {
+        applyPhaseTwoInstant();
       }
     });
 
-    // Scroll & Touch Event Listeners
-    window.addEventListener('scroll', () => {
-      const scrollPos = window.scrollY;
-
-      if (!isPhaseTwo && scrollPos > 10) {
-        triggerPhaseTwo();
-      }
-
-      if (scrollPos > 60) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    }, { passive: true });
-
+    // Capture initial scroll or wheel interaction
     window.addEventListener('wheel', (e) => {
       if (!isPhaseTwo && e.deltaY > 0) {
+        e.preventDefault();
         triggerPhaseTwo();
       }
-    }, { passive: true });
+    }, { passive: false });
 
+    // Touch gesture support for mobile
     let touchStartY = 0;
     window.addEventListener('touchstart', (e) => {
       touchStartY = e.touches[0].clientY;
     }, { passive: true });
 
     window.addEventListener('touchmove', (e) => {
-      const touchEndY = e.touches[0].clientY;
-      if (!isPhaseTwo && touchStartY - touchEndY > 20) {
-        triggerPhaseTwo();
+      if (!isPhaseTwo) {
+        const touchCurrentY = e.touches[0].clientY;
+        if (touchStartY - touchCurrentY > 20) { // user swiped up
+          triggerPhaseTwo();
+        }
       }
     }, { passive: true });
+
+    // Header background blur on regular scroll
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
   </script>
 </body>
 </html>
