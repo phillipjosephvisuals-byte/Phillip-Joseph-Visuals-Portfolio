@@ -32,7 +32,7 @@
       -webkit-font-smoothing: antialiased;
       position: relative;
       min-height: 100vh;
-      overflow-x: hidden;
+      /* Do NOT set overflow or overflow-x on body/html or position:sticky breaks */
     }
 
     body::before {
@@ -134,7 +134,7 @@
        ========================================================================== */
     .hero-track {
       position: relative;
-      height: 200vh; /* Provides the scroll distance needed to drive all animations while hero is pinned */
+      height: 220vh; /* Scroll runway driving the phase transition */
       width: 100%;
     }
 
@@ -143,6 +143,7 @@
     }
 
     .hero-stage {
+      position: -webkit-sticky;
       position: sticky;
       top: 0;
       height: 100vh;
@@ -154,7 +155,6 @@
       background: radial-gradient(ellipse 90% 70% at 50% 35%, #141d2b 0%, #0c121d 55%, #05070a 100%);
       border-bottom: 1px solid var(--border-subtle);
       padding: 5rem 1.5rem 3rem 1.5rem;
-      overflow: hidden;
       z-index: 2;
     }
 
@@ -201,7 +201,7 @@
       text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
     }
 
-    /* HERO TITLE CONTAINER (ANCHORED IN PLACE & SCALED) */
+    /* HERO TITLE CONTAINER */
     .hero-title-container {
       container-type: inline-size;
       width: 100%;
@@ -418,7 +418,7 @@
       .dropdown-menu { min-width: 180px; }
       .dropdown-menu li a { padding: 0.5rem 1rem; font-size: 0.825rem; }
 
-      .hero-track { height: 170vh; }
+      .hero-track { height: 180vh; }
       .hero-stage { padding: 4.5rem 1rem 3rem 1rem; }
       .intro-brand { font-size: 0.95rem; letter-spacing: 0.18em; }
       .hero-bio { font-size: 0.85rem; }
@@ -666,7 +666,7 @@
       const rawProgress = Math.min(Math.max(scrollY / trackHeight, 0), 1);
       const easedProgress = easeInQuad(rawProgress);
 
-      // Phase 1 Top Brand: fades up and out as user scrolls
+      // Phase 1 Top Brand: fades up and out
       const brandOpacity = Math.max((1 - rawProgress * 1.2).toFixed(3), 0);
       const brandBlur = (rawProgress * 6).toFixed(1);
       const brandTranslate = -(rawProgress * 28).toFixed(1);
