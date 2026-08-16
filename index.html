@@ -32,7 +32,6 @@
       -webkit-font-smoothing: antialiased;
       position: relative;
       min-height: 100vh;
-      /* Do NOT set overflow or overflow-x on body/html or position:sticky breaks */
     }
 
     body::before {
@@ -134,7 +133,7 @@
        ========================================================================== */
     .hero-track {
       position: relative;
-      height: 220vh; /* Scroll runway driving the phase transition */
+      height: 220vh;
       width: 100%;
     }
 
@@ -638,9 +637,15 @@
     let bypassPhaseOne = false;
     let hasPaused = false;
     let isBreathing = false;
+    let isEasedRamping = false;
 
     function easeInQuad(x) {
       return x * x;
+    }
+
+    // Smooth ease-in curve for releasing from the pause
+    function easeInCubic(t) {
+      return t * t * t;
     }
 
     function applyScrollProgress() {
@@ -661,12 +666,11 @@
         return;
       }
 
-      // Calculate progress relative to the track's scrollable height
       const trackHeight = heroTrack.offsetHeight - window.innerHeight;
       const rawProgress = Math.min(Math.max(scrollY / trackHeight, 0), 1);
       const easedProgress = easeInQuad(rawProgress);
 
-      // Phase 1 Top Brand: fades up and out
+      // Phase 1 Brand
       const brandOpacity = Math.max((1 - rawProgress * 1.2).toFixed(3), 0);
       const brandBlur = (rawProgress * 6).toFixed(1);
       const brandTranslate = -(rawProgress * 28).toFixed(1);
@@ -681,11 +685,11 @@
       scrollIndicator.style.opacity = indicatorOpacity;
       scrollIndicator.style.pointerEvents = indicatorOpacity <= 0 ? 'none' : 'auto';
 
-      // Title Scale Down (1.0 -> 0.88) anchored firmly on screen
+      // Title Scale Down (1.0 -> 0.88)
       const scale = (1 - easedProgress * 0.12).toFixed(3);
       heroTitleContainer.style.transform = `scale(${scale})`;
 
-      // Phase 2 Cluster: fades and slides into place
+      // Phase 2 Cluster
       const clusterOpacity = Math.min(easedProgress * 1.15, 1).toFixed(3);
       const clusterTranslate = ((1 - easedProgress) * 20).toFixed(1);
       phase2Cluster.style.opacity = clusterOpacity;
@@ -696,7 +700,7 @@
         phase2Cluster.classList.remove('interactive');
       }
 
-      // Nav Bar: fades in with transparent background initially
+      // Header Fade In
       const headerOpacity = Math.min(easedProgress, 1).toFixed(3);
       header.style.opacity = headerOpacity;
       if (rawProgress > 0.7) {
@@ -705,25 +709,52 @@
         header.classList.remove('interactive');
       }
 
-      // Scrolled backdrop kicks in once scrolling down past the hero track
       if (scrollY > trackHeight + 40) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
 
-      // Momentary breathing pause once Phase 2 is fully arrived and settled
+      // Trigger breathing pause & smooth ramp-out
       if (rawProgress >= 0.98 && !hasPaused && !isBreathing) {
         hasPaused = true;
         isBreathing = true;
         sessionStorage.setItem('visited_home', 'true');
         
+        // Lock momentarily
         document.body.style.overflow = 'hidden';
+
         setTimeout(() => {
           document.body.style.overflow = '';
           isBreathing = false;
+          initiateSmoothScrollRelease(trackHeight);
         }, 650);
       }
+    }
+
+    // Programmatic ease-in velocity release so resuming scroll feels fluid
+    function initiateSmoothScrollRelease(trackHeight) {
+      isEasedRamping = true;
+      const startScroll = window.scrollY;
+      const targetScroll = trackHeight + 140; // Soft gentle push past the sticky threshold
+      const duration = 600;
+      const startTime = performance.now();
+
+      function step(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = easeInCubic(progress);
+
+        window.scrollTo(0, startScroll + (targetScroll - startScroll) * ease);
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          isEasedRamping = false;
+        }
+      }
+
+      requestAnimationFrame(step);
     }
 
     function smoothScrollToPhase2() {
