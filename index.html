@@ -71,18 +71,12 @@
       opacity: 0;
       pointer-events: none;
       transform: translateY(-8px);
-      transition: 
-        opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-        background-color 0.6s ease, 
-        border-color 0.6s ease, 
-        backdrop-filter 0.6s ease;
+      transition: background-color 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+      will-change: opacity, transform;
     }
 
-    .site-header.visible {
-      opacity: 1;
+    .site-header.interactive {
       pointer-events: auto;
-      transform: translateY(0);
     }
 
     .site-header.scrolled {
@@ -137,7 +131,7 @@
     }
 
     /* ==========================================================================
-       TWO-PHASE INTERACTIVE HERO STAGE
+       HERO STAGE
        ========================================================================== */
     .hero-stage {
       min-height: 100vh;
@@ -148,7 +142,7 @@
       position: relative;
       background: radial-gradient(ellipse 90% 70% at 50% 35%, #141d2b 0%, #0c121d 55%, #05070a 100%);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 5rem 1.5rem 3rem 1.5rem;
+      padding: 5rem 1.5rem 4rem 1.5rem;
       overflow: hidden;
     }
 
@@ -169,42 +163,23 @@
       z-index: 2;
     }
 
-    /* PHASE 1 TOP BRAND (SLOW DRIFT & DISSOLVE) */
+    /* INTRO BRAND (SCROLL-DRIVEN DISSOLVE) */
     .intro-brand-wrapper {
-      display: grid;
-      grid-template-rows: 1fr;
-      transition: grid-template-rows 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
       width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      will-change: opacity, transform, filter;
     }
 
     .intro-brand {
-      min-height: 0;
       font-weight: 600;
       font-size: 1.15rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--text-main);
       text-align: center;
-      padding-bottom: 1.75rem;
       text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0px);
-      transition: 
-        opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), 
-        transform 1.8s cubic-bezier(0.16, 1, 0.3, 1),
-        filter 1.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .hero-stage.phase-2 .intro-brand-wrapper {
-      grid-template-rows: 0fr;
-    }
-
-    .hero-stage.phase-2 .intro-brand {
-      opacity: 0;
-      transform: translateY(-20px) scale(0.96);
-      filter: blur(6px);
-      pointer-events: none;
     }
 
     /* CENTERED TITLE CONTAINER */
@@ -213,9 +188,9 @@
       width: 100%;
       max-width: 620px;
       text-align: center;
-      transition: 
-        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-        margin-bottom 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: center top;
+      margin-bottom: 1.5rem;
+      will-change: transform;
     }
 
     .hero-title {
@@ -238,27 +213,17 @@
       text-shadow: 0 0 16px rgba(56, 225, 255, 0.7);
     }
 
-    /* Scaling shift into Phase 2 */
-    .hero-stage.phase-2 .hero-title-container {
-      transform: scale(0.92);
-      margin-bottom: 1.25rem;
-    }
-
     /* PHASE 2 CONTENT CLUSTER */
     .phase-2-cluster {
       width: 100%;
       max-width: 620px;
       opacity: 0;
-      transform: translateY(35px);
+      transform: translateY(40px);
       pointer-events: none;
-      transition: 
-        opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s, 
-        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+      will-change: opacity, transform;
     }
 
-    .hero-stage.phase-2 .phase-2-cluster {
-      opacity: 1;
-      transform: translateY(0);
+    .phase-2-cluster.interactive {
       pointer-events: auto;
     }
 
@@ -335,7 +300,7 @@
       gap: 0.5rem;
       cursor: pointer;
       z-index: 10;
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
     }
 
     .scroll-delta {
@@ -353,12 +318,6 @@
     @keyframes pulseGlow {
       0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 4px var(--accent)); opacity: 0.6; }
       50% { transform: translateY(6px); filter: drop-shadow(0 0 14px var(--accent)); opacity: 1; }
-    }
-
-    .hero-stage.phase-2 .scroll-indicator {
-      opacity: 0;
-      pointer-events: none;
-      transform: translate(-50%, 15px);
     }
 
     /* ==========================================================================
@@ -441,12 +400,7 @@
       .dropdown-menu li a { padding: 0.5rem 1rem; font-size: 0.825rem; }
 
       .hero-stage { padding: 4.5rem 1rem 3rem 1rem; }
-      .intro-brand { 
-        font-size: 0.95rem; 
-        letter-spacing: 0.18em;
-        padding-bottom: 1.25rem;
-      }
-
+      .intro-brand { font-size: 0.95rem; letter-spacing: 0.18em; }
       .hero-bio { font-size: 0.85rem; }
       
       .hero-action-row {
@@ -497,9 +451,9 @@
   <section id="heroStage" class="hero-stage">
     <div class="hero-content-wrapper">
       
-      <!-- Phase 1 Top Brand -->
-      <div class="intro-brand-wrapper">
-        <div class="intro-brand" id="introBrand">Phillip Joseph Visuals</div>
+      <!-- Phase 1 Top Brand (Dissolves with scroll) -->
+      <div class="intro-brand-wrapper" id="introBrandWrapper">
+        <div class="intro-brand">Phillip Joseph Visuals</div>
       </div>
 
       <!-- Centered Stack Title -->
@@ -514,7 +468,7 @@
       <!-- Phase 2 Loaded Content Cluster -->
       <div class="phase-2-cluster" id="phase2Cluster">
         <p class="hero-bio">
-          Specializing in taking complex digital concepts from raw strategy to polished production. Blending human-centered UX design discipline with clean front-end code, I engineer scalable design systems, intuitive interfaces, and high-performance dark surface web tools.
+          Specializing in taking complex digital concepts from raw strategy to polished production. Blending human-centered UX discipline with clean front-end code, I engineer scalable design systems, intuitive interfaces, and high-performance dark surface web tools.
         </p>
         
         <div class="hero-action-row">
@@ -534,7 +488,7 @@
     </div>
 
     <!-- Pulsating Inverted Delta Indicator -->
-    <div class="scroll-indicator" id="scrollIndicator" onclick="triggerPhaseTwo()">
+    <div class="scroll-indicator" id="scrollIndicator" onclick="smoothScrollToPhase2()">
       <svg class="scroll-delta" viewBox="0 0 24 24">
         <polygon points="4 6, 20 6, 12 18" />
       </svg>
@@ -646,11 +600,11 @@
 
   <script>
     const header = document.getElementById('siteHeader');
-    const heroStage = document.getElementById('heroStage');
-    
-    let isPhaseTwo = false;
+    const introBrandWrapper = document.getElementById('introBrandWrapper');
+    const heroTitleContainer = document.getElementById('heroTitleContainer');
+    const phase2Cluster = document.getElementById('phase2Cluster');
+    const scrollIndicator = document.getElementById('scrollIndicator');
 
-    // Check if the user navigated from another page inside the website
     const isInternalNavigation = () => {
       if (document.referrer && document.referrer.includes(window.location.hostname)) {
         return true;
@@ -658,55 +612,97 @@
       return sessionStorage.getItem('visited_home') === 'true';
     };
 
-    // Transition smoothly into Phase 2
-    function triggerPhaseTwo() {
-      if (isPhaseTwo) return;
-      isPhaseTwo = true;
-      sessionStorage.setItem('visited_home', 'true');
+    let bypassPhaseOne = false;
+
+    function applyScrollProgress() {
+      const scrollY = window.scrollY;
+
+      if (bypassPhaseOne) {
+        introBrandWrapper.style.opacity = '0';
+        introBrandWrapper.style.display = 'none';
+        scrollIndicator.style.opacity = '0';
+        scrollIndicator.style.display = 'none';
+        heroTitleContainer.style.transform = 'scale(0.92)';
+        phase2Cluster.style.opacity = '1';
+        phase2Cluster.style.transform = 'translateY(0px)';
+        phase2Cluster.classList.add('interactive');
+        header.style.opacity = '1';
+        header.classList.add('interactive');
+        if (scrollY > 60) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+        return;
+      }
+
+      // Smooth scroll interpolation range: 0px to 320px
+      const fadeDistance = 320;
+      const progress = Math.min(Math.max(scrollY / fadeDistance, 0), 1);
+
+      // Phase 1 Top Brand Fade & Blur
+      const brandOpacity = (1 - progress * 1.3).toFixed(3);
+      const brandBlur = (progress * 8).toFixed(1);
+      const brandTranslate = -(progress * 25).toFixed(1);
       
-      heroStage.classList.add('phase-2');
-      header.classList.add('visible');
-    }
+      introBrandWrapper.style.opacity = Math.max(brandOpacity, 0);
+      introBrandWrapper.style.filter = `blur(${brandBlur}px)`;
+      introBrandWrapper.style.transform = `translateY(${brandTranslate}px)`;
+      introBrandWrapper.style.pointerEvents = progress > 0.6 ? 'none' : 'auto';
 
-    // Initialize state on page load
-    document.addEventListener('DOMContentLoaded', () => {
-      if (isInternalNavigation()) {
-        triggerPhaseTwo();
+      // Indicator Fade
+      const indicatorOpacity = Math.max((1 - progress * 2.2).toFixed(3), 0);
+      scrollIndicator.style.opacity = indicatorOpacity;
+      scrollIndicator.style.pointerEvents = indicatorOpacity <= 0 ? 'none' : 'auto';
+
+      // Title Scale Down (1.0 -> 0.92)
+      const scale = (1 - progress * 0.08).toFixed(3);
+      heroTitleContainer.style.transform = `scale(${scale})`;
+
+      // Phase 2 Cluster Fade In
+      const clusterOpacity = Math.max(((progress - 0.15) / 0.85), 0).toFixed(3);
+      const clusterTranslate = ((1 - progress) * 40).toFixed(1);
+      phase2Cluster.style.opacity = Math.min(clusterOpacity, 1);
+      phase2Cluster.style.transform = `translateY(${clusterTranslate}px)`;
+      if (progress > 0.4) {
+        phase2Cluster.classList.add('interactive');
+      } else {
+        phase2Cluster.classList.remove('interactive');
       }
-    });
 
-    // Scroll & Touch Event Listeners
-    window.addEventListener('scroll', () => {
-      const scrollPos = window.scrollY;
-
-      if (!isPhaseTwo && scrollPos > 10) {
-        triggerPhaseTwo();
+      // Header Fade In
+      const headerOpacity = Math.max(((progress - 0.25) / 0.75), 0).toFixed(3);
+      const headerTranslate = (-(1 - progress) * 8).toFixed(1);
+      header.style.opacity = Math.min(headerOpacity, 1);
+      header.style.transform = `translateY(${headerTranslate}px)`;
+      if (progress > 0.5) {
+        header.classList.add('interactive');
+      } else {
+        header.classList.remove('interactive');
       }
 
-      if (scrollPos > 60) {
+      if (scrollY > 60) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
-    }, { passive: true });
 
-    window.addEventListener('wheel', (e) => {
-      if (!isPhaseTwo && e.deltaY > 0) {
-        triggerPhaseTwo();
+      if (progress > 0.8) {
+        sessionStorage.setItem('visited_home', 'true');
       }
+    }
+
+    function smoothScrollToPhase2() {
+      window.scrollTo({ top: 320, behavior: 'smooth' });
+    }
+
+    window.addEventListener('scroll', () => {
+      window.requestAnimationFrame(applyScrollProgress);
     }, { passive: true });
 
-    let touchStartY = 0;
-    window.addEventListener('touchstart', (e) => {
-      touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-
-    window.addEventListener('touchmove', (e) => {
-      const touchEndY = e.touches[0].clientY;
-      if (!isPhaseTwo && touchStartY - touchEndY > 20) {
-        triggerPhaseTwo();
+    document.addEventListener('DOMContentLoaded', () => {
+      if (isInternalNavigation()) {
+        bypassPhaseOne = true;
       }
-    }, { passive: true });
+      applyScrollProgress();
+    });
   </script>
 </body>
 </html>
