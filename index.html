@@ -70,9 +70,8 @@
       border-bottom: 1px solid transparent;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-8px);
       transition: background-color 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
-      will-change: opacity, transform;
+      will-change: opacity;
     }
 
     .site-header.interactive {
@@ -163,7 +162,7 @@
       z-index: 2;
     }
 
-    /* INTRO BRAND (SCROLL-DRIVEN DISSOLVE) */
+    /* INTRO BRAND OVERLAY */
     .intro-brand-wrapper {
       width: 100%;
       display: flex;
@@ -182,13 +181,13 @@
       text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
     }
 
-    /* CENTERED TITLE CONTAINER */
+    /* HERO TITLE CONTAINER (ANCHORED & SCALED) */
     .hero-title-container {
       container-type: inline-size;
       width: 100%;
       max-width: 620px;
       text-align: center;
-      transform-origin: center top;
+      transform-origin: center center;
       margin-bottom: 1.5rem;
       will-change: transform;
     }
@@ -218,7 +217,7 @@
       width: 100%;
       max-width: 620px;
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(20px);
       pointer-events: none;
       will-change: opacity, transform;
     }
@@ -451,12 +450,12 @@
   <section id="heroStage" class="hero-stage">
     <div class="hero-content-wrapper">
       
-      <!-- Phase 1 Top Brand (Dissolves with scroll) -->
+      <!-- Phase 1 Top Brand -->
       <div class="intro-brand-wrapper" id="introBrandWrapper">
         <div class="intro-brand">Phillip Joseph Visuals</div>
       </div>
 
-      <!-- Centered Stack Title -->
+      <!-- Centered Stack Title (Position-Anchored) -->
       <div class="hero-title-container" id="heroTitleContainer">
         <h1 class="hero-title">
           <span class="hero-title-line-1">Product Designer</span>
@@ -613,6 +612,13 @@
     };
 
     let bypassPhaseOne = false;
+    let hasPaused = false;
+    let isBreathing = false;
+
+    // Ease-in formula: acceleration from zero velocity
+    function easeInQuad(x) {
+      return x * x;
+    }
 
     function applyScrollProgress() {
       const scrollY = window.scrollY;
@@ -622,7 +628,7 @@
         introBrandWrapper.style.display = 'none';
         scrollIndicator.style.opacity = '0';
         scrollIndicator.style.display = 'none';
-        heroTitleContainer.style.transform = 'scale(0.92)';
+        heroTitleContainer.style.transform = 'scale(0.88)';
         phase2Cluster.style.opacity = '1';
         phase2Cluster.style.transform = 'translateY(0px)';
         phase2Cluster.classList.add('interactive');
@@ -633,46 +639,45 @@
         return;
       }
 
-      // Smooth scroll interpolation range: 0px to 320px
-      const fadeDistance = 320;
-      const progress = Math.min(Math.max(scrollY / fadeDistance, 0), 1);
+      // Linear scroll distance mapped to the full transition range (~1.0s travel distance)
+      const fadeDistance = 340;
+      const rawProgress = Math.min(Math.max(scrollY / fadeDistance, 0), 1);
+      const easedProgress = easeInQuad(rawProgress);
 
-      // Phase 1 Top Brand Fade & Blur
-      const brandOpacity = (1 - progress * 1.3).toFixed(3);
-      const brandBlur = (progress * 8).toFixed(1);
-      const brandTranslate = -(progress * 25).toFixed(1);
+      // Phase 1 Top Brand: fades up and out
+      const brandOpacity = Math.max((1 - rawProgress * 1.1).toFixed(3), 0);
+      const brandBlur = (rawProgress * 6).toFixed(1);
+      const brandTranslate = -(rawProgress * 28).toFixed(1);
       
-      introBrandWrapper.style.opacity = Math.max(brandOpacity, 0);
+      introBrandWrapper.style.opacity = brandOpacity;
       introBrandWrapper.style.filter = `blur(${brandBlur}px)`;
       introBrandWrapper.style.transform = `translateY(${brandTranslate}px)`;
-      introBrandWrapper.style.pointerEvents = progress > 0.6 ? 'none' : 'auto';
+      introBrandWrapper.style.pointerEvents = rawProgress > 0.8 ? 'none' : 'auto';
 
       // Indicator Fade
-      const indicatorOpacity = Math.max((1 - progress * 2.2).toFixed(3), 0);
+      const indicatorOpacity = Math.max((1 - rawProgress * 2.0).toFixed(3), 0);
       scrollIndicator.style.opacity = indicatorOpacity;
       scrollIndicator.style.pointerEvents = indicatorOpacity <= 0 ? 'none' : 'auto';
 
-      // Title Scale Down (1.0 -> 0.92)
-      const scale = (1 - progress * 0.08).toFixed(3);
+      // Title Scale Down (1.0 -> 0.88) anchored in place
+      const scale = (1 - easedProgress * 0.12).toFixed(3);
       heroTitleContainer.style.transform = `scale(${scale})`;
 
-      // Phase 2 Cluster Fade In
-      const clusterOpacity = Math.max(((progress - 0.15) / 0.85), 0).toFixed(3);
-      const clusterTranslate = ((1 - progress) * 40).toFixed(1);
-      phase2Cluster.style.opacity = Math.min(clusterOpacity, 1);
+      // Phase 2 Cluster: fades in with matching ease-in timeline
+      const clusterOpacity = Math.min(easedProgress * 1.1, 1).toFixed(3);
+      const clusterTranslate = ((1 - easedProgress) * 20).toFixed(1);
+      phase2Cluster.style.opacity = clusterOpacity;
       phase2Cluster.style.transform = `translateY(${clusterTranslate}px)`;
-      if (progress > 0.4) {
+      if (rawProgress > 0.6) {
         phase2Cluster.classList.add('interactive');
       } else {
         phase2Cluster.classList.remove('interactive');
       }
 
-      // Header Fade In
-      const headerOpacity = Math.max(((progress - 0.25) / 0.75), 0).toFixed(3);
-      const headerTranslate = (-(1 - progress) * 8).toFixed(1);
-      header.style.opacity = Math.min(headerOpacity, 1);
-      header.style.transform = `translateY(${headerTranslate}px)`;
-      if (progress > 0.5) {
+      // Nav Bar: fades in with transparent background initially
+      const headerOpacity = Math.min(easedProgress, 1).toFixed(3);
+      header.style.opacity = headerOpacity;
+      if (rawProgress > 0.7) {
         header.classList.add('interactive');
       } else {
         header.classList.remove('interactive');
@@ -684,13 +689,23 @@
         header.classList.remove('scrolled');
       }
 
-      if (progress > 0.8) {
+      // Momentary breathing pause once Phase 2 is fully arrived
+      if (rawProgress >= 0.98 && !hasPaused && !isBreathing) {
+        hasPaused = true;
+        isBreathing = true;
         sessionStorage.setItem('visited_home', 'true');
+        
+        // Momentary scroll delay to let the phase settle
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+          document.body.style.overflow = '';
+          isBreathing = false;
+        }, 650);
       }
     }
 
     function smoothScrollToPhase2() {
-      window.scrollTo({ top: 320, behavior: 'smooth' });
+      window.scrollTo({ top: 340, behavior: 'smooth' });
     }
 
     window.addEventListener('scroll', () => {
