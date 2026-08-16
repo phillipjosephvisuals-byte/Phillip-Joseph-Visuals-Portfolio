@@ -72,8 +72,8 @@
       pointer-events: none;
       transform: translateY(-8px);
       transition: 
-        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), 
-        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), 
+        opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
         background-color 0.6s ease, 
         border-color 0.6s ease, 
         backdrop-filter 0.6s ease;
@@ -169,30 +169,42 @@
       z-index: 2;
     }
 
-    /* PHASE 1 TOP BRAND OVERLAY */
+    /* PHASE 1 TOP BRAND (SLOW DRIFT & DISSOLVE) */
+    .intro-brand-wrapper {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+      width: 100%;
+    }
+
     .intro-brand {
+      min-height: 0;
       font-weight: 600;
       font-size: 1.15rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--text-main);
-      margin-bottom: 1.75rem;
+      text-align: center;
+      padding-bottom: 1.75rem;
       text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
       transition: 
-        opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), 
-        transform 1.5s cubic-bezier(0.22, 1, 0.36, 1),
-        margin-bottom 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), 
+        transform 1.8s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-stage.phase-2 .intro-brand-wrapper {
+      grid-template-rows: 0fr;
     }
 
     .hero-stage.phase-2 .intro-brand {
       opacity: 0;
-      transform: translateY(-24px);
+      transform: translateY(-20px) scale(0.96);
+      filter: blur(6px);
       pointer-events: none;
-      margin-bottom: 0;
-      height: 0;
-      overflow: hidden;
     }
 
     /* CENTERED TITLE CONTAINER */
@@ -202,8 +214,8 @@
       max-width: 620px;
       text-align: center;
       transition: 
-        transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), 
-        margin-bottom 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+        margin-bottom 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .hero-title {
@@ -240,8 +252,8 @@
       transform: translateY(35px);
       pointer-events: none;
       transition: 
-        opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.12s, 
-        transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+        opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s, 
+        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
     }
 
     .hero-stage.phase-2 .phase-2-cluster {
@@ -323,7 +335,7 @@
       gap: 0.5rem;
       cursor: pointer;
       z-index: 10;
-      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .scroll-delta {
@@ -432,10 +444,7 @@
       .intro-brand { 
         font-size: 0.95rem; 
         letter-spacing: 0.18em;
-        transition: 
-          opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), 
-          transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-          margin-bottom 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        padding-bottom: 1.25rem;
       }
 
       .hero-bio { font-size: 0.85rem; }
@@ -489,7 +498,9 @@
     <div class="hero-content-wrapper">
       
       <!-- Phase 1 Top Brand -->
-      <div class="intro-brand" id="introBrand">Phillip Joseph Visuals</div>
+      <div class="intro-brand-wrapper">
+        <div class="intro-brand" id="introBrand">Phillip Joseph Visuals</div>
+      </div>
 
       <!-- Centered Stack Title -->
       <div class="hero-title-container" id="heroTitleContainer">
