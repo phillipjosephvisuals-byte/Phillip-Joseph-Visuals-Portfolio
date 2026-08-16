@@ -130,19 +130,39 @@
     }
 
     /* ==========================================================================
-       HERO STAGE
+       STICKY PINNED HERO ENGINE TRACK
        ========================================================================== */
+    .hero-track {
+      position: relative;
+      height: 200vh; /* Provides the scroll distance needed to drive all animations while hero is pinned */
+      width: 100%;
+    }
+
+    .hero-track.bypassed {
+      height: auto;
+    }
+
     .hero-stage {
-      min-height: 100vh;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      position: relative;
       background: radial-gradient(ellipse 90% 70% at 50% 35%, #141d2b 0%, #0c121d 55%, #05070a 100%);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 5rem 1.5rem 4rem 1.5rem;
+      padding: 5rem 1.5rem 3rem 1.5rem;
       overflow: hidden;
+      z-index: 2;
+    }
+
+    .hero-track.bypassed .hero-stage {
+      position: relative;
+      height: auto;
+      min-height: 100vh;
+      padding: calc(70px + 3rem) 1.5rem 4rem 1.5rem;
     }
 
     .hero-stage::after {
@@ -181,7 +201,7 @@
       text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
     }
 
-    /* HERO TITLE CONTAINER (ANCHORED & SCALED) */
+    /* HERO TITLE CONTAINER (ANCHORED IN PLACE & SCALED) */
     .hero-title-container {
       container-type: inline-size;
       width: 100%;
@@ -398,6 +418,7 @@
       .dropdown-menu { min-width: 180px; }
       .dropdown-menu li a { padding: 0.5rem 1rem; font-size: 0.825rem; }
 
+      .hero-track { height: 170vh; }
       .hero-stage { padding: 4.5rem 1rem 3rem 1rem; }
       .intro-brand { font-size: 0.95rem; letter-spacing: 0.18em; }
       .hero-bio { font-size: 0.85rem; }
@@ -446,53 +467,55 @@
     </div>
   </header>
 
-  <!-- TWO-PHASE HERO STAGE -->
-  <section id="heroStage" class="hero-stage">
-    <div class="hero-content-wrapper">
-      
-      <!-- Phase 1 Top Brand -->
-      <div class="intro-brand-wrapper" id="introBrandWrapper">
-        <div class="intro-brand">Phillip Joseph Visuals</div>
-      </div>
-
-      <!-- Centered Stack Title (Position-Anchored) -->
-      <div class="hero-title-container" id="heroTitleContainer">
-        <h1 class="hero-title">
-          <span class="hero-title-line-1">Product Designer</span>
-          <span class="hero-title-plus">+</span>
-          <span class="hero-title-line-2">Front-End Developer</span>
-        </h1>
-      </div>
-
-      <!-- Phase 2 Loaded Content Cluster -->
-      <div class="phase-2-cluster" id="phase2Cluster">
-        <p class="hero-bio">
-          Specializing in taking complex digital concepts from raw strategy to polished production. Blending human-centered UX discipline with clean front-end code, I engineer scalable design systems, intuitive interfaces, and high-performance dark surface web tools.
-        </p>
+  <!-- STICKY HERO TRACK -->
+  <div class="hero-track" id="heroTrack">
+    <section id="heroStage" class="hero-stage">
+      <div class="hero-content-wrapper">
         
-        <div class="hero-action-row">
-          <div class="hero-status-tag">
-            <span class="status-dot"></span> Available for Product & UX Roles
-          </div>
-          <a href="ContactMe.html" class="btn-secondary">Get in Touch</a>
+        <!-- Phase 1 Top Brand -->
+        <div class="intro-brand-wrapper" id="introBrandWrapper">
+          <div class="intro-brand">Phillip Joseph Visuals</div>
         </div>
 
-        <div class="hero-metrics">
-          <div class="metric-item"><span class="metric-label">0→1 Strategy</span><span class="metric-value">Concept to Code</span></div>
-          <div class="metric-item"><span class="metric-label">Design Systems</span><span class="metric-value">Dark Surface Specialist</span></div>
-          <div class="metric-item"><span class="metric-label">Front-End Stack</span><span class="metric-value">HTML / CSS / JS / Figma</span></div>
+        <!-- Centered Stack Title -->
+        <div class="hero-title-container" id="heroTitleContainer">
+          <h1 class="hero-title">
+            <span class="hero-title-line-1">Product Designer</span>
+            <span class="hero-title-plus">+</span>
+            <span class="hero-title-line-2">Front-End Developer</span>
+          </h1>
         </div>
+
+        <!-- Phase 2 Content Cluster -->
+        <div class="phase-2-cluster" id="phase2Cluster">
+          <p class="hero-bio">
+            Specializing in taking complex digital concepts from raw strategy to polished production. Blending human-centered UX discipline with clean front-end code, I engineer scalable design systems, intuitive interfaces, and high-performance dark surface web tools.
+          </p>
+          
+          <div class="hero-action-row">
+            <div class="hero-status-tag">
+              <span class="status-dot"></span> Available for Product & UX Roles
+            </div>
+            <a href="ContactMe.html" class="btn-secondary">Get in Touch</a>
+          </div>
+
+          <div class="hero-metrics">
+            <div class="metric-item"><span class="metric-label">0→1 Strategy</span><span class="metric-value">Concept to Code</span></div>
+            <div class="metric-item"><span class="metric-label">Design Systems</span><span class="metric-value">Dark Surface Specialist</span></div>
+            <div class="metric-item"><span class="metric-label">Front-End Stack</span><span class="metric-value">HTML / CSS / JS / Figma</span></div>
+          </div>
+        </div>
+
       </div>
 
-    </div>
-
-    <!-- Pulsating Inverted Delta Indicator -->
-    <div class="scroll-indicator" id="scrollIndicator" onclick="smoothScrollToPhase2()">
-      <svg class="scroll-delta" viewBox="0 0 24 24">
-        <polygon points="4 6, 20 6, 12 18" />
-      </svg>
-    </div>
-  </section>
+      <!-- Scroll Delta Indicator -->
+      <div class="scroll-indicator" id="scrollIndicator" onclick="smoothScrollToPhase2()">
+        <svg class="scroll-delta" viewBox="0 0 24 24">
+          <polygon points="4 6, 20 6, 12 18" />
+        </svg>
+      </div>
+    </section>
+  </div>
 
   <main class="container">
     
@@ -598,6 +621,7 @@
   </footer>
 
   <script>
+    const heroTrack = document.getElementById('heroTrack');
     const header = document.getElementById('siteHeader');
     const introBrandWrapper = document.getElementById('introBrandWrapper');
     const heroTitleContainer = document.getElementById('heroTitleContainer');
@@ -615,7 +639,6 @@
     let hasPaused = false;
     let isBreathing = false;
 
-    // Ease-in formula: acceleration from zero velocity
     function easeInQuad(x) {
       return x * x;
     }
@@ -624,9 +647,8 @@
       const scrollY = window.scrollY;
 
       if (bypassPhaseOne) {
-        introBrandWrapper.style.opacity = '0';
+        heroTrack.classList.add('bypassed');
         introBrandWrapper.style.display = 'none';
-        scrollIndicator.style.opacity = '0';
         scrollIndicator.style.display = 'none';
         heroTitleContainer.style.transform = 'scale(0.88)';
         phase2Cluster.style.opacity = '1';
@@ -639,13 +661,13 @@
         return;
       }
 
-      // Linear scroll distance mapped to the full transition range (~1.0s travel distance)
-      const fadeDistance = 340;
-      const rawProgress = Math.min(Math.max(scrollY / fadeDistance, 0), 1);
+      // Calculate progress relative to the track's scrollable height
+      const trackHeight = heroTrack.offsetHeight - window.innerHeight;
+      const rawProgress = Math.min(Math.max(scrollY / trackHeight, 0), 1);
       const easedProgress = easeInQuad(rawProgress);
 
-      // Phase 1 Top Brand: fades up and out
-      const brandOpacity = Math.max((1 - rawProgress * 1.1).toFixed(3), 0);
+      // Phase 1 Top Brand: fades up and out as user scrolls
+      const brandOpacity = Math.max((1 - rawProgress * 1.2).toFixed(3), 0);
       const brandBlur = (rawProgress * 6).toFixed(1);
       const brandTranslate = -(rawProgress * 28).toFixed(1);
       
@@ -655,16 +677,16 @@
       introBrandWrapper.style.pointerEvents = rawProgress > 0.8 ? 'none' : 'auto';
 
       // Indicator Fade
-      const indicatorOpacity = Math.max((1 - rawProgress * 2.0).toFixed(3), 0);
+      const indicatorOpacity = Math.max((1 - rawProgress * 2.2).toFixed(3), 0);
       scrollIndicator.style.opacity = indicatorOpacity;
       scrollIndicator.style.pointerEvents = indicatorOpacity <= 0 ? 'none' : 'auto';
 
-      // Title Scale Down (1.0 -> 0.88) anchored in place
+      // Title Scale Down (1.0 -> 0.88) anchored firmly on screen
       const scale = (1 - easedProgress * 0.12).toFixed(3);
       heroTitleContainer.style.transform = `scale(${scale})`;
 
-      // Phase 2 Cluster: fades in with matching ease-in timeline
-      const clusterOpacity = Math.min(easedProgress * 1.1, 1).toFixed(3);
+      // Phase 2 Cluster: fades and slides into place
+      const clusterOpacity = Math.min(easedProgress * 1.15, 1).toFixed(3);
       const clusterTranslate = ((1 - easedProgress) * 20).toFixed(1);
       phase2Cluster.style.opacity = clusterOpacity;
       phase2Cluster.style.transform = `translateY(${clusterTranslate}px)`;
@@ -683,19 +705,19 @@
         header.classList.remove('interactive');
       }
 
-      if (scrollY > 60) {
+      // Scrolled backdrop kicks in once scrolling down past the hero track
+      if (scrollY > trackHeight + 40) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
 
-      // Momentary breathing pause once Phase 2 is fully arrived
+      // Momentary breathing pause once Phase 2 is fully arrived and settled
       if (rawProgress >= 0.98 && !hasPaused && !isBreathing) {
         hasPaused = true;
         isBreathing = true;
         sessionStorage.setItem('visited_home', 'true');
         
-        // Momentary scroll delay to let the phase settle
         document.body.style.overflow = 'hidden';
         setTimeout(() => {
           document.body.style.overflow = '';
@@ -705,7 +727,8 @@
     }
 
     function smoothScrollToPhase2() {
-      window.scrollTo({ top: 340, behavior: 'smooth' });
+      const trackHeight = heroTrack.offsetHeight - window.innerHeight;
+      window.scrollTo({ top: trackHeight, behavior: 'smooth' });
     }
 
     window.addEventListener('scroll', () => {
