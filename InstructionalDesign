@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study: Protocol Zero | Threat Verification Simulation</title>
+  <style>
+    :root {
+      --bg-canvas: #090d12;
+      --bg-surface: #121820;
+      --bg-subtle: #1c2430;
+      --border: #2d3748;
+      --border-accent: #3b82f6;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-bright: #ffffff;
+      --accent: #38bdf8;
+      --accent-dim: rgba(56, 189, 248, 0.1);
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      --max-width: 1040px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      padding: 0 20px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Top Nav */
+    .nav-wrapper {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-bright);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--accent);
+    }
+
+    /* Main Container */
+    main {
+      width: 100%;
+      max-width: var(--max-width);
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    /* Hero */
+    .hero-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      color: var(--text-bright);
+      line-height: 1.15;
+      margin-bottom: 16px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 780px;
+    }
+
+    /* Metrics Grid */
+    .metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+    }
+
+    .metric-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .metric-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-bright);
+    }
+
+    /* Sections & Typography */
+    .section-header {
+      margin-bottom: 20px;
+    }
+
+    .section-number {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: var(--text-bright);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--text-main);
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Simulation Viewport Card */
+    .simulation-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .simulation-header {
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .simulation-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #4ade80;
+      font-family: var(--font-mono);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
+    }
+
+    .simulation-frame {
+      width: 100%;
+      height: 680px;
+      border: none;
+      display: block;
+      background: #0d1117;
+    }
+
+    .simulation-caption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    /* 2-Column Grid Layouts */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      color: var(--text-bright);
+      margin-bottom: 12px;
+    }
+
+    /* Job Aid Download Box */
+    .download-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    @media (max-width: 640px) {
+      .download-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #090d12;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 12px 20px;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
+
+    .btn-download:hover {
+      opacity: 0.9;
+    }
+
+    /* Footer Navigation */
+    .case-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 32px;
+    }
+
+    .footer-btn {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <nav class="nav-wrapper" aria-label="Main Navigation">
+    <a href="/" class="nav-brand">Portfolio</a>
+    <div class="nav-links">
+      <a href="/#work" class="nav-link">Work</a>
+      <a href="/#about" class="nav-link">About</a>
+      <a href="/#contact" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Case Study Content -->
+  <main>
+
+    <!-- Header / Hero -->
+    <header>
+      <div class="hero-tags">
+        <span class="tag">Instructional Design</span>
+        <span class="tag">Front-End UX Architecture</span>
+        <span class="tag">Information Security</span>
+        <span class="tag">xAPI / SCORM</span>
+      </div>
+      <h1>Protocol Zero: Secure Data Handling Simulation</h1>
+      <p class="hero-subtitle">
+        Replacing passive compliance slide decks with an action-oriented, branching scenario engine that builds real-world threat verification habits.
+      </p>
+    </header>
+
+    <!-- Metadata Grid -->
+    <section class="metrics-bar" aria-label="Project Metadata">
+      <div class="metric-item">
+        <span class="metric-label">Role</span>
+        <span class="metric-value">Lead ID & Front-End Developer</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-label">Timeline</span>
+        <span class="metric-value">2-Week Prototype Sprint</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-label">Target Audience</span>
+        <span class="metric-value">Corporate Ops & Specialists</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-label">Tech Stack</span>
+        <span class="metric-value">HTML5, Vanilla JS, CSS Grid, xAPI</span>
+      </div>
+    </section>
+
+    <!-- Section 1: Problem & Needs Analysis -->
+    <section>
+      <div class="section-header">
+        <span class="section-number">01 / ANALYSIS</span>
+        <h2>The Challenge & Behavioral Gap</h2>
+      </div>
+      <p>
+        Annual compliance modules often rely on passive "click-to-advance" slides and predictable multiple-choice quizzes. While learners score 100% on rote knowledge tests, behavioral breakdowns persist during real spear-phishing and executive-impersonation attempts.
+      </p>
+      <p>
+        <strong>The Core Behavioral Gap:</strong> When faced with artificial urgency from executive personas, employees experience cognitive friction and bypass standard verification procedures. The goal was to build a low-friction, high-fidelity practice environment where learners navigate the consequences of urgency bias safely.
+      </p>
+    </section>
+
+    <!-- Section 2: Instructional Strategy -->
+    <section>
+      <div class="section-header">
+        <span class="section-number">02 / INSTRUCTIONAL STRATEGY</span>
+        <h2>Action Mapping & Branching Architecture</h2>
+      </div>
+      <p>
+        Following Cathy Moore’s Action Mapping model, every decision node in the module corresponds directly to real operational tasks:
+      </p>
+      <ul>
+        <li><strong>Analyze:</strong> Inspect RFC 822 mail headers for domain mismatches rather than trusting display names.</li>
+        <li><strong>Verify:</strong> Execute out-of-band identity checks via authenticated enterprise channels rather than replying in-band.</li>
+        <li><strong>Escalate:</strong> Triage and file an accurate Incident Escalation report to SOC queues.</li>
+      </ul>
+    </section>
+
+    <!-- Section 3: Live Embedded Simulation -->
+    <section>
+      <div class="section-header">
+        <span class="section-number">03 / INTERACTIVE SIMULATOR</span>
+        <h2>Live Module Demonstration</h2>
+      </div>
+      <div class="simulation-card">
+        <div class="simulation-header">
+          <span style="color: var(--text-bright); font-weight: 600;">Protocol Zero: Standalone Engine</span>
+          <div class="simulation-status">
+            <div class="status-dot"></div>
+            <span>xAPI LRS Stream Active</span>
+          </div>
+        </div>
+        <!-- Point to your single-file training player HTML file -->
+        <iframe 
+          class="simulation-frame" 
+          src="player.html" 
+          title="Interactive Protocol Zero Training Simulator" 
+          loading="lazy">
+        </iframe>
+      </div>
+      <p class="simulation-caption">
+        *Interactive: Try selecting the impulsive upload or in-band reply options first to observe the state penalty and telemetry log stream.
+      </p>
+    </section>
+
+    <!-- Section 4: Technical Architecture & LMS Telemetry -->
+    <section>
+      <div class="section-header">
+        <span class="section-number">04 / ENGINEERING & STANDARDS</span>
+        <h2>Front-End Architecture & LMS Readiness</h2>
+      </div>
+      <div class="grid-2col">
+        <div class="card">
+          <h3>Custom JavaScript State Engine</h3>
+          <p>
+            Unlike monolithic authoring tool exports, this module runs on a decoupled vanilla JS state machine. Content nodes, branching conditions, and scoring modifiers are maintained separately from DOM rendering logic.
+          </p>
+          <ul>
+            <li>Zero runtime dependencies for sub-second load times.</li>
+            <li>Fully responsive and accessible (WCAG 2.1 AA keyboard support).</li>
+            <li>Custom CSS variables matching dark-mode brand palettes.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>xAPI & SCORM Interoperability</h3>
+          <p>
+            The simulator features a telemetry dispatch layer that generates structured xAPI statements (<code>Actor → Verb → Object</code>) with execution timestamps and result payloads.
+          </p>
+          <ul>
+            <li>Captures granular learner decisions, not just binary pass/fail states.</li>
+            <li>Easily packaged with a SCORM 1.2/2004 or cmi5 wrapper for enterprise LMS deployment.</li>
+            <li>Kirkpatrick Level 2 assessment logging out of the box.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Performance Support / Job Aid -->
+    <section>
+      <div class="section-header">
+        <span class="section-number">05 / PERFORMANCE SUPPORT</span>
+        <h2>Companion Job Aid (SOP)</h2>
+      </div>
+      <div class="download-box">
+        <div>
+          <h3 style="color: var(--text-bright); margin-bottom: 6px;">The 60-Second Data Verification Flowchart</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0;">
+            A 1-page desk reference supporting real-world workplace transfer for operations and administrative staff.
+          </p>
+        </div>
+        <a href="#download" class="btn-download">Download Job Aid (PDF) ↓</a>
+      </div>
+    </section>
+
+    <!-- Section 6: Evaluation & Takeaways -->
+    <section>
+      <div class="section-header">
+        <span class="section-number">06 / EVALUATION & OUTCOMES</span>
+        <h2>Measurement Framework</h2>
+      </div>
+      <p>
+        Learning efficacy is evaluated through a multi-tier framework:
+      </p>
+      <ul>
+        <li><strong>Kirkpatrick Level 1:</strong> Interaction completion rates and time spent exploring verification tools.</li>
+        <li><strong>Kirkpatrick Level 2:</strong> In-simulation decision accuracy, tracking reduction in repeat traps and correct out-of-band verification usage.</li>
+        <li><strong>Workplace Transfer (Level 3):</strong> Monitored reduction in simulated phishing test failures across participant groups.</li>
+      </ul>
+    </section>
+
+    <!-- Case Study Footer Navigation -->
+    <footer class="case-footer">
+      <a href="/" class="footer-btn">← Back to Portfolio</a>
+      <a href="#top" class="footer-btn">Back to Top ↑</a>
+    </footer>
+
+  </main>
+
+</body>
+</html>
