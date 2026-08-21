@@ -4,7 +4,6 @@
   <link rel="icon" type="image/svg+xml" href="/Assets/PJVfavicon.svg?v=3" />
   <link rel="alternate icon" type="image/png" href="/Assets/PJVfavicon1.png?v=3" />
   <link rel="shortcut icon" href="/Assets/PJVfavicon1.png?v=3" />
-  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | Phillip Joseph Villarreal</title>
@@ -120,7 +119,7 @@
     .info-item p, .info-item a { color: var(--text-main); font-size: 1rem; font-weight: 500; transition: color 0.2s ease; }
     .info-item a:hover { color: var(--accent); }
 
-    .form-group { margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.5rem; position: relative; }
     .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
     .form-control {
       width: 100%; background-color: var(--bg-base); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.85rem 1rem;
@@ -129,12 +128,46 @@
     .form-control:focus { border-color: var(--accent); box-shadow: 0 0 12px rgba(56, 225, 255, 0.25); }
     textarea.form-control { min-height: 140px; resize: vertical; }
 
+    /* FORMSPREE MESSAGE & VALIDATION STYLING */
+    .fs-status-message {
+      display: none;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    [data-fs-success]:not(:empty) {
+      display: block;
+      background-color: rgba(56, 225, 255, 0.08);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 15px rgba(56, 225, 255, 0.2);
+    }
+    [data-fs-error]:not(:empty) {
+      display: block;
+      background-color: rgba(248, 113, 113, 0.1);
+      border: 1px solid #f87171;
+      color: #fca5a5;
+    }
+    span[data-fs-error] {
+      display: block;
+      color: #f87171;
+      font-size: 0.8rem;
+      margin-top: 0.35rem;
+    }
+
     .btn-submit {
       width: 100%; background-color: var(--text-main); color: var(--bg-base); font-family: var(--font-heading); font-weight: 700;
       font-size: 1rem; padding: 0.95rem 1.75rem; border: none; border-radius: 8px; cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, opacity 0.2s ease; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     }
-    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 0 22px rgba(255, 255, 255, 0.4); background-color: #ffffff; }
+    .btn-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 0 22px rgba(255, 255, 255, 0.4); background-color: #ffffff; }
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
 
     /* ==========================================================================
        MOBILE RESPONSIVE & BREATHING ROOM OPTIMIZATIONS
@@ -188,7 +221,6 @@
       .hero-bio {
         text-align: justify;
         margin: 0 auto;
-        font-size: .75rem;
       }
 
       .card {
@@ -258,15 +290,9 @@
           <li class="info-item">
             <h4>Profiles</h4>
             <p>
-              <!-- ===========================================================================
-                   LINKEDIN PROFILE: Paste your profile URL between quotes in href="..." below
-                   =========================================================================== -->
-              <a href="https://www.linkedin.com/in/phillip-joseph-villarreal-383562a1/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              <a href="https://linkedin.com/in/YOUR-PROFILE-HERE" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
               &nbsp;•&nbsp;
-              <!-- ===========================================================================
-                   INSTAGRAM PROFILE: Paste your Instagram URL between quotes in href="..." below
-                   =========================================================================== -->
-              <a href="https://www.instagram.com/phillip_joe_v/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+              <a href="https://instagram.com/YOUR-HANDLE-HERE" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
             </p>
           </li>
         </ul>
@@ -276,35 +302,36 @@
       <section class="card">
         <h3>Send a Message</h3>
         
-        <!-- 
-          ===========================================================================
-          FORM ENDPOINT SETUP:
-          To receive form submissions to your email:
-          1. Replace action="#" below with your Formspree endpoint:
-             action="https://formspree.io/f/YOUR_FORM_ID"
-             or your Formsubmit endpoint:
-             action="https://formsubmit.co/YOUR_EMAIL_HERE@example.com"
-          2. Remove the onsubmit="event.preventDefault(); ..." attribute when using a real form backend.
-          ===========================================================================
-        -->
-        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you for reaching out! Form is ready to connect to your email endpoint.');">
+        <!-- Live Formspree Success and Error Alert Containers -->
+        <div data-fs-success class="fs-status-message"></div>
+        <div data-fs-error class="fs-status-message"></div>
+
+        <form id="contactForm">
           <div class="form-group">
             <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="Jane Doe" required />
+            <input type="text" id="name" name="name" class="form-control" placeholder="Jane Doe" data-fs-field required />
+            <span data-fs-error="name"></span>
           </div>
+
           <div class="form-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="jane@example.com" required />
+            <input type="email" id="email" name="email" class="form-control" placeholder="jane@example.com" data-fs-field required />
+            <span data-fs-error="email"></span>
           </div>
+
           <div class="form-group">
             <label for="subject">Project or Role Subject</label>
-            <input type="text" id="subject" name="subject" class="form-control" placeholder="Product Design Opportunity / Project Inquiry" required />
+            <input type="text" id="subject" name="_subject" class="form-control" placeholder="Product Design Opportunity / Project Inquiry" data-fs-field required />
+            <span data-fs-error="_subject"></span>
           </div>
+
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" class="form-control" placeholder="Tell me a bit about your timeline, scope, or team..." required></textarea>
+            <textarea id="message" name="message" class="form-control" placeholder="Tell me a bit about your timeline, scope, or team..." data-fs-field required></textarea>
+            <span data-fs-error="message"></span>
           </div>
-          <button type="submit" class="btn-submit">Send Message →</button>
+
+          <button type="submit" class="btn-submit" data-fs-submit-btn>Send Message →</button>
         </form>
       </section>
 
@@ -314,6 +341,13 @@
   <footer class="site-footer">
     <div class="container"><p>Copyright © 2026 - Phillip Joseph Villarreal</p></div>
   </footer>
+
+  <!-- FORMSPREE AJAX LIBRARY & INITIALIZATION -->
+  <script>
+    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#contactForm', formId: 'xzepwrzd' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
   <script>
     const header = document.getElementById('siteHeader');
