@@ -614,7 +614,7 @@
       position: relative;
       overflow: hidden;
       min-width: 0;
-      max-height: 720px;
+      max-height: 740px;
     }
 
     .viewport-topbar {
@@ -736,6 +736,101 @@
 
     .content-box ul li {
       margin-bottom: 0.4rem;
+    }
+
+    /* FLASHCARD COMPONENT */
+    .flashcard-section {
+      margin-bottom: 1.75rem;
+      max-width: 780px;
+    }
+
+    .flashcard-section-title {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .flashcards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .flashcard-container {
+      perspective: 1000px;
+      height: 130px;
+      cursor: pointer;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flashcard-container.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-front, .flashcard-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(15, 20, 29, 0.9);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: border-color 0.2s ease;
+    }
+
+    .flashcard-container:hover .flashcard-front,
+    .flashcard-container:hover .flashcard-back {
+      border-color: var(--accent);
+    }
+
+    .flashcard-front {
+      color: #ffffff;
+    }
+
+    .flashcard-front .card-term {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #ffffff;
+      margin-bottom: 0.35rem;
+    }
+
+    .flashcard-front .flip-hint {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      opacity: 0.85;
+    }
+
+    .flashcard-back {
+      transform: rotateY(180deg);
+      background-color: #121926;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      line-height: 1.4;
+      text-align: left;
+      overflow-y: auto;
+      border-color: rgba(56, 225, 255, 0.4);
     }
 
     /* TIMELINE SVG WRAPPER */
@@ -1136,7 +1231,7 @@
             <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 0.75rem;">// INSTRUCTIONAL ECOSYSTEM</div>
             <h3 style="font-size: 1.4rem; color: #ffffff; margin-bottom: 0.75rem;">TLO Mastery & LMS Ready</h3>
             <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 320px;">
-              Engineered with granular date ranges, evolutionary flora/fauna tracking, embedded formative quizzes, and SCORM/xAPI gradebook telemetry.
+              Engineered with granular date ranges, evolutionary flora/fauna tracking, interactive flashcard glossaries, and SCORM/xAPI gradebook telemetry.
             </p>
           </div>
         </div>
@@ -1285,12 +1380,41 @@
 
               <li class="module-group open">
                 <button class="module-heading" onclick="toggleModuleGroup(this)">
-                  <span>Final Assessment</span>
+                  <span>Module 4: Avian Dinosaurs</span>
                   <span class="caret">▶</span>
                 </button>
                 <ul class="module-sublist">
                   <li>
                     <button class="module-page-item" id="menu-slide-13" onclick="goToSlide(13)">
+                      <span>4.1 Cladistics & Taxonomy</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="module-page-item" id="menu-slide-14" onclick="goToSlide(14)">
+                      <span>4.2 Theropod-Bird Bridge</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="module-page-item" id="menu-slide-15" onclick="goToSlide(15)">
+                      <span>4.3 Avian vs. Non-Avian</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="module-page-item" id="menu-slide-16" onclick="goToSlide(16)">
+                      <span>4.4 Knowledge Check</span>
+                    </button>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="module-group open">
+                <button class="module-heading" onclick="toggleModuleGroup(this)">
+                  <span>Final Assessment</span>
+                  <span class="caret">▶</span>
+                </button>
+                <ul class="module-sublist">
+                  <li>
+                    <button class="module-page-item" id="menu-slide-17" onclick="goToSlide(17)">
                       <span>Comprehensive Exam</span>
                     </button>
                   </li>
@@ -1306,7 +1430,7 @@
                 ☰
               </button>
               <div class="current-slide-indicator" id="slideIndicator">
-                SLIDE 1 OF 14 // MESO-01
+                SLIDE 1 OF 18 // MESO-00
               </div>
             </div>
 
@@ -1314,42 +1438,83 @@
               
               <div class="slide-container active" id="slide-0">
                 <div class="slide-tag">// Terminal Learning Objective (TLO)</div>
-                <h3 class="slide-title">The Age of Reptiles</h3>
+                <h3 class="slide-title">The Age of Reptiles & Modern Dinosaurs</h3>
                 <p class="slide-body">
-                  Welcome to the interactive Mesozoic courseware. Throughout this module series, you will examine the evolutionary trajectory of dinosaurs and Earth's prehistoric ecosystems spanning three major geological periods.
+                  Welcome to the interactive Mesozoic courseware. Throughout this module series, you will examine the evolutionary trajectory of dinosaurs, prehistoric ecosystems, and the phylogenetic classification demonstrating why modern birds are living dinosaurs.
                 </p>
 
                 <div class="content-box">
                   <h4>Target Learning Outcomes</h4>
                   <ul>
                     <li><strong>Geochronology:</strong> Identify exact date ranges and boundaries for the Triassic, Jurassic, and Cretaceous periods.</li>
-                    <li><strong>Flora Evolution:</strong> Track the shift from gymnosperm/seed fern dominance to the Cretaceous angiosperm (flowering plant) revolution.</li>
-                    <li><strong>Fauna Radiation:</strong> Distinguish early archosaurs, Jurassic high-canopy megaherbivores, and Late Cretaceous apex predators.</li>
+                    <li><strong>Flora Evolution:</strong> Track the shift from gymnosperm/seed fern dominance to the Cretaceous angiosperm revolution.</li>
+                    <li><strong>Fauna Radiation:</strong> Distinguish early archosaurs, Jurassic megaherbivores, and Late Cretaceous apex predators.</li>
+                    <li><strong>Phylogenetic Cladistics:</strong> Understand why dinosaurs are reptiles, how birds evolved from theropods, and the biological distinction between avian and non-avian dinosaurs.</li>
                   </ul>
                 </div>
 
                 <div style="margin-top: 1rem; padding: 1rem; border-radius: 8px; background: rgba(56, 225, 255, 0.05); border: 1px dashed rgba(56, 225, 255, 0.3); max-width: 780px;">
                   <p style="font-size: 0.85rem; color: var(--accent); font-family: var(--font-mono);">
-                    ▶ INSTRUCTION: Scroll down through each section to absorb the material, then click "Next" below to progress through each module.
+                    ▶ INSTRUCTION: Scroll down through each section to absorb the material, click flashcards to reveal definitions, and click "Next" to progress.
                   </p>
                 </div>
               </div>
 
               <div class="slide-container" id="slide-1">
-                <div class="slide-tag">// Module 1.1 • Geochronology</div>
+                <div class="slide-tag">// Module 1.1 • Vocabulary & Geochronology</div>
                 <h3 class="slide-title">The Triassic Period: Chronology & Climate</h3>
                 
+                <div class="flashcard-section">
+                  <div class="flashcard-section-title">
+                    <span>🗂 Key Module Vocabulary</span>
+                    <span style="font-size: 0.7rem; color: var(--text-muted);">(Click cards to flip)</span>
+                  </div>
+                  <div class="flashcards-grid">
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                      <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                          <p class="card-term">Pangea</p>
+                          <span class="flip-hint">Click to flip ↷</span>
+                        </div>
+                        <div class="flashcard-back">
+                          <strong>Pangea:</strong> The global supercontinent during the Late Paleozoic and Early Mesozoic, uniting all modern landmasses into a single landmass.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                      <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                          <p class="card-term">Carnian Pluvial Event</p>
+                          <span class="flip-hint">Click to flip ↷</span>
+                        </div>
+                        <div class="flashcard-back">
+                          <strong>Carnian Pluvial Event:</strong> A 2-million-year pulse of global rainfall and elevated humidity (~234–232 Ma) that spurred early dinosaur diversification.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                      <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                          <p class="card-term">Pseudosuchia</p>
+                          <span class="flip-hint">Click to flip ↷</span>
+                        </div>
+                        <div class="flashcard-back">
+                          <strong>Pseudosuchia:</strong> The crocodile-line branch of archosaurs that dominated terrestrial predatory and herbivore niches throughout the Triassic.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="timeline-visual-card">
                   <h4>// Deep Time Relative Scale: Triassic Highlight (251.9 – 201.3 Ma)</h4>
                   <svg class="timeline-svg" viewBox="0 0 740 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="20" y="32" width="700" height="12" rx="6" fill="#171f2c"/>
-                    
                     <rect x="20" y="30" width="140" height="16" rx="6" fill="#38e1ff" filter="drop-shadow(0px 0px 8px rgba(56,225,255,0.6))"/>
-                    
                     <rect x="160" y="32" width="156" height="12" fill="#1e293b"/>
-                    
                     <rect x="316" y="32" width="220" height="12" fill="#1e293b"/>
-                    
                     <rect x="536" y="32" width="184" height="12" rx="6" fill="#121824"/>
 
                     <circle cx="20" cy="38" r="4" fill="#38e1ff"/>
@@ -1380,13 +1545,6 @@
                     All major landmasses were merged into the giant C-shaped supercontinent <strong>Pangea</strong>, enveloped by the vast global ocean <strong>Panthalassa</strong>. The continental interior was intensely arid and hot, with immense desert basins and severe seasonal swings.
                   </p>
                 </div>
-
-                <div class="content-box">
-                  <h4>The Carnian Pluvial Event (~234–232 Ma)</h4>
-                  <p style="color: var(--text-muted); font-size: 0.925rem; line-height: 1.6;">
-                    A critical 2-million-year episode of sustained worldwide rainfall and humidity, triggered by massive volcanic outpourings in the Wrangellia Terrane. This climatic transition fractured existing arid ecosystems, facilitating the explosive diversification of early true dinosaurs.
-                  </p>
-                </div>
               </div>
 
               <div class="slide-container" id="slide-2">
@@ -1404,13 +1562,6 @@
                     <li><strong>Cycadophytes (Cycads & Bennettitales):</strong> Palm-like gymnosperms with tough, compound fronds dominated low-to-mid latitude plains.</li>
                     <li><strong>Giant Horsetails (Sphenophytes):</strong> Plants such as <em>Equisetites</em> lined lakeshores and riparian drainage corridors.</li>
                   </ul>
-                </div>
-
-                <div class="content-box" style="border-left: 3px solid var(--accent);">
-                  <h4 style="color: var(--accent);">Instructional Note: Floral Constraints</h4>
-                  <p style="color: var(--text-muted); font-size: 0.925rem;">
-                    True flowering plants (<strong>angiosperms</strong>) and modern turf grasses were completely absent. Herbivore digestive tracts were specialized strictly for tough gymnosperm needles, cycad leaves, and fern fronds.
-                  </p>
                 </div>
               </div>
 
@@ -1472,7 +1623,7 @@
                     <div class="choice-card" onclick="checkQuizAnswer(1, 2, this, true, 'Correct! Seed ferns like Dicroidium and gymnosperms dominated Triassic ecosystems prior to flowering plants.')">
                       <span class="choice-letter">B</span> <span>Seed ferns (Dicroidium)</span>
                     </div>
-                    <div class="choice-card" onclick="checkQuizAnswer(1, 2, this, false, 'Incorrect. Grasses evolved much later in the late Mesozoic/Cenozoic.')">
+                    <div class="choice-card" onclick="checkQuizAnswer(1, 2, this, false, 'Incorrect. Grasses evolved much later.')">
                       <span class="choice-letter">C</span> <span>Flowering orchard grasses</span>
                     </div>
                     <div class="choice-card" onclick="checkQuizAnswer(1, 2, this, false, 'Incorrect. Broadleaf deciduous trees did not appear until the Cretaceous.')">
@@ -1488,13 +1639,13 @@
                     <div class="choice-card" onclick="checkQuizAnswer(1, 3, this, false, 'Incorrect. Large crocodile-line archosaurs occupied apex predatory and megaherbivore niches.')">
                       <span class="choice-letter">A</span> <span>Dinosaurs were the undisputed apex predators and megaherbivores across every continent.</span>
                     </div>
-                    <div class="choice-card" onclick="checkQuizAnswer(1, 3, this, false, 'Incorrect. Dinosaurs were strictly terrestrial animals; marine niches were occupied by ichthyosaurs and sauropterygians.')">
+                    <div class="choice-card" onclick="checkQuizAnswer(1, 3, this, false, 'Incorrect. Dinosaurs were strictly terrestrial animals.')">
                       <span class="choice-letter">B</span> <span>Dinosaurs lived entirely in marine environments alongside giant ichthyosaurs.</span>
                     </div>
                     <div class="choice-card" onclick="checkQuizAnswer(1, 3, this, true, 'Correct! Throughout most of the Triassic, crocodile-line archosaurs (pseudosuchians) held dominant niches while early dinosaurs remained agile bipeds.')">
                       <span class="choice-letter">C</span> <span>Dinosaurs were mostly small-to-medium bipedal animals living alongside dominant crocodile-line archosaurs.</span>
                     </div>
-                    <div class="choice-card" onclick="checkQuizAnswer(1, 3, this, false, 'Incorrect. Dinosaurs radiated slowly across tens of millions of years.')">
+                    <div class="choice-card" onclick="checkQuizAnswer(1, 3, this, false, 'Incorrect. Dinosaurs radiated slowly over tens of millions of years.')">
                       <span class="choice-letter">D</span> <span>Dinosaurs had fully displaced all other land reptiles immediately following the Permian extinction.</span>
                     </div>
                   </div>
@@ -1503,20 +1654,60 @@
               </div>
 
               <div class="slide-container" id="slide-5">
-                <div class="slide-tag">// Module 2.1 • Geochronology</div>
+                <div class="slide-tag">// Module 2.1 • Vocabulary & Geochronology</div>
                 <h3 class="slide-title">The Jurassic Period: Chronology & Continental Drift</h3>
                 
+                <div class="flashcard-section">
+                  <div class="flashcard-section-title">
+                    <span>🗂 Key Module Vocabulary</span>
+                    <span style="font-size: 0.7rem; color: var(--text-muted);">(Click cards to flip)</span>
+                  </div>
+                  <div class="flashcards-grid">
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                      <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                          <p class="card-term">Laurasia & Gondwana</p>
+                          <span class="flip-hint">Click to flip ↷</span>
+                        </div>
+                        <div class="flashcard-back">
+                          <strong>Laurasia & Gondwana:</strong> The two secondary northern and southern supercontinents formed when Pangea rifted apart during the Jurassic.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                      <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                          <p class="card-term">Thagomizer</p>
+                          <span class="flip-hint">Click to flip ↷</span>
+                        </div>
+                        <div class="flashcard-back">
+                          <strong>Thagomizer:</strong> The four-to-eight defensive spike arrangement located at the terminal end of a stegosaurid dinosaur's tail.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                      <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                          <p class="card-term">Pneumaticity</p>
+                          <span class="flip-hint">Click to flip ↷</span>
+                        </div>
+                        <div class="flashcard-back">
+                          <strong>Pneumaticity:</strong> The presence of hollow, air-filled cavities within sauropod and theropod vertebrae that dramatically lightened skeletal mass.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="timeline-visual-card">
                   <h4>// Deep Time Relative Scale: Jurassic Highlight (201.3 – 145.0 Ma)</h4>
                   <svg class="timeline-svg" viewBox="0 0 740 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="20" y="32" width="700" height="12" rx="6" fill="#171f2c"/>
-                    
                     <rect x="20" y="32" width="140" height="12" rx="6" fill="#1e293b"/>
-                    
                     <rect x="160" y="30" width="156" height="16" rx="6" fill="#38e1ff" filter="drop-shadow(0px 0px 8px rgba(56,225,255,0.6))"/>
-                    
                     <rect x="316" y="32" width="220" height="12" fill="#1e293b"/>
-                    
                     <rect x="536" y="32" width="184" height="12" rx="6" fill="#121824"/>
 
                     <circle cx="20" cy="38" r="3" fill="#94a3b8"/>
@@ -1547,13 +1738,6 @@
                     Tectonic rifting split Pangea into two massive northern and southern landmasses: <strong>Laurasia</strong> (North America, Europe, Asia) and <strong>Gondwana</strong> (South America, Africa, Australia, Antarctica, India).
                   </p>
                 </div>
-
-                <div class="content-box">
-                  <h4>Oceanic Ingress & Moist Climate</h4>
-                  <p style="color: var(--text-muted); font-size: 0.925rem; line-height: 1.6;">
-                    The opening of the central Atlantic Ocean and the expanding Tethys Seaway flooded low-lying corridors. This brought warm oceanic breezes into continental interiors, transforming desert wastes into lush, humid, high-canopy gymnosperm forests.
-                  </p>
-                </div>
               </div>
 
               <div class="slide-container" id="slide-6">
@@ -1570,13 +1754,6 @@
                     <li><strong>Mid-Story (Cycadophytes & Ginkgos):</strong> Bennettitaleans and true cycads formed dense sub-canopies alongside fan-leaved <em>Ginkgo</em> trees.</li>
                     <li><strong>Understory (Tree Ferns & Horsetails):</strong> Enormous tree ferns (such as <em>Dicksoniaceae</em>) and giant sphenophytes carpeted river valleys and flood basins.</li>
                   </ul>
-                </div>
-
-                <div class="content-box" style="border-left: 3px solid var(--accent);">
-                  <h4 style="color: var(--accent);">Evolutionary Driver</h4>
-                  <p style="color: var(--text-muted); font-size: 0.925rem;">
-                    The vertical height of conifer canopies acted as a primary selective pressure driving extreme neck elongation and gigantism in macronarian sauropods (e.g., <em>Brachiosaurus</em>).
-                  </p>
                 </div>
               </div>
 
@@ -1634,7 +1811,7 @@
                     <div class="choice-card" onclick="checkQuizAnswer(2, 2, this, false, 'Incorrect. The inland seaways increased moisture and reduced continental deserts.')">
                       <span class="choice-letter">C</span> <span>It caused total desertification across all continents, eliminating understory ferns.</span>
                     </div>
-                    <div class="choice-card" onclick="checkQuizAnswer(2, 2, this, false, 'Incorrect. Angiosperms did not evolve or dominate until the Cretaceous.')">
+                    <div class="choice-card" onclick="checkQuizAnswer(2, 2, this, false, 'Incorrect. Angiosperms did not evolve until the Cretaceous.')">
                       <span class="choice-letter">D</span> <span>It led directly to the first appearance and global dominance of flowering angiosperms.</span>
                     </div>
                   </div>
@@ -1662,20 +1839,60 @@
               </div>
 
               <div class="slide-container" id="slide-9">
-                <div class="slide-tag">// Module 3.1 • Geochronology</div>
+                <div class="slide-tag">// Module 3.1 • Vocabulary & Geochronology</div>
                 <h3 class="slide-title">The Cretaceous Period: Chronology & Epicontinental Seas</h3>
                 
+                <div class="flashcard-section">
+                  <div class="flashcard-section-title">
+                    <span>🗂 Key Module Vocabulary</span>
+                    <span style="font-size: 0.7rem; color: var(--text-muted);">(Click cards to flip)</span>
+                  </div>
+                  <div class="flashcards-grid">
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                      <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                          <p class="card-term">Angiosperms</p>
+                          <span class="flip-hint">Click to flip ↷</span>
+                        </div>
+                        <div class="flashcard-back">
+                          <strong>Angiosperms:</strong> Seed-bearing vascular flowering plants that evolved during the Early Cretaceous, rapidly overtaking gymnosperms.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                      <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                          <p class="card-term">Western Interior Seaway</p>
+                          <span class="flip-hint">Click to flip ↷</span>
+                        </div>
+                        <div class="flashcard-back">
+                          <strong>Western Interior Seaway:</strong> A massive inland sea that split North America into the landmasses Laramidia (west) and Appalachia (east).
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                      <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                          <p class="card-term">Dental Battery</p>
+                          <span class="flip-hint">Click to flip ↷</span>
+                        </div>
+                        <div class="flashcard-back">
+                          <strong>Dental Battery:</strong> Hundreds of tightly packed, self-sharpening teeth in hadrosaurs and ceratopsians evolved to grind tough fibrous plants.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="timeline-visual-card">
                   <h4>// Deep Time Relative Scale: Cretaceous Highlight (145.0 – 66.0 Ma)</h4>
                   <svg class="timeline-svg" viewBox="0 0 740 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="20" y="32" width="700" height="12" rx="6" fill="#171f2c"/>
-                    
                     <rect x="20" y="32" width="140" height="12" rx="6" fill="#1e293b"/>
-                    
                     <rect x="160" y="32" width="156" height="12" fill="#1e293b"/>
-                    
                     <rect x="316" y="30" width="220" height="16" rx="6" fill="#38e1ff" filter="drop-shadow(0px 0px 8px rgba(56,225,255,0.6))"/>
-                    
                     <rect x="536" y="32" width="184" height="12" rx="6" fill="#121824"/>
 
                     <circle cx="20" cy="38" r="3" fill="#94a3b8"/>
@@ -1705,13 +1922,6 @@
                   <h4>Continental Isolation & High Sea Levels</h4>
                   <p style="color: var(--text-muted); font-size: 0.925rem; line-height: 1.6;">
                     Continents fragmented toward modern outlines, isolating faunal populations. High global sea levels created shallow interior seaways, such as the <strong>Western Interior Seaway</strong> that bisected North America into Laramidia and Appalachia.
-                  </p>
-                </div>
-
-                <div class="content-box">
-                  <h4>Supergreenhouse Climate & Chalk Formation</h4>
-                  <p style="color: var(--text-muted); font-size: 0.925rem; line-height: 1.6;">
-                    Widespread volcanism released immense volumes of $CO_2$, creating tropical polar conditions. Vast blooms of calcite-shelled plankton (coccoliths) formed the global chalk beds (Latin <em>creta</em>) that name the period.
                   </p>
                 </div>
               </div>
@@ -1749,13 +1959,6 @@
                     <li><strong>Ankylosauridae:</strong> Heavily armored quadrupedal tanks with bony osteoderm carapaces and tail clubs (e.g., <em>Ankylosaurus</em>).</li>
                     <li><strong>Apex Theropods & Raptors:</strong> Massive bone-crushing predators (<em>Tyrannosaurus rex</em>) and feathered sickle-clawed dromaeosaurs (<em>Velociraptor</em>, <em>Deinonychus</em>).</li>
                   </ul>
-                </div>
-
-                <div class="content-box" style="border-left: 3px solid var(--danger);">
-                  <h4 style="color: var(--danger);">The K-Pg Extinction Event (66.0 Ma)</h4>
-                  <p style="color: var(--text-muted); font-size: 0.925rem;">
-                    A ~10 km wide asteroid impacted Chicxulub (Yucatan, Mexico). Combined with Deccan Trap volcanism in India, the impact caused global wildfires, acid rain, and an impact winter that eradicated non-avian dinosaurs, pterosaurs, and ammonites.
-                  </p>
                 </div>
               </div>
 
@@ -1823,10 +2026,167 @@
               </div>
 
               <div class="slide-container" id="slide-13">
-                <div class="slide-tag">// Summative Assessment • Comprehensive Exam</div>
-                <h3 class="slide-title">Mesozoic Era Final Examination</h3>
+                <div class="slide-tag">// Module 4.1 • Vocabulary & Evolutionary Cladistics</div>
+                <h3 class="slide-title">Dinosaurs, Reptiles, & Modern Cladistics</h3>
+
+                <div class="flashcard-section">
+                  <div class="flashcard-section-title">
+                    <span>🗂 Key Module Vocabulary</span>
+                    <span style="font-size: 0.7rem; color: var(--text-muted);">(Click cards to flip)</span>
+                  </div>
+                  <div class="flashcards-grid">
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                      <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                          <p class="card-term">Cladistics</p>
+                          <span class="flip-hint">Click to flip ↷</span>
+                        </div>
+                        <div class="flashcard-back">
+                          <strong>Cladistics:</strong> A biological classification system that categorizes organisms based strictly on shared common ancestry and branching evolutionary lineages.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                      <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                          <p class="card-term">Monophyletic Group</p>
+                          <span class="flip-hint">Click to flip ↷</span>
+                        </div>
+                        <div class="flashcard-back">
+                          <strong>Monophyletic Group (Clade):</strong> A group consisting of an ancestral species and ALL of its descendants (e.g., Reptilia includes modern birds).
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                      <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                          <p class="card-term">Avian Dinosaurs</p>
+                          <span class="flip-hint">Click to flip ↷</span>
+                        </div>
+                        <div class="flashcard-back">
+                          <strong>Avian Dinosaurs:</strong> Feathered, winged dinosaurs belonging to clade <em>Aves</em>—the only dinosaur lineage that survived the K-Pg extinction.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <p class="slide-body">
-                  Complete all 6 questions below (2 per period) to validate Terminal Learning Objective mastery and transmit your final grade to the LMS.
+                  Are dinosaurs reptiles even though they are the direct ancestors of birds? <strong>Yes. Dinosaurs are reptiles, and under modern biological science, all birds are living dinosaurs and living reptiles.</strong>
+                </p>
+
+                <div class="content-box">
+                  <h4>Traditional (Linnaean) vs. Modern (Phylogenetic) Taxonomy</h4>
+                  <ul>
+                    <li><strong>Traditional Linnaean System:</strong> Grouped animals by superficial physical traits (e.g., cold-blooded, scaly skin = reptile). It created an artificial separate class (<em>Class Aves</em>) that ignored common ancestry.</li>
+                    <li><strong>Modern Cladistics Rule:</strong> An organism never "outgrows" its ancestry. Because birds evolved within theropod dinosaurs, birds are classified as specialized theropod dinosaurs nested within clade <strong>Reptilia (Sauropsida)</strong>.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="slide-container" id="slide-14">
+                <div class="slide-tag">// Module 4.2 • Evolutionary Morphology</div>
+                <h3 class="slide-title">The Theropod-to-Bird Transition</h3>
+                <p class="slide-body">
+                  The boundary between "non-avian dinosaurs" and "birds" represents a smooth evolutionary gradient across tens of millions of years of theropod evolution.
+                </p>
+
+                <div class="content-box">
+                  <h4>Key Shared Anatomical Innovations</h4>
+                  <ul>
+                    <li><strong>Pennaceous Feathers:</strong> Evolved initially in small coelurosaurian theropods (e.g., <em>Sinosauropteryx</em>, <em>Velociraptor</em>) for thermoregulation and visual sexual display long before powered flight.</li>
+                    <li><strong>Wishbone (Furcula):</strong> The fusion of clavicle bones to store kinetic energy during locomotion, present in <em>Allosaurus</em> and <em>T. rex</em> just as in modern turkeys.</li>
+                    <li><strong>Hollow Pneumatic Bones:</strong> Lightened skeletal structures with unidirectional respiratory air sacs first evolved in early saurischians to maximize oxygen uptake.</li>
+                    <li><strong>Swiveling Wrist Joints:</strong> Flexible semi-lunate carpal bones allowed raptors to snap their arms forward to seize prey—the exact mechanics later repurposed for the flight stroke.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="slide-container" id="slide-15">
+                <div class="slide-tag">// Module 4.3 • Extinction & Modern Survival</div>
+                <h3 class="slide-title">Avian vs. Non-Avian Dinosaurs</h3>
+                <p class="slide-body">
+                  When the Chicxulub asteroid struck 66.0 million years ago, it did <strong>not</strong> drive all dinosaurs to extinction. It specifically eradicated <strong>non-avian dinosaurs</strong>.
+                </p>
+
+                <div class="content-box">
+                  <h4>Why Avian Dinosaurs Survived the K-Pg Boundary</h4>
+                  <ul>
+                    <li><strong>Beak Adaptations & Seed Diet:</strong> After global wildfires and impact winter collapsed food chains, toothless beaked avians could forage on dormant seeds and subterranean plant roots.</li>
+                    <li><strong>Small Body Size & High Metabolic Efficiency:</strong> Miniature body plans required substantially fewer daily calories than large-bodied non-avian theropods and sauropods.</li>
+                    <li><strong>Ground/Burrowing Habits:</strong> Basal ground-dwelling bird lineages could shelter from thermal radiation and catastrophic firestorms.</li>
+                  </ul>
+                </div>
+
+                <div class="content-box" style="border-left: 3px solid var(--success);">
+                  <h4 style="color: var(--success);">Modern Biodiversity Reality</h4>
+                  <p style="color: var(--text-muted); font-size: 0.925rem;">
+                    Today, with over <strong>11,000 living species of birds</strong>, there are more than twice as many living species of dinosaurs on Earth as there are species of mammals (~6,400).
+                  </p>
+                </div>
+              </div>
+
+              <div class="slide-container" id="slide-16">
+                <div class="slide-tag">// Formative Assessment • Module 4</div>
+                <h3 class="slide-title">Avian Dinosaurs Knowledge Check</h3>
+                <p class="slide-body">Complete the 3 questions below to validate your understanding of cladistics and avian dinosaurs.</p>
+
+                <div class="quiz-question-block" id="m4q1-block">
+                  <p class="quiz-question-stem">1. Under modern phylogenetic cladistics, why are birds classified as both dinosaurs and reptiles?</p>
+                  <div class="choice-stack">
+                    <div class="choice-card" onclick="checkQuizAnswer(4, 1, this, false, 'Incorrect. Cladistics classifies organisms by ancestry, not physical convergence.')">
+                      <span class="choice-letter">A</span> <span>Because modern birds share cold-blooded metabolism with lizards</span>
+                    </div>
+                    <div class="choice-card" onclick="checkQuizAnswer(4, 1, this, true, 'Correct! Cladistics dictates that an organism belongs to all clades that include its ancestors. Birds are theropod descendants nested within Reptilia.')">
+                      <span class="choice-letter">B</span> <span>Because organisms never outgrow their ancestry; birds are direct theropod descendants nested within clade Reptilia</span>
+                    </div>
+                    <div class="choice-card" onclick="checkQuizAnswer(4, 1, this, false, 'Incorrect. Pterosaurs were flying reptiles, but birds evolved from theropod dinosaurs.')">
+                      <span class="choice-letter">C</span> <span>Because birds evolved directly from flying pterosaurs in the Late Jurassic</span>
+                    </div>
+                  </div>
+                  <div class="scenario-feedback" id="m4q1-fb"></div>
+                </div>
+
+                <div class="quiz-question-block" id="m4q2-block">
+                  <p class="quiz-question-stem">2. What was the original evolutionary function of feathers in small theropod dinosaurs prior to powered flight?</p>
+                  <div class="choice-stack">
+                    <div class="choice-card" onclick="checkQuizAnswer(4, 2, this, true, 'Correct! Feathers initially evolved for thermal insulation and mating displays before being co-opted for flight.')">
+                      <span class="choice-letter">A</span> <span>Thermoregulation (insulation) and visual courtship displays</span>
+                    </div>
+                    <div class="choice-card" onclick="checkQuizAnswer(4, 2, this, false, 'Incorrect. Aquatic jet-propulsion is not associated with early theropod feathers.')">
+                      <span class="choice-letter">B</span> <span>High-speed underwater jet-propulsion in ocean waters</span>
+                    </div>
+                    <div class="choice-card" onclick="checkQuizAnswer(4, 2, this, false, 'Incorrect. Early feather filaments were too delicate for armor.')">
+                      <span class="choice-letter">C</span> <span>Defensive armor plating to deflect bites from apex predators</span>
+                    </div>
+                  </div>
+                  <div class="scenario-feedback" id="m4q2-fb"></div>
+                </div>
+
+                <div class="quiz-question-block" id="m4q3-block">
+                  <p class="quiz-question-stem">3. Which term accurately describes the group of dinosaurs that went completely extinct at the 66.0 Ma K-Pg boundary?</p>
+                  <div class="choice-stack">
+                    <div class="choice-card" onclick="checkQuizAnswer(4, 3, this, false, 'Incorrect. Avian dinosaurs (birds) survived the mass extinction.')">
+                      <span class="choice-letter">A</span> <span>All avian dinosaurs</span>
+                    </div>
+                    <div class="choice-card" onclick="checkQuizAnswer(4, 3, this, true, 'Correct! Non-avian dinosaurs went extinct, while avian dinosaurs survived and radiated into modern birds.')">
+                      <span class="choice-letter">B</span> <span>Non-avian dinosaurs</span>
+                    </div>
+                    <div class="choice-card" onclick="checkQuizAnswer(4, 3, this, false, 'Incorrect. Pseudosuchians were crocodile-line archosaurs that largely went extinct earlier in the Triassic.')">
+                      <span class="choice-letter">C</span> <span>All pseudosuchian dinosaurs</span>
+                    </div>
+                  </div>
+                  <div class="scenario-feedback" id="m4q3-fb"></div>
+                </div>
+              </div>
+
+              <div class="slide-container" id="slide-17">
+                <div class="slide-tag">// Summative Assessment • Comprehensive Exam</div>
+                <h3 class="slide-title">Mesozoic & Paleobiological Final Examination</h3>
+                <p class="slide-body">
+                  Complete all 8 questions below (2 per module) to validate Terminal Learning Objective mastery and transmit your final grade to the LMS.
                 </p>
 
                 <div class="quiz-question-block" id="feq1-block">
@@ -1848,7 +2208,7 @@
                 <div class="quiz-question-block" id="feq2-block">
                   <p class="quiz-question-stem">2. [Triassic] What morphological feature distinguished early dinosaurs like Coelophysis and Herrerasaurus from primitive sprawling reptiles?</p>
                   <div class="choice-stack">
-                    <div class="choice-card" onclick="checkFinalAnswer(2, this, false, 'Incorrect. Only avian dinosaurs and select theropods possessed asymmetrical flight feathers.')">
+                    <div class="choice-card" onclick="checkFinalAnswer(2, this, false, 'Incorrect. Asymmetrical flight feathers appeared much later.')">
                       <span class="choice-letter">A</span> <span>Asymmetrical flight feathers and fused toothless beaks</span>
                     </div>
                     <div class="choice-card" onclick="checkFinalAnswer(2, this, true, 'Correct! An open-socket hip (perforate acetabulum) positioned the hind limbs directly beneath the torso for bipedal locomotion.')">
@@ -1886,7 +2246,7 @@
                     <div class="choice-card" onclick="checkFinalAnswer(4, this, true, 'Correct! Archaeopteryx possessed flight feathers alongside theropod skeletal traits like teeth, wing claws, and a long bony tail.')">
                       <span class="choice-letter">B</span> <span>Avian flight feathers alongside theropod teeth, wing claws, and a bony tail</span>
                     </div>
-                    <div class="choice-card" onclick="checkFinalAnswer(4, this, false, 'Incorrect. Archaeopteryx had winged forelimbs, not quadrupedal hooves.')">
+                    <div class="choice-card" onclick="checkFinalAnswer(4, this, false, 'Incorrect. Archaeopteryx was a feathered coelurosaurian.')">
                       <span class="choice-letter">C</span> <span>Quadrupedal limbs, dermal thagomizer spikes, and turtle-like shells</span>
                     </div>
                   </div>
@@ -1918,18 +2278,50 @@
                     <div class="choice-card" onclick="checkFinalAnswer(6, this, true, 'Correct! A worldwide iridium clay layer and shocked quartz band demarcates the K-Pg boundary layer at 66.0 Ma.')">
                       <span class="choice-letter">B</span> <span>A worldwide clay layer containing anomalous iridium and shocked quartz</span>
                     </div>
-                    <div class="choice-card" onclick="checkFinalAnswer(6, this, false, 'Incorrect. The Carnian pluvial event was a Triassic rainy pulse.')">
+                    <div class="choice-card" onclick="checkFinalAnswer(6, this, false, 'Incorrect. The Carnian pluvial event occurred in the Triassic.')">
                       <span class="choice-letter">C</span> <span>Massive Carnian pluvial sandstone formations</span>
                     </div>
                   </div>
                   <div class="scenario-feedback" id="feq6-fb"></div>
                 </div>
 
+                <div class="quiz-question-block" id="feq7-block">
+                  <p class="quiz-question-stem">7. [Avian Dinosaurs] Under phylogenetic systematics (cladistics), why is it impossible for birds to 'stop' being dinosaurs?</p>
+                  <div class="choice-stack">
+                    <div class="choice-card" onclick="checkFinalAnswer(7, this, true, 'Correct! Cladistic monophyly dictates that a descendant group remains a member of all ancestral clades it evolved from.')">
+                      <span class="choice-letter">A</span> <span>In cladistics, groups are monophyletic: an organism always belongs to every ancestral clade it descended from</span>
+                    </div>
+                    <div class="choice-card" onclick="checkFinalAnswer(7, this, false, 'Incorrect. Birds have endothermic warm-blooded metabolisms.')">
+                      <span class="choice-letter">B</span> <span>Because modern birds still possess ectothermic cold-blooded reptilian physiology</span>
+                    </div>
+                    <div class="choice-card" onclick="checkFinalAnswer(7, this, false, 'Incorrect. Cladistics is based on rigorous genetic and skeletal phylogenies.')">
+                      <span class="choice-letter">C</span> <span>Because Linnaean classification mandates that reptiles and birds are identical classes</span>
+                    </div>
+                  </div>
+                  <div class="scenario-feedback" id="feq7-fb"></div>
+                </div>
+
+                <div class="quiz-question-block" id="feq8-block">
+                  <p class="quiz-question-stem">8. [Avian Dinosaurs] What physiological and anatomical advantage helped basal crown avian dinosaurs survive the K-Pg impact winter while non-avian dinosaurs perished?</p>
+                  <div class="choice-stack">
+                    <div class="choice-card" onclick="checkFinalAnswer(8, this, false, 'Incorrect. Marine reptiles such as mosasaurs went entirely extinct.')">
+                      <span class="choice-letter">A</span> <span>Aquatic breathing gills and fully marine life cycles</span>
+                    </div>
+                    <div class="choice-card" onclick="checkFinalAnswer(8, this, true, 'Correct! Toothless beaks capable of eating resilient seeds, compact bodies, and ground-sheltering habits allowed avians to survive the collapse of food chains.')">
+                      <span class="choice-letter">B</span> <span>Toothless beaks adapted for seed-eating, smaller caloric requirements, and ground-sheltering habits</span>
+                    </div>
+                    <div class="choice-card" onclick="checkFinalAnswer(8, this, false, 'Incorrect. Large sauropods were completely eradicated.')">
+                      <span class="choice-letter">C</span> <span>Extreme giant body mass allowing long multi-year starvation dormancy</span>
+                    </div>
+                  </div>
+                  <div class="scenario-feedback" id="feq8-fb"></div>
+                </div>
+
                 <div id="finalScoreCard" style="display: none; margin-top: 1.5rem;" class="content-box">
                   <div class="grid-2">
                     <div>
                       <h4 style="color: var(--accent); font-size: 0.85rem; font-family: var(--font-mono);">Summative Score</h4>
-                      <p style="font-size: 1.8rem; font-weight: 700; color: #ffffff;" id="examFinalScore">-- / 6 PTS</p>
+                      <p style="font-size: 1.8rem; font-weight: 700; color: #ffffff;" id="examFinalScore">-- / 8 PTS</p>
                       <p style="color: var(--success); font-size: 0.85rem; font-weight: 600;" id="examFinalStatus">STATUS: PENDING</p>
                     </div>
                     <div>
@@ -1988,9 +2380,9 @@
             Training starts by defining the operational gap before authoring a single slide. Learning objectives are mapped in a strict hierarchical tree:
           </p>
           <ul>
-            <li><strong>Terminal Learning Objectives (TLOs):</strong> Learners master date ranges, dominant flora, and major dinosaur/archosaur fauna across all three Mesozoic periods.</li>
-            <li><strong>Enabling Learning Objectives (ELOs):</strong> Scaffold foundational knowledge of plate tectonics (Pangea rifting), gymnosperm-to-angiosperm shifts, and extinction boundaries.</li>
-            <li><strong>Formative vs. Summative:</strong> 3-question formative quizzes at the end of each period reinforce ELOs, culminating in a 6-question comprehensive final assessment.</li>
+            <li><strong>Terminal Learning Objectives (TLOs):</strong> Learners master date ranges, dominant flora, and major dinosaur/archosaur fauna across the Triassic, Jurassic, Cretaceous, and modern avian clades.</li>
+            <li><strong>Enabling Learning Objectives (ELOs):</strong> Scaffold foundational knowledge of plate tectonics, gymnosperm-to-angiosperm transitions, extinction boundaries, and phylogenetic cladistics.</li>
+            <li><strong>Formative vs. Summative:</strong> 3-question formative quizzes at the end of each module reinforce ELOs, culminating in an 8-question comprehensive final assessment.</li>
           </ul>
         </article>
 
@@ -2000,9 +2392,9 @@
             Applying digital product design to e-learning eliminates cognitive overload and maximizes learner retention:
           </p>
           <ul>
+            <li><strong>3D Flippable Flashcards:</strong> Spatial interaction patterns reinforce complex taxonomic vocabulary prior to reading dense subject text.</li>
             <li><strong>Scrollable In-Frame Layouts:</strong> Learners scroll through cohesive narrative sections rather than clicking through fragmented mini-slides.</li>
             <li><strong>Consistent Visual Anchors:</strong> Shared-scale vector timelines anchor relative chronological scales across deep-time geological eras.</li>
-            <li><strong>High-Contrast Dark Canvas:</strong> Ergonomic, glare-resistant visual design optimized for varied devices and low-light operations.</li>
           </ul>
         </article>
       </div>
@@ -2080,19 +2472,20 @@
     });
 
     /* ==========================================================================
-       COURSE PLAYER ENGINE & STATE MACHINE (14 SLIDES)
+       COURSE PLAYER ENGINE & STATE MACHINE (18 SLIDES TOTAL)
        ========================================================================== */
     let currentSlide = 0;
-    const totalSlides = 14;
+    const totalSlides = 18;
 
     // Progress tracking
     const moduleQuizzes = {
       1: { 1: false, 2: false, 3: false },
       2: { 1: false, 2: false, 3: false },
-      3: { 1: false, 2: false, 3: false }
+      3: { 1: false, 2: false, 3: false },
+      4: { 1: false, 2: false, 3: false }
     };
 
-    const finalExamAnswers = { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null };
+    const finalExamAnswers = { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null, 8: null };
 
     const slides = Array.from({ length: totalSlides }, (_, i) => document.getElementById(`slide-${i}`));
     const menuItems = Array.from({ length: totalSlides }, (_, i) => document.getElementById(`menu-slide-${i}`));
@@ -2115,7 +2508,7 @@
       });
 
       // Top slide code indicator
-      const slideCode = currentSlide === 0 ? "MESO-00" : (currentSlide === 13 ? "MESO-FINAL" : `MESO-0${currentSlide}`);
+      const slideCode = currentSlide === 0 ? "MESO-00" : (currentSlide === 17 ? "MESO-FINAL" : `MESO-0${currentSlide}`);
       slideIndicator.textContent = `SLIDE ${currentSlide + 1} OF ${totalSlides} // ${slideCode}`;
       prevBtn.disabled = (currentSlide === 0);
 
@@ -2158,7 +2551,7 @@
       group.classList.toggle('open');
     }
 
-    // Formative Quiz Handlers (Modules 1, 2, 3)
+    // Formative Quiz Handlers (Modules 1, 2, 3, 4)
     function checkQuizAnswer(moduleNum, qNum, cardEl, isCorrect, feedbackText) {
       const block = document.getElementById(`m${moduleNum}q${qNum}-block`);
       const feedbackEl = document.getElementById(`m${moduleNum}q${qNum}-fb`);
@@ -2181,15 +2574,11 @@
         feedbackEl.innerHTML = `<strong>INCORRECT:</strong> ${feedbackText}`;
       }
 
-      // Check if all 3 questions in the quiz have been answered
-      const quizDone = moduleQuizzes[moduleNum][1] !== undefined && 
-                       block.parentElement.querySelectorAll('.choice-card.disabled').length === 12;
-      
-      const quizSlideIndex = moduleNum === 1 ? 4 : (moduleNum === 2 ? 8 : 12);
+      const quizSlideIndex = moduleNum === 1 ? 4 : (moduleNum === 2 ? 8 : (moduleNum === 3 ? 12 : 16));
       menuItems[quizSlideIndex].classList.add('completed');
     }
 
-    // Final Exam Handler (6 Questions)
+    // Final Exam Handler (8 Questions)
     function checkFinalAnswer(qNum, cardEl, isCorrect, feedbackText) {
       const block = document.getElementById(`feq${qNum}-block`);
       const feedbackEl = document.getElementById(`feq${qNum}-fb`);
@@ -2213,14 +2602,14 @@
         finalExamAnswers[qNum] = false;
       }
 
-      // Check if all 6 final questions are answered
+      // Check if all 8 final questions are answered
       const answeredCount = Object.values(finalExamAnswers).filter(v => v !== null).length;
-      if (answeredCount === 6) {
+      if (answeredCount === 8) {
         const correctCount = Object.values(finalExamAnswers).filter(v => v === true).length;
-        const finalScorePct = Math.round((correctCount / 6) * 100);
+        const finalScorePct = Math.round((correctCount / 8) * 100);
 
         document.getElementById('finalScoreCard').style.display = 'block';
-        document.getElementById('examFinalScore').textContent = `${correctCount} / 6 PTS (${finalScorePct}%)`;
+        document.getElementById('examFinalScore').textContent = `${correctCount} / 8 PTS (${finalScorePct}%)`;
         
         const statusEl = document.getElementById('examFinalStatus');
         const scormStatusEl = document.getElementById('scormStatus');
@@ -2237,7 +2626,7 @@
           scormStatusEl.textContent = "incomplete";
         }
 
-        menuItems[13].classList.add('completed');
+        menuItems[17].classList.add('completed');
         progressBadge.textContent = "100% Done";
       }
     }
@@ -2254,7 +2643,7 @@
   </metadata>
   <organizations default="mesozoic_org">
     <organization identifier="mesozoic_org">
-      <title>The Mesozoic Era: Age of Reptiles</title>
+      <title>The Mesozoic Era: Age of Reptiles & Modern Dinosaurs</title>
       <item identifier="item_meso_01" identifierref="res_meso_01">
         <title>Mesozoic Courseware Package</title>
       </item>
