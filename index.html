@@ -357,8 +357,8 @@
       box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6), 0 0 18px rgba(56, 225, 255, 0.28);
     }
 
-    .card-title { font-size: 1.75rem; font-weight: 500; margin-bottom: 1rem; }
-    .card-subtitle { font-size: 1.25rem; font-weight: 250; margin-bottom: 1rem; }
+    .card-title { font-size: 1.75rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .card-subtitle { font-size: 1.25rem; font-weight: 250; margin-bottom: 1rem; color: var(--accent); }
     .card-desc { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.7; text-align: justify; text-justify: inter-word; }
 
     .meta-list { list-style: none; font-size: 0.875rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.5rem; }
@@ -404,7 +404,7 @@
       box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 225, 255, 0.25);
     }
     .card .media-placeholder { margin-bottom: 1.25rem; }
-    .card h3 { font-size: 1.35rem; font-weight: 500; margin-bottom: 0.5rem; margin-toop: 0.0rem; }
+    .card h3 { font-size: 1.35rem; font-weight: 500; margin-bottom: 0.5rem; }
     .card h3 em { font-style: italic; }
     .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; margin-bottom: 1rem; flex-grow: 1; text-align: justify; text-justify: inter-word; }
     .card-tags { font-size: 0.8rem; color: var(--accent); font-weight: 500; }
@@ -446,7 +446,6 @@
 </head>
 <body>
 
-  <!-- SITE HEADER -->
   <header class="site-header" id="siteHeader">
     <div class="container nav-inner">
       <a href="index.html" class="brand">PJV</a>
@@ -456,7 +455,7 @@
             <a href="#scribe85">Portfolio ▾</a>
             <ul class="dropdown-menu">
               <li><a href="scribe85-case-study.html">scribe85</a></li>
-              <li><a href="instructional-systems-design.html">Instructional Systems</a></li>
+              <li><a href="isd-case-study.html">Instructional Systems</a></li>
               <li><a href="iaem-bulletin-case-study.html">IAEM</a></li>
               <li><a href="k12-insight-illustration-project-case-study.html">K12 Insight</a></li>
               <li><a href="presentations-case-study.html">Presentations</a></li>
@@ -471,17 +470,14 @@
     </div>
   </header>
 
-  <!-- STICKY HERO TRACK -->
   <div class="hero-track" id="heroTrack">
     <section id="heroStage" class="hero-stage">
       <div class="hero-content-wrapper">
         
-        <!-- Phase 1 Top Brand -->
         <div class="intro-brand-wrapper" id="introBrandWrapper">
           <div class="intro-brand">Phillip Joseph Visuals</div>
         </div>
 
-        <!-- Centered Stack Title -->
         <div class="hero-title-container" id="heroTitleContainer">
           <h1 class="hero-title">
             <span class="hero-title-line-1">Product Designer</span>
@@ -490,7 +486,6 @@
           </h1>
         </div>
 
-        <!-- Phase 2 Content Cluster -->
         <div class="phase-2-cluster" id="phase2Cluster">
           <p class="hero-bio">
             Specializing in taking complex digital concepts from raw strategy to polished production. Blending human-centered UX discipline with clean front-end code, I engineer scalable design systems, intuitive interfaces, and high-performance dark surface web tools.
@@ -512,7 +507,6 @@
 
       </div>
 
-      <!-- Scroll Delta Indicator -->
       <div class="scroll-indicator" id="scrollIndicator" onclick="smoothScrollToPhase2()">
         <svg class="scroll-delta" viewBox="0 0 24 24">
           <polygon points="4 6, 20 6, 12 18" />
@@ -523,13 +517,12 @@
 
   <main class="container">
     
-    <!-- FEATURED PRODUCT CASE STUDY -->
     <section id="scribe85" class="section">
       <h2 class="section-title">Featured Product Case Study</h2>
       <a href="scribe85-case-study.html" class="card-link">
         <div class="featured-card">
           <div>
-            <h3 class="card-title"> <em>scribe85</em> :</h3>
+            <h3 class="card-title"><em>scribe85</em> :</h3>
             <h3 class="card-subtitle">zero-to-one dark surface word processor</h3>
             <p class="card-desc">
               An independent, single-file browser writing workspace engineered from scratch to eliminate cognitive distraction. Features custom theme architectures, full markdown formatting, and local autosave functionality.
@@ -546,12 +539,32 @@
       </a>
     </section>
 
-    <!-- CORPORATE COMMUNICATION -->
+    <section id="instructional-systems" class="section">
+      <h2 class="section-title">Instructional Systems Design</h2>
+      <a href="isd-case-study.html" class="card-link">
+        <div class="featured-card">
+          <div>
+            <h3 class="card-title"><em>Instructional Systems Design</em> :</h3>
+            <h3 class="card-subtitle">interactive courseware & lms ecosystems</h3>
+            <p class="card-desc">
+              An end-to-end e-learning architecture demonstrating how user-centered UI/UX principles, military Systems Approach to Training (SAT) frameworks, and client-side web technologies converge to create scalable, trackable SCORM courseware.
+            </p>
+            <ul class="meta-list">
+              <li><strong>My Role:</strong> Instructional Systems Designer & Front-End Developer</li>
+              <li><strong>Key Skills:</strong> ADDIE / SAT Frameworks | TLO/ELO Mapping | SCORM 1.2/2004 & xAPI | Interactive SPA UI</li>
+            </ul>
+          </div>
+          <div class="media-placeholder">
+            <img src="Assets/ISD/ISD_Courseware_Preview.webp" alt="Instructional Systems Design Preview" onerror="this.onerror=null; this.parentElement.innerHTML='Instructional Systems Case Study Preview';" />
+          </div>
+        </div>
+      </a>
+    </section>
+
     <section id="corporate" class="section">
       <h2 class="section-title">Corporate Communication</h2>
       <div class="grid-2">
         
-        <!-- IAEM CARD -->
         <a href="iaem-bulletin-case-study.html" class="card-link">
           <article class="card">
             <div class="floating-card-stage">
@@ -563,7 +576,6 @@
           </article>
         </a>
 
-        <!-- K12 INSIGHT CARD -->
         <a href="k12-insight-illustration-project-case-study.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
@@ -577,12 +589,10 @@
       </div>
     </section>
 
-    <!-- MEDIA & ART DIRECTION -->
     <section id="media" class="section">
       <h2 class="section-title">Media & Art Direction</h2>
       <div class="grid-3">
         
-        <!-- PRESENTATIONS -->
         <a href="presentations-case-study.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
@@ -594,7 +604,6 @@
           </article>
         </a>
 
-        <!-- VIDEOGRAPHY -->
         <a href="videography.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
@@ -606,7 +615,6 @@
           </article>
         </a>
 
-        <!-- PHOTOGRAPHY -->
         <a href="photography-case-study.html" class="card-link">
           <article class="card">
             <div class="media-placeholder">
