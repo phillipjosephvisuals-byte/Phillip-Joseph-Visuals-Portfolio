@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="/Assets/PJVfavicon.svg?v=3" />
+  <link rel="alternate icon" type="image/png" href="/Assets/PJVfavicon1.png?v=3" />
+  <link rel="shortcut icon" href="/Assets/PJVfavicon1.png?v=3" />
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instructional Systems Design Case Study | Phillip Joseph Villarreal</title>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+    :root {
+      --bg-base: #05070a;
+      --bg-surface: #0f141d;
+      --bg-surface-hover: #171f2c;
+      --border-subtle: #1e293b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38e1ff;
+      --accent-glow: rgba(56, 225, 255, 0.25);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', "Courier Prime", Consolas, monospace;
+      --max-width: 1120px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* MULTIPLY VIGNETTE OVERLAY */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(
+        circle at 50% 30%, 
+        rgba(20, 27, 41, 0.45) 0%, 
+        rgba(5, 7, 10, 0.85) 65%, 
+        rgba(2, 3, 5, 0.98) 100%
+      );
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .site-header, main, .site-footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img, video {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* --- SITE HEADER & NAV --- */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background-color: transparent;
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      border-bottom: 1px solid transparent;
+      transition: background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
+    }
+
+    .site-header.scrolled {
+      background-color: rgba(5, 7, 10, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+
+    .brand {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
+      color: #ffffff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links > li {
+      position: relative;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.5rem 0;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text-main);
+    }
+
+    /* DROPDOWN SUB-MENU */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 230px;
+      background-color: rgba(15, 20, 29, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.6rem 0;
+      list-style: none;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(56, 225, 255, 0.1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.25s ease;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu li a {
+      padding: 0.6rem 1.25rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .dropdown-menu li a:hover, .dropdown-menu li a.active {
+      background-color: var(--bg-surface-hover);
+      color: var(--accent);
+    }
+
+    /* BASE HEADING SELECTOR */
+    h1, h2, h3, .brand, .hero-title, .section-title, .card-title {
+      font-family: var(--font-heading);
+      color: #ffffff;
+      text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.28),
+        0 0 20px rgba(255, 255, 255, 0.12);
+    }
+
+    /* --- HERO SECTION --- */
+    .subpage-hero {
+      padding: calc(70px + 3rem) 0 4rem 0;
+      position: relative;
+      background: radial-gradient(
+        ellipse 90% 70% at 50% 30%, 
+        #141d2b 0%, 
+        #0c121d 55%, 
+        #05070a 100%
+      );
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      padding-left: calc(50vw - 50%);
+      padding-right: calc(50vw - 50%);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .subpage-hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(
+        to bottom, 
+        rgba(5, 7, 10, 0) 0%, 
+        rgba(5, 7, 10, 0.8) 70%, 
+        #05070a 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-inner-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (min-width: 850px) {
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+    }
+
+    .hero-status-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(56, 225, 255, 0.08);
+      border: 1px solid rgba(56, 225, 255, 0.25);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      margin-bottom: 1.25rem;
+      width: fit-content;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+      text-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .hero-bio {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+      max-width: 580px;
+      text-align: justify;
+    }
+
+    .hero-media-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      margin-left: auto;
+      margin-right: 0;
+      border-radius: 16px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .hero-media-frame:hover {
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow);
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin-top: 3.5rem;
+    }
+
+    .meta-item h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .meta-item p {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 800px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* --- CARDS & GRIDS --- */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      height: 100%;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4);
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-glow);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .card p, .card ul {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .card ul {
+      list-style-type: disc;
+      padding-left: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .card ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* ==========================================================================
+       CUSTOM INTERACTIVE EMBEDDED COURSE VIEWER (MOCKUP IMPLEMENTATION)
+       ========================================================================== */
+    .course-player-wrapper {
+      position: relative;
+      margin-top: 1.5rem;
+    }
+
+    .course-player-stage {
+      display: flex;
+      width: 100%;
+      min-height: 560px;
+      background-color: #090d14;
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), 0 0 25px rgba(56, 225, 255, 0.08);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .course-player-stage:focus-within, .course-player-stage:hover {
+      border-color: rgba(56, 225, 255, 0.4);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 25px rgba(56, 225, 255, 0.15);
+    }
+
+    /* TOGGLEABLE SIDEBAR MENU */
+    .course-sidebar {
+      width: 290px;
+      background-color: #0c111a;
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      transition: transform 0.3s ease, width 0.3s ease, margin-left 0.3s ease;
+      z-index: 20;
+    }
+
+    .course-sidebar.collapsed {
+      margin-left: -290px;
+    }
+
+    .sidebar-header {
+      padding: 1.1rem 1.25rem;
+      background-color: rgba(15, 20, 29, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar-header h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .sidebar-progress-badge {
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      background-color: rgba(56, 225, 255, 0.12);
+      color: var(--accent);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid rgba(56, 225, 255, 0.25);
+    }
+
+    .sidebar-tree {
+      overflow-y: auto;
+      padding: 0.75rem 0;
+      list-style: none;
+      flex-grow: 1;
+    }
+
+    .module-group {
+      margin-bottom: 0.4rem;
+    }
+
+    .module-heading {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      padding: 0.65rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .module-heading:hover {
+      background-color: var(--bg-surface-hover);
+      color: var(--accent);
+    }
+
+    .module-heading .caret {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+      color: var(--text-muted);
+    }
+
+    .module-group.open .module-heading .caret {
+      transform: rotate(90deg);
+      color: var(--accent);
+    }
+
+    .module-sublist {
+      list-style: none;
+      background-color: rgba(5, 7, 10, 0.4);
+      display: none;
+    }
+
+    .module-group.open .module-sublist {
+      display: block;
+    }
+
+    .module-page-item {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      padding: 0.55rem 1.25rem 0.55rem 2.25rem;
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .module-page-item:hover:not(.locked) {
+      color: var(--text-main);
+      background-color: rgba(23, 31, 44, 0.5);
+    }
+
+    .module-page-item.active {
+      color: var(--accent);
+      background-color: rgba(56, 225, 255, 0.08);
+      font-weight: 500;
+      border-left: 3px solid var(--accent);
+    }
+
+    .module-page-item.completed::after {
+      content: "✓";
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .module-page-item.locked {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .module-page-item.locked::after {
+      content: "🔒";
+      margin-left: auto;
+      font-size: 0.7rem;
+    }
+
+    /* MAIN VIEWPORT CANVAS */
+    .course-viewport {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(circle at 60% 30%, #111827 0%, #080c14 100%);
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .viewport-topbar {
+      height: 52px;
+      padding: 0 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+      background-color: rgba(15, 20, 29, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-toggle-btn {
+      background-color: rgba(23, 31, 44, 0.6);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      width: 34px;
+      height: 34px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 1.1rem;
+    }
+
+    .menu-toggle-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background-color: var(--bg-surface-hover);
+    }
+
+    .current-slide-indicator {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .viewport-content {
+      flex: 1;
+      padding: 2.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .slide-container {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+      animation: fadeInSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide-container.active {
+      display: flex;
+    }
+
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-title {
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+
+    .slide-body {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      max-width: 720px;
+    }
+
+    /* INTERACTIVE SLIDE COMPONENTS */
+    .diagnostic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .diag-card {
+      background-color: rgba(15, 20, 29, 0.8);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: left;
+    }
+
+    .diag-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      background-color: var(--bg-surface-hover);
+    }
+
+    .diag-card.inspected {
+      border-color: rgba(56, 225, 255, 0.6);
+      background-color: rgba(56, 225, 255, 0.05);
+    }
+
+    .diag-card h4 {
+      font-size: 0.95rem;
+      color: #ffffff;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .diag-card p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .diag-modal-layer {
+      margin-top: 1rem;
+      padding: 1.25rem;
+      border-radius: 8px;
+      background-color: rgba(5, 7, 10, 0.9);
+      border: 1px solid var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      display: none;
+    }
+
+    .diag-modal-layer.active {
+      display: block;
+      animation: fadeInSlide 0.2s ease;
+    }
+
+    /* SCENARIO CHOICE CARDS */
+    .choice-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .choice-card {
+      background-color: rgba(15, 20, 29, 0.8);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      color: var(--text-main);
+      font-size: 0.925rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-align: left;
+    }
+
+    .choice-card:hover:not(.disabled) {
+      border-color: var(--accent);
+      background-color: var(--bg-surface-hover);
+      transform: translateX(4px);
+    }
+
+    .choice-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background-color: rgba(255, 255, 255, 0.08);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .choice-card.correct {
+      border-color: var(--success) !important;
+      background-color: rgba(16, 185, 129, 0.1) !important;
+    }
+
+    .choice-card.incorrect {
+      border-color: var(--danger) !important;
+      background-color: rgba(239, 68, 68, 0.1) !important;
+    }
+
+    .scenario-feedback {
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .scenario-feedback.active {
+      display: block;
+      animation: fadeInSlide 0.2s ease;
+    }
+
+    .scenario-feedback.correct {
+      background-color: rgba(16, 185, 129, 0.12);
+      border: 1px solid var(--success);
+      color: #a7f3d0;
+    }
+
+    .scenario-feedback.incorrect {
+      background-color: rgba(239, 68, 68, 0.12);
+      border: 1px solid var(--danger);
+      color: #fecaca;
+    }
+
+    /* VIEWPORT FOOTER NAVIGATION */
+    .viewport-footer {
+      height: 64px;
+      padding: 0 1.75rem;
+      background-color: rgba(15, 20, 29, 0.85);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-btn.secondary {
+      background-color: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+    }
+
+    .nav-btn.secondary:hover:not(:disabled) {
+      color: var(--text-main);
+      border-color: var(--text-muted);
+      background-color: var(--bg-surface-hover);
+    }
+
+    .nav-btn.primary {
+      background-color: var(--accent);
+      border: 1px solid var(--accent);
+      color: #05070a;
+      box-shadow: 0 0 15px rgba(56, 225, 255, 0.3);
+    }
+
+    .nav-btn.primary:hover:not(:disabled) {
+      background-color: #ffffff;
+      border-color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    /* COURSE FOOTER ACTION BAR (DOWNLOAD SCORM ON RIGHT) */
+    .course-action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.25rem;
+      padding: 0 0.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .scorm-compliance-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .scorm-compliance-badge span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--success);
+      box-shadow: 0 0 6px var(--success);
+    }
+
+    .download-scorm-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-family: var(--font-heading);
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.65rem 1.4rem;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .download-scorm-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-glow);
+      background-color: var(--bg-surface-hover);
+    }
+
+    /* TECHNICAL ARCHITECTURE TABLE */
+    .spec-table-container {
+      overflow-x: auto;
+      margin-top: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background-color: var(--bg-surface);
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .spec-table th, .spec-table td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .spec-table th {
+      background-color: rgba(5, 7, 10, 0.6);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .spec-table td {
+      color: var(--text-muted);
+    }
+
+    .spec-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .spec-table tr:hover td {
+      background-color: rgba(23, 31, 44, 0.4);
+      color: var(--text-main);
+    }
+
+    /* --- CTA BANNER --- */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-surface-hover) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+      margin: 4rem 0 2rem 0;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: var(--text-main);
+      color: var(--bg-base);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 22px rgba(255, 255, 255, 0.4);
+      background-color: #ffffff;
+    }
+
+    /* MOBILE RESPONSIVE ADJUSTMENTS */
+    @media (max-width: 768px) {
+      .container { padding: 0 1rem; }
+      .nav-inner { height: 60px; }
+      .brand { font-size: 1.15rem; }
+      .nav-links { gap: 0.85rem; }
+      .nav-links a { font-size: 0.825rem; }
+      .section { padding: 3.5rem 0; }
+      
+      .hero-title, .hero-subtitle, .section-title, .section-subtitle {
+        text-align: center;
+      }
+      .hero-status-tag { margin: 0 auto 1.25rem auto; }
+      .hero-bio { text-align: justify; margin: 0 auto 1.5rem auto; font-size: 0.85rem; }
+
+      .course-player-stage { min-height: 520px; }
+      .course-sidebar {
+        position: absolute;
+        top: 52px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-width: 280px;
+        box-shadow: 10px 0 25px rgba(0,0,0,0.8);
+      }
+      .course-sidebar.collapsed {
+        margin-left: -100%;
+      }
+      .viewport-content { padding: 1.5rem 1rem; }
+      .course-action-bar { flex-direction: column; align-items: stretch; text-align: center; }
+      .download-scorm-btn { justify-content: center; width: 100%; }
+    }
+
+    .site-footer {
+      padding: 3rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-align: center;
+      border-top: 1px solid var(--border-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SITE HEADER -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">PJV</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown">
+            <a href="index.html#portfolio" class="active">Portfolio ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="isd-case-study.html" class="active">Instructional Systems</a></li>
+              <li><a href="scribe85-case-study.html">scribe85</a></li>
+              <li><a href="iaem-bulletin-case-study.html">IAEM</a></li>
+              <li><a href="k12-insight-illustration-project-case-study.html">K12 Insight</a></li>
+              <li><a href="presentations-case-study.html">Presentations</a></li>
+              <li><a href="videography.html">Videography</a></li>
+              <li><a href="photography-case-study.html">Photography</a></li>
+            </ul>
+          </li>
+          <li><a href="Resume.html">Resume</a></li>
+          <li><a href="ContactMe.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- SUBPAGE HERO SECTION -->
+  <section id="overview" class="subpage-hero">
+    <div class="hero-inner-container">
+      <div class="hero-grid">
+        
+        <!-- LEFT: HERO TITLE & BIO -->
+        <div>
+          <div class="hero-status-tag">
+            <span class="status-dot"></span> ADDIE • SCORM • Systems Architecture
+          </div>
+          <h1 class="hero-title">Information Systems Design</h1>
+          <h2 class="hero-subtitle">Interactive Courseware & LMS Ecosystems</h2>
+          
+          <p class="hero-bio">
+            An end-to-end Instructional Systems Design (ISD) case study demonstrating how user-centered UI/UX principles, rigorous military Systems Approach to Training (SAT) frameworks, and client-side web technologies converge to create scalable, trackable e-learning modules.
+          </p>
+        </div>
+
+        <!-- RIGHT: HERO METRICS CARD -->
+        <div>
+          <div class="hero-media-frame">
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 0.75rem;">// INSTRUCTIONAL ECOSYSTEM</div>
+            <h3 style="font-size: 1.4rem; color: #ffffff; margin-bottom: 0.75rem;">MCeLE & Moodle Ready</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 320px;">
+              Engineered with granular TLO/ELO objective alignment, conditional branching, and universal SCORM/xAPI manifest tracking.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PROJECT META GRID -->
+      <div class="meta-grid">
+        <div class="meta-item">
+          <h4>Role</h4>
+          <p>Instructional Systems Designer</p>
+        </div>
+        <div class="meta-item">
+          <h4>Methodology</h4>
+          <p>ADDIE / TRNGCMD SAT Framework</p>
+        </div>
+        <div class="meta-item">
+          <h4>Standards</h4>
+          <p>SCORM 1.2 / 2004, Section 508</p>
+        </div>
+        <div class="meta-item">
+          <h4>Target LMS</h4>
+          <p>Moodle / MCeLE / Workday</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <!-- SECTION 1: INTERACTIVE EMBEDDED LEARNING MODULE (PEN & PAPER MOCKUP IMPLEMENTATION) -->
+    <section id="interactive-course" class="section">
+      <h2 class="section-title">Interactive Learning Module</h2>
+      <p class="section-subtitle">
+        A custom interactive scenario engineered with conditional completion gating, multi-state diagnostic cards, and SCORM API data pass-back. Test the interactive module below.
+      </p>
+
+      <div class="course-player-wrapper">
+        <div class="course-player-stage">
+          
+          <!-- TOGGLEABLE SIDEBAR MENU (LEFT DRAWER) -->
+          <aside class="course-sidebar" id="courseSidebar">
+            <div class="sidebar-header">
+              <h3>Course Index</h3>
+              <span class="sidebar-progress-badge" id="progressBadge">0% Done</span>
+            </div>
+
+            <ul class="sidebar-tree">
+              <!-- MODULE 1 -->
+              <li class="module-group open">
+                <button class="module-heading" onclick="toggleModuleGroup(this)">
+                  <span>Module 1: Briefing & Setup</span>
+                  <span class="caret">▶</span>
+                </button>
+                <ul class="module-sublist">
+                  <li>
+                    <button class="module-page-item active" id="menu-slide-0" onclick="goToSlide(0)">
+                      <span>1.1 Mission Briefing</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="module-page-item" id="menu-slide-1" onclick="goToSlide(1)">
+                      <span>1.2 Diagnostic Isolation</span>
+                    </button>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- MODULE 2 -->
+              <li class="module-group open">
+                <button class="module-heading" onclick="toggleModuleGroup(this)">
+                  <span>Module 2: Tactical Action</span>
+                  <span class="caret">▶</span>
+                </button>
+                <ul class="module-sublist">
+                  <li>
+                    <button class="module-page-item locked" id="menu-slide-2" onclick="goToSlide(2)">
+                      <span>2.1 Critical Decision</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="module-page-item locked" id="menu-slide-3" onclick="goToSlide(3)">
+                      <span>2.2 After-Action Review</span>
+                    </button>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- MODULE 3 (LOCKED ADVANCED) -->
+              <li class="module-group">
+                <button class="module-heading" onclick="toggleModuleGroup(this)">
+                  <span>Module 3: Fleet Deployment</span>
+                  <span class="caret">▶</span>
+                </button>
+                <ul class="module-sublist">
+                  <li>
+                    <button class="module-page-item locked" disabled>
+                      <span>3.1 Cryptographic Net Sync</span>
+                    </button>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </aside>
+
+          <!-- MAIN VIEWPORT CANVAS -->
+          <div class="course-viewport">
+            
+            <!-- TOP CONTROLS BAR -->
+            <div class="viewport-topbar">
+              <button class="menu-toggle-btn" id="sidebarToggle" aria-label="Toggle Course Index" onclick="toggleSidebar()">
+                ☰
+              </button>
+              <div class="current-slide-indicator" id="slideIndicator">
+                SLIDE 1 OF 4 // TRFI-01
+              </div>
+            </div>
+
+            <!-- VIEWPORT CONTENT BODY -->
+            <div class="viewport-content">
+              
+              <!-- SLIDE 0: MISSION BRIEFING -->
+              <div class="slide-container active" id="slide-0">
+                <div class="slide-tag">// Terminal Learning Objective (TLO) 1.0</div>
+                <h3 class="slide-title">Tactical Comms Jamming Incident</h3>
+                <p class="slide-body">
+                  <strong>0300 HRS // FOB Alpha.</strong> Primary tactical VHF net communications have dropped across all squad elements, replaced by continuous high-amplitude static. As the Communications Chief, you must isolate the root cause, determine if this is environmental fading or electronic warfare, and restore secure comms.
+                </p>
+                <div style="margin-top: auto; padding: 1rem; border-radius: 8px; background: rgba(56, 225, 255, 0.05); border: 1px dashed rgba(56, 225, 255, 0.3); max-width: 600px;">
+                  <p style="font-size: 0.85rem; color: var(--accent); font-family: var(--font-mono);">
+                    ▶ INSTRUCTION: Click "Next" below to initialize diagnostic sensors.
+                  </p>
+                </div>
+              </div>
+
+              <!-- SLIDE 1: INTERACTIVE DIAGNOSTIC HUB (GATED) -->
+              <div class="slide-container" id="slide-1">
+                <div class="slide-tag">// Enabling Learning Objective (ELO) 1.1</div>
+                <h3 class="slide-title">System Diagnostic Isolation</h3>
+                <p class="slide-body">
+                  Inspect all three diagnostic telemetry feeds below before advancing to the tactical decision phase.
+                </p>
+
+                <div class="diagnostic-grid">
+                  <div class="diag-card" id="diagCard1" onclick="inspectTelemetry(1)">
+                    <h4><span>Spectral Analysis</span> <span id="diagStatus1" style="color: var(--warning); font-size: 0.75rem;">UNREAD</span></h4>
+                    <p>Analyze RF band power distribution.</p>
+                  </div>
+
+                  <div class="diag-card" id="diagCard2" onclick="inspectTelemetry(2)">
+                    <h4><span>Hardware Antenna</span> <span id="diagStatus2" style="color: var(--warning); font-size: 0.75rem;">UNREAD</span></h4>
+                    <p>Verify physical cabling & VSWR ratio.</p>
+                  </div>
+
+                  <div class="diag-card" id="diagCard3" onclick="inspectTelemetry(3)">
+                    <h4><span>Crypto Key Sync</span> <span id="diagStatus3" style="color: var(--warning); font-size: 0.75rem;">UNREAD</span></h4>
+                    <p>Verify fill-device rollover state.</p>
+                  </div>
+                </div>
+
+                <div class="diag-modal-layer" id="diagOutput">
+                  // TELEMETRY LOG: Select a subsystem above to run diagnostics...
+                </div>
+              </div>
+
+              <!-- SLIDE 2: CRITICAL DECISION SCENARIO -->
+              <div class="slide-container" id="slide-2">
+                <div class="slide-tag">// Enabling Learning Objective (ELO) 1.2</div>
+                <h3 class="slide-title">Tactical Corrective Action</h3>
+                <p class="slide-body">
+                  Diagnostics confirm high-power wideband RF jamming across single-channel VHF. What is your immediate primary corrective action to restore squad communications?
+                </p>
+
+                <div class="choice-stack">
+                  <div class="choice-card" onclick="selectChoice(this, false, 'Boosting transmitter power fails to penetrate wideband jamming and turns FOB Alpha into an active beacon for enemy direction-finding.')">
+                    <span class="choice-letter">A</span>
+                    <span>Increase transceiver amplification to maximum wattage on the current frequency.</span>
+                  </div>
+
+                  <div class="choice-card" onclick="selectChoice(this, true, 'Correct. Initiating automated Frequency Hopping Spread Spectrum (FHSS) on the alternate net bypasses static jamming while maintaining full squad tempo.')">
+                    <span class="choice-letter">B</span>
+                    <span>Initiate automated Frequency Hopping Spread Spectrum (FHSS) and switch to secondary preset net.</span>
+                  </div>
+
+                  <div class="choice-card" onclick="selectChoice(this, false, 'Shutting down comms leaves patrol elements isolated. Electronic counter-countermeasures (ECCM) should be attempted first.')">
+                    <span class="choice-letter">C</span>
+                    <span>Power down all RF equipment and switch exclusively to physical runner dispatches.</span>
+                  </div>
+                </div>
+
+                <div class="scenario-feedback" id="scenarioFeedback"></div>
+              </div>
+
+              <!-- SLIDE 3: AFTER-ACTION REPORT (AAR) -->
+              <div class="slide-container" id="slide-3">
+                <div class="slide-tag">// Performance Evaluation</div>
+                <h3 class="slide-title">After-Action Report (AAR)</h3>
+                <p class="slide-body">
+                  Training module complete. The completion token and score telemetry have been packaged for LMS pass-back.
+                </p>
+
+                <div class="grid-2" style="margin-bottom: 1.5rem;">
+                  <div class="card" style="padding: 1.5rem; background: rgba(15, 20, 29, 0.9);">
+                    <h4 style="color: var(--accent); font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase;">Final Score</h4>
+                    <p style="font-size: 1.8rem; font-weight: 700; color: #ffffff;" id="finalScoreDisplay">100 / 100 PTS</p>
+                    <p style="color: var(--success); font-size: 0.85rem; font-weight: 600;">STATUS: QUALIFIED (SCORM PASSED)</p>
+                  </div>
+
+                  <div class="card" style="padding: 1.5rem; background: rgba(15, 20, 29, 0.9);">
+                    <h4 style="color: var(--accent); font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase;">Standard Alignment</h4>
+                    <ul style="font-size: 0.85rem; margin-top: 0.25rem;">
+                      <li>TLO 1.0: RF Jamming Protocol [Mastered]</li>
+                      <li>ELO 1.1: Signal Isolation [Complete]</li>
+                      <li>ELO 1.2: ECCM FHSS Execution [Complete]</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- FOOTER NAVIGATION CONTROLS -->
+            <div class="viewport-footer">
+              <button class="nav-btn secondary" id="prevBtn" onclick="navigateSlide(-1)" disabled>
+                ← Back
+              </button>
+              <button class="nav-btn primary" id="nextBtn" onclick="navigateSlide(1)">
+                Next →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- COURSE FOOTER ACTION BAR -->
+        <div class="course-action-bar">
+          <div class="scorm-compliance-badge">
+            <span></span> SCORM 2004 4th Ed. & xAPI Compliant Architecture
+          </div>
+          <button class="download-scorm-btn" onclick="triggerScormDownload()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download SCORM Package (.zip)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: THE ISD METHODOLOGY (ADDIE & SAT) -->
+    <section id="methodology" class="section">
+      <h2 class="section-title">Instructional Architecture & ADDIE Alignment</h2>
+      <p class="section-subtitle">
+        Bridging military training doctrine (Systems Approach to Training / TRNGCMD) with modern user-centered experience design.
+      </p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3 style="color: var(--accent);">Analysis & Objective Hierarchy</h3>
+          <p>
+            Training starts by defining the operational gap before authoring a single slide. Learning objectives are mapped in a strict hierarchical tree:
+          </p>
+          <ul>
+            <li><strong>Terminal Learning Objectives (TLOs):</strong> Define the primary operational task the learner must execute independently.</li>
+            <li><strong>Enabling Learning Objectives (ELOs):</strong> Scaffold foundational knowledge, procedures, and safety checks required to achieve the TLO.</li>
+            <li><strong>Formative vs. Summative:</strong> Embedded micro-checks test ELOs progressively, while graded branching scenarios validate the overarching TLO.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 style="color: #ffffff;">UX Principles in Courseware</h3>
+          <p>
+            Applying digital product design to e-learning eliminates cognitive overload and maximizes learner retention:
+          </p>
+          <ul>
+            <li><strong>Progressive Disclosure:</strong> Information is revealed contextually via modal layers rather than cluttering the screen with text walls.</li>
+            <li><strong>Active Decision Branching:</strong> Replaces passive "click-next" reading with consequential decision loops that provide immediate corrective feedback.</li>
+            <li><strong>High-Contrast Dark Canvas:</strong> Ergonomic, glare-resistant visual design optimized for varied field devices and low-light operations.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 3: LMS OPERATIONS & SCORM/xAPI ARCHITECTURE -->
+    <section id="lms-operations" class="section">
+      <h2 class="section-title">LMS Operations & SCORM Specifications</h2>
+      <p class="section-subtitle">
+        How custom web courseware packages communicate with enterprise Learning Management Systems like Moodle, MarineNet/MCeLE, and Workday Learning.
+      </p>
+
+      <div class="spec-table-container">
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th>Standard / Metric</th>
+              <th>Data Parameter</th>
+              <th>Implementation & Tracking Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>SCORM 1.2 / 2004</strong></td>
+              <td><code>cmi.core.lesson_status</code></td>
+              <td>Passes <code>passed</code>, <code>completed</code>, or <code>incomplete</code> based on quiz completion criteria.</td>
+            </tr>
+            <tr>
+              <td><strong>Score Pass-back</strong></td>
+              <td><code>cmi.core.score.raw</code></td>
+              <td>Dynamic variable passing weighted score (0–100) directly into Moodle Gradebook aggregation.</td>
+            </tr>
+            <tr>
+              <td><strong>Suspend / Resume State</strong></td>
+              <td><code>cmi.suspend_data</code></td>
+              <td>Caches visited slide IDs and diagnostic flags to allow seamless bookmarking on return sessions.</td>
+            </tr>
+            <tr>
+              <td><strong>Experience API (xAPI)</strong></td>
+              <td><code>Actor • Verb • Object</code></td>
+              <td>Dispatches JSON event streams to Learning Record Stores (LRS) for simulation telemetries.</td>
+            </tr>
+            <tr>
+              <td><strong>Accessibility Compliance</strong></td>
+              <td>Section 508 / WCAG 2.1 AA</td>
+              <td>Keyboard tab order, screen-reader aria attributes, and strict 4.5:1 minimum color contrast ratios.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION BANNER -->
+    <section class="cta-banner">
+      <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; color: #ffffff;">Need Custom Learning Systems?</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Let's build engaging, data-driven courseware, LMS integrations, and training tools for your team.</p>
+      <a href="ContactMe.html" class="cta-button">Get in Touch →</a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Copyright © 2026 - Phillip Joseph Villarreal</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT: COURSEWARE STATE MACHINE, GATING & LMS LOGIC -->
+  <script>
+    // Header scroll background toggle
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) { 
+        header.classList.add('scrolled'); 
+      } else { 
+        header.classList.remove('scrolled'); 
+      }
+    });
+
+    /* ==========================================================================
+       COURSE PLAYER ENGINE & STATE MACHINE
+       ========================================================================== */
+    let currentSlide = 0;
+    const totalSlides = 4;
+    
+    // Progress & Gating States
+    const inspectedTelemetry = { 1: false, 2: false, 3: false };
+    let decisionAnswered = false;
+    let score = 0;
+
+    const slides = [
+      document.getElementById('slide-0'),
+      document.getElementById('slide-1'),
+      document.getElementById('slide-2'),
+      document.getElementById('slide-3')
+    ];
+
+    const menuItems = [
+      document.getElementById('menu-slide-0'),
+      document.getElementById('menu-slide-1'),
+      document.getElementById('menu-slide-2'),
+      document.getElementById('menu-slide-3')
+    ];
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const slideIndicator = document.getElementById('slideIndicator');
+    const progressBadge = document.getElementById('progressBadge');
+
+    function updateCourseUI() {
+      // Toggle slide visibility
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === currentSlide);
+      });
+
+      // Update Menu items
+      menuItems.forEach((item, idx) => {
+        item.classList.toggle('active', idx === currentSlide);
+      });
+
+      // Top indicator & Previous button
+      slideIndicator.textContent = `SLIDE ${currentSlide + 1} OF ${totalSlides} // TRFI-0${currentSlide + 1}`;
+      prevBtn.disabled = (currentSlide === 0);
+
+      // Gating & Next Button evaluation
+      if (currentSlide === 0) {
+        nextBtn.disabled = false;
+        nextBtn.textContent = "Next →";
+      } else if (currentSlide === 1) {
+        const allInspected = inspectedTelemetry[1] && inspectedTelemetry[2] && inspectedTelemetry[3];
+        nextBtn.disabled = !allInspected;
+        nextBtn.textContent = allInspected ? "Proceed to Action →" : "Inspect All 3 Above";
+      } else if (currentSlide === 2) {
+        nextBtn.disabled = !decisionAnswered;
+        nextBtn.textContent = decisionAnswered ? "View AAR Debrief →" : "Select Option";
+      } else if (currentSlide === 3) {
+        nextBtn.disabled = true;
+        nextBtn.textContent = "Module Completed ✓";
+        progressBadge.textContent = "100% Done";
+      }
+    }
+
+    function navigateSlide(direction) {
+      const target = currentSlide + direction;
+      if (target >= 0 && target < totalSlides) {
+        goToSlide(target);
+      }
+    }
+
+    function goToSlide(index) {
+      // Prevent navigation if target slide is locked
+      if (menuItems[index].classList.contains('locked') && index > currentSlide) {
+        return;
+      }
+      currentSlide = index;
+      updateCourseUI();
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('courseSidebar');
+      sidebar.classList.toggle('collapsed');
+    }
+
+    function toggleModuleGroup(button) {
+      const group = button.parentElement;
+      group.classList.toggle('open');
+    }
+
+    // Diagnostic Inspection Logic (Slide 1)
+    function inspectTelemetry(id) {
+      inspectedTelemetry[id] = true;
+      document.getElementById(`diagCard${id}`).classList.add('inspected');
+      
+      const statusSpan = document.getElementById(`diagStatus${id}`);
+      statusSpan.textContent = "VERIFIED";
+      statusSpan.style.color = "var(--success)";
+
+      const output = document.getElementById('diagOutput');
+      output.classList.add('active');
+
+      if (id === 1) {
+        output.innerHTML = `<strong>// SPECTRAL TELEMETRY:</strong> Continuous 30dB power surge across 30–88 MHz. Signature consistent with active wideband barrage jamming.`;
+      } else if (id === 2) {
+        output.innerHTML = `<strong>// HARDWARE TELEMETRY:</strong> Transceiver VSWR 1.1:1. RF amplifier running at nominal thermal operating limits. No physical failure.`;
+      } else if (id === 3) {
+        output.innerHTML = `<strong>// CRYPTO STATUS:</strong> Daily rollover key hash matches FOB Master Node. Cryptographic lockout ruled out.`;
+      }
+
+      // Check if all 3 are inspected to unlock Slide 2
+      if (inspectedTelemetry[1] && inspectedTelemetry[2] && inspectedTelemetry[3]) {
+        menuItems[1].classList.add('completed');
+        menuItems[2].classList.remove('locked');
+        progressBadge.textContent = "50% Done";
+      }
+      updateCourseUI();
+    }
+
+    // Scenario Decision Logic (Slide 2)
+    function selectChoice(cardElement, isCorrect, feedbackText) {
+      if (decisionAnswered) return; // Lock choices once selected
+      decisionAnswered = true;
+
+      const allCards = document.querySelectorAll('.choice-card');
+      allCards.forEach(c => c.classList.add('disabled'));
+
+      const feedbackEl = document.getElementById('scenarioFeedback');
+      feedbackEl.classList.add('active');
+
+      if (isCorrect) {
+        cardElement.classList.add('correct');
+        feedbackEl.classList.add('correct');
+        feedbackEl.innerHTML = `<strong>CORRECT DECISION:</strong> ${feedbackText}`;
+        score = 100;
+        document.getElementById('finalScoreDisplay').textContent = "100 / 100 PTS";
+      } else {
+        cardElement.classList.add('incorrect');
+        feedbackEl.classList.add('incorrect');
+        feedbackEl.innerHTML = `<strong>TACTICAL WARNING:</strong> ${feedbackText}`;
+        score = 65;
+        document.getElementById('finalScoreDisplay').textContent = "65 / 100 PTS";
+      }
+
+      menuItems[2].classList.add('completed');
+      menuItems[3].classList.remove('locked');
+      progressBadge.textContent = "75% Done";
+      updateCourseUI();
+    }
+
+    // SCORM Download Trigger Simulation
+    function triggerScormDownload() {
+      // Creates a lightweight programmatic client-side manifest download placeholder
+      const manifestXML = `<manifest identifier="com.pjv.isd.trfi" version="1.0">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>2004 4th Edition</schemaversion>
+  </metadata>
+  <organizations default="org-1">
+    <organization identifier="org-1">
+      <title>Tactical Radio Frequency Incident (TRFI)</title>
+      <item identifier="item-1" identifierref="res-1">
+        <title>TRFI Courseware Module</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="res-1" type="webcontent" adlcp:scormType="sco" href="index.html">
+      <file href="index.html"/>
+    </resource>
+  </resources>
+</manifest>`;
+
+      const blob = new Blob([manifestXML], { type: 'application/xml' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'imsmanifest.xml';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      alert('SCORM manifest asset generated. (In production, this links to your complete exported .zip package).');
+    }
+
+    // Initialize UI on load
+    updateCourseUI();
+  </script>
+</body>
+</html>
